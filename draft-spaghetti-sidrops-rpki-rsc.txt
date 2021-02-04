@@ -17,11 +17,11 @@ Abstract
    for a general purpose listing of checksums (a 'checklist'), for use
    with the Resource Public Key Infrastructure (RPKI).  The objective is
    to allow an attestation, in the form of a listing of one or more
-   checksums of arbitrary files, to be signed "with resources", and for
-   validation to provide a means to confirm a specific Internet Resource
-   Holder produced the signed checklist.  The profile is intended to
-   provide for the signing of a checksum listing with an arbitrary set
-   of Internet Number Resources.
+   checksums of arbitrary digital objects (files), to be signed "with
+   resources", and for validation to provide a means to confirm a
+   specific Internet Resource Holder produced the signed checklist.  The
+   profile is intended to provide for the signing of a checksum listing
+   with an arbitrary set of Internet Number Resources.
 
 Requirements Language
 
@@ -122,8 +122,8 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    resource holdership verification processes.
 
    The RSC concept borrows heavily from RTA [I-D.ietf-sidrops-rpki-rta],
-   Manifests [RFC6486], and OpenBSD's signify [signify] utility.  The
-   main difference between RSC and RTA is that an RTA allows multiple
+   Manifests [RFC6486], and OpenBSD's [signify] utility.  The main
+   difference between RSC and RTA is that an RTA enables multiple
    signers to attest a single anonymous digital object through a
    checksum of its content, while an RSC allows a single signer to
    attest the checksums of multiple named digital objects.  This
@@ -154,8 +154,8 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 4.  The RSC eContent
 
    The content of an RSC indicates that an a checklist for arbitrary
-   digital objects has been signed "with resources".  An RSC is formally
-   defined as:
+   named digital objects has been signed "with resources".  An RSC is
+   formally defined as:
 
    RpkiSignedChecklist-2021
    { iso(1) member-body(2) us(840) rsadsi(113549)

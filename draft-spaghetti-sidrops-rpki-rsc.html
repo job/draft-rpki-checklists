@@ -402,8 +402,8 @@
   <meta name="dct.creator" content="Snijders, J." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-spaghetti-sidrops-rpki-rsc-00" />
   <meta name="dct.issued" scheme="ISO8601" content="2021-04" />
-  <meta name="dct.abstract" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
-  <meta name="description" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
+  <meta name="dct.abstract" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
+  <meta name="description" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
 
 </head>
 
@@ -437,7 +437,7 @@
   <span class="filename">draft-spaghetti-sidrops-rpki-rsc-00</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
+<p>This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
 <h1><a>Requirements Language</a></h1>
 <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.  </p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
@@ -503,7 +503,7 @@
 </h1>
 <p id="rfc.section.1.p.1">This document defines a Cryptographic Message Syntax (CMS) <a href="#RFC5652" class="xref">[RFC5652]</a> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <a href="#RFC6480" class="xref">[RFC6480]</a>.  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
 <p id="rfc.section.1.p.2">RSC files are expected to facilitate Bring Your Own IP (BYOIP) authentication, inter-domain interconnection provisioning, and resource holdership verification processes.  </p>
-<p id="rfc.section.1.p.3">The RSC concept borrows heavily from <a href="#I-D.ietf-sidrops-rpki-rta" class="xref">RTA</a>, Manifests <a href="#RFC6486" class="xref">[RFC6486]</a>, and OpenBSD's <a href="#signify" class="xref">signify</a> utility. The main difference between RSC and RTA is that an RTA allows multiple signers to attest a single anonymous digital object through a checksum of its content, while an RSC allows a single signer to attest the checksums of multiple named digital objects. This difference is expected to represent a simplification for implementers and operators.  </p>
+<p id="rfc.section.1.p.3">The RSC concept borrows heavily from <a href="#I-D.ietf-sidrops-rpki-rta" class="xref">RTA</a>, Manifests <a href="#RFC6486" class="xref">[RFC6486]</a>, and OpenBSD's <a href="#signify" class="xref">[signify]</a> utility. The main difference between RSC and RTA is that an RTA enables multiple signers to attest a single anonymous digital object through a checksum of its content, while an RSC allows a single signer to attest the checksums of multiple named digital objects. This difference is expected to represent a simplification for implementers and operators.  </p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#profile" id="profile">RSC Profile and Distribution</a>
 </h1>
@@ -517,7 +517,7 @@
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#econtent" id="econtent">The RSC eContent</a>
 </h1>
-<p id="rfc.section.4.p.1">The content of an RSC indicates that an a checklist for arbitrary digital objects has been signed "with resources".  An RSC is formally defined as: </p>
+<p id="rfc.section.4.p.1">The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".  An RSC is formally defined as: </p>
 <pre>
 RpkiSignedChecklist-2021
 { iso(1) member-body(2) us(840) rsadsi(113549)
