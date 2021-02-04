@@ -36,7 +36,7 @@
   <abstract>
     <t>
       This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
-      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.
+      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.
       The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
     </t>
   </abstract>
@@ -71,7 +71,7 @@
     </t>
 
     <t>
-      The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify</xref> utility. The main difference between RSC and RTA is that an RTA allows multiple signers to attest a single anonymous digital object through a checksum of its content, while an RSC allows a single signer to attest the checksums of multiple named digital objects. This difference is expected to represent a simplification for implementers and operators.
+      The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify" /> utility. The main difference between RSC and RTA is that an RTA enables multiple signers to attest a single anonymous digital object through a checksum of its content, while an RSC allows a single signer to attest the checksums of multiple named digital objects. This difference is expected to represent a simplification for implementers and operators.
     </t>
   </section>
 
@@ -97,7 +97,7 @@
 
   <section anchor="econtent" title="The RSC eContent">
     <t>
-      The content of an RSC indicates that an a checklist for arbitrary digital objects has been signed "with resources".
+      The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".
       An RSC is formally defined as:
     </t>
     <figure><artwork>
