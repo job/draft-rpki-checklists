@@ -176,38 +176,79 @@ END
   </section>
   
   <section title="RSC Validation">
-
-
-
-   <section anchor="Security" title="Security Considerations">
+    <t>
+      To validate an RSC the relying party MUST perform all the validation checks specified in <xref target="RFC6488"/> as well as the following additional RSC-specific validation steps.
+    </t>
+    <t>
+      <list style="symbols">
+        <t>
+          The message digests of the referenced object using the digest algorithm specified in the the digestAlgorithm field MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.
+        </t>
+      </list>
+    </t>
+  </section>
+  <section title="Standalone Use">
+    <t>
+      
+ 
+  <section anchor="Security" title="Security Considerations">
     
     <t>
-     Despite common misconceptions and marketing, Route Origin
-     Validation is not a security protocol.  It is intended to catch
-     operational errors, and is easily gamed and attacked.
-    </t>
-    
-    <t>
-     If an attacker can add, delete, or modify RPKI data, either in
-     repositories or in flight, they can affect routing and thereby
-     steer or damage traffic.  The RPKI system design does much to deter
-     these attacks.  But the 'last mile' from the cache to the router
-     uses transport, as opposed to object, security and is vulnerable.
-     This is discussed in <xref target="I-D.ietf-sidrops-8210bis"/>.
-    </t>
-    
-    <t>
-      Similarly, if an attacker can delay prompt propagation of RPKI
-      data on the supply chain described in this document, they can
-      affect routing, and therefore traffic flow, to their advantage.
-    </t>
+      
     
   </section>
 
   <section anchor="IANA" title="IANA Considerations">
-    <t>
-      None
-    </t>
+    <section title="OID">
+      <t>
+        The IANA has registered the OID for the RPKI Signed Checklist in the registry created by [RFC6488] as follows:
+      </t>
+<figure><artwork>
+   Name          OID                         Specification
+   -----------------------------------------------------------
+   Checklists    1.2.840.113549.1.9.16.1.TBD [RFC-TBD]
+</artwork></figure>
+    </section>
+    <section title="File Extension">
+      <t>
+        The IANA has added an item for the signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
+      </t>
+<figure><artwork>
+   Filename Extension  RPKI Object           Reference
+   -----------------------------------------------------------
+      .sig             Signed Checklist      [RFC-TBD]
+</artwork></figure>
+    </section>
+    <section title="Media Type">
+      <t>
+        The IANA has registered the media type application/rpki-checklist as follows:
+      </t>
+<figure><artwork>
+   Type name: application
+   Subtype name: rpki-checklist
+   Required parameters: None
+   Optional parameters: None
+   Encoding considerations: binary
+   Security considerations: Carries an RPKI Signed Checklist
+                            [RFC-TBD].
+   Interoperability considerations: None
+   Published specification: This document.
+   Applications that use this media type: RPKI operators.
+   Additional information:
+     Content: This media type is a signed object, as defined
+         in [RFC6488], which contains a payload of a list of
+         checksums as defined above in this document.
+     Magic number(s): None
+     File extension(s): .sig
+     Macintosh file type code(s):
+   Person & email address to contact for further information:
+     Job Snijders <job@fastly.com>
+   Intended usage: COMMON
+   Restrictions on usage: None
+   Author: Job Snijders <job@fastly.com>
+   Change controller: Job Snijders <job@fastly.com>
+</artwork></figure>
+     </section>
   </section>
 
 </middle>
@@ -235,7 +276,16 @@ END
 
   <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
-      The authors wish to thank Massimiliano Stucchi.
+      The author wishes to thank George Michaelson,
+        Tom Harrison,
+        Geoff Huston,
+        Randy Bush,
+        Stephen Kent,
+        Matt Lepinski,
+        Rob Austein,
+        Ted Unangst,
+        and Marc Espie
+      for prior art.
     </t>
   </section>
 
