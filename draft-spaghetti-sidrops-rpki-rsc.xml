@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc sortrefs="yes"?>
+<?rfc subcompact="no"?>
+<?rfc symrefs="yes"?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+
+<rfc category="info" docName="draft-spaghetti-sidrops-rpki-rsc-00" ipr="trust200902">
+
+<front>
+
+  <title abbrev="RPKI Signed Checklists">
+    RPKI Signed Checklists
+  </title>
+
+  <author fullname="Job Snijders" initials="J." surname="Snijders">
+    <organization>Fastly</organization>
+    <address>
+      <postal>
+	<street />
+	<code />
+	<city>Amsterdam</city>
+	<country>Netherlands</country>
+      </postal>
+      <email>job@fastly.com</email>
+    </address>
+  </author>
+
+  <date />
+
+  <abstract>
+    <t>
+      This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
+      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.
+      The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
+    </t>
+  </abstract>
+
+  <note title="Requirements Language">
+
+    <t>
+      The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+      "MAY", and "OPTIONAL" in this document are to be interpreted as
+      described in BCP 14 <xref target="RFC2119"/> <xref
+      target="RFC8174"/> when, and only when, they appear in all
+      capitals, as shown here.
+    </t>
+
+  </note>
+
+</front>
+
+<middle>
+
+  <section anchor="intro" title="Introduction">
+    
+    <t>
+      This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480" />.
+      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the RPKI Signed Checklist (RSC).
+      The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
+    </t>
+
+    <t>
+      The RSC concept borrows heavily from <xref target="I-D.sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify<xref> utility.
+    </t>
+  </section>
+
+  <section anchor="profile" title="RSC Profile and Distribution">
+    <t>
+      RSC follows the Signed Object Template for the RPKI <xref target="RFC6488" /> with one exception.
+      Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension is omitted from the RSC's X.509 EE certificate.
+      What constitutes suitable transport for RSC files is deliberately unspecified.
+      It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.
+    </t>
+  </section>
+
+  <section anchor="content" title="The RSC ContentType">
+    <t>
+      The ContentType for an RTA is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.TBD.
+    </t>
+    <t>
+      This OID MUST appear both within the eContentType in the encapContentInfo object as well as the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
+    </t>
+  </section>
+
+  <section anchor="econtent" title="The RSC eContent">
+    <t>
+      The content of an RSC indicates that an a checklist for arbitrary digital objects has been signed "with resources".
+      An RSC is formally defined as:
+    </t>
+    <t>
+      <figure><artwork>
+RpkiSignedChecklist-2021
+{ iso(1) member-body(2) us(840) rsadsi(113549)
+  pkcs(1) pkcs-9(9) smime(16) mod(0) TBD }
+
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+CONTENT-TYPE, DigestAlgorithmIdentifier
+FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+    pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+
+ASIdOrRange, IPAddressFamily
+FROM IPAddrAndASCertExtn -- in [RFC3779]
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) mod(0)
+    id-mod-ip-addr-and-as-ident(30) } ;
+
+ct-rpkiSignedChecklist CONTENT-TYPE ::=
+  { TYPE RpkiSignedChecklist IDENTIFIED BY
+    id-ct-rpkiSignedChecklist }
+
+id-ct-signedChecklist OBJECT IDENTIFIER ::=
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+    pkcs-9(9) id-smime(16) id-ct TBD }
+
+ResourceBlock ::= SEQUENCE {
+  asID         [0]       AsList OPTIONAL,
+  ipAddrBlocks [1]       IPList OPTIONAL }
+  -- at least one of asID or ipAddrBlocks MUST be present
+  ( WITH COMPONENTS { ..., asID PRESENT} |
+    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+
+AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+
+IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
+
+FileAndHash ::= SEQUENCE {
+  file            IA5String,
+  hash            BIT STRING }
+
+RpkiSignedChecklist ::= SEQUENCE {
+  version  [0]          INTEGER DEFAULT 0,
+  resources             ResourceBlock,
+  digestAlgorithm       DigestAlgorithmIdentifier,
+  checkList		SEQUENCE SIZE (1..MAX) OF FileAndHash }
+
+END
+</artwork></figure>
+
+    <section title="version">
+      <t>
+        The version number of the ResourceTaggedAttestation MUST be 0.
+      </t>
+    </section>
+
+    <section title="resources">
+      <t>
+        The resources contained here are the resources used to mark the attestation, and MUST match the set of resources listed by the EE certificate carried in the CMS certificates field.
+      </t>
+    </section>
+
+    <section title="digestAlgorithm">
+      <t>
+	The digest algorithm used to create the message digest of the attested digital object.
+        This algorithm MUST be a hashing algorithm defined in <xref target="RFC7935" />.
+      </t>
+    </section>
+
+    <section title="checkList">
+      <t>
+	This field is a sequence of FileAndHash objects.
+	There is one FileAndHash entry for each arbitrary object referenced from the RSC.
+        Each FileAndHash is an ordered pair consisting of the name of the file that contains the object in question and a hash of the file's contents.
+      </t>
+    </section>
+  </section>
+  
+  <section title="RSC Validation">
+
+
+
+   <section anchor="Security" title="Security Considerations">
+    
+    <t>
+     Despite common misconceptions and marketing, Route Origin
+     Validation is not a security protocol.  It is intended to catch
+     operational errors, and is easily gamed and attacked.
+    </t>
+    
+    <t>
+     If an attacker can add, delete, or modify RPKI data, either in
+     repositories or in flight, they can affect routing and thereby
+     steer or damage traffic.  The RPKI system design does much to deter
+     these attacks.  But the 'last mile' from the cache to the router
+     uses transport, as opposed to object, security and is vulnerable.
+     This is discussed in <xref target="I-D.ietf-sidrops-8210bis"/>.
+    </t>
+    
+    <t>
+      Similarly, if an attacker can delay prompt propagation of RPKI
+      data on the supply chain described in this document, they can
+      affect routing, and therefore traffic flow, to their advantage.
+    </t>
+    
+  </section>
+
+  <section anchor="IANA" title="IANA Considerations">
+    <t>
+      None
+    </t>
+  </section>
+
+</middle>
+
+<back>
+    
+  <references title="Normative References">
+    <?rfc include="reference.RFC.2119"?>
+    <?rfc include="reference.RFC.4271"?>
+    <?rfc include="reference.RFC.6481"?>
+    <?rfc include="reference.RFC.6486"?>
+    <?rfc include="reference.RFC.6482"?>
+    <?rfc include="reference.RFC.6811"?>
+    <?rfc include="reference.RFC.8174"?>
+    <?rfc include="reference.RFC.8182"?>
+<!--    <?rfc include="reference.RFC.8210"?> -->
+    <?rfc include="reference.RFC.8481"?>
+    <?rfc include="reference.I-D.ietf-sidrops-8210bis"?>
+    </references>
+
+  <references title="Informative References">
+    <?rfc include="reference.RFC.6480"?>
+    <?rfc include="reference.I-D.sidrops-bruijnzeels-deprecate-rsync"?>
+    </references>
+
+  <section anchor="Acknowledgements" title="Acknowledgements">
+    <t>
+      The authors wish to thank Massimiliano Stucchi.
+    </t>
+  </section>
+
+</back>
+
+</rfc>
