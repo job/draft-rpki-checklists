@@ -191,7 +191,8 @@ END
       
   <section anchor="Security" title="Security Considerations">
     <t>
-      some writing needs to happen here
+      Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
+      These data have not been verified by the CA that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
     </t>
   </section>
 
