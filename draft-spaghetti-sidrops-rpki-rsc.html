@@ -503,7 +503,8 @@
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#profile" id="profile">RSC Profile and Distribution</a>
 </h1>
-<p id="rfc.section.2.p.1">RSC follows the Signed Object Template for the RPKI <a href="#RFC6488" class="xref">[RFC6488]</a> with one exception.  Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension is omitted from the RSC's X.509 EE certificate.  What constitutes suitable transport for RSC files is deliberately unspecified.  It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.  </p>
+<p id="rfc.section.2.p.1">RSC follows the Signed Object Template for the RPKI <a href="#RFC6488" class="xref">[RFC6488]</a> with one exception.  Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension is omitted from the RSC's X.509 EE certificate.  </p>
+<p id="rfc.section.2.p.2">What constitutes suitable transport for RSC files is deliberately unspecified.  It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.  </p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#content" id="content">The RSC ContentType</a>
 </h1>
@@ -581,7 +582,7 @@ END
 <p id="rfc.section.5.p.1">To validate an RSC the relying party MUST perform all the validation checks specified in <a href="#RFC6488" class="xref">[RFC6488]</a> as well as the following additional RSC-specific validation steps.  </p>
 <p></p>
 
-<ul><li>The message digests of the referenced object using the digest algorithm specified in the the digestAlgorithm field MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.  </li></ul>
+<ul><li>The message digests of the by filename referenced digital objects using the digest algorithm specified in the the digestAlgorithm field MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.  </li></ul>
 
 <p> </p>
 <h1 id="rfc.section.6">

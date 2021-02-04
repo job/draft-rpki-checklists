@@ -122,8 +122,9 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    RSC follows the Signed Object Template for the RPKI [RFC6488] with
    one exception.  Because RSCs MUST NOT be distributed through the
    global RPKI repository system, the Subject Information Access (SIA)
-   extension is omitted from the RSC's X.509 EE certificate.  What
-   constitutes suitable transport for RSC files is deliberately
+   extension is omitted from the RSC's X.509 EE certificate.
+
+   What constitutes suitable transport for RSC files is deliberately
    unspecified.  It might be a USB stick, a web interface secured with
    conventional HTTPS, PGP-signed email, a T-shirt printed with a QR
    code, or a carrier pigeon.
@@ -161,7 +162,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) mod(0)
        id-mod-ip-addr-and-as-ident(30) } ;
-
 
 
 
@@ -240,10 +240,10 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    checks specified in [RFC6488] as well as the following additional
    RSC-specific validation steps.
 
-   o  The message digests of the referenced object using the digest
-      algorithm specified in the the digestAlgorithm field MUST be
-      calculated and MUST match the value given in the messageDigest
-      field of the RSC content.
+   o  The message digests of the by filename referenced digital objects
+      using the digest algorithm specified in the the digestAlgorithm
+      field MUST be calculated and MUST match the value given in the
+      messageDigest field of the RSC content.
 
 6.  Security Considerations
 
