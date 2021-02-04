@@ -400,7 +400,7 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Snijders, J." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-spaghetti-sidrops-rpki-rsc-00" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-spaghetti-sidrops-rpki-rsc-01" />
   <meta name="dct.issued" scheme="ISO8601" content="2021-04" />
   <meta name="dct.abstract" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
   <meta name="description" content="This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a &#x27;checklist&#x27;), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed &quot;with resources&quot;, and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.   " />
@@ -434,7 +434,7 @@
   </table>
 
   <p class="title">RPKI Signed Checklists <br />
-  <span class="filename">draft-spaghetti-sidrops-rpki-rsc-00</span></p>
+  <span class="filename">draft-spaghetti-sidrops-rpki-rsc-01</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
@@ -519,55 +519,55 @@
 </h1>
 <p id="rfc.section.4.p.1">The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".  An RSC is formally defined as: </p>
 <pre>
-RpkiSignedChecklist-2021
-{ iso(1) member-body(2) us(840) rsadsi(113549)
-  pkcs(1) pkcs-9(9) smime(16) mod(0) TBD }
+   RpkiSignedChecklist-2021
+     { iso(1) member-body(2) us(840) rsadsi(113549)
+       pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
 
-DEFINITIONS EXPLICIT TAGS ::=
-BEGIN
+   DEFINITIONS EXPLICIT TAGS ::=
+   BEGIN
 
-IMPORTS
-CONTENT-TYPE, DigestAlgorithmIdentifier
-FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
-  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-    pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+   IMPORTS
+     CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
+     FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+         pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
 
-ASIdOrRange, IPAddressFamily
-FROM IPAddrAndASCertExtn -- in [RFC3779]
-  { iso(1) identified-organization(3) dod(6) internet(1)
-    security(5) mechanisms(5) pkix(7) mod(0)
-    id-mod-ip-addr-and-as-ident(30) } ;
+     ASIdOrRange, IPAddressFamily
+     FROM IPAddrAndASCertExtn -- in [RFC3779]
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) mod(0)
+         id-mod-ip-addr-and-as-ident(30) } ;
 
-ct-rpkiSignedChecklist CONTENT-TYPE ::=
-  { TYPE RpkiSignedChecklist IDENTIFIED BY
-    id-ct-rpkiSignedChecklist }
+   ct-rpkiSignedChecklist CONTENT-TYPE ::=
+       { TYPE RpkiSignedChecklist IDENTIFIED BY
+         id-ct-signedChecklist }
 
-id-ct-signedChecklist OBJECT IDENTIFIER ::=
-  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-    pkcs-9(9) id-smime(16) id-ct TBD }
+   id-ct-signedChecklist OBJECT IDENTIFIER ::=
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+         pkcs-9(9) id-smime(16) id-ct(1) TBD }
 
-ResourceBlock ::= SEQUENCE {
-  asID         [0]       AsList OPTIONAL,
-  ipAddrBlocks [1]       IPList OPTIONAL }
-  -- at least one of asID or ipAddrBlocks MUST be present
-  ( WITH COMPONENTS { ..., asID PRESENT} |
-    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+   RpkiSignedChecklist ::= SEQUENCE {
+     version  [0]          INTEGER DEFAULT 0,
+     resources             ResourceBlock,
+     digestAlgorithm       DigestAlgorithmIdentifier,
+     checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
-AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+   FileAndHash ::= SEQUENCE {
+     file            IA5String,
+     hash            Digest }
 
-IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
+   ResourceBlock ::= SEQUENCE {
+       asID         [0]       AsList OPTIONAL,
+       ipAddrBlocks [1]       IPList OPTIONAL }
+       -- at least one of asID or ipAddrBlocks MUST be present
+       ( WITH COMPONENTS { ..., asID PRESENT} |
+         WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-FileAndHash ::= SEQUENCE {
-  file            IA5String,
-  hash            BIT STRING }
+   AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
-RpkiSignedChecklist ::= SEQUENCE {
-  version  [0]          INTEGER DEFAULT 0,
-  resources             ResourceBlock,
-  digestAlgorithm       DigestAlgorithmIdentifier,
-  checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
+   IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
-END
+   END
 </pre>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> version</h1>
@@ -712,7 +712,7 @@ END
 <h1 id="rfc.appendix.A">
 <a href="#rfc.appendix.A">Appendix A.</a> <a href="#Acknowledgements" id="Acknowledgements">Acknowledgements</a>
 </h1>
-<p id="rfc.section.A.p.1">The author wishes to thank George Michaelson, Tom Harrison, Geoff Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted Unangst, and Marc Espie for prior art.  And Nimrod Levy for document review and suggestions.  </p>
+<p id="rfc.section.A.p.1">The author wishes to thank George Michaelson, Tom Harrison, Geoff Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted Unangst, and Marc Espie for prior art.  The author would like to thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.  The author would like to thank Nimrod Levy for document review and suggestions.  </p>
 <h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
 <div class="avoidbreak">
   <address class="vcard">
