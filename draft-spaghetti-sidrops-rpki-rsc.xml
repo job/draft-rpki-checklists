@@ -59,7 +59,6 @@
 <middle>
 
   <section anchor="intro" title="Introduction">
-    
     <t>
       This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480" />.
       The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
@@ -100,57 +99,57 @@
       The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".
       An RSC is formally defined as:
     </t>
-    <figure><artwork>
-RpkiSignedChecklist-2021
-{ iso(1) member-body(2) us(840) rsadsi(113549)
-  pkcs(1) pkcs-9(9) smime(16) mod(0) TBD }
+<figure><artwork><![CDATA[
+   RpkiSignedChecklist-2021
+     { iso(1) member-body(2) us(840) rsadsi(113549)
+       pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
 
-DEFINITIONS EXPLICIT TAGS ::=
-BEGIN
+   DEFINITIONS EXPLICIT TAGS ::=
+   BEGIN
 
-IMPORTS
-CONTENT-TYPE, DigestAlgorithmIdentifier
-FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
-  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-    pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+   IMPORTS
+     CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
+     FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+         pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
 
-ASIdOrRange, IPAddressFamily
-FROM IPAddrAndASCertExtn -- in [RFC3779]
-  { iso(1) identified-organization(3) dod(6) internet(1)
-    security(5) mechanisms(5) pkix(7) mod(0)
-    id-mod-ip-addr-and-as-ident(30) } ;
+     ASIdOrRange, IPAddressFamily
+     FROM IPAddrAndASCertExtn -- in [RFC3779]
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) mod(0)
+         id-mod-ip-addr-and-as-ident(30) } ;
 
-ct-rpkiSignedChecklist CONTENT-TYPE ::=
-  { TYPE RpkiSignedChecklist IDENTIFIED BY
-    id-ct-rpkiSignedChecklist }
+   ct-rpkiSignedChecklist CONTENT-TYPE ::=
+       { TYPE RpkiSignedChecklist IDENTIFIED BY
+         id-ct-signedChecklist }
 
-id-ct-signedChecklist OBJECT IDENTIFIER ::=
-  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-    pkcs-9(9) id-smime(16) id-ct TBD }
+   id-ct-signedChecklist OBJECT IDENTIFIER ::=
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+         pkcs-9(9) id-smime(16) id-ct(1) TBD }
 
-ResourceBlock ::= SEQUENCE {
-  asID         [0]       AsList OPTIONAL,
-  ipAddrBlocks [1]       IPList OPTIONAL }
-  -- at least one of asID or ipAddrBlocks MUST be present
-  ( WITH COMPONENTS { ..., asID PRESENT} |
-    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+   RpkiSignedChecklist ::=3D SEQUENCE {
+     version  [0]          INTEGER DEFAULT 0,
+     resources             ResourceBlock,
+     digestAlgorithm       DigestAlgorithmIdentifier,
+     checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
-AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+   FileAndHash ::=3D SEQUENCE {
+     file            IA5String,
+     hash            Digest }
 
-IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
+   ResourceBlock ::=3D SEQUENCE {
+       asID         [0]       AsList OPTIONAL,
+       ipAddrBlocks [1]       IPList OPTIONAL }
+       -- at least one of asID or ipAddrBlocks MUST be present
+       ( WITH COMPONENTS { ..., asID PRESENT} |
+         WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-FileAndHash ::= SEQUENCE {
-  file            IA5String,
-  hash            BIT STRING }
+   AsList ::=3D SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
-RpkiSignedChecklist ::= SEQUENCE {
-  version  [0]          INTEGER DEFAULT 0,
-  resources             ResourceBlock,
-  digestAlgorithm       DigestAlgorithmIdentifier,
-  checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
+   IPList ::=3D SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
-END
-</artwork></figure>
+   END
+]]></artwork></figure>
 
     <section title="version">
       <t>
@@ -179,7 +178,7 @@ END
       </t>
     </section>
   </section>
-  
+
   <section title="RSC Validation">
     <t>
       To validate an RSC the relying party MUST perform all the validation checks specified in <xref target="RFC6488"/> as well as the following additional RSC-specific validation steps.
@@ -192,7 +191,7 @@ END
       </list>
     </t>
   </section>
-      
+
   <section anchor="Security" title="Security Considerations">
     <t>
       Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
@@ -278,7 +277,7 @@ END
 </middle>
 
 <back>
-    
+
   <references title="Normative References">
     <?rfc include="reference.RFC.2119"?>
     <?rfc include="reference.RFC.5652"?>
@@ -315,8 +314,8 @@ END
         Ted Unangst,
         and Marc Espie
      for prior art.
-     And Nimrod Levy
-     for document review and suggestions. 
+     The author would like to thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.
+     The author would like to thank Nimrod Levy for document review and suggestions.
     </t>
   </section>
 
