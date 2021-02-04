@@ -85,14 +85,15 @@ Table of Contents
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
-     7.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     7.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   5
-     7.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   6
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   7
+   7.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION   5
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
+     8.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     8.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   6
+     8.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   6
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   8
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
@@ -104,8 +105,7 @@ Table of Contents
    one or more checksums of arbitrary files, to be signed "with
    resources", and for validation to provide a means to confirm a given
    Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-   The profile is intended to provide for the signing of a checksum
-   listing with an arbitrary set of Internet Number Resources.
+
 
 
 
@@ -113,6 +113,9 @@ Snijders                 Expires August 8, 2021                 [Page 2]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+   The profile is intended to provide for the signing of a checksum
+   listing with an arbitrary set of Internet Number Resources.
 
    RSC files are expected to facilitate Bring Your Own IP (BYOIP)
    authentication, inter-domain interconnection provisioning, and
@@ -135,7 +138,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 3.  The RSC ContentType
 
-   The ContentType for an RTA is defined as rpkiSignedChecklist, and has
+   The ContentType for an RSC is defined as rpkiSignedChecklist, and has
    the numerical value of 1.2.840.113549.1.9.16.1.TBD.
 
    This OID MUST appear both within the eContentType in the
@@ -159,9 +162,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    CONTENT-TYPE, DigestAlgorithmIdentifier
    FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-       pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
-
-   ASIdOrRange, IPAddressFamily
 
 
 
@@ -170,6 +170,9 @@ Snijders                 Expires August 8, 2021                 [Page 3]
 Internet-Draft           RPKI Signed Checklists            February 2021
 
 
+       pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+
+   ASIdOrRange, IPAddressFamily
    FROM IPAddrAndASCertExtn -- in [RFC3779]
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) mod(0)
@@ -208,16 +211,13 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 4.1.  version
 
-   The version number of the ResourceTaggedAttestation MUST be 0.
+   The version number of the RpkiSignedChecklist MUST be 0.
 
 4.2.  resources
 
    The resources contained here are the resources used to mark the
    attestation, and MUST match the set of resources listed by the EE
    certificate carried in the CMS certificates field.
-
-
-
 
 
 
@@ -258,21 +258,21 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    CA that issued the CA certificate to the entity that issued the EE
    certificate used to validate the Signed Checklist.
 
-7.  IANA Considerations
+7.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
 
-7.1.  OID
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of posting of this
+   Internet-Draft, and is based on a proposal described in RFC 7942.
+   The description of implementations in this section is intended to
+   assist the IETF in its decision processes in progressing drafts to
+   RFCs.  Please note that the listing of any individual implementation
+   here does not imply endorsement by the IETF.  Furthermore, no effort
+   has been spent to verify the information presented here that was
+   supplied by IETF contributors.  This is not intended as, and must not
+   be construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
 
-   The IANA has registered the OID for the RPKI Signed Checklist in the
-   registry created by [RFC6488] as follows:
-
-      Name          OID                          Specification
-      ---------------------------------------------------------
-      Checklists    1.2.840.113549.1.9.16.1.TBD  [RFC-TBD]
-
-7.2.  File Extension
-
-   The IANA has added an item for the signed Checklist file extension to
-   the "RPKI Repository Name Scheme" created by [RFC6481] as follows:
 
 
 
@@ -282,14 +282,61 @@ Snijders                 Expires August 8, 2021                 [Page 5]
 Internet-Draft           RPKI Signed Checklists            February 2021
 
 
+   According to RFC 7942, "this will allow reviewers and working groups
+   to assign due consideration to documents that have the benefit of
+   running code, which may serve as evidence of valuable experimentation
+   and feedback that have made the implemented protocols more mature.
+   It is up to the individual working groups to use this information as
+   they see fit".
+
+   o  A validator implementation based on OpenBSD's rpki-client is
+      expected to be published after IANA Early Allocation of the OIDs.
+
+8.  IANA Considerations
+
+8.1.  OID
+
+   The IANA has registered the OID for the RPKI Signed Checklist in the
+   registry created by [RFC6488] as follows:
+
+      Name          OID                          Specification
+      ---------------------------------------------------------
+      Checklists    1.2.840.113549.1.9.16.1.TBD  [RFC-TBD]
+
+8.2.  File Extension
+
+   The IANA has added an item for the signed Checklist file extension to
+   the "RPKI Repository Name Scheme" created by [RFC6481] as follows:
+
       Filename Extension  RPKI Object           Reference
       -----------------------------------------------------------
          .sig             Signed Checklist      [RFC-TBD]
 
-7.3.  Media Type
+8.3.  Media Type
 
    The IANA has registered the media type application/rpki-checklist as
    follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 6]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
       Type name: application
       Subtype name: rpki-checklist
@@ -315,9 +362,9 @@ Internet-Draft           RPKI Signed Checklists            February 2021
       Author: Job Snijders <job@fastly.com>
       Change controller: Job Snijders <job@fastly.com>
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -328,16 +375,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/info/rfc5652>.
 
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 6]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
-
    [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", RFC 6481,
               DOI 10.17487/RFC6481, February 2012,
@@ -347,6 +384,15 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               "Manifests for the Resource Public Key Infrastructure
               (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
               <https://www.rfc-editor.org/info/rfc6486>.
+
+
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 7]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
    [RFC6488]  Lepinski, M., Chi, A., and S. Kent, "Signed Object
               Template for the Resource Public Key Infrastructure
@@ -362,7 +408,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
@@ -382,17 +428,8 @@ Appendix A.  Acknowledgements
 
    The author wishes to thank George Michaelson, Tom Harrison, Geoff
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
-   Unangst, and Marc Espie for prior art.
-
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 7]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
+   Unangst, and Marc Espie for prior art.  And Nimrod Levy for document
+   review and suggestions.
 
 Author's Address
 
@@ -402,43 +439,6 @@ Author's Address
    Netherlands
 
    Email: job@fastly.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

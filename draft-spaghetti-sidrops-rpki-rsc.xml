@@ -88,7 +88,7 @@
 
   <section anchor="content" title="The RSC ContentType">
     <t>
-      The ContentType for an RTA is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.TBD.
+      The ContentType for an RSC is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.TBD.
     </t>
     <t>
       This OID MUST appear both within the eContentType in the encapContentInfo object as well as the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
@@ -154,7 +154,7 @@ END
 
     <section title="version">
       <t>
-        The version number of the ResourceTaggedAttestation MUST be 0.
+        The version number of the RpkiSignedChecklist MUST be 0.
       </t>
     </section>
 
@@ -197,6 +197,28 @@ END
     <t>
       Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
       These data have not been verified by the CA that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
+    </t>
+  </section>
+
+  <section title="Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+    <t>
+     This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in RFC 7942.
+     The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.
+     Please note that the listing of any individual implementation here does not imply endorsement by the IETF.
+     Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.
+     This is not intended as, and must not be construed to be, a catalog of available implementations or their features.
+     Readers are advised to note that other implementations may exist.
+   </t>
+    <t>
+     According to RFC 7942, "this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.
+     It is up to the individual working groups to use this information as they see fit".
+    </t>
+    <t>
+      <list style="symbols">
+        <t>
+          A validator implementation based on OpenBSD's rpki-client is expected to be published after IANA Early Allocation of the OIDs.
+        </t>
+      </list>
     </t>
   </section>
 
@@ -292,7 +314,9 @@ END
         Rob Austein,
         Ted Unangst,
         and Marc Espie
-      for prior art.
+     for prior art.
+     And Nimrod Levy
+     for document review and suggestions. 
     </t>
   </section>
 
