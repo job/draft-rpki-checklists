@@ -71,7 +71,7 @@
     </t>
 
     <t>
-      The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify</xref> utility.
+      The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify</xref> utility. The main difference between RSC and RTA is that an RTA allows multiple signers to attest a single anonymous digital object through a checksum of its content, while an RSC allows a single signer to attest the checksums of multiple named digital objects. This difference is expected to represent a simplification for implementers and operators.
     </t>
   </section>
 

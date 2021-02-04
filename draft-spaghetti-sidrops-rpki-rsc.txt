@@ -79,8 +79,8 @@ Table of Contents
    2.  RSC Profile and Distribution  . . . . . . . . . . . . . . . .   3
    3.  The RSC ContentType . . . . . . . . . . . . . . . . . . . . .   3
    4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   3
-     4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   4
+     4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
@@ -122,7 +122,13 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    resource holdership verification processes.
 
    The RSC concept borrows heavily from RTA [I-D.ietf-sidrops-rpki-rta],
-   Manifests [RFC6486], and OpenBSD's signify [signify] utility.
+   Manifests [RFC6486], and OpenBSD's signify [signify] utility.  The
+   main difference between RSC and RTA is that an RTA allows multiple
+   signers to attest a single anonymous digital object through a
+   checksum of its content, while an RSC allows a single signer to
+   attest the checksums of multiple named digital objects.  This
+   difference is expected to represent a simplification for implementers
+   and operators.
 
 2.  RSC Profile and Distribution
 
@@ -156,12 +162,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
      pkcs(1) pkcs-9(9) smime(16) mod(0) TBD }
 
    DEFINITIONS EXPLICIT TAGS ::=
-   BEGIN
-
-   IMPORTS
-   CONTENT-TYPE, DigestAlgorithmIdentifier
-   FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
-     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
 
 
 
@@ -170,6 +170,12 @@ Snijders                 Expires August 8, 2021                 [Page 3]
 Internet-Draft           RPKI Signed Checklists            February 2021
 
 
+   BEGIN
+
+   IMPORTS
+   CONTENT-TYPE, DigestAlgorithmIdentifier
+   FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
        pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
 
    ASIdOrRange, IPAddressFamily
@@ -209,6 +215,17 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    END
 
+
+
+
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 4]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
 4.1.  version
 
    The version number of the RpkiSignedChecklist MUST be 0.
@@ -218,13 +235,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    The resources contained here are the resources used to mark the
    attestation, and MUST match the set of resources listed by the EE
    certificate carried in the CMS certificates field.
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 4]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
 4.3.  digestAlgorithm
 
@@ -264,6 +274,14 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    protocol defined by this specification at the time of posting of this
    Internet-Draft, and is based on a proposal described in RFC 7942.
    The description of implementations in this section is intended to
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 5]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
    assist the IETF in its decision processes in progressing drafts to
    RFCs.  Please note that the listing of any individual implementation
    here does not imply endorsement by the IETF.  Furthermore, no effort
@@ -272,15 +290,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    be construed to be, a catalog of available implementations or their
    features.  Readers are advised to note that other implementations may
    exist.
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 5]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
    According to RFC 7942, "this will allow reviewers and working groups
    to assign due consideration to documents that have the benefit of
@@ -316,15 +325,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    The IANA has registered the media type application/rpki-checklist as
    follows:
-
-
-
-
-
-
-
-
-
 
 
 
