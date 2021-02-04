@@ -75,6 +75,8 @@
     <t>
       RSC follows the Signed Object Template for the RPKI <xref target="RFC6488" /> with one exception.
       Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension is omitted from the RSC's X.509 EE certificate.
+    </t>
+    <t>
       What constitutes suitable transport for RSC files is deliberately unspecified.
       It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.
     </t>
