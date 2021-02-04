@@ -62,8 +62,12 @@
     
     <t>
       This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480" />.
-      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the RPKI Signed Checklist (RSC).
+      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
       The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
+    </t>
+
+    <t>
+      RSC files are expected to facilitate Bring Your Own IP (BYOIP) authentication, inter-domain interconnection provisioning, and resource holdership verification processes.
     </t>
 
     <t>

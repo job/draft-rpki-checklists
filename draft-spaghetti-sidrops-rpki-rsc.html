@@ -498,8 +498,9 @@
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">This document defines a Cryptographic Message Syntax (CMS) <a href="#RFC5652" class="xref">[RFC5652]</a> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <a href="#RFC6480" class="xref">[RFC6480]</a>.  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the RPKI Signed Checklist (RSC).  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
-<p id="rfc.section.1.p.2">The RSC concept borrows heavily from <a href="#I-D.ietf-sidrops-rpki-rta" class="xref">RTA</a>, Manifests <a href="#RFC6486" class="xref">[RFC6486]</a>, and OpenBSD's <a href="#signify" class="xref">signify</a> utility.  </p>
+<p id="rfc.section.1.p.1">This document defines a Cryptographic Message Syntax (CMS) <a href="#RFC5652" class="xref">[RFC5652]</a> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <a href="#RFC6480" class="xref">[RFC6480]</a>.  The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).  The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.  </p>
+<p id="rfc.section.1.p.2">RSC files are expected to facilitate Bring Your Own IP (BYOIP) authentication, inter-domain interconnection provisioning, and resource holdership verification processes.  </p>
+<p id="rfc.section.1.p.3">The RSC concept borrows heavily from <a href="#I-D.ietf-sidrops-rpki-rta" class="xref">RTA</a>, Manifests <a href="#RFC6486" class="xref">[RFC6486]</a>, and OpenBSD's <a href="#signify" class="xref">signify</a> utility.  </p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#profile" id="profile">RSC Profile and Distribution</a>
 </h1>
@@ -588,7 +589,7 @@ END
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#Security" id="Security">Security Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">some writing needs to happen here </p>
+<p id="rfc.section.6.p.1">Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.  These data have not been verified by the CA that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.  </p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#IANA" id="IANA">IANA Considerations</a>
 </h1>

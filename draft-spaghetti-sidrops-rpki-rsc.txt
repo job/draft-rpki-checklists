@@ -81,19 +81,19 @@ Table of Contents
    4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   3
      4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   4
      4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   4
-     4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   4
+     4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
      7.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
      7.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   5
-     7.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   6
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
      8.2.  Informative References  . . . . . . . . . . . . . . . . .   7
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -102,10 +102,10 @@ Table of Contents
    for use with the Resource Public Key Infrastructure (RPKI) [RFC6480].
    The objective is to allow an attestation, in the form of a listing of
    one or more checksums of arbitrary files, to be signed "with
-   resources", and for validation to provide a means to confirm a
-   specific Internet Resource Holder produced the RPKI Signed Checklist
-   (RSC).  The profile is intended to provide for the signing of a
-   checksum listing with an arbitrary set of Internet Number Resources.
+   resources", and for validation to provide a means to confirm a given
+   Internet Resource Holder produced the RPKI Signed Checklist (RSC).
+   The profile is intended to provide for the signing of a checksum
+   listing with an arbitrary set of Internet Number Resources.
 
 
 
@@ -113,6 +113,10 @@ Snijders                 Expires August 8, 2021                 [Page 2]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+   RSC files are expected to facilitate Bring Your Own IP (BYOIP)
+   authentication, inter-domain interconnection provisioning, and
+   resource holdership verification processes.
 
    The RSC concept borrows heavily from RTA [I-D.ietf-sidrops-rpki-rta],
    Manifests [RFC6486], and OpenBSD's signify [signify] utility.
@@ -158,10 +162,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
        pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
 
    ASIdOrRange, IPAddressFamily
-   FROM IPAddrAndASCertExtn -- in [RFC3779]
-     { iso(1) identified-organization(3) dod(6) internet(1)
-       security(5) mechanisms(5) pkix(7) mod(0)
-       id-mod-ip-addr-and-as-ident(30) } ;
 
 
 
@@ -169,6 +169,11 @@ Snijders                 Expires August 8, 2021                 [Page 3]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+   FROM IPAddrAndASCertExtn -- in [RFC3779]
+     { iso(1) identified-organization(3) dod(6) internet(1)
+       security(5) mechanisms(5) pkix(7) mod(0)
+       id-mod-ip-addr-and-as-ident(30) } ;
 
    ct-rpkiSignedChecklist CONTENT-TYPE ::=
      { TYPE RpkiSignedChecklist IDENTIFIED BY
@@ -211,11 +216,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    attestation, and MUST match the set of resources listed by the EE
    certificate carried in the CMS certificates field.
 
-4.3.  digestAlgorithm
-
-   The digest algorithm used to create the message digest of the
-   attested digital object.  This algorithm MUST be a hashing algorithm
-   defined in [RFC7935].
 
 
 
@@ -225,6 +225,12 @@ Snijders                 Expires August 8, 2021                 [Page 4]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+4.3.  digestAlgorithm
+
+   The digest algorithm used to create the message digest of the
+   attested digital object.  This algorithm MUST be a hashing algorithm
+   defined in [RFC7935].
 
 4.4.  checkList
 
@@ -247,7 +253,10 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 6.  Security Considerations
 
-   some writing needs to happen here
+   Relying parties are hereby warned that the data in a RPKI Signed
+   Checklist is self-asserted.  These data have not been verified by the
+   CA that issued the CA certificate to the entity that issued the EE
+   certificate used to validate the Signed Checklist.
 
 7.  IANA Considerations
 
@@ -265,6 +274,14 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    The IANA has added an item for the signed Checklist file extension to
    the "RPKI Repository Name Scheme" created by [RFC6481] as follows:
 
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 5]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
       Filename Extension  RPKI Object           Reference
       -----------------------------------------------------------
          .sig             Signed Checklist      [RFC-TBD]
@@ -273,14 +290,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    The IANA has registered the media type application/rpki-checklist as
    follows:
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 5]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
       Type name: application
       Subtype name: rpki-checklist
@@ -319,15 +328,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/info/rfc5652>.
 
-   [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
-              Resource Certificate Repository Structure", RFC 6481,
-              DOI 10.17487/RFC6481, February 2012,
-              <https://www.rfc-editor.org/info/rfc6481>.
-
-   [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
-              "Manifests for the Resource Public Key Infrastructure
-              (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
-              <https://www.rfc-editor.org/info/rfc6486>.
 
 
 
@@ -337,6 +337,16 @@ Snijders                 Expires August 8, 2021                 [Page 6]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+   [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
+              Resource Certificate Repository Structure", RFC 6481,
+              DOI 10.17487/RFC6481, February 2012,
+              <https://www.rfc-editor.org/info/rfc6481>.
+
+   [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
+              "Manifests for the Resource Public Key Infrastructure
+              (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
+              <https://www.rfc-editor.org/info/rfc6486>.
 
    [RFC6488]  Lepinski, M., Chi, A., and S. Kent, "Signed Object
               Template for the Resource Public Key Infrastructure
@@ -374,6 +384,16 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.
 
+
+
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 7]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
 Author's Address
 
    Job Snijders
@@ -389,4 +409,40 @@ Author's Address
 
 
 
-Snijders                 Expires August 8, 2021                 [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders                 Expires August 8, 2021                 [Page 8]
