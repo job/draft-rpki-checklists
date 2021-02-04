@@ -99,7 +99,7 @@
       The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".
       An RSC is formally defined as:
     </t>
-<figure><artwork><![CDATA[
+<figure><artwork>
    RpkiSignedChecklist-2021
      { iso(1) member-body(2) us(840) rsadsi(113549)
        pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
@@ -127,29 +127,29 @@
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
          pkcs-9(9) id-smime(16) id-ct(1) TBD }
 
-   RpkiSignedChecklist ::=3D SEQUENCE {
+   RpkiSignedChecklist ::= SEQUENCE {
      version  [0]          INTEGER DEFAULT 0,
      resources             ResourceBlock,
      digestAlgorithm       DigestAlgorithmIdentifier,
      checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
-   FileAndHash ::=3D SEQUENCE {
+   FileAndHash ::= SEQUENCE {
      file            IA5String,
      hash            Digest }
 
-   ResourceBlock ::=3D SEQUENCE {
+   ResourceBlock ::= SEQUENCE {
        asID         [0]       AsList OPTIONAL,
        ipAddrBlocks [1]       IPList OPTIONAL }
        -- at least one of asID or ipAddrBlocks MUST be present
        ( WITH COMPONENTS { ..., asID PRESENT} |
          WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-   AsList ::=3D SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+   AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
-   IPList ::=3D SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
+   IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
    END
-]]></artwork></figure>
+</artwork></figure>
 
     <section title="version">
       <t>
