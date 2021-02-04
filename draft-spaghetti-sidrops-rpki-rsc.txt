@@ -240,9 +240,9 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    checks specified in [RFC6488] as well as the following additional
    RSC-specific validation steps.
 
-   o  The message digests of the by filename referenced digital objects
+   o  The message digest of each by filename referenced digital object,
       using the digest algorithm specified in the the digestAlgorithm
-      field MUST be calculated and MUST match the value given in the
+      field, MUST be calculated and MUST match the value given in the
       messageDigest field of the RSC content.
 
 6.  Security Considerations
