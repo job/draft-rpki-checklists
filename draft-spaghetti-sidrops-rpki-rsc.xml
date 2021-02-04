@@ -22,10 +22,10 @@
     <organization>Fastly</organization>
     <address>
       <postal>
-	<street />
-	<code />
-	<city>Amsterdam</city>
-	<country>Netherlands</country>
+        <street />
+        <code />
+        <city>Amsterdam</city>
+        <country>Netherlands</country>
       </postal>
       <email>job@fastly.com</email>
     </address>
@@ -67,7 +67,7 @@
     </t>
 
     <t>
-      The RSC concept borrows heavily from <xref target="I-D.sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify<xref> utility.
+      The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify">signify</xref> utility.
     </t>
   </section>
 
@@ -94,8 +94,7 @@
       The content of an RSC indicates that an a checklist for arbitrary digital objects has been signed "with resources".
       An RSC is formally defined as:
     </t>
-    <t>
-      <figure><artwork>
+    <figure><artwork>
 RpkiSignedChecklist-2021
 { iso(1) member-body(2) us(840) rsadsi(113549)
   pkcs(1) pkcs-9(9) smime(16) mod(0) TBD }
@@ -142,7 +141,7 @@ RpkiSignedChecklist ::= SEQUENCE {
   version  [0]          INTEGER DEFAULT 0,
   resources             ResourceBlock,
   digestAlgorithm       DigestAlgorithmIdentifier,
-  checkList		SEQUENCE SIZE (1..MAX) OF FileAndHash }
+  checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
 END
 </artwork></figure>
@@ -161,15 +160,15 @@ END
 
     <section title="digestAlgorithm">
       <t>
-	The digest algorithm used to create the message digest of the attested digital object.
+        The digest algorithm used to create the message digest of the attested digital object.
         This algorithm MUST be a hashing algorithm defined in <xref target="RFC7935" />.
       </t>
     </section>
 
     <section title="checkList">
       <t>
-	This field is a sequence of FileAndHash objects.
-	There is one FileAndHash entry for each arbitrary object referenced from the RSC.
+        This field is a sequence of FileAndHash objects.
+        There is one FileAndHash entry for each arbitrary object referenced from the RSC.
         Each FileAndHash is an ordered pair consisting of the name of the file that contains the object in question and a hash of the file's contents.
       </t>
     </section>
@@ -187,15 +186,11 @@ END
       </list>
     </t>
   </section>
-  <section title="Standalone Use">
-    <t>
       
- 
   <section anchor="Security" title="Security Considerations">
-    
     <t>
-      
-    
+      some writing needs to happen here
+    </t>
   </section>
 
   <section anchor="IANA" title="IANA Considerations">
@@ -204,9 +199,9 @@ END
         The IANA has registered the OID for the RPKI Signed Checklist in the registry created by [RFC6488] as follows:
       </t>
 <figure><artwork>
-   Name          OID                         Specification
-   -----------------------------------------------------------
-   Checklists    1.2.840.113549.1.9.16.1.TBD [RFC-TBD]
+   Name          OID                          Specification
+   ---------------------------------------------------------
+   Checklists    1.2.840.113549.1.9.16.1.TBD  [RFC-TBD]
 </artwork></figure>
     </section>
     <section title="File Extension">
@@ -223,7 +218,7 @@ END
       <t>
         The IANA has registered the media type application/rpki-checklist as follows:
       </t>
-<figure><artwork>
+<figure><artwork><![CDATA[
    Type name: application
    Subtype name: rpki-checklist
    Required parameters: None
@@ -247,7 +242,7 @@ END
    Restrictions on usage: None
    Author: Job Snijders <job@fastly.com>
    Change controller: Job Snijders <job@fastly.com>
-</artwork></figure>
+]]></artwork></figure>
      </section>
   </section>
 
@@ -257,22 +252,27 @@ END
     
   <references title="Normative References">
     <?rfc include="reference.RFC.2119"?>
-    <?rfc include="reference.RFC.4271"?>
+    <?rfc include="reference.RFC.5652"?>
     <?rfc include="reference.RFC.6481"?>
     <?rfc include="reference.RFC.6486"?>
-    <?rfc include="reference.RFC.6482"?>
-    <?rfc include="reference.RFC.6811"?>
+    <?rfc include="reference.RFC.6488"?>
     <?rfc include="reference.RFC.8174"?>
-    <?rfc include="reference.RFC.8182"?>
-<!--    <?rfc include="reference.RFC.8210"?> -->
-    <?rfc include="reference.RFC.8481"?>
-    <?rfc include="reference.I-D.ietf-sidrops-8210bis"?>
+    <?rfc include="reference.RFC.7935"?>
     </references>
 
   <references title="Informative References">
+    <?rfc include="reference.I-D.draft-ietf-sidrops-rpki-rta-00"?>
     <?rfc include="reference.RFC.6480"?>
-    <?rfc include="reference.I-D.sidrops-bruijnzeels-deprecate-rsync"?>
-    </references>
+    <reference anchor="signify" target="https://man.openbsd.org/signify">
+      <front>
+        <title>signify - cryptographically sign and verify files</title>
+        <author initials="T." surname="Unangst"><organization /></author>
+        <author initials="M." surname="Espie"><organization /></author>
+        <date year="2014" month="May" />
+      </front>
+    </reference>
+
+  </references>
 
   <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
