@@ -183,7 +183,7 @@ END
     <t>
       <list style="symbols">
         <t>
-          The message digests of the referenced object using the digest algorithm specified in the the digestAlgorithm field MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.
+          The message digests of the by filename referenced digital objects using the digest algorithm specified in the the digestAlgorithm field MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.
         </t>
       </list>
     </t>
