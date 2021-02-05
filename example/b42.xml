@@ -17,11 +17,11 @@
   </digestAlgorithm>
   <checkList>
     <FileAndHash>
-      <file>ipv6_loa.png</file>
-      <hash>36997c7cb806fc0bb3c40e6f3b4de389543e378b18a629b3b348e05e08f1452b</hash>
+      <file>b42_ipv6_loa.png</file>
+      <hash>9516dd64be7c1725b9fca117120e58e8d842a5206873399b3ddffc91c4b6acf0</hash>
     </FileAndHash>
     <FileAndHash>
-      <file>service-definition.json</file>
+      <file>b42_service_definition.json</file>
       <hash>0ae1394722005cd92f4c6aa024d5d6b3e2e67d629f11720d9478a633a117a1c7</hash>
     </FileAndHash>
   </checkList>
