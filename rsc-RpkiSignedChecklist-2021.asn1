@@ -1,65 +1,64 @@
--- 
--- ASN.1 module found by /home/job/source/asn1c/examples/crfc2asn1.pl in draft-spaghetti-sidrops-rpki-rsc.txt at line 164
--- 
-
-RpkiSignedChecklist-2021
-{ iso(1) member-body(2) us(840) rsadsi(113549)
-  pkcs(1) pkcs9(9) smime(16) mod(0) 49 }
-
+RpkiSignedChecklist-2021 { iso(1) member-body(2) us(840) rsadsi(113549)
+	pkcs(1) pkcs9(9) smime(16) mod(0) 49 }
 DEFINITIONS EXPLICIT TAGS ::=
 BEGIN
 
-id-ct-signedChecklist OBJECT IDENTIFIER ::=
-  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+id-ct-signedChecklist OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
     pkcs-9(9) id-smime(16) id-ct(1) 49 }
 
 RpkiSignedChecklist ::= SEQUENCE {
-version  [0]          INTEGER DEFAULT 0,
-resources             ResourceBlock,
-digestAlgorithm       AlgorithmIdentifier,
-checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
+    version	 [0] INTEGER DEFAULT 0,
+    resources	 ResourceBlock,
+    digestAlgorithm	 AlgorithmIdentifier,
+    checkList	 SEQUENCE SIZE(1..MAX) OF FileAndHash
+}
 
 FileAndHash ::= SEQUENCE {
-file            IA5String,
-hash            OCTET STRING }
+    file	 IA5String,
+    hash	 OCTET STRING
+}
 
 ResourceBlock ::= SEQUENCE {
-  asID         [0]       AsList OPTIONAL,
-  ipAddrBlocks [1]       IPList OPTIONAL }
-  -- at least one of asID or ipAddrBlocks MUST be present
-  ( WITH COMPONENTS { ..., asID PRESENT} |
-    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+    asID	 [0] AsList OPTIONAL,
+    ipAddrBlocks	 [1] IPList OPTIONAL
+} (WITH COMPONENTS { ..., asID PRESENT } | WITH COMPONENTS { ..., ipAddrBlocks PRESENT })
 
 AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
-ASIdOrRange         ::= CHOICE {
-   id                   ASId,
- range                ASRange }
+ASIdOrRange ::= CHOICE {
+    id	 ASId,
+    range	 ASRange
+}
 
-ASId                ::= INTEGER
+ASId ::= INTEGER
 
-ASRange	::= SEQUENCE {
-   min ASId,
-   max ASId }
+ASRange ::= SEQUENCE {
+    min	 ASId,
+    max	 ASId
+}
 
 IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
-IPAddressFamily     ::= SEQUENCE {    -- AFI & optional SAFI --
- addressFamily        OCTET STRING (SIZE (2..3)),
- addressesOrRanges    SEQUENCE OF IPAddressOrRange }
+IPAddressFamily ::= SEQUENCE {
+    addressFamily	 OCTET STRING (SIZE(2..3)),
+    addressesOrRanges	 SEQUENCE OF IPAddressOrRange
+}
 
-IPAddressOrRange    ::= CHOICE {
- addressPrefix        IPAddress,
- addressRange         IPAddressRange }
+IPAddressOrRange ::= CHOICE {
+    addressPrefix	 IPAddress,
+    addressRange	 IPAddressRange
+}
 
-IPAddressRange      ::= SEQUENCE {
- min                  IPAddress,
- max                  IPAddress }
+IPAddressRange ::= SEQUENCE {
+    min	 IPAddress,
+    max	 IPAddress
+}
 
-IPAddress           ::= BIT STRING
+IPAddress ::= BIT STRING
 
-AlgorithmIdentifier  ::=  SEQUENCE  {
-     algorithm               OBJECT IDENTIFIER,
-     parameters              ANY DEFINED BY algorithm OPTIONAL  }
+AlgorithmIdentifier ::= SEQUENCE {
+    algorithm	 OBJECT IDENTIFIER,
+    parameters	 ANY algorithm OPTIONAL
+}
 
 END
