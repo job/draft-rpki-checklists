@@ -58,7 +58,7 @@ IPAddress ::= BIT STRING
 
 AlgorithmIdentifier ::= SEQUENCE {
     algorithm	 OBJECT IDENTIFIER,
-    parameters	 ANY algorithm OPTIONAL
+    parameters	 ANY DEFINED BY algorithm OPTIONAL
 }
 
 END
