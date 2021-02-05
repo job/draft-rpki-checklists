@@ -5,7 +5,7 @@
             <addressFamily>00 02</addressFamily>
             <addressesOrRanges>
                 <addressPrefix>
-                  00001010001000000000000100000110011111000010000010001100
+                  00000000001000000000000100000110011111000010000010001100
                 </addressPrefix>
             </addressesOrRanges>
           </IPAddressFamily>
