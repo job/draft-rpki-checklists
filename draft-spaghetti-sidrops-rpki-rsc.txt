@@ -4,8 +4,8 @@
 
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
-Intended status: Informational                          February 4, 2021
-Expires: August 8, 2021
+Intended status: Informational                           9 February 2021
+Expires: 13 August 2021
 
 
                          RPKI Signed Checklists
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 8, 2021.
+   This Internet-Draft will expire on 13 August 2021.
 
 
 
 
 
 
-Snijders                 Expires August 8, 2021                 [Page 1]
+Snijders                 Expires 13 August 2021                 [Page 1]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -64,37 +64,55 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  RSC Profile and Distribution  . . . . . . . . . . . . . . . .   3
    3.  The RSC ContentType . . . . . . . . . . . . . . . . . . . . .   3
-   4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   4
      4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   7.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION   5
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   7.  Implementation status - RFC EDITOR: REMOVE BEFORE
+           PUBLICATION . . . . . . . . . . . . . . . . . . . . . . .   6
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      8.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
      8.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   6
-     8.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   6
+     8.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   7
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      9.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
      9.2.  Informative References  . . . . . . . . . . . . . . . . .   8
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   8
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 2]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
 1.  Introduction
 
@@ -105,15 +123,6 @@ Table of Contents
    one or more checksums of arbitrary files, to be signed "with
    resources", and for validation to provide a means to confirm a given
    Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 2]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
-
    The profile is intended to provide for the signing of a checksum
    listing with an arbitrary set of Internet Number Resources.
 
@@ -151,6 +160,16 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    encapContentInfo object as well as the ContentType signed attribute
    in the signerInfo object (see [RFC6488]).
 
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 3]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
 4.  The RSC eContent
 
    The content of an RSC indicates that an a checklist for arbitrary
@@ -162,14 +181,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
           pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
 
       DEFINITIONS EXPLICIT TAGS ::=
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 3]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
-
       BEGIN
 
       IMPORTS
@@ -207,6 +218,14 @@ Internet-Draft           RPKI Signed Checklists            February 2021
           ipAddrBlocks [1]       IPList OPTIONAL }
           -- at least one of asID or ipAddrBlocks MUST be present
           ( WITH COMPONENTS { ..., asID PRESENT} |
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 4]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
             WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
       AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
@@ -214,17 +233,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
       IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
       END
-
-
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 4]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
 4.1.  version
 
@@ -256,10 +264,23 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    checks specified in [RFC6488] as well as the following additional
    RSC-specific validation steps.
 
-   o  The message digest of each by filename referenced digital object,
+   *  The message digest of each by filename referenced digital object,
       using the digest algorithm specified in the the digestAlgorithm
       field, MUST be calculated and MUST match the value given in the
       messageDigest field of the RSC content.
+
+
+
+
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 5]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
 6.  Security Considerations
 
@@ -274,14 +295,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    protocol defined by this specification at the time of posting of this
    Internet-Draft, and is based on a proposal described in RFC 7942.
    The description of implementations in this section is intended to
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 5]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
-
    assist the IETF in its decision processes in progressing drafts to
    RFCs.  Please note that the listing of any individual implementation
    here does not imply endorsement by the IETF.  Furthermore, no effort
@@ -298,7 +311,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    It is up to the individual working groups to use this information as
    they see fit".
 
-   o  A validator implementation based on OpenBSD's rpki-client is
+   *  A validator implementation based on OpenBSD's rpki-client is
       expected to be published after IANA Early Allocation of the OIDs.
 
 8.  IANA Considerations
@@ -317,6 +330,14 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    The IANA has added an item for the signed Checklist file extension to
    the "RPKI Repository Name Scheme" created by [RFC6481] as follows:
 
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 6]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
       Filename Extension  RPKI Object           Reference
       -----------------------------------------------------------
          .sig             Signed Checklist      [RFC-TBD]
@@ -325,18 +346,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    The IANA has registered the media type application/rpki-checklist as
    follows:
-
-
-
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 6]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
       Type name: application
       Subtype name: rpki-checklist
@@ -375,6 +384,16 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/info/rfc5652>.
 
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 7]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
    [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", RFC 6481,
               DOI 10.17487/RFC6481, February 2012,
@@ -384,15 +403,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               "Manifests for the Resource Public Key Infrastructure
               (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
               <https://www.rfc-editor.org/info/rfc6486>.
-
-
-
-
-
-Snijders                 Expires August 8, 2021                 [Page 7]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
    [RFC6488]  Lepinski, M., Chi, A., and S. Kent, "Signed Object
               Template for the Resource Public Key Infrastructure
@@ -413,8 +423,10 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
               and M. Hoffmann, "A profile for Resource Tagged
-              Attestations (RTAs)", draft-ietf-sidrops-rpki-rta-00 (work
-              in progress), January 2021.
+              Attestations (RTAs)", Work in Progress, Internet-Draft,
+              draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
+              <http://www.ietf.org/internet-drafts/draft-ietf-sidrops-
+              rpki-rta-00.txt>.
 
    [RFC6480]  Lepinski, M. and S. Kent, "An Infrastructure to Support
               Secure Internet Routing", RFC 6480, DOI 10.17487/RFC6480,
@@ -423,6 +435,20 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    [signify]  Unangst, T. and M. Espie, "signify - cryptographically
               sign and verify files", May 2014,
               <https://man.openbsd.org/signify>.
+
+
+
+
+
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 8]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
 Appendix A.  Acknowledgements
 
@@ -445,4 +471,34 @@ Author's Address
 
 
 
-Snijders                 Expires August 8, 2021                 [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders                 Expires 13 August 2021                 [Page 9]
