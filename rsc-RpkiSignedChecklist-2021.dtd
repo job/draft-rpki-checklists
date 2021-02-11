@@ -12,7 +12,7 @@ found in rsc-RpkiSignedChecklist-2021.asn1 -->
     <!ELEMENT checkList (FileAndHash*)>
 <!ELEMENT FileAndHash (file, hash)>
     <!ELEMENT file ANY>
-    <!ELEMENT hash (#PCDATA)>
+    <!ELEMENT hash (ANY*)>
 <!ELEMENT ResourceBlock (asID?, ipAddrBlocks?)>
     <!ELEMENT asID (ASIdOrRange*)>
     <!ELEMENT ipAddrBlocks (IPAddressFamily*)>

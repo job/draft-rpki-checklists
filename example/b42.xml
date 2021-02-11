@@ -23,6 +23,7 @@
     <FileAndHash>
       <file>b42_service_definition.json</file>
       <hash>0ae1394722005cd92f4c6aa024d5d6b3e2e67d629f11720d9478a633a117a1c7</hash>
+      <hash>663fc8339ee9a46e72ae32f5d926ff39b657f6b804c0cb6a77a7a8d6c8cbd667</hash>
     </FileAndHash>
   </checkList>
 </RpkiSignedChecklist>

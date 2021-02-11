@@ -4,8 +4,8 @@
 
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
-Intended status: Informational                           9 February 2021
-Expires: 13 August 2021
+Intended status: Informational                          11 February 2021
+Expires: 15 August 2021
 
 
                          RPKI Signed Checklists
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 August 2021.
+   This Internet-Draft will expire on 15 August 2021.
 
 
 
 
 
 
-Snijders                 Expires 13 August 2021                 [Page 1]
+Snijders                 Expires 15 August 2021                 [Page 1]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -82,16 +82,16 @@ Table of Contents
      4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
-   5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
+   5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    7.  Implementation status - RFC EDITOR: REMOVE BEFORE
            PUBLICATION . . . . . . . . . . . . . . . . . . . . . . .   6
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-     8.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     8.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   6
+     8.1.  OID . . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     8.2.  File Extension  . . . . . . . . . . . . . . . . . . . . .   7
      8.3.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   7
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
      9.2.  Informative References  . . . . . . . . . . . . . . . . .   8
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Snijders                 Expires 13 August 2021                 [Page 2]
+Snijders                 Expires 15 August 2021                 [Page 2]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -165,7 +165,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 13 August 2021                 [Page 3]
+Snijders                 Expires 15 August 2021                 [Page 3]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -211,7 +211,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
       FileAndHash ::= SEQUENCE {
         file            IA5String,
-        hash            Digest }
+        hash            SEQUENCE SIZE (1..2) OF Digest }
 
       ResourceBlock ::= SEQUENCE {
           asID         [0]       AsList OPTIONAL,
@@ -221,7 +221,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 13 August 2021                 [Page 4]
+Snijders                 Expires 15 August 2021                 [Page 4]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -255,8 +255,32 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    This field is a sequence of FileAndHash objects.  There is one
    FileAndHash entry for each arbitrary object referenced from the RSC.
    Each FileAndHash is an ordered pair consisting of the name of the
-   file that contains the object in question and a hash of the file's
-   contents.
+   file that contains the object in question, and one or two hashes.
+
+   It may seem counter-intuitive for a single digital object to be
+   associated with one or two different hashes; however some files
+   (particularily the class of plain-text files such as ASCII, UTF-8,
+   HTML, Javascript, or XML) are likely to be subjected to modification
+   during transit.  A signer MAY convert the attested digital object to
+   a form that is uniquely and unambigously representable in the
+   environment where the signature is created, and additionally to a
+   form suitable for the environment where the checksum will be
+   verified.  A signer MAY include both checksum calculated in the
+   'sender' environment and the checksum calculated for the 'receiver'
+   environment.  an example would be to include the checksums of the
+   digital object before and after <CR> / <CRLF> conversion.
+
+
+
+
+
+
+
+
+Snijders                 Expires 15 August 2021                 [Page 5]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
 
 5.  RSC Validation
 
@@ -266,21 +290,8 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    *  The message digest of each by filename referenced digital object,
       using the digest algorithm specified in the the digestAlgorithm
-      field, MUST be calculated and MUST match the value given in the
-      messageDigest field of the RSC content.
-
-
-
-
-
-
-
-
-
-Snijders                 Expires 13 August 2021                 [Page 5]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
+      field, MUST be calculated and MUST match a single value provided
+      in the messageDigest sequence of the FileAndHash content.
 
 6.  Security Considerations
 
@@ -316,6 +327,17 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 8.  IANA Considerations
 
+
+
+
+
+
+
+Snijders                 Expires 15 August 2021                 [Page 6]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
 8.1.  OID
 
    The IANA has registered the OID for the RPKI Signed Checklist in the
@@ -329,14 +351,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    The IANA has added an item for the signed Checklist file extension to
    the "RPKI Repository Name Scheme" created by [RFC6481] as follows:
-
-
-
-
-Snijders                 Expires 13 August 2021                 [Page 6]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
       Filename Extension  RPKI Object           Reference
       -----------------------------------------------------------
@@ -373,6 +387,13 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 9.  References
 
+
+
+Snijders                 Expires 15 August 2021                 [Page 7]
+
+Internet-Draft           RPKI Signed Checklists            February 2021
+
+
 9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -383,16 +404,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/info/rfc5652>.
-
-
-
-
-
-
-Snijders                 Expires 13 August 2021                 [Page 7]
-
-Internet-Draft           RPKI Signed Checklists            February 2021
-
 
    [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", RFC 6481,
@@ -432,23 +443,16 @@ Internet-Draft           RPKI Signed Checklists            February 2021
               Secure Internet Routing", RFC 6480, DOI 10.17487/RFC6480,
               February 2012, <https://www.rfc-editor.org/info/rfc6480>.
 
-   [signify]  Unangst, T. and M. Espie, "signify - cryptographically
-              sign and verify files", May 2014,
-              <https://man.openbsd.org/signify>.
 
 
-
-
-
-
-
-
-
-
-Snijders                 Expires 13 August 2021                 [Page 8]
+Snijders                 Expires 15 August 2021                 [Page 8]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
+
+   [signify]  Unangst, T. and M. Espie, "signify - cryptographically
+              sign and verify files", May 2014,
+              <https://man.openbsd.org/signify>.
 
 Appendix A.  Acknowledgements
 
@@ -497,8 +501,4 @@ Author's Address
 
 
 
-
-
-
-
-Snijders                 Expires 13 August 2021                 [Page 9]
+Snijders                 Expires 15 August 2021                 [Page 9]

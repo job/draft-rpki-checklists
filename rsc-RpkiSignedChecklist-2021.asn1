@@ -15,7 +15,7 @@ RpkiSignedChecklist ::= SEQUENCE {
 
 FileAndHash ::= SEQUENCE {
     file	 IA5String,
-    hash	 OCTET STRING
+    hash	 SEQUENCE (SIZE (1..2)) OF OCTET STRING
 }
 
 ResourceBlock ::= SEQUENCE {

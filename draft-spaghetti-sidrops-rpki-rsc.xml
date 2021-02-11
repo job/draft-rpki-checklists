@@ -135,7 +135,7 @@
 
    FileAndHash ::= SEQUENCE {
      file            IA5String,
-     hash            Digest }
+     hash            SEQUENCE SIZE (1..2) OF Digest }
 
    ResourceBlock ::= SEQUENCE {
        asID         [0]       AsList OPTIONAL,
@@ -174,7 +174,13 @@
       <t>
         This field is a sequence of FileAndHash objects.
         There is one FileAndHash entry for each arbitrary object referenced from the RSC.
-        Each FileAndHash is an ordered pair consisting of the name of the file that contains the object in question and a hash of the file's contents.
+        Each FileAndHash is an ordered pair consisting of the name of the file that contains the object in question, and one or two hashes.
+      </t>
+      <t>
+        It may seem counter-intuitive for a single digital object to be associated with one or two different hashes; however some files (particularily the class of plain-text files such as ASCII, UTF-8, HTML, Javascript, or XML) are likely to be subjected to modification during transit.
+        A signer MAY convert the attested digital object to a form that is uniquely and unambigously representable in the environment where the signature is created, and additionally to a form suitable for the environment where the checksum will be verified.
+        A signer MAY include both checksum calculated in the 'sender' environment and the checksum calculated for the 'receiver' environment.
+        an example would be to include the checksums of the digital object before and after &lt;CR&gt; / &lt;CRLF&gt; conversion.
       </t>
     </section>
   </section>
@@ -186,7 +192,7 @@
     <t>
       <list style="symbols">
         <t>
-          The message digest of each by filename referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.
+          The message digest of each by filename referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match a single value provided in the messageDigest sequence of the FileAndHash content.
         </t>
       </list>
     </t>
