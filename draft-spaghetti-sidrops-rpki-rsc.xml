@@ -179,6 +179,14 @@
     </section>
   </section>
 
+  <section title="Operational Considerations">
+    <t>
+      When working with objects of a plain-text nature (ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to distribute such objects in a lossless compressed form, and sign the compressed form.
+      Wrapping plain-text objects in a compression envelope can help make those appear as a single octet string to any intermediate systems, which hopefully discourages in-transit modification of the file contents.
+      The use of lossless compression can help avoid checksum verification errors.
+    </t>
+  </section>
+
   <section title="RSC Validation">
     <t>
       To validate an RSC the relying party MUST perform all the validation checks specified in <xref target="RFC6488"/> as well as the following additional RSC-specific validation steps.
@@ -186,7 +194,7 @@
     <t>
       <list style="symbols">
         <t>
-          The message digest of each by filename referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the RSC content.
+          The message digest of each by filename referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
         </t>
       </list>
     </t>
@@ -214,6 +222,9 @@
     </t>
     <t>
       <list style="symbols">
+        <t>
+          A signer and validator implementation <xref target="rpki-rsc-demo"/> based on perl and OpenSSL was provided by Tom Harrison from APNIC.
+        </t>
         <t>
           A validator implementation based on OpenBSD's rpki-client is expected to be published after IANA Early Allocation of the OIDs.
         </t>
@@ -299,6 +310,13 @@
         <date year="2014" month="May" />
       </front>
     </reference>
+    <reference anchor="rpki-rsc-demo" target="https://github.com/APNIC-net/rpki-rsc-demo">
+      <front>
+        <title>A proof-of-concept for constructing and validating RPKI Signed Checklists (RSCs).</title>
+	<author initials="T." surname="Harrison"><organization>APNIC</organization></author>
+        <date year="2021" month="February" />
+      </front>
+    </reference>
 
   </references>
 
@@ -314,8 +332,10 @@
         Ted Unangst,
         and Marc Espie
      for prior art.
-     The author would like to thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.
-     The author would like to thank Nimrod Levy for document review and suggestions.
+     The author thanks Russ Housley for reviewing the ASN.1 notation and providing suggestions.
+     The author would like to thank Nimrod Levy and
+     Tom Harrison
+     for document review and suggestions.
     </t>
   </section>
 
