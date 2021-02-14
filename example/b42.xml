@@ -2,7 +2,7 @@
   <resources>
       <ipAddrBlocks>
           <IPAddressFamily>
-            <addressFamily>02</addressFamily>
+            <addressFamily>00 02</addressFamily>
             <addressesOrRanges>
                 <addressPrefix>
                   001000000000000100000110011111000010000010001100
