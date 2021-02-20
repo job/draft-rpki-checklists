@@ -196,6 +196,9 @@
         <t>
           The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
         </t>
+        <t>
+          If a filename is present, the filename MUST NOT contain a '/' (slash) or '\' (backslash) character.
+        </t>
       </list>
     </t>
   </section>
