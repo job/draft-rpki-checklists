@@ -9,7 +9,7 @@ Expires: 24 August 2021
 
 
                          RPKI Signed Checklists
-                  draft-spaghetti-sidrops-rpki-rsc-02
+                  draft-spaghetti-sidrops-rpki-rsc-03
 
 Abstract
 
@@ -282,6 +282,9 @@ Snijders                 Expires 24 August 2021                 [Page 5]
 Internet-Draft           RPKI Signed Checklists            February 2021
 
 
+   *  If a filename is present, the filename MUST NOT contain a '/'
+      (slash) or '\' (backslash) character.
+
 7.  Security Considerations
 
    Relying parties are hereby warned that the data in a RPKI Signed
@@ -327,9 +330,6 @@ Internet-Draft           RPKI Signed Checklists            February 2021
       Name          OID                          Specification
       ---------------------------------------------------------
       Checklists    1.2.840.113549.1.9.16.1.TBD  [RFC-TBD]
-
-
-
 
 
 
@@ -460,8 +460,8 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.  The author thanks Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
-   The author would like to thank Nimrod Levy, Tom Harrison, and Tim
-   Bruijnzeels for document review and suggestions.
+   The author would like to thank Nimrod Levy, Tom Harrison, Ben
+   Maddison, and Tim Bruijnzeels for document review and suggestions.
 
 Author's Address
 
