@@ -4,12 +4,12 @@
 
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
-Intended status: Informational                          11 February 2021
-Expires: 15 August 2021
+Intended status: Informational                          20 February 2021
+Expires: 24 August 2021
 
 
                          RPKI Signed Checklists
-                  draft-spaghetti-sidrops-rpki-rsc-01
+                  draft-spaghetti-sidrops-rpki-rsc-02
 
 Abstract
 
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 August 2021.
+   This Internet-Draft will expire on 24 August 2021.
 
 
 
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 1]
+Snijders                 Expires 24 August 2021                 [Page 1]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 2]
+Snijders                 Expires 24 August 2021                 [Page 2]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -165,7 +165,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 3]
+Snijders                 Expires 24 August 2021                 [Page 3]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -204,7 +204,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
         checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
       FileAndHash ::= SEQUENCE {
-        file            IA5String,
+        file            IA5String OPTIONAL,
         hash            Digest }
 
       ResourceBlock ::= SEQUENCE {
@@ -221,7 +221,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 4]
+Snijders                 Expires 24 August 2021                 [Page 4]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -248,9 +248,9 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
    This field is a sequence of FileAndHash objects.  There is one
    FileAndHash entry for each arbitrary object referenced from the RSC.
-   Each FileAndHash is an ordered pair consisting of the name of the
-   file that contains the object in question and a hash of the file's
-   contents.
+   Each FileAndHash is an ordered pair consisting an optional name of
+   the file containing the object, and the message digest of the digital
+   object.
 
 5.  Operational Considerations
 
@@ -269,15 +269,15 @@ Internet-Draft           RPKI Signed Checklists            February 2021
    checks specified in [RFC6488] as well as the following additional
    RSC-specific validation steps.
 
-   *  The message digest of each by filename referenced digital object,
-      using the digest algorithm specified in the the digestAlgorithm
-      field, MUST be calculated and MUST match the value given in the
-      messageDigest field of the associated FileAndHash.
+   *  The message digest of each referenced digital object, using the
+      digest algorithm specified in the the digestAlgorithm field, MUST
+      be calculated and MUST match the value given in the messageDigest
+      field of the associated FileAndHash.
 
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 5]
+Snijders                 Expires 24 August 2021                 [Page 5]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -333,7 +333,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 6]
+Snijders                 Expires 24 August 2021                 [Page 6]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -389,7 +389,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 7]
+Snijders                 Expires 24 August 2021                 [Page 7]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -445,7 +445,7 @@ Internet-Draft           RPKI Signed Checklists            February 2021
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 8]
+Snijders                 Expires 24 August 2021                 [Page 8]
 
 Internet-Draft           RPKI Signed Checklists            February 2021
 
@@ -460,8 +460,8 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.  The author thanks Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
-   The author would like to thank Nimrod Levy and Tom Harrison for
-   document review and suggestions.
+   The author would like to thank Nimrod Levy, Tom Harrison, and Tim
+   Bruijnzeels for document review and suggestions.
 
 Author's Address
 
@@ -501,4 +501,4 @@ Author's Address
 
 
 
-Snijders                 Expires 15 August 2021                 [Page 9]
+Snijders                 Expires 24 August 2021                 [Page 9]

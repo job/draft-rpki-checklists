@@ -134,7 +134,7 @@
      checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
 
    FileAndHash ::= SEQUENCE {
-     file            IA5String,
+     file            IA5String OPTIONAL,
      hash            Digest }
 
    ResourceBlock ::= SEQUENCE {
@@ -174,7 +174,7 @@
       <t>
         This field is a sequence of FileAndHash objects.
         There is one FileAndHash entry for each arbitrary object referenced from the RSC.
-        Each FileAndHash is an ordered pair consisting of the name of the file that contains the object in question and a hash of the file's contents.
+        Each FileAndHash is an ordered pair consisting an optional name of the file containing the object, and the message digest of the digital object.
       </t>
     </section>
   </section>
@@ -194,7 +194,7 @@
     <t>
       <list style="symbols">
         <t>
-          The message digest of each by filename referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
+          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
         </t>
       </list>
     </t>
@@ -333,8 +333,11 @@
         and Marc Espie
      for prior art.
      The author thanks Russ Housley for reviewing the ASN.1 notation and providing suggestions.
-     The author would like to thank Nimrod Levy and
-     Tom Harrison
+     The author would like to thank Nimrod Levy,
+     Tom Harrison,
+     Ben Maddison,
+     and
+     Tim Bruijnzeels
      for document review and suggestions.
     </t>
   </section>

@@ -14,7 +14,7 @@ RpkiSignedChecklist ::= SEQUENCE {
 }
 
 FileAndHash ::= SEQUENCE {
-    file	 IA5String,
+    file	 IA5String OPTIONAL,
     hash	 OCTET STRING
 }
 
