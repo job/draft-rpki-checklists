@@ -4,7 +4,7 @@
 #
 
 # Your nroff document is called foo.txt. Change below as appropiate.
-NAME=draft-spaghetti-sidrops-rpki-rsc
+NAME=draft-ietf-sidrops-rpki-rsc
 
 all: $(NAME).xml
 	xml2rfc $(NAME).xml --html --text
