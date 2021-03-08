@@ -10,12 +10,12 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="info" docName="draft-ietf-sidrops-rpki-rsc-00" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-01" ipr="trust200902">
 
 <front>
 
-  <title abbrev="RPKI Signed Checklists">
-    RPKI Signed Checklists
+  <title abbrev="RPKI Signed Checklist">
+    Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
   </title>
 
   <author fullname="Job Snijders" initials="J." surname="Snijders">
@@ -66,7 +66,7 @@
     </t>
 
     <t>
-      RSC files are expected to facilitate Bring Your Own IP (BYOIP) authentication, inter-domain interconnection provisioning, and resource holdership verification processes.
+      RSC files are expected to facilitate inter-domain business processes such as authentication during Bring Your Own IP (BYOIP) on-boarding, during establishment of interconnection provisioning, or any other processes in which a Relying Party must be able to verify resource holdership.
     </t>
 
     <t>
@@ -131,10 +131,10 @@
      version  [0]          INTEGER DEFAULT 0,
      resources             ResourceBlock,
      digestAlgorithm       DigestAlgorithmIdentifier,
-     checkList             SEQUENCE SIZE (1..MAX) OF FileAndHash }
+     checkList             SEQUENCE SIZE (1..MAX) OF FilenameAndHash }
 
-   FileAndHash ::= SEQUENCE {
-     file            IA5String OPTIONAL,
+   FilenameAndHash ::= SEQUENCE {
+     filename        IA5String OPTIONAL,
      hash            Digest }
 
    ResourceBlock ::= SEQUENCE {
@@ -172,9 +172,10 @@
 
     <section title="checkList">
       <t>
-        This field is a sequence of FileAndHash objects.
-        There is one FileAndHash entry for each arbitrary object referenced from the RSC.
-        Each FileAndHash is an ordered pair consisting an optional name of the file containing the object, and the message digest of the digital object.
+        This field is a sequence of FilenameAndHash objects.
+        There is one FilenameAndHash entry for each arbitrary object referenced on the Signed Checklist.
+        Each FilenameAndHash is an ordered pair of the name of the file containing the digital object and the message digest of the digital object.
+        The filename field is OPTIONAL.
       </t>
     </section>
   </section>
@@ -206,7 +207,7 @@
   <section anchor="Security" title="Security Considerations">
     <t>
       Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
-      These data have not been verified by the CA that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
+      These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
     </t>
   </section>
 
@@ -343,6 +344,27 @@
      Tim Bruijnzeels
      for document review and suggestions.
     </t>
+  </section>
+
+  <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+    <section title="00 -&gt; 01">
+      <t>
+      <list style="symbols">
+          <t>Wordsmithing</t>
+          <t>Retarget to STD because the IANA registry is only for STD docs</t>
+      </list>
+      </t>
+    </section>
+    <section title="individual submission phase">
+      <t>
+      <list style="symbols">
+        <t>
+           On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
+           SIDROPS Working Group participants proposed a checksum by itself is the most minimal information required to address digital objects.
+        </t>
+      </list>
+      </t>
+    </section>
   </section>
 
 </back>
