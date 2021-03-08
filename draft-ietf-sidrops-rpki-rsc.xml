@@ -37,7 +37,7 @@
     <t>
       This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
       The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the Signed Checklist.
-      The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
+      The profile is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
     </t>
   </abstract>
 
@@ -62,7 +62,7 @@
     <t>
       This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480" />.
       The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-      The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
+      The profile is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
     </t>
 
     <t>
@@ -96,7 +96,7 @@
 
   <section anchor="econtent" title="The RSC eContent">
     <t>
-      The content of an RSC indicates that an a checklist for arbitrary named digital objects has been signed "with resources".
+      The content of an RSC indicates that a checklist for arbitrary digital objects has been signed "with resources".
       An RSC is formally defined as:
     </t>
 <figure><artwork>
@@ -182,9 +182,9 @@
 
   <section title="Operational Considerations">
     <t>
-      When working with objects of a plain-text nature (ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to distribute such objects in a lossless compressed form, and sign the compressed form.
-      Wrapping plain-text objects in a compression envelope can help make those appear as a single octet string to any intermediate systems, which hopefully discourages in-transit modification of the file contents.
-      The use of lossless compression can help avoid checksum verification errors.
+      When working with objects composed of plain-text content (such as ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to transform such objects in lossless compressed form, and accordingly calculate the message digest of the compressed form.
+      Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help dissuade unexpected canonicalization at intermediate systems.
+      In-transit modification of a file's content will cause checksum verification errors.
     </t>
   </section>
 
@@ -195,7 +195,7 @@
     <t>
       <list style="symbols">
         <t>
-          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
+          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash, for the RSC entry to be considered valid.
         </t>
         <t>
           If a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
