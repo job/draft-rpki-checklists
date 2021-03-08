@@ -36,7 +36,7 @@
   <abstract>
     <t>
       This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
-      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the signed checklist.
+      The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the Signed Checklist.
       The profile is intended to provide for the signing of a checksum listing with an arbitrary set of Internet Number Resources.
     </t>
   </abstract>
@@ -174,7 +174,7 @@
       <t>
         This field is a sequence of FilenameAndHash objects.
         There is one FilenameAndHash entry for each arbitrary object referenced on the Signed Checklist.
-        Each FilenameAndHash is an ordered pair of the name of the file containing the digital object and the message digest of the digital object.
+        Each FilenameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
         The filename field is OPTIONAL.
       </t>
     </section>
@@ -198,7 +198,7 @@
           The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileAndHash.
         </t>
         <t>
-          If a filename is present, the filename MUST NOT contain a '/' (slash) or '\' (backslash) character.
+          If a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
         </t>
       </list>
     </t>
@@ -249,7 +249,7 @@
     </section>
     <section title="File Extension">
       <t>
-        The IANA has added an item for the signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
+        The IANA has added an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
       </t>
 <figure><artwork>
    Filename Extension  RPKI Object           Reference
@@ -321,7 +321,13 @@
         <date year="2021" month="February" />
       </front>
     </reference>
-
+    <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
+      <front>
+        <title>The Open Group's Base Specifications, Issue 7</title>
+        <author><organization>IEEE and The Open Group</organization></author>
+        <date year="2016"/>
+      </front>
+    </reference>
   </references>
 
   <section anchor="Acknowledgements" title="Acknowledgements">
