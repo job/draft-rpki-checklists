@@ -354,11 +354,11 @@
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
-    <section title="00 -&gt; 01">
+    <section title="changes from -00 -&gt; -01">
       <t>
       <list style="symbols">
-          <t>Wordsmithing</t>
-          <t>Retarget to STD because the IANA registry is only for STD docs</t>
+        <t>Readability improvements</t>
+        <t>Update document category to match the registry allocation policy requirement.</t>
       </list>
       </t>
     </section>
@@ -367,7 +367,7 @@
       <list style="symbols">
         <t>
            On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
-           SIDROPS Working Group participants proposed a checksum by itself is the most minimal information required to address digital objects.
+           Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.
         </t>
       </list>
       </t>
