@@ -182,9 +182,9 @@
 
   <section title="Operational Considerations">
     <t>
-      When working with objects composed of plain-text content (such as ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to transform such objects in lossless compressed form, and accordingly calculate the message digest of the compressed form.
-      Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help dissuade unexpected canonicalization at intermediate systems.
-      In-transit modification of a file's content will cause checksum verification errors.
+      When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to convert such objects into a lossless compressed form.
+      Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
+      Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
     </t>
   </section>
 
@@ -305,6 +305,7 @@
 
   <references title="Informative References">
     <?rfc include="reference.I-D.draft-ietf-sidrops-rpki-rta-00.xml"?>
+    <?rfc include="reference.RFC.1952.xml"?>
     <?rfc include="reference.RFC.6480.xml"?>
     <reference anchor="signify" target="https://man.openbsd.org/signify">
       <front>
