@@ -310,7 +310,6 @@
     <?rfc include="reference.I-D.draft-ietf-sidrops-rpki-rta-00.xml"?>
     <?rfc include="reference.RFC.1952.xml"?>
     <?rfc include="reference.RFC.6480.xml"?>
-    <?rfc include="reference.RFC.6482.xml"?>
     <reference anchor="signify" target="https://man.openbsd.org/signify">
       <front>
         <title>signify - cryptographically sign and verify files</title>
@@ -333,51 +332,7 @@
         <date year="2016"/>
       </front>
     </reference>
-    <reference anchor="Cast" target="https://en.wikipedia.org/wiki/Alice_and_Bob">
-      <front>
-        <title>Alice and Bob</title>
-        <author><organization>Wikipedia</organization></author>
-        <date month="March" year="2021"/>
-      </front>
-    </reference>
-    <reference anchor="ec2byoip" target="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">
-      <front>
-        <title>Bring your own IP addresses (BYOIP) in Amazon EC2</title>
-        <author><organization>Amazon</organization></author>
-        <date month="March" year="2021"/>
-      </front>
-    </reference>
-
-
   </references>
-
-  <section anchor="Workflow_Example" title="Example workflow">
-    <t>
-      The following section uses fictional characters commonly <xref target="Cast"/> in cryptological literature.
-    </t>
-    <t>
-      Alice works in a bookstore.
-      Bob wishes Alice's bookstore to start selling copies of Carlos' comicbook.
-      Before launching the comicbook, Alice will need to establish whether their bookstore is authorized to sell copies of Carlos' comicbook, and also whether Bob is an authorized representative.
-      Alice must authenticate whether Bob has any relationship with Carlos, since paying Bob dividends over the sales of Carlos' comicbook can potentially put Alice in an unenviable position.
-      Alice and Carlos each trust Trent Thrusthook: they are able to access Trent's archive of notarized attestations.
-    </t>
-    <t>
-      In the RPKI, whether a given bookstore is authorized to redistribute a specific comicbook can be answered using Route Origin Authorizations (ROA) <xref target="RFC6482" />.
-      Carlos can issue and publish a ROA which authorizes Alice's bookstore (identified by their ASN) to originate an given IP prefix ('sell the comicbook') during a specific time window.
-      Carlos can revoke authorization by dereferencing the ROA from the current valid Manifest, or by adding the serial number of the certificate to the CA's CRL.
-    </t>
-    <t>
-      Alice can establish whether Bob is an authorized representative before exchanging value with Bob in relation to Carlos' comicbook, by challenging Bob to provide a response which undeniably was composed by a holder of the private key associated with Carlos' comicbook.
-      Alice generates a nonce in the form of a digital object and shares the file with Bob.
-      The nonce does not need to be held confidential (it can also be shared with Eve), however Alice should take care not to re-use the same nonce for future challenges related to the same comicbook.
-      Alice asks Bob to provide a detached digital signature for the message digest of the nonce signed by a CA to which Carlos' comicbook is subordinate (a RSC).
-      Carlos can sever the relationship by adding the serial number of the RSC's End Entity certificate given to Bob to the CA's CRL.
-    </t>
-    <t>
-      An alternative (less convenient) workflow without the use of RPKI is described in <xref target="ec2byoip"/>.
-    </t>
-  </section>
 
   <section anchor="Acknowledgements" title="Acknowledgements">
     <t>
@@ -402,13 +357,6 @@
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
-    <section title="changes from -01 -&gt; -02">
-      <t>
-      <list style="symbols">
-        <t>Add appendix with worked examples.</t>
-      </list>
-      </t>
-    </section>
     <section title="changes from -00 -&gt; -01">
       <t>
       <list style="symbols">
