@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-01" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-02" ipr="trust200902">
 
 <front>
 
@@ -68,6 +68,11 @@
     <t>
       Signed Checklists are expected to facilitate inter-domain business use-cases which depend on an ability to verify resource holdership.
       RPKI-based validation processes are expected to become the industry norm for automated Bring Your Own IP (BYOIP) on-boarding or establishment of physical interconnection between Autonomous Systems.
+    </t>
+
+    <t>
+      An Relying Party attempting to associate specific legal entities to Internet Number Resources will need to additionally consult an exogenous authority.
+      RPKI Certificates are not bound to real world identities or vice versa, see <xref target="I-D.ymbk-sidrops-rpki-has-no-identity" />.
     </t>
 
     <t>
@@ -307,7 +312,23 @@
     </references>
 
   <references title="Informative References">
+    <reference anchor='I-D.ymbk-sidrops-rpki-has-no-identity'>
+      <front>
+        <title>The I in RPKI does not stand for Identity</title>
+        <author initials='R' surname='Bush' fullname='Randy Bush'>
+          <organization>Arrcus &amp; Internet Initiative Japan</organization>
+        </author>
+        <author initials='R' surname='Housley' fullname='Russ Housley'>
+          <organization>Vigil Security</organization>
+        </author>
+        <date month='March' year='2021' />
+      </front>
+      <seriesInfo name='Internet-Draft' value='draft-ymbk-sidrops-rpki-has-no-identity-00' />
+      <format type='TXT' target='https://www.ietf.org/archive/id/draft-ymbk-sidrops-rpki-has-no-identity-00.txt' />
+    </reference>
+
     <?rfc include="reference.I-D.draft-ietf-sidrops-rpki-rta-00.xml"?>
+
     <?rfc include="reference.RFC.1952.xml"?>
     <?rfc include="reference.RFC.6480.xml"?>
     <reference anchor="signify" target="https://man.openbsd.org/signify">
@@ -357,6 +378,13 @@
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+    <section title="changes from -01 -&gt; -02">
+      <t>
+      <list style="symbols">
+        <t>Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ</t>
+      </list>
+      </t>
+    </section>
     <section title="changes from -00 -&gt; -01">
       <t>
       <list style="symbols">
