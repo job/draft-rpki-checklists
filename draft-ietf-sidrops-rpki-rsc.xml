@@ -210,16 +210,15 @@
   <section anchor="Security" title="Security Considerations">
     <t>
       Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
+      When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
       These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
     </t>
 
     <t>
-      RPKI Certificates are not bound to real world identities or vice versa.
-      As a result Signed Checklists are a useful tool to communicate assertions about Internet Number Resources, but not about any other aspect of the resource holder's business operations, nor about the identity of the resource holder itself.
-      See <xref target="I-D.ymbk-sidrops-rpki-has-no-identity" />.
-      In determining the trustworthiness of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
+      RPKI Certificates are not bound to real world identities, see <xref target="I-D.ymbk-sidrops-rpki-has-no-identity" /> for an elaboration.
+      Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
+      Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.
     </t>
-
   </section>
 
   <section title="Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION">
