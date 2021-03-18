@@ -71,11 +71,6 @@
     </t>
 
     <t>
-      An Relying Party attempting to associate specific legal entities to Internet Number Resources will need to additionally consult an exogenous authority.
-      RPKI Certificates are not bound to real world identities or vice versa, see <xref target="I-D.ymbk-sidrops-rpki-has-no-identity" />.
-    </t>
-
-    <t>
       The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486" />, and OpenBSD's <xref target="signify" /> utility.
       The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the existence of multiple digital objects.
       A single signer profile is considered a simplification for both implementers and operators.
@@ -217,6 +212,14 @@
       Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
       These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
     </t>
+
+    <t>
+      RPKI Certificates are not bound to real world identities or vice versa.
+      As a result Signed Checklists are a useful tool to communicate assertions about Internet Number Resources, but not about any other aspect of the resource holder's business operations, nor about the identity of the resource holder itself.
+      See <xref target="I-D.ymbk-sidrops-rpki-has-no-identity" />.
+      In determining the trustworthiness of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
+    </t>
+
   </section>
 
   <section title="Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION">
