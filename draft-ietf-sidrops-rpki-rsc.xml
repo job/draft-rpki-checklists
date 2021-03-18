@@ -189,6 +189,10 @@
       Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
       Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
     </t>
+
+    <t>
+      If a filename field is present, but no referenced digital object has a filename that matches the content of that field, a validator implementation SHOULD compare the message digest of each digital object to the value from the messageDigest field of the associated FileAndHash, and report matches to the client for further consideration.
+    </t>
   </section>
 
   <section title="RSC Validation">
