@@ -219,6 +219,14 @@
       Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
       Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.
     </t>
+
+    <t>
+      RSC objects are not distributed through the global RPKI repository system, so whether a given CA is making use of them is not immediately apparent from the state of the repository.
+      However, because RSC objects depend on EE certificates, and because all existing applications for EE certificates involve their publication in the repository, an observer may be able to infer indirectly from the state of the repository that RSC objects are in use.
+      For example, if the CA sets the serial number on a new EE certificate to be one greater than the serial number used for the previous EE certificate, then an observer could infer that RSCs are in use if there is a gap between serial numbers used in published EE certificates.
+      Similarly, if the CA includes an unpublished serial number in a CRL, an observer could infer that an RSC object has been revoked.
+    </t>
+
   </section>
 
   <section title="Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION">
