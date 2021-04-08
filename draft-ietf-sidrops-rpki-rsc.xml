@@ -259,16 +259,32 @@
   </section>
 
   <section anchor="IANA" title="IANA Considerations">
-    <section title="OID">
+
+    <section title="SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)">
       <t>
-        The IANA has registered the OID for the RPKI Signed Checklist in the registry created by [RFC6488] as follows:
+        The IANA has permanently allocated for this document in the SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1) registry:
+      </t>
+      <t>
+<figure><artwork>
+        48    id-ct-signedChecklist    [draft-ietf-sidrops-rpki-rsc-02]
+</artwork></figure>
+      </t>
+      <t>
+        Upon publication of this document IANA is requested to reference the publication instead of the draft.
+      </t>
+    </section>
+
+    <section title="RPKI Signed Objects sub-registry">
+      <t>
+        The IANA is requested to register the OID for the RPKI Signed Checklist in the registry created by [RFC6488] as following:
       </t>
 <figure><artwork>
-   Name          OID                          Specification
-   ---------------------------------------------------------
-   Checklists    1.2.840.113549.1.9.16.1.TBD  [RFC-TBD]
+   Name               OID                          Specification
+   -------------------------------------------------------------
+   Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
 </artwork></figure>
     </section>
+
     <section title="File Extension">
       <t>
         The IANA has added an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
@@ -279,6 +295,13 @@
       .sig             Signed Checklist      [RFC-TBD]
 </artwork></figure>
     </section>
+
+    <section title="MI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)">
+      <t>
+        XXX this needs to be done as well
+      </t>
+    </section>
+
     <section title="Media Type">
       <t>
         The IANA has registered the media type application/rpki-checklist as follows:
