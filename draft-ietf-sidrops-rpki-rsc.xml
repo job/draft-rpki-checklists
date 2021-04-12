@@ -105,7 +105,7 @@
 
   <section anchor="content" title="The RSC ContentType">
     <t>
-      The ContentType for an RSC is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.TBD.
+      The ContentType for an RSC is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.48.
     </t>
     <t>
       This OID MUST appear both within the eContentType in the encapContentInfo object as well as the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
@@ -143,7 +143,7 @@
 
    id-ct-signedChecklist OBJECT IDENTIFIER ::=
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-         pkcs-9(9) id-smime(16) id-ct(1) TBD }
+         pkcs-9(9) id-smime(16) id-ct(1) 48 }
 
    RpkiSignedChecklist ::= SEQUENCE {
      version  [0]          INTEGER DEFAULT 0,
@@ -369,6 +369,7 @@
 
   <references title="Normative References">
     <?rfc include="reference.RFC.2119.xml"?>
+    <?rfc include="reference.RFC.3779.xml"?>
     <?rfc include="reference.RFC.5652.xml"?>
     <?rfc include="reference.RFC.6481.xml"?>
     <?rfc include="reference.RFC.6486.xml"?>
