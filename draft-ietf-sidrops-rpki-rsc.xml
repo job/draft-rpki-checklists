@@ -445,6 +445,15 @@
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+    <section title="changes from -02 -&gt; -03">
+      <t>
+        <list style="symbols">
+          <t>Reference the IANA assigned OID</t>
+          <t>Clarify validation rules</t>
+        </list>
+      </t>
+    </section>
+
     <section title="changes from -01 -&gt; -02">
       <t>
       <list style="symbols">
