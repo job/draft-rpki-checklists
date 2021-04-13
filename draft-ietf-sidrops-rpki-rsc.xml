@@ -149,9 +149,9 @@
      version  [0]          INTEGER DEFAULT 0,
      resources             ResourceBlock,
      digestAlgorithm       DigestAlgorithmIdentifier,
-     checkList             SEQUENCE SIZE (1..MAX) OF FilenameAndHash }
+     checkList             SEQUENCE SIZE (1..MAX) OF FileNameAndHash }
 
-   FilenameAndHash ::= SEQUENCE {
+   FileNameAndHash ::= SEQUENCE {
      fileName        IA5String OPTIONAL,
      hash            Digest }
 
