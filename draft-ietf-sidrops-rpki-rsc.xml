@@ -152,7 +152,7 @@
      checkList             SEQUENCE SIZE (1..MAX) OF FilenameAndHash }
 
    FilenameAndHash ::= SEQUENCE {
-     filename        IA5String OPTIONAL,
+     fileName        IA5String OPTIONAL,
      hash            Digest }
 
    ResourceBlock ::= SEQUENCE {
