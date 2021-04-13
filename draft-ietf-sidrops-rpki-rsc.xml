@@ -166,6 +166,20 @@
 
    IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamily
 
+   IPAddressFamily     ::= SEQUENCE {    -- AFI & optional SAFI --
+      addressFamily        OCTET STRING (SIZE (2..3)),
+      iPAddressOrRange     IPAddressOrRange }
+
+   IPAddressOrRange    ::= CHOICE {
+      addressPrefix        IPAddress,
+      addressRange         IPAddressRange }
+
+   IPAddressRange      ::= SEQUENCE {
+      min                  IPAddress,
+      max                  IPAddress }
+
+   IPAddress           ::= BIT STRING
+
    END
 </artwork></figure>
 
