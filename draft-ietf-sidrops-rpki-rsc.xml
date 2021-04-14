@@ -337,7 +337,7 @@
 
     <section title="Media Type">
       <t>
-        The IANA has registered the media type application/rpki-checklist as follows:
+        The IANA has registered the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
       </t>
 <figure><artwork><![CDATA[
    Type name: application
