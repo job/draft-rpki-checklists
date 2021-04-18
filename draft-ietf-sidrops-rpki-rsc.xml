@@ -166,7 +166,7 @@
 
    IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
 
-   IPAddressFamilyItem ::= SEQUENCE {    -- AFI & optional SAFI --
+   IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI --
       addressFamily        OCTET STRING (SIZE (2..3)),
       iPAddressOrRange     IPAddressOrRange }
 
