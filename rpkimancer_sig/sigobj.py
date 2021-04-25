@@ -94,4 +94,11 @@ class SignedChecklistEContent(EncapsulatedContent):
 class SignedChecklist(SignedObject):
     """CMS ASN.1 ContentInfo for RPKI Signed Checklists."""
 
+    # TODO:
+    # Implement deviations to rfc6486, rfc6487 and rfc6488:
+    # - exclude object from issuing CA's manifest
+    # - omit SIA extension from EE cert
+    # - publish outside issuing CA's repo path
+    # ... all the above require changes to rpkimancer base implementations
+
     econtent_cls = SignedChecklistEContent
