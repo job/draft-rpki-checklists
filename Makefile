@@ -5,9 +5,22 @@
 
 # Your nroff document is called foo.txt. Change below as appropiate.
 NAME=draft-ietf-sidrops-rpki-rsc
+MOD=RpkiSignedChecklist-2021
 
-all: $(NAME).xml
+.PHONY: all
+all: drafts asn1
+
+.PHONY: drafts
+drafts: $(NAME).txt
+
+$(NAME).txt: $(NAME).xml
 	xml2rfc $(NAME).xml --html --text
 
+.PHONY: asn1
+asn1: rpkimancer_sig/asn1/$(MOD).asn
+
+rpkimancer_sig/asn1/$(MOD).asn: $(MOD).asn $(MOD).patch
+	patch $(MOD).asn $(MOD).patch -o $@
+
 clean:
-	rm -f *.html *.txt
+	rm -f *.html *.txt rpkimancer_sig/asn1/$(MOD).asn
