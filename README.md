@@ -38,7 +38,7 @@ the patched version in python distribution tree.
 To setup a development environment with the required test dependencies:
 
 ``` sh
-python -m venv .venv
+python3 -m venv .venv
 . .venv/bin/activate
 pip install -r packaging/requirements-dev.txt
 ```
