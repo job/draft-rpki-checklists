@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-02" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-03" ipr="trust200902">
 
 <front>
 
@@ -47,7 +47,7 @@
   </author>
 
   <author fullname="Ben Maddison" initials="B." surname="Maddison">
-    <organization>Workonline Communications</organization>
+    <organization abbrev="Workonline">Workonline Communications</organization>
     <address>
       <postal>
         <street/>
