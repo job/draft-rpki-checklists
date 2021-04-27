@@ -25,6 +25,8 @@ from rpkimancer.resources import (AFI, ASIdOrRange, AsResourcesInfo,
                                   IpResourcesInfo, net_to_bitstring)
 from rpkimancer.sigobj.base import EncapsulatedContent, SignedObject
 
+from .eecert import UnpublishedEECertificate
+
 log = logging.getLogger(__name__)
 
 
@@ -94,11 +96,17 @@ class SignedChecklistEContent(EncapsulatedContent):
 class SignedChecklist(SignedObject):
     """CMS ASN.1 ContentInfo for RPKI Signed Checklists."""
 
-    # TODO:
-    # Implement deviations to rfc6486, rfc6487 and rfc6488:
-    # - exclude object from issuing CA's manifest
-    # - omit SIA extension from EE cert
-    # - publish outside issuing CA's repo path
-    # ... all the above require changes to rpkimancer base implementations
-
     econtent_cls = SignedChecklistEContent
+    ee_cert_cls = UnpublishedEECertificate
+
+    def publish(self, *,
+                rsc_output_dir: typing.Optional[str] = None,
+                **kwargs: typing.Any) -> None:
+        """Optionally out-of-tree publication."""
+        if rsc_output_dir is not None:
+            os.makedirs(rsc_output_dir, exist_ok=True)
+            with open(os.path.join(rsc_output_dir, self.file_name),
+                      "wb") as f:
+                f.write(self.to_der())
+        else:
+            super().publish(**kwargs)

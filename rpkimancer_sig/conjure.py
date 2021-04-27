@@ -23,14 +23,15 @@ from rpkimancer.cli import Args
 from rpkimancer.cli.conjure import (ConjurePlugin,
                                     DEFAULT_CA_AS_RESOURCES,
                                     DEFAULT_CA_IP_RESOURCES,
-                                    META_AS, META_IP, META_PATH)
-
-from .sigobj import SignedChecklist
+                                    META_AS, META_IP, META_PATH,
+                                    PluginReturn)
 
 if typing.TYPE_CHECKING:
     from rpkimancer.cert import CertificateAuthority
 
 log = logging.getLogger(__name__)
+
+RSC_SUB_DIR = "sigs"
 
 
 class ConjureChecklist(ConjurePlugin):
@@ -64,11 +65,14 @@ class ConjureChecklist(ConjurePlugin):
             parsed_args: Args,
             ca: CertificateAuthority,
             *args: typing.Any,
-            **kwargs: typing.Any) -> None:
+            **kwargs: typing.Any) -> PluginReturn:
         """Run with the given arguments."""
         # create RSC object
+        from .sigobj import SignedChecklist
         log.info("creating signed checklist object")
+        rsc_output_dir = os.path.join(parsed_args.output_dir, RSC_SUB_DIR)
         SignedChecklist(issuer=ca,
                         paths=parsed_args.rsc_paths,
                         as_resources=parsed_args.rsc_as_resources,
                         ip_resources=parsed_args.rsc_ip_resources)
+        return {"rsc_output_dir": rsc_output_dir}
