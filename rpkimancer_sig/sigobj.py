@@ -93,7 +93,8 @@ class SignedChecklistEContent(EncapsulatedContent):
         return self._ip_resources
 
 
-class SignedChecklist(SignedObject):
+class SignedChecklist(SignedObject,
+                      econtent_type=RpkiSignedChecklist_2021.ct_rpkiSignedChecklist):  # noqa: E501
     """CMS ASN.1 ContentInfo for RPKI Signed Checklists."""
 
     econtent_cls = SignedChecklistEContent
