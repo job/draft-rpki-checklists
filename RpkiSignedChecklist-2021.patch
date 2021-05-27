@@ -2,5 +2,3 @@
 <     pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
 ---
 >     pkcs(1) pkcs9(9) smime(16) mod(0) 72 } -- using next available id-mod(0)
-13a14
->   Dummy, -- pycrate can't seem to import the first name, so pad the list
