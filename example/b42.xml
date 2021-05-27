@@ -1,27 +1,26 @@
 <RpkiSignedChecklist>
   <resources>
       <ipAddrBlocks>
-          <IPAddressFamily>
+          <IPAddressFamilyItem>
             <addressFamily>00 02</addressFamily>
-            <addressesOrRanges>
-                <addressPrefix>
-                  001000000000000100000110011111000010000010001100
-                </addressPrefix>
-            </addressesOrRanges>
-          </IPAddressFamily>
+            <iPAddressOrRange>
+              <addressPrefix>
+                001000000000000100000110011111000010000010001100
+              </addressPrefix>
+            </iPAddressOrRange>
+          </IPAddressFamilyItem>
       </ipAddrBlocks>
   </resources>
   <digestAlgorithm>
     <algorithm>2.16.840.1.101.3.4.2.1</algorithm>
-    <parameters />
   </digestAlgorithm>
   <checkList>
-    <FileAndHash>
-      <file>b42_ipv6_loa.png</file>
+    <FileNameAndHash>
+      <fileName>b42_ipv6_loa.png</fileName>
       <hash>9516dd64be7c1725b9fca117120e58e8d842a5206873399b3ddffc91c4b6acf0</hash>
-    </FileAndHash>
-    <FileAndHash>
+    </FileNameAndHash>
+    <FileNameAndHash>
       <hash>0ae1394722005cd92f4c6aa024d5d6b3e2e67d629f11720d9478a633a117a1c7</hash>
-    </FileAndHash>
+    </FileNameAndHash>
   </checkList>
 </RpkiSignedChecklist>

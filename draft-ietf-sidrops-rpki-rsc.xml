@@ -244,10 +244,16 @@
     <t>
       <list style="symbols">
         <t>
-          A signer and validator implementation <xref target="rpki-rsc-demo"/> based on perl and OpenSSL was provided by Tom Harrison from APNIC.
+          A signer and validator implementation <xref target="rpki-rsc-demo"/> written in Perl based on OpenSSL was provided by Tom Harrison from APNIC.
         </t>
         <t>
-          A validator implementation based on OpenBSD's rpki-client is expected to be published after IANA Early Allocation of the OIDs.
+          A signer implementation <xref target="rpkimancer"/> written in Python was developed by Ben Maddison.
+        </t>
+        <t>
+          Example .sig files were created by Job Snijders with the use of OpenSSL.
+        </t>
+        <t>
+          A validator implementation based on OpenBSD rpki-client and LibreSSL was developed by Job Snijders.
         </t>
       </list>
     </t>
@@ -261,11 +267,13 @@
       </t>
       <t>
 <figure><artwork>
-        48    id-ct-signedChecklist    [draft-ietf-sidrops-rpki-rsc-02]
+   Decimal   Description             References
+   ---------------------------------------------------------------
+      48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
 </artwork></figure>
       </t>
       <t>
-        Upon publication of this document IANA is requested to reference the publication instead of the draft.
+        Upon publication of this document, IANA is requested to reference the RFC publication instead of this draft.
       </t>
     </section>
 
@@ -282,24 +290,29 @@
 
     <section title="File Extension">
       <t>
-        The IANA has added an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
+        The IANA is requested to add an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" registry created by <xref target="RFC6481"/> as follows:
       </t>
 <figure><artwork>
    Filename Extension  RPKI Object           Reference
-   -----------------------------------------------------------
-      .sig             Signed Checklist      [RFC-TBD]
+   -----------------------------------------------------------------------
+      .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
 </artwork></figure>
     </section>
 
-    <section title="MI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)">
+    <section title="SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)">
       <t>
-        XXX this needs to be done as well
+        The IANA is requested to add an item to the "SMI Security for S/MIME Module Identifier" registry as follows:
       </t>
+<figure><artwork>
+   Decimal   Description                       References
+   -------------------------------------------------------------------------
+     TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+</artwork></figure>
     </section>
 
     <section title="Media Type">
       <t>
-        The IANA has registered the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
+        The IANA is requested to register the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
       </t>
 <figure><artwork><![CDATA[
    Type name: application
@@ -377,6 +390,13 @@
         <title>A proof-of-concept for constructing and validating RPKI Signed Checklists (RSCs).</title>
 	<author initials="T." surname="Harrison"><organization>APNIC</organization></author>
         <date year="2021" month="February" />
+      </front>
+    </reference>
+    <reference anchor="rpkimancer" target="https://github.com/benmaddison/rpkimancer">
+      <front>
+        <title>rpkimancer</title>
+	<author initials="B." surname="Maddison"><organization>Workonline</organization></author>
+        <date year="2021" month="May" />
       </front>
     </reference>
     <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
