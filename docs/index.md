@@ -1,8 +1,10 @@
 # RPKI Signed Checklists
 
+![sidrops](_static/b42_ipv6_loa.png)
+
 :::{toctree}
 :maxdepth: 2
 
-Draft <drafts/draft-ietf-sidrops-rpki-rsc.html>
-Prototyping API Reference <generated/modules>
+drafts
+api
 :::

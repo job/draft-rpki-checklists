@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import datetime
 import importlib.metadata
+import os
+import sys
 
 import rpkimancer_sig
 
@@ -39,34 +41,27 @@ copyright = f"{_year_range}, {author}"
 release = _dist.version
 version = ".".join(release.split(".")[:2])
 
-
 # -- General configuration
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                             "_extensions")))
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
     "myst_parser",
-    "sphinx_multiversion",
+    "sphinx_xml2rfc"
 ]
 source_suffix = {
     ".rst": "restructuredtext",
     ".md": "markdown",
 }
 exclude_patterns = []
-templates_path = ['_templates']
 
 # -- HTML output
 
-html_theme = 'readable'
+html_theme = "readable"
 html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
-# html_static_path = ['_static']
-html_sidebars = {
-    "**": [
-        "localtoc.html",
-        "relations.html",
-        "versions.html",
-        "searchbox.html",
-    ],
-}
+html_static_path = ["_static"]
 
 # -- Autodoc configuration
 
@@ -74,17 +69,22 @@ autodoc_member_order = "bysource"
 autodoc_typehints = "description"
 autodoc_typehints_description_target = "all"
 
+
+# -- Intersphinx configuration
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "rpkimancer": ("https://benmaddison.github.io/rpkimancer/main/", None)
+}
+
 # -- Markdown processing
 
 myst_enable_extensions = [
     "colon_fence",
 ]
 
-# -- Multiversion processing
+# -- xml2rfc document generation
 
-smv_branch_whitelist = r"^(?!pyup-|gh-pages).*$"
-smv_remote_whitelist = r"^origin$"
-smv_prebuild_command = "sphinx-apidoc --separate " \
-                                     "--force " \
-                                     "--output-dir docs/generated/ " \
-                                     "rpkimancer_sig/"
+xml2rfc_drafts = ["draft-ietf-sidrops-rpki-rsc"]
+xml2rfc_sources = ["RpkiSignedChecklist-2021.asn"]
+xml2rfc_output = "drafts"

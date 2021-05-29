@@ -17,3 +17,7 @@ __pycache__
 coverage.xml
 .pytest_cache/
 .mypy_cache/
+
+# document generation artifacts
+docs/_xml2rfc/
+*.exp.xml
