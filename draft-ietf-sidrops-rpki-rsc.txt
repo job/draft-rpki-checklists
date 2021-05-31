@@ -95,7 +95,7 @@ Table of Contents
      9.2.  RPKI Signed Objects sub-registry  . . . . . . . . . . . .   8
      9.3.  File Extension  . . . . . . . . . . . . . . . . . . . . .   8
      9.4.  SMI Security for S/MIME Module Identifier
-           (1.2.840.113549.1.9.16.0) . . . . . . . . . . . . . . . .   8
+           (1.2.840.113549.1.9.16.0) . . . . . . . . . . . . . . . .   9
      9.5.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   9
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
      10.1.  Normative References . . . . . . . . . . . . . . . . . .   9
@@ -104,8 +104,8 @@ Table of Contents
    Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE
            PUBLICATION . . . . . . . . . . . . . . . . . . . . . . .  11
      B.1.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  11
-     B.2.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  11
-     B.3.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  11
+     B.2.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  12
+     B.3.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  12
 
 
 
@@ -403,6 +403,9 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
    *  A validator implementation based on OpenBSD rpki-client and
       LibreSSL was developed by Job Snijders.
 
+   *  A validator implementation [FORT] based on the FORT validator was
+      developed by Alberto Leiva.
+
 9.  IANA Considerations
 
 9.1.  SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)
@@ -437,11 +440,8 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
    -----------------------------------------------------------------------
       .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
 
-9.4.  SMI Security for S/MIME Module Identifier
-      (1.2.840.113549.1.9.16.0)
 
-   The IANA is requested to add an item to the "SMI Security for S/MIME
-   Module Identifier" registry as follows:
+
 
 
 
@@ -449,6 +449,12 @@ Snijders, et al.         Expires 2 December 2021                [Page 8]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
+
+9.4.  SMI Security for S/MIME Module Identifier
+      (1.2.840.113549.1.9.16.0)
+
+   The IANA is requested to add an item to the "SMI Security for S/MIME
+   Module Identifier" registry as follows:
 
    Decimal   Description                       References
    -------------------------------------------------------------------------
@@ -492,12 +498,6 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-   [RFC3779]  Lynn, C., Kent, S., and K. Seo, "X.509 Extensions for IP
-              Addresses and AS Identifiers", RFC 3779,
-              DOI 10.17487/RFC3779, June 2004,
-              <https://www.rfc-editor.org/info/rfc3779>.
-
-
 
 
 
@@ -505,6 +505,11 @@ Snijders, et al.         Expires 2 December 2021                [Page 9]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
+
+   [RFC3779]  Lynn, C., Kent, S., and K. Seo, "X.509 Extensions for IP
+              Addresses and AS Identifiers", RFC 3779,
+              DOI 10.17487/RFC3779, June 2004,
+              <https://www.rfc-editor.org/info/rfc3779>.
 
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
@@ -536,6 +541,9 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 10.2.  Informative References
 
+   [FORT]     LACNIC and NIC.MX, "FORT", May 2021,
+              <https://github.com/NICMx/FORT-validator>.
+
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
               and M. Hoffmann, "A profile for Resource Tagged
@@ -543,6 +551,16 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
               <https://www.ietf.org/internet-drafts/draft-ietf-sidrops-
               rpki-rta-00.txt>.
+
+
+
+
+
+
+Snijders, et al.         Expires 2 December 2021               [Page 10]
+
+Internet-Draft            RPKI Signed Checklist                 May 2021
+
 
    [I-D.ymbk-sidrops-rpki-has-no-identity]
               Bush, R. and R. Housley, "The I in RPKI does not stand for
@@ -554,13 +572,6 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
    [POSIX]    IEEE and The Open Group, "The Open Group's Base
               Specifications, Issue 7", 2016,
               <https://publications.opengroup.org/standards/unix/c165>.
-
-
-
-Snijders, et al.         Expires 2 December 2021               [Page 10]
-
-Internet-Draft            RPKI Signed Checklist                 May 2021
-
 
    [RFC1952]  Deutsch, P., "GZIP file format specification version 4.3",
               RFC 1952, DOI 10.17487/RFC1952, May 1996,
@@ -599,6 +610,14 @@ B.1.  changes from -03 -> -04
    *  Alberto pointed out the asID validation also needs to be
       documented.
 
+
+
+
+Snijders, et al.         Expires 2 December 2021               [Page 11]
+
+Internet-Draft            RPKI Signed Checklist                 May 2021
+
+
 B.2.  changes from -02 -> -03
 
    *  Reference the IANA assigned OID
@@ -608,15 +627,6 @@ B.2.  changes from -02 -> -03
 B.3.  changes from -01 -> -02
 
    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy & Russ
-
-
-
-
-
-Snijders, et al.         Expires 2 December 2021               [Page 11]
-
-Internet-Draft            RPKI Signed Checklist                 May 2021
-
 
 B.4.  changes from -00 -> -01
 
@@ -656,6 +666,14 @@ Authors' Addresses
    Cape Town
    South Africa
 
+
+
+
+Snijders, et al.         Expires 2 December 2021               [Page 12]
+
+Internet-Draft            RPKI Signed Checklist                 May 2021
+
+
    Email: benm@workonline.africa
 
 
@@ -669,4 +687,42 @@ Authors' Addresses
 
 
 
-Snijders, et al.         Expires 2 December 2021               [Page 12]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.         Expires 2 December 2021               [Page 13]
