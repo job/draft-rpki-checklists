@@ -5,15 +5,15 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 28 November 2021                                          APNIC
+Expires: 2 December 2021                                           APNIC
                                                              B. Maddison
                                                               Workonline
-                                                             27 May 2021
+                                                             31 May 2021
 
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
                             Checklist (RSC)
-                     draft-ietf-sidrops-rpki-rsc-03
+                     draft-ietf-sidrops-rpki-rsc-04
 
 Abstract
 
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 1]
+Snijders, et al.         Expires 2 December 2021                [Page 1]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
-   This Internet-Draft will expire on 28 November 2021.
+   This Internet-Draft will expire on 2 December 2021.
 
 Copyright Notice
 
@@ -103,18 +103,19 @@ Table of Contents
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
    Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE
            PUBLICATION . . . . . . . . . . . . . . . . . . . . . . .  11
-     B.1.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  11
-     B.2.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  11
-     B.3.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  11
+     B.1.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  11
+     B.2.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  11
+     B.3.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  11
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 2]
+Snijders, et al.         Expires 2 December 2021                [Page 2]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
-     B.4.  individual submission phase . . . . . . . . . . . . . . .  12
+     B.4.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  12
+     B.5.  individual submission phase . . . . . . . . . . . . . . .  12
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
@@ -164,8 +165,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-
-Snijders, et al.        Expires 28 November 2021                [Page 3]
+Snijders, et al.         Expires 2 December 2021                [Page 3]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -221,7 +221,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 4]
+Snijders, et al.         Expires 2 December 2021                [Page 4]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -277,16 +277,16 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 5]
+Snijders, et al.         Expires 2 December 2021                [Page 5]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
-   *  The IP address delegation extension [RFC3779] is present in the
-      end-entity (EE) certificate (contained within the RSC), and each
-      IP address prefix(es) in the RSC is contained within the set of IP
-      addresses specified by the EE certificate's IP address delegation
-      extension.
+   *  The IP Addresses and AS Identifiers extension [RFC3779] is present
+      in the end-entity (EE) certificate (contained within the RSC), and
+      each IP address prefix(es) and/or AS Identifier(s) in the RSC is
+      contained within the set of IP addresses specified by the EE
+      certificate's IP address delegation extension.
 
    *  For each FilenameAndHash entry in the RSC, if a filename field is
       present, the field's content MUST contain only characters
@@ -333,7 +333,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 6]
+Snijders, et al.         Expires 2 December 2021                [Page 6]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -389,7 +389,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 7]
+Snijders, et al.         Expires 2 December 2021                [Page 7]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -445,7 +445,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 8]
+Snijders, et al.         Expires 2 December 2021                [Page 8]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -501,7 +501,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021                [Page 9]
+Snijders, et al.         Expires 2 December 2021                [Page 9]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -557,7 +557,7 @@ Internet-Draft            RPKI Signed Checklist                 May 2021
 
 
 
-Snijders, et al.        Expires 28 November 2021               [Page 10]
+Snijders, et al.         Expires 2 December 2021               [Page 10]
 
 Internet-Draft            RPKI Signed Checklist                 May 2021
 
@@ -589,36 +589,43 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.  The authors thank Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
-   The authors would like to thank Nimrod Levy, and Tim Bruijnzeels for
-   document review and suggestions.
+   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and
+   Alberto Leiva for document review and suggestions.
 
 Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION
 
-B.1.  changes from -02 -> -03
+B.1.  changes from -03 -> -04
+
+   *  Alberto pointed out the asID validation also needs to be
+      documented.
+
+B.2.  changes from -02 -> -03
 
    *  Reference the IANA assigned OID
 
    *  Clarify validation rules
 
-B.2.  changes from -01 -> -02
+B.3.  changes from -01 -> -02
 
    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy & Russ
 
-B.3.  changes from -00 -> -01
+
+
+
+
+Snijders, et al.         Expires 2 December 2021               [Page 11]
+
+Internet-Draft            RPKI Signed Checklist                 May 2021
+
+
+B.4.  changes from -00 -> -01
 
    *  Readability improvements
 
    *  Update document category to match the registry allocation policy
       requirement.
 
-
-
-Snijders, et al.        Expires 28 November 2021               [Page 11]
-
-Internet-Draft            RPKI Signed Checklist                 May 2021
-
-
-B.4.  individual submission phase
+B.5.  individual submission phase
 
    *  On-the-wire change: the 'Filename' switched from 'required' to
       'optional'.  Some SIDROPS Working Group participants proposed a
@@ -662,11 +669,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-Snijders, et al.        Expires 28 November 2021               [Page 12]
+Snijders, et al.         Expires 2 December 2021               [Page 12]

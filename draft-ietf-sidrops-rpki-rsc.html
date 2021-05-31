@@ -16,7 +16,7 @@
        
     " name="description">
 <meta content="xml2rfc 3.7.0" name="generator">
-<meta content="draft-ietf-sidrops-rpki-rsc-03" name="ietf.draft">
+<meta content="draft-ietf-sidrops-rpki-rsc-04" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.7.0
     Python 3.8.8
@@ -1186,7 +1186,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Snijders, et al.</td>
-<td class="center">Expires 28 November 2021</td>
+<td class="center">Expires 2 December 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1196,15 +1196,15 @@ li > p:last-of-type {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-03</dd>
+<dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-04</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-05-27" class="published">27 May 2021</time>
+<time datetime="2021-05-31" class="published">31 May 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-11-28">28 November 2021</time></dd>
+<dd class="expires"><time datetime="2021-12-02">2 December 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1260,7 +1260,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 November 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 December 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1365,16 +1365,19 @@ li > p:last-of-type {
             <p id="section-toc.1-1.12.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-document-changelog-rfc-edito" class="xref">Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION</a></p>
 <ul class="toc compact ulEmpty">
 <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-changes-from-02-03-2" class="xref">changes from -02 -&gt; -03</a></p>
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-changes-from-03-04-2" class="xref">changes from -03 -&gt; -04</a></p>
 </li>
               <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-changes-from-01-02-2" class="xref">changes from -01 -&gt; -02</a></p>
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-changes-from-02-03-2" class="xref">changes from -02 -&gt; -03</a></p>
 </li>
               <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#section-b.3" class="xref">B.3</a>.  <a href="#name-changes-from-00-01-2" class="xref">changes from -00 -&gt; -01</a></p>
+                <p id="section-toc.1-1.12.2.3.1"><a href="#section-b.3" class="xref">B.3</a>.  <a href="#name-changes-from-01-02-2" class="xref">changes from -01 -&gt; -02</a></p>
 </li>
               <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-b.4" class="xref">B.4</a>.  <a href="#name-individual-submission-phase-2" class="xref">individual submission phase</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-b.4" class="xref">B.4</a>.  <a href="#name-changes-from-00-01-2" class="xref">changes from -00 -&gt; -01</a></p>
+</li>
+              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.5">
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-b.5" class="xref">B.5</a>.  <a href="#name-individual-submission-phase-2" class="xref">individual submission phase</a></p>
 </li>
             </ul>
 </li>
@@ -1533,7 +1536,7 @@ END
       Before a relying party can use an RSC to validate a set of digital objects, the relying party MUST first validate the RSC.  To validate an RSC, the relying party MUST perform all the validation checks specified in [RFC6488] as well as the following additional RSC-specific validation steps.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-2.1">
-          The IP address delegation extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP address delegation extension.<a href="#section-5-2.1" class="pilcrow">¶</a>
+          The IP Addresses and AS Identifiers extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP address delegation extension.<a href="#section-5-2.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-5-2.2">
           For each FilenameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <span>[<a href="#POSIX" class="xref">POSIX</a>]</span>.<a href="#section-5-2.2" class="pilcrow">¶</a>
@@ -1809,8 +1812,8 @@ END
       The authors thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.
       The authors would like to thank
         Nimrod Levy,
-        and
-        Tim Bruijnzeels
+        Tim Bruijnzeels,
+        and Alberto Leiva
       for document review and suggestions.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1819,44 +1822,53 @@ END
 <a href="#section-appendix.b" class="section-number selfRef">Appendix B. </a><a href="#name-document-changelog-rfc-edito" class="section-name selfRef">Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION</a>
       </h2>
 <section id="section-b.1">
-        <h2 id="name-changes-from-02-03-2">
-<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-changes-from-02-03-2" class="section-name selfRef">changes from -02 -&gt; -03</a>
+        <h2 id="name-changes-from-03-04-2">
+<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-changes-from-03-04-2" class="section-name selfRef">changes from -03 -&gt; -04</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.1-1.1">Reference the IANA assigned OID<a href="#section-b.1-1.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-b.1-1.2">Clarify validation rules<a href="#section-b.1-1.2" class="pilcrow">¶</a>
+<li class="normal" id="section-b.1-1.1">Alberto pointed out the asID validation also needs to be documented.<a href="#section-b.1-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.2">
-        <h2 id="name-changes-from-01-02-2">
-<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-changes-from-01-02-2" class="section-name selfRef">changes from -01 -&gt; -02</a>
+        <h2 id="name-changes-from-02-03-2">
+<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-changes-from-02-03-2" class="section-name selfRef">changes from -02 -&gt; -03</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.2-1.1">Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ<a href="#section-b.2-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-b.2-1.1">Reference the IANA assigned OID<a href="#section-b.2-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-b.2-1.2">Clarify validation rules<a href="#section-b.2-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.3">
-        <h2 id="name-changes-from-00-01-2">
-<a href="#section-b.3" class="section-number selfRef">B.3. </a><a href="#name-changes-from-00-01-2" class="section-name selfRef">changes from -00 -&gt; -01</a>
+        <h2 id="name-changes-from-01-02-2">
+<a href="#section-b.3" class="section-number selfRef">B.3. </a><a href="#name-changes-from-01-02-2" class="section-name selfRef">changes from -01 -&gt; -02</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.3-1.1">Readability improvements<a href="#section-b.3-1.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-b.3-1.2">Update document category to match the registry allocation policy requirement.<a href="#section-b.3-1.2" class="pilcrow">¶</a>
+<li class="normal" id="section-b.3-1.1">Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ<a href="#section-b.3-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.4">
-        <h2 id="name-individual-submission-phase-2">
-<a href="#section-b.4" class="section-number selfRef">B.4. </a><a href="#name-individual-submission-phase-2" class="section-name selfRef">individual submission phase</a>
+        <h2 id="name-changes-from-00-01-2">
+<a href="#section-b.4" class="section-number selfRef">B.4. </a><a href="#name-changes-from-00-01-2" class="section-name selfRef">changes from -00 -&gt; -01</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.4-1.1">
+<li class="normal" id="section-b.4-1.1">Readability improvements<a href="#section-b.4-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-b.4-1.2">Update document category to match the registry allocation policy requirement.<a href="#section-b.4-1.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+<section id="section-b.5">
+        <h2 id="name-individual-submission-phase-2">
+<a href="#section-b.5" class="section-number selfRef">B.5. </a><a href="#name-individual-submission-phase-2" class="section-name selfRef">individual submission phase</a>
+        </h2>
+<ul class="normal">
+<li class="normal" id="section-b.5-1.1">
            On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
-           Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.<a href="#section-b.4-1.1" class="pilcrow">¶</a>
+           Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.<a href="#section-b.5-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>

@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-04" ipr="trust200902">
 
 <front>
 
@@ -173,7 +173,7 @@
     <t>
       <list style="symbols">
         <t>
-          The IP address delegation extension <xref target="RFC3779" /> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP address delegation extension.
+          The IP Addresses and AS Identifiers extension <xref target="RFC3779" /> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP address delegation extension.
         </t>
         <t>
           For each FilenameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
@@ -424,13 +424,22 @@
       The authors thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.
       The authors would like to thank
         Nimrod Levy,
-        and
-        Tim Bruijnzeels
+        Tim Bruijnzeels,
+        and Alberto Leiva
       for document review and suggestions.
     </t>
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+
+    <section title="changes from -03 -&gt; -04">
+      <t>
+        <list style="symbols">
+          <t>Alberto pointed out the asID validation also needs to be documented.</t>
+        </list>
+      </t>
+    </section>
+
     <section title="changes from -02 -&gt; -03">
       <t>
         <list style="symbols">
