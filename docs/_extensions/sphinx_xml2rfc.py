@@ -80,15 +80,18 @@ def gen_rfc_html(app):
                         blob.stream_data(f)
                 for draft in app.config.xml2rfc_drafts:
                     logger.info(f"generating html for {draft} at {ref.path}")
+                    date = ref.commit.committed_datetime.strftime("%Y-%m-%d")
                     cmd = ("xml2rfc", f"{draft}.xml",
+                           "--date", date,
                            "--html",
                            "--path", output_dir)
+                    logger.debug(f"{cmd=}")
                     try:
                         proc = subprocess.run(cmd, check=True,
                                               capture_output=True)
                     except subprocess.CalledProcessError as e:
                         logger.warning(e.stderr.decode())
-                    logger.debug(proc.stdout.decode())
+                    logger.debug(proc.stderr.decode())
                     versions.append((draft, ref_type, name, ref))
     app.env.xml2rfc_versions = {draft: {ref_type: {name: ref
                                                    for _, _, name, ref in it}
