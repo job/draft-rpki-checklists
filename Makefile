@@ -14,7 +14,7 @@ all: drafts asn1
 drafts: $(NAME).txt
 
 $(NAME).txt: $(NAME).xml
-	xml2rfc $(NAME).xml --html --text
+	xml2rfc $(NAME).xml --html --text --expand
 
 .PHONY: asn1
 asn1: rpkimancer_sig/asn1/$(MOD).asn
