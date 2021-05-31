@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import collections
 import docutils
+import itertools
 import os
 import subprocess
 import tempfile
@@ -90,16 +91,13 @@ def gen_rfc_html(app):
                     logger.debug(proc.stdout.decode())
                     versions.append((draft, ref_type, name, ref))
     app.env.xml2rfc_versions = {draft: {ref_type: {name: ref
-                                                   for name, ref
-                                                   in set((v[2], v[3])
-                                                          for v in versions
-                                                          if v[0] == draft
-                                                          and v[1] == ref_type)}
-                                        for ref_type
-                                        in set(v[1]
-                                               for v in versions
-                                               if v[0] == draft)}
-                                for draft in set(v[0] for v in versions)}
+                                                   for _, _, name, ref in it}
+                                        for ref_type, it
+                                        in itertools.groupby(it,
+                                                             lambda v: v[1])}
+                                for draft, it
+                                in itertools.groupby(versions,
+                                                     lambda v: v[0])}
     logger.debug(f"{app.env.xml2rfc_versions=}")
 
 
