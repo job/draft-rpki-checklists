@@ -62,6 +62,7 @@ exclude_patterns = []
 html_theme = "readable"
 html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
 html_static_path = ["_static"]
+html_sidebars = {"**": []}
 
 # -- Autodoc configuration
 
@@ -87,4 +88,3 @@ myst_enable_extensions = [
 
 xml2rfc_drafts = ["draft-ietf-sidrops-rpki-rsc"]
 xml2rfc_sources = ["RpkiSignedChecklist-2021.asn"]
-xml2rfc_output = "drafts"
