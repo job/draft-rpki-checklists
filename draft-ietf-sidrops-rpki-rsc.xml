@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-sidrops-rpki-rsc-05" ipr="trust200902">
 
 <front>
 
@@ -131,9 +131,61 @@
       An RSC is formally defined as:
     </t>
 
-    <figure>
-      <sourcecode src="RpkiSignedChecklist-2021.asn"/>
-    </figure>
+<figure><artwork><![CDATA[
+RpkiSignedChecklist-2021
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+    pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
+
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
+  FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+      pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+
+  ASIdOrRange, IPAddressOrRange
+  FROM IPAddrAndASCertExtn -- in [RFC3779]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) mod(0)
+      id-mod-ip-addr-and-as-ident(30) } ;
+
+ct-rpkiSignedChecklist CONTENT-TYPE ::=
+    { TYPE RpkiSignedChecklist IDENTIFIED BY
+      id-ct-signedChecklist }
+
+id-ct-signedChecklist OBJECT IDENTIFIER ::=
+    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+      pkcs-9(9) id-smime(16) id-ct(1) 48 }
+
+RpkiSignedChecklist ::= SEQUENCE {
+  version  [0]          INTEGER DEFAULT 0,
+  resources             ResourceBlock,
+  digestAlgorithm       DigestAlgorithmIdentifier,
+  checkList             SEQUENCE SIZE (1..MAX) OF FileNameAndHash }
+
+FileNameAndHash ::= SEQUENCE {
+  fileName        IA5String OPTIONAL,
+  hash            Digest }
+
+ResourceBlock ::= SEQUENCE {
+    asID         [0]       AsList OPTIONAL,
+    ipAddrBlocks [1]       IPList OPTIONAL }
+    -- at least one of asID or ipAddrBlocks MUST be present
+    ( WITH COMPONENTS { ..., asID PRESENT} |
+      WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+
+AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+
+IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
+
+IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI --
+   addressFamily        OCTET STRING (SIZE (2..3)),
+   iPAddressOrRange     IPAddressOrRange }
+
+END
+]]></artwork></figure>
 
     <section title="version">
       <t>
@@ -173,7 +225,7 @@
     <t>
       <list style="symbols">
         <t>
-          The IP address delegation extension <xref target="RFC3779" /> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP address delegation extension.
+          The IP Addresses and AS Identifiers extension <xref target="RFC3779" /> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP Addresses and AS Identifiers delegation extension.
         </t>
         <t>
           For each FilenameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
@@ -244,10 +296,19 @@
     <t>
       <list style="symbols">
         <t>
-          A signer and validator implementation <xref target="rpki-rsc-demo"/> based on perl and OpenSSL was provided by Tom Harrison from APNIC.
+          A signer and validator implementation <xref target="rpki-rsc-demo"/> written in Perl based on OpenSSL was provided by Tom Harrison from APNIC.
         </t>
         <t>
-          A validator implementation based on OpenBSD's rpki-client is expected to be published after IANA Early Allocation of the OIDs.
+          A signer implementation <xref target="rpkimancer"/> written in Python was developed by Ben Maddison.
+        </t>
+        <t>
+          Example .sig files were created by Job Snijders with the use of OpenSSL.
+        </t>
+        <t>
+          A validator implementation based on OpenBSD rpki-client and LibreSSL was developed by Job Snijders.
+        </t>
+        <t>
+          A validator implementation <xref target="FORT"/> based on the FORT validator was developed by Alberto Leiva.
         </t>
       </list>
     </t>
@@ -261,11 +322,13 @@
       </t>
       <t>
 <figure><artwork>
-        48    id-ct-signedChecklist    [draft-ietf-sidrops-rpki-rsc-02]
+   Decimal   Description             References
+   ---------------------------------------------------------------
+      48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
 </artwork></figure>
       </t>
       <t>
-        Upon publication of this document IANA is requested to reference the publication instead of the draft.
+        Upon publication of this document, IANA is requested to reference the RFC publication instead of this draft.
       </t>
     </section>
 
@@ -282,24 +345,29 @@
 
     <section title="File Extension">
       <t>
-        The IANA has added an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" created by <xref target="RFC6481"/> as follows:
+        The IANA is requested to add an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" registry created by <xref target="RFC6481"/> as follows:
       </t>
 <figure><artwork>
    Filename Extension  RPKI Object           Reference
-   -----------------------------------------------------------
-      .sig             Signed Checklist      [RFC-TBD]
+   -----------------------------------------------------------------------
+      .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
 </artwork></figure>
     </section>
 
-    <section title="MI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)">
+    <section title="SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)">
       <t>
-        XXX this needs to be done as well
+        The IANA is requested to add an item to the "SMI Security for S/MIME Module Identifier" registry as follows:
       </t>
+<figure><artwork>
+   Decimal   Description                       References
+   -------------------------------------------------------------------------
+     TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+</artwork></figure>
     </section>
 
     <section title="Media Type">
       <t>
-        The IANA has registered the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
+        The IANA is requested to register the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
       </t>
 <figure><artwork><![CDATA[
    Type name: application
@@ -379,6 +447,20 @@
         <date year="2021" month="February" />
       </front>
     </reference>
+    <reference anchor="rpkimancer" target="https://github.com/benmaddison/rpkimancer">
+      <front>
+        <title>rpkimancer</title>
+	<author initials="B." surname="Maddison"><organization>Workonline</organization></author>
+        <date year="2021" month="May" />
+      </front>
+    </reference>
+    <reference anchor="FORT" target="https://github.com/NICMx/FORT-validator">
+      <front>
+        <title>FORT</title>
+	<author surname="FORT Validator"><organization>LACNIC and NIC.MX</organization></author>
+        <date year="2021" month="May" />
+      </front>
+    </reference>
     <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
       <front>
         <title>The Open Group's Base Specifications, Issue 7</title>
@@ -404,13 +486,22 @@
       The authors thank Russ Housley for reviewing the ASN.1 notation and providing suggestions.
       The authors would like to thank
         Nimrod Levy,
-        and
-        Tim Bruijnzeels
+        Tim Bruijnzeels,
+        and Alberto Leiva
       for document review and suggestions.
     </t>
   </section>
 
   <section title="Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION">
+
+    <section title="changes from -03 -&gt; -04">
+      <t>
+        <list style="symbols">
+          <t>Alberto pointed out the asID validation also needs to be documented.</t>
+        </list>
+      </t>
+    </section>
+
     <section title="changes from -02 -&gt; -03">
       <t>
         <list style="symbols">
