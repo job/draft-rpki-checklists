@@ -5,6 +5,6 @@
 :::{toctree}
 :maxdepth: 2
 
-drafts
+_xml2rfc/toc
 api
 :::
