@@ -218,25 +218,33 @@ def autogen(app):
         return
 
     if app.config.xml2rfc_autogen_versions:
-        autogen_versions(app)
+        refs = autogen_select_refs(app)
+        autogen_versions(app, refs)
         if app.config.xml2rfc_autogen_docs:
             autogen_docs(app)
     return
 
 
-def autogen_versions(app):
+def autogen_select_refs(app):
+    repo = git.Repo(path=os.path.dirname(__file__),
+                    search_parent_directories=True)
+    refs = {"branches": {b.name: b for b in repo.branches},
+            "tags": {t.name: t for t in repo.tags}}
+    for remote in app.config.xml2rfc_remotes:
+        for ref in repo.remotes[remote].refs:
+            if ref.remote_head not in refs["branches"] and ref.is_detached:
+                refs["branches"][ref.remote_head] = ref
+    return refs
+
+
+def autogen_versions(app, refs):
     proc = subprocess.run(("xml2rfc", "--version"),
                           capture_output=True, check=True)
     xml2rfc_version = proc.stdout.decode().strip()
     logger.info(f"sphinx-xml2rfc: using {xml2rfc_version}")
 
-    repo = git.Repo(path=os.path.dirname(__file__),
-                    search_parent_directories=True)
     file_names = [f"{draft}.xml" for draft in app.config.xml2rfc_drafts]
     file_names += app.config.xml2rfc_sources
-
-    refs = {"branches": {b.name: b for b in repo.branches},
-            "tags": {t.name: t for t in repo.tags}}
 
     versions = list()
     for ref_type, refs in refs.items():
@@ -326,6 +334,7 @@ def setup(app):
 
     app.add_config_value("xml2rfc_drafts", [], "env")
     app.add_config_value("xml2rfc_sources", [], "env")
+    app.add_config_value("xml2rfc_remotes", ["origin"], "env")
     app.add_config_value("xml2rfc_autogen_versions", True, "env")
     app.add_config_value("xml2rfc_autogen_docs", True, "env")
     app.add_config_value("xml2rfc_output", "_xml2rfc", "env")
