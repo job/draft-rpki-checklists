@@ -87,6 +87,7 @@ class Version(typing.NamedTuple):
 class VersionNotFound(Exception):
     pass
 
+
 class DiffDirective(sphinx.directives.ObjectDescription):
 
     has_content = False
@@ -107,17 +108,14 @@ class DiffDirective(sphinx.directives.ObjectDescription):
         return sig
 
     def transform_content(self, contentnode):
-        domain = self.env.get_domain("xml2rfc")
-        from_version = domain.search_version(self.diff.ref_from)
-        to_version = domain.search_version(self.diff.ref_to)
-        diff_lines = difflib.unified_diff(from_version.read_src().split("\n"),
-                                          to_version.read_src().split("\n"),
-                                          fromfile=from_version.ref_path,
-                                          tofile=to_version.ref_path)
-        diff_src = "\n".join(diff_lines)
-        code_block = docutils.nodes.literal_block(diff_src, diff_src)
-        code_block["language"] = "diff"
-        contentnode += code_block
+        target = (self.diff.ref_from, self.diff.ref_to)
+        refnode = sphinx.addnodes.pending_xref("", refdomain="xml2rfc",
+                                               reftype="diff",
+                                               reftarget=target)
+        temp_msg = f"diff targets {target} not resolved"
+        temp = docutils.nodes.literal(temp_msg, temp_msg)
+        refnode += temp
+        contentnode += refnode
 
     def add_target_and_index(self, name_cls, draft, signode):
         signode["ids"].append(self.diff.anchor)
@@ -187,7 +185,31 @@ class Xml2rfcDomain(sphinx.domains.Domain):
 
     def resolve_xref(self, env, fromdocname, builder,
                      typ, target, node, contnode):
+        if typ == "diff":
+            return self.construct_diff(target)
         return None
+
+    def construct_diff(self, target):
+        (ref_from, ref_to) = target
+        from_version = self.search_version(ref_from)
+        to_version = self.search_version(ref_to)
+        diff_lines = difflib.unified_diff(from_version.read_src().split("\n"),
+                                          to_version.read_src().split("\n"),
+                                          fromfile=from_version.ref_path,
+                                          tofile=to_version.ref_path)
+        container = docutils.nodes.container()
+        if diff_lines:
+            desc_src = f"Changes {ref_from} ⟼ {ref_to}"
+            desc = docutils.nodes.paragraph(desc_src, desc_src)
+            diff_src = "\n".join(diff_lines)
+            code_block = docutils.nodes.literal_block(diff_src, diff_src)
+            code_block["language"] = "diff"
+            container += [desc, code_block]
+        else:
+            desc_src = f"No changes {self.diff.ref_from} ⟼ {self.diff.ref_to}"
+            desc = docutils.nodes.paragraph(desc_src, desc_src)
+            container += desc
+        return container
 
     @staticmethod
     def object_type_name(ref_type):
@@ -210,7 +232,7 @@ def get_base_dir(app):
     return os.path.join(app.confdir, app.config.xml2rfc_output)
 
 
-def autogen(app):
+def autogen_run(app):
     """Generate HTML output from XML sources at every git ref."""
 
     app.env.xml2rfc_versions = dict()
@@ -219,9 +241,9 @@ def autogen(app):
 
     if app.config.xml2rfc_autogen_versions:
         refs = autogen_select_refs(app)
-        autogen_versions(app, refs)
+        autogen = Autogen(app, refs)
         if app.config.xml2rfc_autogen_docs:
-            autogen_docs(app)
+            autogen.gen_docs()
     return
 
 
@@ -237,96 +259,151 @@ def autogen_select_refs(app):
     return refs
 
 
-def autogen_versions(app, refs):
-    proc = subprocess.run(("xml2rfc", "--version"),
-                          capture_output=True, check=True)
-    xml2rfc_version = proc.stdout.decode().strip()
-    logger.info(f"sphinx-xml2rfc: using {xml2rfc_version}")
+class AutoVersion(typing.NamedTuple):
 
-    file_names = [f"{draft}.xml" for draft in app.config.xml2rfc_drafts]
-    file_names += app.config.xml2rfc_sources
+    draft: str
+    ref_type: str
+    ref_name: str
+    ref: git.refs.reference.Reference
 
-    versions = list()
-    for ref_type, refs in refs.items():
-        for ref_name, ref in refs.items():
-            output_dir = os.path.join(get_base_dir(app), *ref.path.split("/"))
-            os.makedirs(output_dir, exist_ok=True)
-            logger.debug(f"{output_dir=}")
-            with tempfile.TemporaryDirectory() as tmpdir:
-                logger.debug(f"{ref_name=}, {ref.path=}")
-                for blob in ref.commit.tree.blobs:
-                    if blob.name not in file_names:
-                        continue
-                    logger.debug(f"{blob.name=}")
-                    logger.debug(f"{blob.hexsha=}")
-                    with open(os.path.join(tmpdir, blob.name), "wb") as f:
-                        blob.stream_data(f)
-                for draft in app.config.xml2rfc_drafts:
-                    logger.info(f"generating output for {draft} at {ref.path}")
-                    date = ref.commit.committed_datetime.strftime("%Y-%m-%d")
-                    cmd = ("xml2rfc", f"{draft}.xml",
-                           "--date", date,
-                           "--no-pagination",
-                           "--text",
-                           "--path", output_dir)
-                    logger.debug(f"{cmd=}")
-                    try:
-                        proc = subprocess.run(cmd, check=True,
-                                              capture_output=True)
-                    except subprocess.CalledProcessError as e:
-                        logger.warning(e.stderr.decode())
-                    logger.debug(proc.stderr.decode())
-                    versions.append((draft, ref_type, ref_name, ref))
-    app.env.xml2rfc_auto_versions = versions
-    logger.debug(f"{app.env.xml2rfc_auto_versions=}")
-    return
+    @property
+    def ts(self):
+        return self.ref.commit.committed_datetime
 
 
-def prior_versions(app, ref):
+class Autogen(object):
+
+    def __init__(self, app, refs):
+        self.app = app
+        self.base_dir = get_base_dir(self.app)
+        proc = subprocess.run(("xml2rfc", "--version"),
+                              capture_output=True, check=True)
+        xml2rfc_version = proc.stdout.decode().strip()
+        logger.info(f"sphinx-xml2rfc: using {xml2rfc_version}")
+
+        file_names = [f"{draft}.xml" for draft in app.config.xml2rfc_drafts]
+        file_names += app.config.xml2rfc_sources
+
+        self.versions = list()
+        for ref_type, refs in refs.items():
+            for ref_name, ref in refs.items():
+                output_dir = os.path.join(self.base_dir, *ref.path.split("/"))
+                os.makedirs(output_dir, exist_ok=True)
+                logger.debug(f"{output_dir=}")
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    logger.debug(f"{ref_name=}, {ref.path=}")
+                    for blob in ref.commit.tree.blobs:
+                        if blob.name not in file_names:
+                            continue
+                        logger.debug(f"{blob.name=}")
+                        logger.debug(f"{blob.hexsha=}")
+                        with open(os.path.join(tmpdir, blob.name), "wb") as f:
+                            blob.stream_data(f)
+                    for draft in app.config.xml2rfc_drafts:
+                        logger.info(f"generating output for {draft} at {ref.path}")
+                        src_path = os.path.join(tmpdir, f"{draft}.xml")
+                        date = ref.commit.committed_datetime.strftime("%Y-%m-%d")
+                        cmd = ("xml2rfc", src_path,
+                               "--date", date,
+                               "--no-pagination",
+                               "--text",
+                               "--path", output_dir)
+                        logger.debug(f"{cmd=}")
+                        try:
+                            proc = subprocess.run(cmd, check=True,
+                                                  capture_output=True)
+                        except subprocess.CalledProcessError as e:
+                            logger.warning(e.stderr.decode())
+                            continue
+                        logger.debug(proc.stderr.decode())
+                        version = AutoVersion(draft, ref_type, ref_name, ref)
+                        self.versions.append(version)
+
+    def version_items(self):
+        d = {draft: {ref_type: [version for version in it]
+                     for ref_type, it
+                     in itertools.groupby(it, lambda v: v.ref_type)}
+             for draft, it
+             in itertools.groupby(sorted(self.versions), lambda v: v.draft)}
+        return d.items()
+
+    def sorted_versions(self, draft):
+        for version in sorted(self.versions, key=lambda v: v.ts, reverse=True):
+            if version.draft == draft:
+                yield version
+
+    def prior_versions(self, version):
+        for prior in self.sorted_versions(version.draft):
+            if prior.ts < version.ts:
+                yield prior
+
+    def gen_docs(self):
+        with open(os.path.join(self.base_dir, "toc.md"), "w") as toc_fd:
+            toc_fd.write("# Internet Drafts\n\n"
+                         ":::{toctree}\n"
+                         ":maxdepth: 3\n\n")
+            for draft, ref_types in self.version_items():
+                draft_toc = f"toc-{draft}"
+                toc_fd.write(f"{draft_toc}\n")
+                with open(os.path.join(self.base_dir, f"{draft_toc}.md"),
+                          "w") as draft_toc_fd:
+                    draft_toc_fd.write(f"# `{draft}`\n\n"
+                                       f":::{{toctree}}\n\n")
+                    for ref_type, versions in ref_types.items():
+                        ref_type_toc = f"{draft_toc}-{ref_type}"
+                        draft_toc_fd.write(f"{ref_type_toc}\n")
+                        with open(os.path.join(self.base_dir, f"{ref_type_toc}.md"),
+                                  "w") as ref_type_toc_fd:
+                            ref_type_toc_fd.write(f"# {ref_type}\n\n"
+                                                  f":::{{toctree}}\n\n")
+                            for version in versions:
+                                draft_doc = os.path.join(*version.ref.path.split("/"),
+                                                         draft)
+                                ref_type_toc_fd.write(f"{draft_doc}\n")
+                                with open(os.path.join(self.base_dir, f"{draft_doc}.md"),
+                                          "w") as draft_fd:
+                                    draft_fd.write(f"# {version.ref_type}: {version.ref_name}\n\n"
+                                                   f":::{{xml2rfc:version}} {draft}\n"
+                                                   f":ref_type: {version.ref_type}\n"
+                                                   f":ref_name: {version.ref_name}\n"
+                                                   f":ref_path: {version.ref.path}\n"
+                                                   f":::\n")
+                            ref_type_toc_fd.write(":::\n")
+                    changes_toc = f"{draft_toc}-diffs"
+                    draft_toc_fd.write(f"{changes_toc}\n")
+                    with open(os.path.join(self.base_dir, f"{changes_toc}.md"),
+                              "w") as changes_toc_fd:
+                        changes_toc_fd.write("# changes\n\n"
+                                             ":::{toctree}\n\n")
+                        for to_version in self.sorted_versions(draft):
+                            for from_version in self.prior_versions(to_version):
+                                changes_doc = os.path.join(*to_version.ref.path.split("/"),
+                                                           f"{draft}-diff-from-{from_version.ref_type}.{from_version.ref_name}")
+                                changes_toc_fd.write(f"{changes_doc}\n")
+                                with open(os.path.join(self.base_dir, f"{changes_doc}.md"),
+                                          "w") as changes_doc_fd:
+                                    changes_doc_fd.write(f"# {from_version.ref.path} ⟼ {to_version.ref.path}\n\n"
+                                                         f":::{{xml2rfc:diff}} {draft}\n"
+                                                         f":from: {from_version.ref.path}\n"
+                                                         f":to: {to_version.ref.path}\n"
+                                                         f":::\n")
+                        changes_toc_fd.write(":::\n")
+                    draft_toc_fd.write(":::\n")
+            toc_fd.write(":::\n")
+        return
+
+
+def committed(ref_or_version):
+    if isinstance(ref_or_version, git.refs.reference.Reference):
+        return ref_or_version.commit.committed_datetime
+    else:
+        return ref_or_version[3].commit.committed_datetime
+
+
+def prior_versions(app, draft, ref):
     for version in app.env.xml2rfc_auto_versions:
-        commit = version[3].commit
-        if commit.committed_datetime < ref.commit.commited_datetime:
+        if version[0] == draft and committed(version[3]) < committed(ref):
             yield version
-
-
-def autogen_docs(app):
-    base_dir = get_base_dir(app)
-    with open(os.path.join(base_dir, "toc.md"), "w") as toc_fd:
-        toc_fd.write("# Internet Drafts\n\n"
-                     ":::{toctree}\n"
-                     ":maxdepth: 3\n\n")
-        for draft, versions in itertools.groupby(app.env.xml2rfc_auto_versions,
-                                                 lambda v: v[0]):
-            draft_toc = f"toc-{draft}"
-            toc_fd.write(f"{draft_toc}\n")
-            with open(os.path.join(base_dir, f"{draft_toc}.md"),
-                      "w") as draft_toc_fd:
-                draft_toc_fd.write(f"# `{draft}`\n\n"
-                                   f":::{{toctree}}\n\n")
-                for ref_type, versions in itertools.groupby(versions,
-                                                            lambda v: v[1]):
-                    ref_type_toc = f"{draft_toc}-{ref_type}"
-                    draft_toc_fd.write(f"{ref_type_toc}\n")
-                    with open(os.path.join(base_dir, f"{ref_type_toc}.md"),
-                              "w") as ref_type_toc_fd:
-                        ref_type_toc_fd.write(f"# {ref_type}\n\n"
-                                              f":::{{toctree}}\n\n")
-                        for _, _, ref_name, ref in versions:
-                            draft_doc = os.path.join(*ref.path.split("/"),
-                                                     draft)
-                            ref_type_toc_fd.write(f"{draft_doc}\n")
-                            with open(os.path.join(base_dir, f"{draft_doc}.md"),
-                                      "w") as draft_fd:
-                                draft_fd.write(f"# {ref_type}: {ref_name}\n\n"
-                                               f":::{{xml2rfc:version}} {draft}\n"
-                                               f":ref_type: {ref_type}\n"
-                                               f":ref_name: {ref_name}\n"
-                                               f":ref_path: {ref.path}\n"
-                                               f":::\n")
-                        ref_type_toc_fd.write(":::\n")
-                draft_toc_fd.write(":::\n")
-        toc_fd.write(":::\n")
-    return
 
 
 def setup(app):
@@ -341,7 +418,7 @@ def setup(app):
 
     app.add_domain(Xml2rfcDomain)
 
-    app.connect("builder-inited", autogen)
+    app.connect("builder-inited", autogen_run)
 
     return {"version": "0.0.1",
             "parallel_read_safe": True,
