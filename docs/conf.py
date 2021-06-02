@@ -27,7 +27,7 @@ _buildtime = datetime.datetime.utcnow()
 
 # -- Project Information
 
-project = _dist.metadata["name"]
+project = "RPKI Signed Checklists"
 author = _dist.metadata["author"]
 
 _from_year = 2021
