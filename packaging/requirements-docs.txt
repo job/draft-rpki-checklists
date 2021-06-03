@@ -1,6 +1,6 @@
 sphinx==3.5.4
 
-# ietf internet-draft renderer
+# sphinx_xml2rfc dependencies
 xml2rfc==3.8.0
 GitPython==3.1.17
 
