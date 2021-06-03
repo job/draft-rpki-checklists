@@ -49,7 +49,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "myst_parser",
-    "sphinx_xml2rfc"
+    "sphinx_xml2rfc",
 ]
 source_suffix = {
     ".rst": "restructuredtext",
@@ -75,7 +75,7 @@ autodoc_typehints_description_target = "all"
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    "rpkimancer": ("https://benmaddison.github.io/rpkimancer/main/", None)
+    "rpkimancer": ("https://benmaddison.github.io/rpkimancer/main/", None),
 }
 
 # -- Markdown processing
