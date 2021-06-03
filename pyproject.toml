@@ -7,6 +7,5 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-tag_regex = '^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){2}[^\+]*)(?:\+.*)?$'
+tag_regex = '^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){1,2}[^\+]*)(?:\+.*)?$'
 local_scheme = "no-local-version"
-fallback_version = "0.0.0"
