@@ -17,6 +17,7 @@ import difflib
 import docutils
 import itertools
 import os
+import re
 import subprocess
 import tempfile
 import typing
@@ -248,13 +249,19 @@ def autogen_run(app):
 
 
 def autogen_select_refs(app):
+    branch_re = re.compile(app.config.xml2rfc_autogen_branch_re)
+    tag_re = re.compile(app.config.xml2rfc_autogen_tag_re)
     repo = git.Repo(path=os.path.dirname(__file__),
                     search_parent_directories=True)
-    refs = {"branches": {b.name: b for b in repo.branches},
-            "tags": {t.name: t for t in repo.tags}}
+    refs = {"branches": {b.name: b for b in repo.branches
+                         if branch_re.match(b.name)},
+            "tags": {t.name: t for t in repo.tags
+                     if tag_re.match(t.name)}}
     for remote in app.config.xml2rfc_remotes:
         for ref in repo.remotes[remote].refs:
-            if ref.remote_head not in refs["branches"] and ref.is_detached:
+            if (branch_re.match(ref.remote_head)
+                    and ref.remote_head not in refs["branches"]
+                    and ref.is_detached):
                 refs["branches"][ref.remote_head] = ref
     return refs
 
@@ -414,6 +421,8 @@ def setup(app):
     app.add_config_value("xml2rfc_remotes", ["origin"], "env")
     app.add_config_value("xml2rfc_autogen_versions", True, "env")
     app.add_config_value("xml2rfc_autogen_docs", True, "env")
+    app.add_config_value("xml2rfc_autogen_branch_re", r"^main|master$", "env")
+    app.add_config_value("xml2rfc_autogen_tag_re", r"^.+$", "env")
     app.add_config_value("xml2rfc_output", "_xml2rfc", "env")
 
     app.add_domain(Xml2rfcDomain)
