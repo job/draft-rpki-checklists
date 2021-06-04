@@ -59,8 +59,6 @@
     </address>
   </author>
 
-  <date />
-
   <abstract>
     <t>
       This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
