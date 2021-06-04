@@ -10,12 +10,18 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-05" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" xml:lang="en" sortRefs="true" symRefs="true" tocInclude="true" tocDepth="3" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+     category="std"
+     docName="draft-ietf-sidrops-rpki-rsc-05"
+     ipr="trust200902"
+     xml:lang="en"
+     sortRefs="true"
+     version="3">
 
   <front>
 
     <title abbrev="RPKI Signed Checklist">
-    Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
+      Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
     </title>
 
     <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-05"/>
@@ -501,7 +507,7 @@
       <section>
         <name>changes from -01 -&gt; -02</name>
         <ul>
-          <li>Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ</li>
+          <li>Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ.</li>
         </ul>
       </section>
 
@@ -517,9 +523,9 @@
         <name>individual submission phase</name>
         <ul>
           <li>
-           On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
-           Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.
-        </li>
+            On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
+            Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.
+          </li>
         </ul>
       </section>
 
