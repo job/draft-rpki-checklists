@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object Prototyping API Reference &#8212; RPKI Signed Checklists 0.4.1.dev24 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/readable.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="refs/tags/03 ⟼ refs/tags/04" href="_xml2rfc/refs/tags/04/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="xml2rfc-version-index.html" title="Internet Draft Versions"
+             >drafts</a> |</li>
+        <li class="right" >
+          <a href="_xml2rfc/refs/tags/04/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03.html" title="refs/tags/03 ⟼ refs/tags/04"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RPKI Signed Checklists 0.4.1.dev24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Object Prototyping API Reference</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-rpkimancer_sig.sigobj">
+<span id="object-prototyping-api-reference"></span><h1>Object Prototyping API Reference<a class="headerlink" href="#module-rpkimancer_sig.sigobj" title="Permalink to this headline">¶</a></h1>
+<p>RPKI Signed Checklist implementation - draft-ietf-sidrops-rpki-rsc.</p>
+<dl class="py class">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">rpkimancer_sig.sigobj.</span></code><code class="sig-name descname"><span class="pre">SignedChecklist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">issuer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://benmaddison.github.io/rpkimancer/main/generated/rpkimancer.sigobj.base.html#rpkimancer.sigobj.base.SignedObject" title="(in rpkimancer v0.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">rpkimancer.sigobj.base.SignedObject</span></code></a></p>
+<p>CMS ASN.1 ContentInfo for RPKI Signed Checklists.</p>
+<dl class="py attribute">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.econtent_cls">
+<code class="sig-name descname"><span class="pre">econtent_cls</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.econtent_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#rpkimancer_sig.sigobj.SignedChecklistEContent" title="rpkimancer_sig.sigobj.SignedChecklistEContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">rpkimancer_sig.sigobj.SignedChecklistEContent</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.ee_cert_cls">
+<code class="sig-name descname"><span class="pre">ee_cert_cls</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.ee_cert_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#rpkimancer_sig.eecert.UnpublishedEECertificate" title="rpkimancer_sig.eecert.UnpublishedEECertificate"><code class="xref py py-class docutils literal notranslate"><span class="pre">rpkimancer_sig.eecert.UnpublishedEECertificate</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.publish">
+<code class="sig-name descname"><span class="pre">publish</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsc_output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.publish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optionally out-of-tree publication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rsc_output_dir</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.constructed">
+<code class="sig-name descname"><span class="pre">constructed</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.constructed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a context manager to mediate the global pycrates object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pycrate_asn1rt.asnobj.ASN1Obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.content_data">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">content_data</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.content_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the underlying python data for this type instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.econtent">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">econtent</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.econtent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Signed Object’s eContent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.econtent_info">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">econtent_info</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.econtent_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Signed Object’s encapContentInfo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.file_name">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">file_name</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the file name of the SignedObject.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.from_data">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an instance from python data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ContentSubclass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.from_der">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_der</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">der_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.from_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an instance from DER encoded data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>der_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ContentSubclass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.register_econtent_type">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">register_econtent_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">econtent_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.register_econtent_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add CONTENT-TYPE instance to eContentType constraint set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content_type</strong> (<em>Type</em><em>[</em><em>ContentDataSubclass</em><em>]</em>) – </p></li>
+<li><p><strong>econtent_type</strong> (<em>pycrate_asn1rt.asnobj_class.CLASS</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_asn1">
+<code class="sig-name descname"><span class="pre">to_asn1</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_asn1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as ASN.1 data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_der">
+<code class="sig-name descname"><span class="pre">to_der</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as DER.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_internal">
+<code class="sig-name descname"><span class="pre">to_internal</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_internal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize using internal python repr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_jer">
+<code class="sig-name descname"><span class="pre">to_jer</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_jer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as JER.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_json">
+<code class="sig-name descname"><span class="pre">to_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklist.to_txt">
+<code class="sig-name descname"><span class="pre">to_txt</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklist.to_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default text serialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">rpkimancer_sig.sigobj.</span></code><code class="sig-name descname"><span class="pre">SignedChecklistEContent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_resources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip_resources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digest_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">16,</span> <span class="pre">840,</span> <span class="pre">1,</span> <span class="pre">101,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">2,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://benmaddison.github.io/rpkimancer/main/generated/rpkimancer.sigobj.base.html#rpkimancer.sigobj.base.EncapsulatedContent" title="(in rpkimancer v0.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">rpkimancer.sigobj.base.EncapsulatedContent</span></code></a></p>
+<p>encapContentInfo for RPKI Signed Checklists.</p>
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.as_resources">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">as_resources</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.as_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the AS Number Resources covered by this Checklist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.ip_resources">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">ip_resources</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.ip_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the IP Address Resources covered by this Checklist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.constructed">
+<code class="sig-name descname"><span class="pre">constructed</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.constructed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a context manager to mediate the global pycrates object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pycrate_asn1rt.asnobj.ASN1Obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.content_data">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">content_data</span></code><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.content_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the underlying python data for this type instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.digest">
+<code class="sig-name descname"><span class="pre">digest</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the message digest over the DER-encoded eContent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.digest_algorithm">
+<code class="sig-name descname"><span class="pre">digest_algorithm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usedforsecurity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.digest_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sha256 hash object; optionally initialized with a string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.from_data">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an instance from python data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ContentSubclass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.from_der">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_der</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">der_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.from_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an instance from DER encoded data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>der_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ContentSubclass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.signed_attrs">
+<code class="sig-name descname"><span class="pre">signed_attrs</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.signed_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the signedAttrs value from the encapContentInfo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://benmaddison.github.io/rpkimancer/main/generated/rpkimancer.cms.html#rpkimancer.cms.SignedAttributes" title="(in rpkimancer v0.1)">rpkimancer.cms.SignedAttributes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.signed_attrs_digest">
+<code class="sig-name descname"><span class="pre">signed_attrs_digest</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.signed_attrs_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the message digest over the DER-encoded signedAttrs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_asn1">
+<code class="sig-name descname"><span class="pre">to_asn1</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_asn1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as ASN.1 data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_der">
+<code class="sig-name descname"><span class="pre">to_der</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as DER.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_internal">
+<code class="sig-name descname"><span class="pre">to_internal</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_internal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize using internal python repr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_jer">
+<code class="sig-name descname"><span class="pre">to_jer</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_jer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as JER.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_json">
+<code class="sig-name descname"><span class="pre">to_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize as JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.sigobj.SignedChecklistEContent.to_txt">
+<code class="sig-name descname"><span class="pre">to_txt</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.sigobj.SignedChecklistEContent.to_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default text serialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-rpkimancer_sig.eecert"></span><p>RPKI Signed Checklist implementation - draft-ietf-sidrops-rpki-rsc.</p>
+<dl class="py class">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">rpkimancer_sig.eecert.</span></code><code class="sig-name descname"><span class="pre">UnpublishedEECertificate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed_object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://benmaddison.github.io/rpkimancer/main/generated/rpkimancer.cert.ee.html#rpkimancer.cert.ee.EECertificate" title="(in rpkimancer v0.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">rpkimancer.cert.ee.EECertificate</span></code></a></p>
+<p>RPKI Unpublished EE Certificate.</p>
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.asn1_cert">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">asn1_cert</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.asn1_cert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an ASN.1 Certificate for the certificate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.base_uri">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">base_uri</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.base_uri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the base URI of the RPKI publication service.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.cert">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cert</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.cert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the underlying cryptography X.509 Certificate object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.cert_builder">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cert_builder</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.cert_builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the certificate builder used to construct the certificate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.cert_der">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cert_der</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.cert_der" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get cert DER-encoded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.cps">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cps</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.cps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the CPS extension.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.issuer">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">issuer</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.issuer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the issuing CertificateAuthority.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.issuer_repo_path">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">issuer_repo_path</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.issuer_repo_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the filesystem path to the the issuer publication point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.private_key">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">private_key</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.private_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the private part of the RSA key pair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.public_key">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">public_key</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.public_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the public part of the RSA key pair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.publish">
+<code class="sig-name descname"><span class="pre">publish</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pub_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.publish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Publish the SignedObject artifact as a DER file in the PP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pub_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.sign_object">
+<code class="sig-name descname"><span class="pre">sign_object</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.sign_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a signature over the signedAttrs of the SignedObject.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.signed_object">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">signed_object</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.signed_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SignedObject that this certificate signs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.ski_digest">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">ski_digest</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.ski_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the message digest of the SKI extension.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.subject_cn">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">subject_cn</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.subject_cn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the common_name component of the subjectName.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.subject_public_key_info">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">subject_public_key_info</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.subject_public_key_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the subjectPublicKeyInfo for the certificate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rpkimancer_sig.eecert.UnpublishedEECertificate.uri_path">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">uri_path</span></code><a class="headerlink" href="#rpkimancer_sig.eecert.UnpublishedEECertificate.uri_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the relative filesystem path equivalent of base_uri.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2021, Ben Maddison.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.
+  </div>
+  
+  </body>
+</html>
