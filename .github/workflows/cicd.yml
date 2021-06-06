@@ -1,7 +1,11 @@
 name: "CI/CD"
 on:
-  - push
-  - pull_request
+  push:
+    branches-ignore:
+      - "artifacts"
+  pull_request:
+    branches-ignore:
+      - "artifacts"
 env:
   DEFAULT_PYTHON: 3.9
 jobs:
@@ -269,3 +273,28 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
+  store-artifacts:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [build-drafts]
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: artifacts
+          fetch-depth: 0
+      - name: start merge
+        run: git merge --no-ff --no-commit --strategy ours "$GITHUB_REF"
+      - name: clean drafts directory
+        run: rm -rf drafts
+      - name: download drafts artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: drafts
+          path: drafts/
+      - name: stage changes
+        run: git add drafts/
+      - name: commit merge
+        run: git commit -m "merge artifacts built from $GITHUB_SHA"
+      - name: push changes
+        run: git push
