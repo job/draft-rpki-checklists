@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.4.1.dev24 documentation</title>
+    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.4.1.dev28 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/readable.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" title="changes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.4.1.dev24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.4.1.dev28 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -74,17 +74,171 @@
  
  Abstract
  
-<span class="gu">@@ -246,7 +246,8 @@</span>
+<span class="gu">@@ -79,7 +79,7 @@</span>
 
-       in the end-entity (EE) certificate (contained within the RSC), and
-       each IP address prefix(es) and/or AS Identifier(s) in the RSC is
-       contained within the set of IP addresses specified by the EE
-<span class="gd">-      certificate&#39;s IP address delegation extension.</span>
-<span class="gi">+      certificate&#39;s IP Addresses and AS Identifiers delegation</span>
-<span class="gi">+      extension.</span>
+    5.  RSC Validation
+    6.  Operational Considerations
+    7.  Security Considerations
+<span class="gd">-   8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION</span>
+<span class="gi">+   8.  Implementation status</span>
+    9.  IANA Considerations
+      9.1.  SMI Security for S/MIME CMS Content Type
+            (1.2.840.113549.1.9.16.1)
+<span class="gu">@@ -92,8 +92,7 @@</span>
+
+      10.1.  Normative References
+      10.2.  Informative References
+    Appendix A.  Acknowledgements
+<span class="gd">-   Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE</span>
+<span class="gd">-           PUBLICATION</span>
+<span class="gi">+   Appendix B.  Document changelog</span>
+      B.1.  changes from -03 -&gt; -04
+      B.2.  changes from -02 -&gt; -03
+      B.3.  changes from -01 -&gt; -02
+<span class="gu">@@ -164,9 +163,9 @@</span>
+
  
-    *  For each FilenameAndHash entry in the RSC, if a filename field is
-       present, the field&#39;s content MUST contain only characters
+    IMPORTS
+      CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
+<span class="gd">-     FROM CryptographicMessageSyntax-2009 -- in [RFC5911]</span>
+<span class="gi">+     FROM CryptographicMessageSyntax-2010 -- in [RFC6268]</span>
+        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+<span class="gd">-         pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }</span>
+<span class="gi">+         pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }</span>
+ 
+      ASIdOrRange, IPAddressOrRange
+      FROM IPAddrAndASCertExtn -- in [RFC3779]
+<span class="gu">@@ -242,16 +241,17 @@</span>
+
+    specified in [RFC6488] as well as the following additional RSC-
+    specific validation steps.
+ 
+<span class="gd">-   *  The IP Addresses and AS Identifiers extension [RFC3779] is present</span>
+<span class="gd">-      in the end-entity (EE) certificate (contained within the RSC), and</span>
+<span class="gd">-      each IP address prefix(es) and/or AS Identifier(s) in the RSC is</span>
+<span class="gd">-      contained within the set of IP addresses specified by the EE</span>
+<span class="gd">-      certificate&#39;s IP address delegation extension.</span>
+<span class="gd">-</span>
+<span class="gd">-   *  For each FilenameAndHash entry in the RSC, if a filename field is</span>
+<span class="gd">-      present, the field&#39;s content MUST contain only characters</span>
+<span class="gd">-      specified in the Portable Filename Character Set as defined in</span>
+<span class="gd">-      [POSIX].</span>
+<span class="gi">+   1.  The IP Addresses and AS Identifiers extension [RFC3779] is</span>
+<span class="gi">+       present in the end-entity (EE) certificate (contained within the</span>
+<span class="gi">+       RSC), and each IP address prefix(es) and/or AS Identifier(s) in</span>
+<span class="gi">+       the RSC is contained within the set of IP addresses specified by</span>
+<span class="gi">+       the EE certificate&#39;s IP Addresses and AS Identifiers delegation</span>
+<span class="gi">+       extension.</span>
+<span class="gi">+</span>
+<span class="gi">+   2.  For each FilenameAndHash entry in the RSC, if a filename field is</span>
+<span class="gi">+       present, the field&#39;s content MUST contain only characters</span>
+<span class="gi">+       specified in the Portable Filename Character Set as defined in</span>
+<span class="gi">+       [POSIX].</span>
+ 
+    To validate a set of digital objects against an RSC:
+ 
+<span class="gu">@@ -314,7 +314,9 @@</span>
+
+    number in a CRL, an observer could infer that an RSC object has been
+    revoked.
+ 
+<span class="gd">-8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION</span>
+<span class="gi">+8.  Implementation status</span>
+<span class="gi">+</span>
+<span class="gi">+   This section is to be removed before publishing as an RFC.</span>
+ 
+    This section records the status of known implementations of the
+    protocol defined by this specification at the time of posting of this
+<span class="gu">@@ -363,6 +365,7 @@</span>
+
+       ---------------------------------------------------------------
+          48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
+ 
+<span class="gi">+</span>
+    Upon publication of this document, IANA is requested to reference the
+    RFC publication instead of this draft.
+ 
+<span class="gu">@@ -375,6 +378,7 @@</span>
+
+    -------------------------------------------------------------
+    Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
+ 
+<span class="gi">+</span>
+ 9.3.  File Extension
+ 
+    The IANA is requested to add an item for the Signed Checklist file
+<span class="gu">@@ -385,6 +389,7 @@</span>
+
+    -----------------------------------------------------------------------
+       .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
+ 
+<span class="gi">+</span>
+ 9.4.  SMI Security for S/MIME Module Identifier
+       (1.2.840.113549.1.9.16.0)
+ 
+<span class="gu">@@ -394,6 +399,7 @@</span>
+
+    Decimal   Description                       References
+    -------------------------------------------------------------------------
+      TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+<span class="gi">+</span>
+ 
+ 9.5.  Media Type
+ 
+<span class="gu">@@ -424,6 +430,7 @@</span>
+
+       Author: Job Snijders &lt;job@fastly.com&gt;
+       Change controller: Job Snijders &lt;job@fastly.com&gt;
+ 
+<span class="gi">+</span>
+ 10.  References
+ 
+ 10.1.  Normative References
+<span class="gu">@@ -476,15 +483,15 @@</span>
+
+               and M. Hoffmann, &quot;A profile for Resource Tagged
+               Attestations (RTAs)&quot;, Work in Progress, Internet-Draft,
+               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
+<span class="gd">-              &lt;https://www.ietf.org/internet-drafts/draft-ietf-sidrops-</span>
+<span class="gd">-              rpki-rta-00.txt&gt;.</span>
+<span class="gi">+              &lt;https://tools.ietf.org/html/draft-ietf-sidrops-rpki-rta-</span>
+<span class="gi">+              00&gt;.</span>
+ 
+    [I-D.ymbk-sidrops-rpki-has-no-identity]
+               Bush, R. and R. Housley, &quot;The I in RPKI does not stand for
+               Identity&quot;, Work in Progress, Internet-Draft, draft-ymbk-
+<span class="gd">-              sidrops-rpki-has-no-identity-00, March 2021,</span>
+<span class="gd">-              &lt;https://www.ietf.org/archive/id/draft-ymbk-sidrops-rpki-</span>
+<span class="gd">-              has-no-identity-00.txt&gt;.</span>
+<span class="gi">+              sidrops-rpki-has-no-identity-00, 16 March 2021,</span>
+<span class="gi">+              &lt;https://tools.ietf.org/html/draft-ymbk-sidrops-rpki-has-</span>
+<span class="gi">+              no-identity-00&gt;.</span>
+ 
+    [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base
+               Specifications, Issue 7&quot;, 2016,
+<span class="gu">@@ -520,7 +527,9 @@</span>
+
+    The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and
+    Alberto Leiva for document review and suggestions.
+ 
+<span class="gd">-Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION</span>
+<span class="gi">+Appendix B.  Document changelog</span>
+<span class="gi">+</span>
+<span class="gi">+   This section is to be removed before publishing as an RFC.</span>
+ 
+ B.1.  changes from -03 -&gt; -04
+ 
+<span class="gu">@@ -535,7 +544,8 @@</span>
+
+ 
+ B.3.  changes from -01 -&gt; -02
+ 
+<span class="gd">-   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ</span>
+<span class="gi">+   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp;</span>
+<span class="gi">+      Russ.</span>
+ 
+ B.4.  changes from -00 -&gt; -01
+ 
 </pre></div>
 </div>
 </div>

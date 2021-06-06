@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>branches: main &#8212; RPKI Signed Checklists 0.4.1.dev24 documentation</title>
+    <title>branches: main &#8212; RPKI Signed Checklists 0.4.1.dev28 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/readable.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" title="branches"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.4.1.dev24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.4.1.dev28 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" accesskey="U">branches</a> &#187;</li>
@@ -61,10 +61,10 @@
 <dd><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 6 December 2021                                           APNIC
+Expires: 8 December 2021                                           APNIC
                                                              B. Maddison
                                                               Workonline
-                                                             4 June 2021
+                                                             6 June 2021
 
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
@@ -106,7 +106,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as &quot;work in progress.&quot;
 
-   This Internet-Draft will expire on 6 December 2021.
+   This Internet-Draft will expire on 8 December 2021.
 
 Copyright Notice
 
@@ -135,7 +135,7 @@ Table of Contents
    5.  RSC Validation
    6.  Operational Considerations
    7.  Security Considerations
-   8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
+   8.  Implementation status
    9.  IANA Considerations
      9.1.  SMI Security for S/MIME CMS Content Type
            (1.2.840.113549.1.9.16.1)
@@ -148,8 +148,7 @@ Table of Contents
      10.1.  Normative References
      10.2.  Informative References
    Appendix A.  Acknowledgements
-   Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE
-           PUBLICATION
+   Appendix B.  Document changelog
      B.1.  changes from -03 -&gt; -04
      B.2.  changes from -02 -&gt; -03
      B.3.  changes from -01 -&gt; -02
@@ -220,9 +219,9 @@ Table of Contents
 
    IMPORTS
      CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
-     FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+     FROM CryptographicMessageSyntax-2010 -- in [RFC6268]
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-         pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+         pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
      ASIdOrRange, IPAddressOrRange
      FROM IPAddrAndASCertExtn -- in [RFC3779]
@@ -298,17 +297,17 @@ Table of Contents
    specified in [RFC6488] as well as the following additional RSC-
    specific validation steps.
 
-   *  The IP Addresses and AS Identifiers extension [RFC3779] is present
-      in the end-entity (EE) certificate (contained within the RSC), and
-      each IP address prefix(es) and/or AS Identifier(s) in the RSC is
-      contained within the set of IP addresses specified by the EE
-      certificate&#39;s IP Addresses and AS Identifiers delegation
-      extension.
+   1.  The IP Addresses and AS Identifiers extension [RFC3779] is
+       present in the end-entity (EE) certificate (contained within the
+       RSC), and each IP address prefix(es) and/or AS Identifier(s) in
+       the RSC is contained within the set of IP addresses specified by
+       the EE certificate&#39;s IP Addresses and AS Identifiers delegation
+       extension.
 
-   *  For each FilenameAndHash entry in the RSC, if a filename field is
-      present, the field&#39;s content MUST contain only characters
-      specified in the Portable Filename Character Set as defined in
-      [POSIX].
+   2.  For each FilenameAndHash entry in the RSC, if a filename field is
+       present, the field&#39;s content MUST contain only characters
+       specified in the Portable Filename Character Set as defined in
+       [POSIX].
 
    To validate a set of digital objects against an RSC:
 
@@ -371,7 +370,9 @@ Table of Contents
    number in a CRL, an observer could infer that an RSC object has been
    revoked.
 
-8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
+8.  Implementation status
+
+   This section is to be removed before publishing as an RFC.
 
    This section records the status of known implementations of the
    protocol defined by this specification at the time of posting of this
@@ -420,6 +421,7 @@ Table of Contents
       ---------------------------------------------------------------
          48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
 
+
    Upon publication of this document, IANA is requested to reference the
    RFC publication instead of this draft.
 
@@ -432,6 +434,7 @@ Table of Contents
    -------------------------------------------------------------
    Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
 
+
 9.3.  File Extension
 
    The IANA is requested to add an item for the Signed Checklist file
@@ -442,6 +445,7 @@ Table of Contents
    -----------------------------------------------------------------------
       .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
 
+
 9.4.  SMI Security for S/MIME Module Identifier
       (1.2.840.113549.1.9.16.0)
 
@@ -451,6 +455,7 @@ Table of Contents
    Decimal   Description                       References
    -------------------------------------------------------------------------
      TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+
 
 9.5.  Media Type
 
@@ -480,6 +485,7 @@ Table of Contents
       Restrictions on usage: None
       Author: Job Snijders &lt;job@fastly.com&gt;
       Change controller: Job Snijders &lt;job@fastly.com&gt;
+
 
 10.  References
 
@@ -533,15 +539,15 @@ Table of Contents
               and M. Hoffmann, &quot;A profile for Resource Tagged
               Attestations (RTAs)&quot;, Work in Progress, Internet-Draft,
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
-              &lt;https://www.ietf.org/internet-drafts/draft-ietf-sidrops-
-              rpki-rta-00.txt&gt;.
+              &lt;https://tools.ietf.org/html/draft-ietf-sidrops-rpki-rta-
+              00&gt;.
 
    [I-D.ymbk-sidrops-rpki-has-no-identity]
               Bush, R. and R. Housley, &quot;The I in RPKI does not stand for
               Identity&quot;, Work in Progress, Internet-Draft, draft-ymbk-
-              sidrops-rpki-has-no-identity-00, March 2021,
-              &lt;https://www.ietf.org/archive/id/draft-ymbk-sidrops-rpki-
-              has-no-identity-00.txt&gt;.
+              sidrops-rpki-has-no-identity-00, 16 March 2021,
+              &lt;https://tools.ietf.org/html/draft-ymbk-sidrops-rpki-has-
+              no-identity-00&gt;.
 
    [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base
               Specifications, Issue 7&quot;, 2016,
@@ -577,7 +583,9 @@ Appendix A.  Acknowledgements
    The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and
    Alberto Leiva for document review and suggestions.
 
-Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION
+Appendix B.  Document changelog
+
+   This section is to be removed before publishing as an RFC.
 
 B.1.  changes from -03 -&gt; -04
 
@@ -592,7 +600,8 @@ B.2.  changes from -02 -&gt; -03
 
 B.3.  changes from -01 -&gt; -02
 
-   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ
+   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp;
+      Russ.
 
 B.4.  changes from -00 -&gt; -01
 
