@@ -284,7 +284,7 @@ jobs:
           ref: artifacts
           fetch-depth: 0
       - name: start merge
-        run: git merge --no-ff --no-commit --strategy ours "$GITHUB_REF"
+        run: git merge --no-ff --no-commit --strategy ours "$GITHUB_SHA"
       - name: clean drafts directory
         run: rm -rf drafts
       - name: download drafts artifacts
