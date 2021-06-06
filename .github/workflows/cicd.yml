@@ -277,14 +277,26 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: [build-drafts]
     runs-on: ubuntu-latest
+    env:
+      GIT_USER_NAME: "GitHub Actions"
+      GIT_USER_MAIL: "actions@github.com"
+      GIT_COMMITTER: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           ref: artifacts
           fetch-depth: 0
+      - name: configure git user
+        run: >
+          git config --global user.name "$GIT_USER_NAME"
+          git config --global user.email "$GIT_USER_MAIL"
       - name: start merge
-        run: git merge --no-ff --no-commit --strategy ours "$GITHUB_SHA"
+        run: >
+          git merge --no-ff \
+                    --no-commit \
+                    --strategy ours \
+                    "$GITHUB_SHA"
       - name: clean drafts directory
         run: rm -rf drafts
       - name: download drafts artifacts
@@ -295,6 +307,8 @@ jobs:
       - name: stage changes
         run: git add drafts/
       - name: commit merge
-        run: git commit -m "merge artifacts built from $GITHUB_SHA"
+        run: >
+          git commit --message "merge artifacts built from $GITHUB_SHA" \
+                     --author "$GIT_COMMITTER"
       - name: push changes
         run: git push
