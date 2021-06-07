@@ -3,6 +3,8 @@ on:
   push:
     branches-ignore:
       - "artifacts"
+    tags:
+      - "**"
   pull_request:
     branches-ignore:
       - "artifacts"
