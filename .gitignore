@@ -20,4 +20,3 @@ coverage.xml
 
 # document generation artifacts
 docs/_xml2rfc/
-*.exp.xml
