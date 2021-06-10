@@ -15,8 +15,6 @@ from __future__ import annotations
 
 import datetime
 import importlib.metadata
-import os
-import sys
 
 import rpkimancer_sig
 
@@ -43,8 +41,6 @@ version = ".".join(release.split(".")[:2])
 
 # -- General configuration
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                             "_extensions")))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",

@@ -1,14 +1,8 @@
 sphinx==3.5.4
 
-# sphinx_xml2rfc dependencies
-xml2rfc==3.8.0
-GitPython==3.1.17
-
 # sphinx extensions
 myst-parser==0.14.0
+sphinx-xml2rfc==0.1.0
 
 # sphinx theme
 sphinx-readable-theme==1.3.0
-
-# dependency resolution
-jinja2>=2.3, <3.0
