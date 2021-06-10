@@ -2,5 +2,5 @@
 
 :::{toctree}
 
-refs/heads/main/draft-ietf-sidrops-rpki-rsc
+refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc
 :::
