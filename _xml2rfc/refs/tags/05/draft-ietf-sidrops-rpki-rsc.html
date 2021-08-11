@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tags: 03 &#8212; RPKI Signed Checklists 0.5.0 documentation</title>
+    <title>tags: 05 &#8212; RPKI Signed Checklists 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/readable.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script src="../../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="tags: 04" href="../04/draft-ietf-sidrops-rpki-rsc.html" />
-    <link rel="prev" title="tags" href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" />
+    <link rel="next" title="changes" href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" />
+    <link rel="prev" title="tags: 04" href="../04/draft-ietf-sidrops-rpki-rsc.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -36,16 +36,16 @@
           <a href="../../../../xml2rfc-version-index.html" title="Internet Draft Versions"
              >drafts</a> |</li>
         <li class="right" >
-          <a href="../04/draft-ietf-sidrops-rpki-rsc.html" title="tags: 04"
+          <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" title="changes"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" title="tags"
+          <a href="../04/draft-ietf-sidrops-rpki-rsc.html" title="tags: 04"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" accesskey="U">tags</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">tags: 03</a></li> 
+        <li class="nav-item nav-item-this"><a href="">tags: 05</a></li> 
       </ul>
     </div>  
 
@@ -53,11 +53,11 @@
       <div class="documentwrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tags-03">
-<h1>tags: 03<a class="headerlink" href="#tags-03" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tags-05">
+<h1>tags: 05<a class="headerlink" href="#tags-05" title="Permalink to this headline">¶</a></h1>
 <dl class="xml2rfc version">
-<dt id="xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-3">
-<code class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code><a class="headerlink" href="#xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-3" title="Permalink to this definition">¶</a></dt>
+<dt id="xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-5">
+<code class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code><a class="headerlink" href="#xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-5" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
@@ -69,7 +69,7 @@ Expires: 12 February 2022                                          APNIC
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
                             Checklist (RSC)
-                     draft-ietf-sidrops-rpki-rsc-03
+                     draft-ietf-sidrops-rpki-rsc-05
 
 Abstract
 
@@ -126,6 +126,7 @@ Table of Contents
 
    1.  Introduction
    2.  RSC Profile and Distribution
+     2.1.  RSC End-Entity Certificates
    3.  The RSC ContentType
    4.  The RSC eContent
      4.1.  version
@@ -135,7 +136,7 @@ Table of Contents
    5.  RSC Validation
    6.  Operational Considerations
    7.  Security Considerations
-   8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
+   8.  Implementation status
    9.  IANA Considerations
      9.1.  SMI Security for S/MIME CMS Content Type
            (1.2.840.113549.1.9.16.1)
@@ -148,12 +149,13 @@ Table of Contents
      10.1.  Normative References
      10.2.  Informative References
    Appendix A.  Acknowledgements
-   Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE
-           PUBLICATION
-     B.1.  changes from -02 -&gt; -03
-     B.2.  changes from -01 -&gt; -02
-     B.3.  changes from -00 -&gt; -01
-     B.4.  individual submission phase
+   Appendix B.  Document changelog
+     B.1.  changes from -04 -&gt; -05
+     B.2.  changes from -03 -&gt; -04
+     B.3.  changes from -02 -&gt; -03
+     B.4.  changes from -01 -&gt; -02
+     B.5.  changes from -00 -&gt; -01
+     B.6.  individual submission phase
    Authors&#39; Addresses
 
 1.  Introduction
@@ -187,13 +189,21 @@ Table of Contents
 
    RSC follows the Signed Object Template for the RPKI [RFC6488] with
    one exception.  Because RSCs MUST NOT be distributed through the
-   global RPKI repository system, the Subject Information Access (SIA)
-   extension MUST be omitted from the RSC&#39;s X.509 EE certificate.
+   global RPKI Repository system, the Subject Information Access (SIA)
+   extension MUST be omitted from the RSC&#39;s X.509 End-Entity (EE)
+   certificate.
 
    What constitutes suitable transport for RSC files is deliberately
    unspecified.  It might be a USB stick, a web interface secured with
    conventional HTTPS, PGP-signed email, a T-shirt printed with a QR
    code, or a carrier pigeon.
+
+2.1.  RSC End-Entity Certificates
+
+   The CA MUST only sign one RSC with each EE Certificate, and MUST
+   generate a new key pair for each new RSC.  This form of use of the
+   associated EE Certificate is termed a &quot;one-time-use&quot; EE certificate
+   Section 3 of [RFC6487].
 
 3.  The RSC ContentType
 
@@ -219,9 +229,9 @@ Table of Contents
 
    IMPORTS
      CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
-     FROM CryptographicMessageSyntax-2009 -- in [RFC5911]
+     FROM CryptographicMessageSyntax-2010 -- in [RFC6268]
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-         pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) }
+         pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
      ASIdOrRange, IPAddressOrRange
      FROM IPAddrAndASCertExtn -- in [RFC3779]
@@ -272,7 +282,7 @@ Table of Contents
 
    The resources contained here are the resources used to mark the
    attestation, and MUST match the set of resources listed by the EE
-   certificate carried in the CMS certificates field.
+   Certificate carried in the CMS certificates field.
 
 4.3.  digestAlgorithm
 
@@ -282,38 +292,44 @@ Table of Contents
 
 4.4.  checkList
 
-   This field is a sequence of FilenameAndHash objects.  There is one
-   FilenameAndHash entry for each arbitrary object referenced on the
-   Signed Checklist.  Each FilenameAndHash is an ordered pair of the
+   This field is a sequence of FileNameAndHash objects.  There is one
+   FileNameAndHash entry for each arbitrary object referenced on the
+   Signed Checklist.  Each FileNameAndHash is an ordered pair of the
    name of the directory entry containing the digital object and the
    message digest of the digital object.  The filename field is
    OPTIONAL.
 
 5.  RSC Validation
 
-   Before a relying party can use an RSC to validate a set of digital
-   objects, the relying party MUST first validate the RSC.  To validate
-   an RSC, the relying party MUST perform all the validation checks
-   specified in [RFC6488] as well as the following additional RSC-
-   specific validation steps.
+   Before a Relying Party can use an RSC to validate a set of digital
+   objects, the Relying Party MUST first validate the RSC.  To validate
+   an RSC, the Relying Party MUST perform all the validation checks
+   specified in [RFC6488] (except checking for the presence of a SIA
+   extension), and perform the following additional RSC-specific
+   validation steps:
 
-   *  The IP address delegation extension [RFC3779] is present in the
-      end-entity (EE) certificate (contained within the RSC), and each
-      IP address prefix(es) in the RSC is contained within the set of IP
-      addresses specified by the EE certificate&#39;s IP address delegation
-      extension.
+   1.  The RSC specification deviates from Section 4.8.8.2 of [RFC6487],
+       the Subject Information Access extension MUST NOT be present on
+       the End-Entity (EE) certificate signing the RSC.
 
-   *  For each FilenameAndHash entry in the RSC, if a filename field is
-      present, the field&#39;s content MUST contain only characters
-      specified in the Portable Filename Character Set as defined in
-      [POSIX].
+   2.  The IP Addresses and AS Identifiers extension [RFC3779] is
+       present in the end-entity (EE) certificate (contained within the
+       RSC), and each IP address prefix(es) and/or AS Identifier(s) in
+       the RSC is contained within the set of IP addresses specified by
+       the EE Certificate&#39;s IP Addresses and AS Identifiers delegation
+       extension.
+
+   3.  For each FileNameAndHash entry in the RSC, if a filename field is
+       present, the field&#39;s content MUST contain only characters
+       specified in the Portable Filename Character Set as defined in
+       [POSIX].
 
    To validate a set of digital objects against an RSC:
 
    *  The message digest of each referenced digital object, using the
       digest algorithm specified in the the digestAlgorithm field, MUST
       be calculated and MUST match the value given in the messageDigest
-      field of the associated FilenameAndHash, for the digital object to
+      field of the associated FileNameAndHash, for the digital object to
       be considered valid as against the RSC.
 
 6.  Operational Considerations
@@ -331,7 +347,7 @@ Table of Contents
    a filename that matches the content of that field, a validator
    implementation SHOULD compare the message digest of each digital
    object to the value from the messageDigest field of the associated
-   FilenameAndHash, and report matches to the client for further
+   FileNameAndHash, and report matches to the client for further
    consideration.
 
 7.  Security Considerations
@@ -343,7 +359,7 @@ Table of Contents
    sufficient control of the issuing CA to create the object.  These
    data have not been verified by the Certificate Authority (CA) that
    issued the CA certificate to the entity that issued the EE
-   certificate used to validate the Signed Checklist.
+   Certificate used to validate the Signed Checklist.
 
    RPKI Certificates are not bound to real world identities, see
    [I-D.ymbk-sidrops-rpki-has-no-identity] for an elaboration.  Relying
@@ -354,22 +370,36 @@ Table of Contents
    holder&#39;s business operations such as the identity of the resource
    holder itself.
 
-   RSC objects are not distributed through the global RPKI repository
-   system, so whether a given CA is making use of them is not
-   immediately apparent from the state of the repository.  However,
-   because RSC objects depend on EE certificates, and because all
-   existing applications for EE certificates involve their publication
-   in the repository, an observer may be able to infer indirectly from
-   the state of the repository that RSC objects are in use.  For
-   example, if the CA sets the serial number on a new EE certificate to
-   be one greater than the serial number used for the previous EE
-   certificate, then an observer could infer that RSCs are in use if
-   there is a gap between serial numbers used in published EE
-   certificates.  Similarly, if the CA includes an unpublished serial
-   number in a CRL, an observer could infer that an RSC object has been
-   revoked.
+   RSC objects are not distributed through the RPKI Repository system.
+   From this, it follows that third parties who do not have a copy of a
+   given RSC, may not be aware of the existence of that RSC.  Since RSC
+   objects use EE Certificates, but all other currently defined types of
+   RPKI object profiles are published in public CA repositories, an
+   observer may infer from discrepancies in the Repository that RSC
+   object(s) may exist.  For example, if a CA does not use random serial
+   numbers for Certificates, an observer could detect gaps between the
+   serial numbers of the published EE Certificates.  Similarly, if the
+   CA includes a serial number on a CRL that does not match any
+   published object, an observer could postulate an RSC EE Certificate
+   was revoked.
 
-8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
+   Conversely, a gap in serial numbers does not imply that an RSC
+   exists.  Nor does an arbitrary (to the RP unknown) serial in a CRL
+   imply an RSC object exists: the implicitly referenced object might
+   not be a RSC, it might never have been published, or was revoked
+   before it was visible to RPs.  In general, it is not possible to
+   confidentiality infer the existence or non-existence of RSCs from the
+   Repository state without access to a given RSC.
+
+   While an one-time-use EE Certificate must only be used to generate
+   and sign a single RSC object, CAs technically are not restricted from
+   generating and signing multiple different RSC objects with a single
+   keypair.  Any RSC objects sharing the same EE Certificate can not be
+   revoked individually.
+
+8.  Implementation status
+
+   This section is to be removed before publishing as an RFC.
 
    This section records the status of known implementations of the
    protocol defined by this specification at the time of posting of this
@@ -403,6 +433,9 @@ Table of Contents
    *  A validator implementation based on OpenBSD rpki-client and
       LibreSSL was developed by Job Snijders.
 
+   *  A validator implementation [FORT] based on the FORT validator was
+      developed by Alberto Leiva.
+
 9.  IANA Considerations
 
 9.1.  SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)
@@ -414,6 +447,7 @@ Table of Contents
       Decimal   Description             References
       ---------------------------------------------------------------
          48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
+
 
    Upon publication of this document, IANA is requested to reference the
    RFC publication instead of this draft.
@@ -427,6 +461,7 @@ Table of Contents
    -------------------------------------------------------------
    Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
 
+
 9.3.  File Extension
 
    The IANA is requested to add an item for the Signed Checklist file
@@ -437,6 +472,7 @@ Table of Contents
    -----------------------------------------------------------------------
       .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
 
+
 9.4.  SMI Security for S/MIME Module Identifier
       (1.2.840.113549.1.9.16.0)
 
@@ -446,6 +482,7 @@ Table of Contents
    Decimal   Description                       References
    -------------------------------------------------------------------------
      TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+
 
 9.5.  Media Type
 
@@ -476,6 +513,7 @@ Table of Contents
       Author: Job Snijders &lt;job@fastly.com&gt;
       Change controller: Job Snijders &lt;job@fastly.com&gt;
 
+
 10.  References
 
 10.1.  Normative References
@@ -504,6 +542,11 @@ Table of Contents
               (RPKI)&quot;, RFC 6486, DOI 10.17487/RFC6486, February 2012,
               &lt;https://www.rfc-editor.org/info/rfc6486&gt;.
 
+   [RFC6487]  Huston, G., Michaelson, G., and R. Loomans, &quot;A Profile for
+              X.509 PKIX Resource Certificates&quot;, RFC 6487,
+              DOI 10.17487/RFC6487, February 2012,
+              &lt;https://www.rfc-editor.org/info/rfc6487&gt;.
+
    [RFC6488]  Lepinski, M., Chi, A., and S. Kent, &quot;Signed Object
               Template for the Resource Public Key Infrastructure
               (RPKI)&quot;, RFC 6488, DOI 10.17487/RFC6488, February 2012,
@@ -520,20 +563,23 @@ Table of Contents
 
 10.2.  Informative References
 
+   [FORT]     LACNIC and NIC.MX, &quot;FORT&quot;, May 2021,
+              &lt;https://github.com/NICMx/FORT-validator&gt;.
+
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
               and M. Hoffmann, &quot;A profile for Resource Tagged
               Attestations (RTAs)&quot;, Work in Progress, Internet-Draft,
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
-              &lt;https://www.ietf.org/internet-drafts/draft-ietf-sidrops-
-              rpki-rta-00.txt&gt;.
+              &lt;https://datatracker.ietf.org/doc/html/draft-ietf-sidrops-
+              rpki-rta-00&gt;.
 
    [I-D.ymbk-sidrops-rpki-has-no-identity]
               Bush, R. and R. Housley, &quot;The I in RPKI does not stand for
               Identity&quot;, Work in Progress, Internet-Draft, draft-ymbk-
-              sidrops-rpki-has-no-identity-00, March 2021,
-              &lt;https://www.ietf.org/archive/id/draft-ymbk-sidrops-rpki-
-              has-no-identity-00.txt&gt;.
+              sidrops-rpki-has-no-identity-00, 16 March 2021,
+              &lt;https://datatracker.ietf.org/doc/html/draft-ymbk-sidrops-
+              rpki-has-no-identity-00&gt;.
 
    [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base
               Specifications, Issue 7&quot;, 2016,
@@ -566,29 +612,41 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.  The authors thank Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
-   The authors would like to thank Nimrod Levy, and Tim Bruijnzeels for
-   document review and suggestions.
+   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto
+   Leiva, and Ties de Kock for document review and suggestions.
 
-Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION
+Appendix B.  Document changelog
 
-B.1.  changes from -02 -&gt; -03
+   This section is to be removed before publishing as an RFC.
+
+B.1.  changes from -04 -&gt; -05
+
+   *  Ties contributed clarifications.
+
+B.2.  changes from -03 -&gt; -04
+
+   *  Alberto pointed out the asID validation also needs to be
+      documented.
+
+B.3.  changes from -02 -&gt; -03
 
    *  Reference the IANA assigned OID
 
    *  Clarify validation rules
 
-B.2.  changes from -01 -&gt; -02
+B.4.  changes from -01 -&gt; -02
 
-   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ
+   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp;
+      Russ.
 
-B.3.  changes from -00 -&gt; -01
+B.5.  changes from -00 -&gt; -01
 
    *  Readability improvements
 
    *  Update document category to match the registry allocation policy
       requirement.
 
-B.4.  individual submission phase
+B.6.  individual submission phase
 
    *  On-the-wire change: the &#39;Filename&#39; switched from &#39;required&#39; to
       &#39;optional&#39;.  Some SIDROPS Working Group participants proposed a
