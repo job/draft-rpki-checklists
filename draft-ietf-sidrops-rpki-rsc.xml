@@ -259,8 +259,8 @@
         Since RSC objects use EE Certificates, but all other currently defined types of RPKI object profiles are published in public CA repositories, an observer may infer from discrepancies in the Repository that RSC object(s) may exist.
         For example, if a CA does not use random serial numbers for Certificates, an observer could detect gaps between the serial numbers of the published EE Certificates.
         Similarly, if the CA includes a serial number on a CRL that does not match any published object, an observer could postulate an RSC EE Certificate was revoked.
-      <t>
       </t>
+      <t>
         Conversely, a gap in serial numbers does not imply that an RSC exists.
         Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be a RSC, it might never have been published, or was revoked before it was visible to RPs.
         In general, it is not possible to confidentiality infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
