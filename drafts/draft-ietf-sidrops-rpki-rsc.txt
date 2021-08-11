@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 12 December 2021                                          APNIC
+Expires: 12 February 2022                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                            10 June 2021
+                                                          11 August 2021
 
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.        Expires 12 December 2021                [Page 1]
+Snijders, et al.        Expires 12 February 2022                [Page 1]
 
-Internet-Draft            RPKI Signed Checklist                June 2021
+Internet-Draft            RPKI Signed Checklist              August 2021
 
 
-   This Internet-Draft will expire on 12 December 2021.
+   This Internet-Draft will expire on 12 February 2022.
 
 Copyright Notice
 
@@ -78,43 +78,45 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  RSC Profile and Distribution  . . . . . . . . . . . . . . . .   3
-   3.  The RSC ContentType . . . . . . . . . . . . . . . . . . . . .   3
+     2.1.  RSC End-Entity Certificates . . . . . . . . . . . . . . .   4
+   3.  The RSC ContentType . . . . . . . . . . . . . . . . . . . . .   4
    4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   4
      4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
-     4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   5
-   5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Operational Considerations  . . . . . . . . . . . . . . . . .   6
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   8.  Implementation status . . . . . . . . . . . . . . . . . . . .   7
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
+     4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   6
+   5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Operational Considerations  . . . . . . . . . . . . . . . . .   7
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
+   8.  Implementation status . . . . . . . . . . . . . . . . . . . .   8
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
      9.1.  SMI Security for S/MIME CMS Content Type
-           (1.2.840.113549.1.9.16.1) . . . . . . . . . . . . . . . .   8
-     9.2.  RPKI Signed Objects sub-registry  . . . . . . . . . . . .   8
-     9.3.  File Extension  . . . . . . . . . . . . . . . . . . . . .   8
+           (1.2.840.113549.1.9.16.1) . . . . . . . . . . . . . . . .   9
+     9.2.  RPKI Signed Objects sub-registry  . . . . . . . . . . . .   9
+     9.3.  File Extension  . . . . . . . . . . . . . . . . . . . . .  10
      9.4.  SMI Security for S/MIME Module Identifier
-           (1.2.840.113549.1.9.16.0) . . . . . . . . . . . . . . . .   9
-     9.5.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .   9
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  10
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
-   Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  12
-     B.1.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  12
-     B.2.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  12
-     B.3.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  12
-     B.4.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  12
-     B.5.  individual submission phase . . . . . . . . . . . . . . .  12
+           (1.2.840.113549.1.9.16.0) . . . . . . . . . . . . . . . .  10
+     9.5.  Media Type  . . . . . . . . . . . . . . . . . . . . . . .  10
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  11
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  12
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  13
+   Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  13
+     B.1.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  13
+     B.2.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  13
+     B.3.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  13
+     B.4.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  14
 
 
 
-Snijders, et al.        Expires 12 December 2021                [Page 2]
+Snijders, et al.        Expires 12 February 2022                [Page 2]
 
-Internet-Draft            RPKI Signed Checklist                June 2021
+Internet-Draft            RPKI Signed Checklist              August 2021
 
 
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
+     B.5.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  14
+     B.6.  individual submission phase . . . . . . . . . . . . . . .  14
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Introduction
 
@@ -147,28 +149,38 @@ Internet-Draft            RPKI Signed Checklist                June 2021
 
    RSC follows the Signed Object Template for the RPKI [RFC6488] with
    one exception.  Because RSCs MUST NOT be distributed through the
-   global RPKI repository system, the Subject Information Access (SIA)
-   extension MUST be omitted from the RSC's X.509 EE certificate.
+   global RPKI Repository system, the Subject Information Access (SIA)
+   extension MUST be omitted from the RSC's X.509 End-Entity (EE)
+   certificate.
 
    What constitutes suitable transport for RSC files is deliberately
    unspecified.  It might be a USB stick, a web interface secured with
    conventional HTTPS, PGP-signed email, a T-shirt printed with a QR
    code, or a carrier pigeon.
 
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 3]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
+2.1.  RSC End-Entity Certificates
+
+   The CA MUST only sign one RSC with each EE Certificate, and MUST
+   generate a new key pair for each new RSC.  This form of use of the
+   associated EE Certificate is termed a "one-time-use" EE certificate
+   Section 3 of [RFC6487].
+
 3.  The RSC ContentType
 
    The ContentType for an RSC is defined as rpkiSignedChecklist, and has
    the numerical value of 1.2.840.113549.1.9.16.1.48.
-
-
-
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 3]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
 
    This OID MUST appear both within the eContentType in the
    encapContentInfo object as well as the ContentType signed attribute
@@ -207,6 +219,13 @@ Internet-Draft            RPKI Signed Checklist                June 2021
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
          pkcs-9(9) id-smime(16) id-ct(1) 48 }
 
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 4]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
    RpkiSignedChecklist ::= SEQUENCE {
      version  [0]          INTEGER DEFAULT 0,
      resources             ResourceBlock,
@@ -218,14 +237,6 @@ Internet-Draft            RPKI Signed Checklist                June 2021
      hash            Digest }
 
    ResourceBlock ::= SEQUENCE {
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 4]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
-
        asID         [0]       AsList OPTIONAL,
        ipAddrBlocks [1]       IPList OPTIONAL }
        -- at least one of asID or ipAddrBlocks MUST be present
@@ -250,7 +261,7 @@ Internet-Draft            RPKI Signed Checklist                June 2021
 
    The resources contained here are the resources used to mark the
    attestation, and MUST match the set of resources listed by the EE
-   certificate carried in the CMS certificates field.
+   Certificate carried in the CMS certificates field.
 
 4.3.  digestAlgorithm
 
@@ -258,38 +269,49 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    attested digital object.  This algorithm MUST be a hashing algorithm
    defined in [RFC7935].
 
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 5]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
 4.4.  checkList
 
-   This field is a sequence of FilenameAndHash objects.  There is one
-   FilenameAndHash entry for each arbitrary object referenced on the
-   Signed Checklist.  Each FilenameAndHash is an ordered pair of the
+   This field is a sequence of FileNameAndHash objects.  There is one
+   FileNameAndHash entry for each arbitrary object referenced on the
+   Signed Checklist.  Each FileNameAndHash is an ordered pair of the
    name of the directory entry containing the digital object and the
    message digest of the digital object.  The filename field is
    OPTIONAL.
 
 5.  RSC Validation
 
-   Before a relying party can use an RSC to validate a set of digital
-   objects, the relying party MUST first validate the RSC.  To validate
-   an RSC, the relying party MUST perform all the validation checks
-   specified in [RFC6488] as well as the following additional RSC-
-   specific validation steps.
+   Before a Relying Party can use an RSC to validate a set of digital
+   objects, the Relying Party MUST first validate the RSC.  To validate
+   an RSC, the Relying Party MUST perform all the validation checks
+   specified in [RFC6488] (except checking for the presence of a SIA
+   extension), and perform the following additional RSC-specific
+   validation steps:
 
+   1.  The RSC specification deviates from Section 4.8.8.2 of [RFC6487],
+       the Subject Information Access extension MUST NOT be present on
+       the End-Entity (EE) certificate signing the RSC.
 
-
-Snijders, et al.        Expires 12 December 2021                [Page 5]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
-
-   1.  The IP Addresses and AS Identifiers extension [RFC3779] is
+   2.  The IP Addresses and AS Identifiers extension [RFC3779] is
        present in the end-entity (EE) certificate (contained within the
        RSC), and each IP address prefix(es) and/or AS Identifier(s) in
        the RSC is contained within the set of IP addresses specified by
-       the EE certificate's IP Addresses and AS Identifiers delegation
+       the EE Certificate's IP Addresses and AS Identifiers delegation
        extension.
 
-   2.  For each FilenameAndHash entry in the RSC, if a filename field is
+   3.  For each FileNameAndHash entry in the RSC, if a filename field is
        present, the field's content MUST contain only characters
        specified in the Portable Filename Character Set as defined in
        [POSIX].
@@ -299,8 +321,22 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    *  The message digest of each referenced digital object, using the
       digest algorithm specified in the the digestAlgorithm field, MUST
       be calculated and MUST match the value given in the messageDigest
-      field of the associated FilenameAndHash, for the digital object to
+      field of the associated FileNameAndHash, for the digital object to
       be considered valid as against the RSC.
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 6]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
 
 6.  Operational Considerations
 
@@ -317,7 +353,7 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    a filename that matches the content of that field, a validator
    implementation SHOULD compare the message digest of each digital
    object to the value from the messageDigest field of the associated
-   FilenameAndHash, and report matches to the client for further
+   FileNameAndHash, and report matches to the client for further
    consideration.
 
 7.  Security Considerations
@@ -329,14 +365,7 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    sufficient control of the issuing CA to create the object.  These
    data have not been verified by the Certificate Authority (CA) that
    issued the CA certificate to the entity that issued the EE
-   certificate used to validate the Signed Checklist.
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 6]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
+   Certificate used to validate the Signed Checklist.
 
    RPKI Certificates are not bound to real world identities, see
    [I-D.ymbk-sidrops-rpki-has-no-identity] for an elaboration.  Relying
@@ -347,20 +376,50 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    holder's business operations such as the identity of the resource
    holder itself.
 
-   RSC objects are not distributed through the global RPKI repository
-   system, so whether a given CA is making use of them is not
-   immediately apparent from the state of the repository.  However,
-   because RSC objects depend on EE certificates, and because all
-   existing applications for EE certificates involve their publication
-   in the repository, an observer may be able to infer indirectly from
-   the state of the repository that RSC objects are in use.  For
-   example, if the CA sets the serial number on a new EE certificate to
-   be one greater than the serial number used for the previous EE
-   certificate, then an observer could infer that RSCs are in use if
-   there is a gap between serial numbers used in published EE
-   certificates.  Similarly, if the CA includes an unpublished serial
-   number in a CRL, an observer could infer that an RSC object has been
-   revoked.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 7]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
+   RSC objects are not distributed through the RPKI Repository system.
+   From this, it follows that third parties who do not have a copy of a
+   given RSC, may not be aware of the existence of that RSC.  Since RSC
+   objects use EE Certificates, but all other currently defined types of
+   RPKI object profiles are published in public CA repositories, an
+   observer may infer from discrepancies in the Repository that RSC
+   object(s) may exist.  For example, if a CA does not use random serial
+   numbers for Certificates, an observer could detect gaps between the
+   serial numbers of the published EE Certificates.  Similarly, if the
+   CA includes a serial number on a CRL that does not match any
+   published object, an observer could postulate an RSC EE Certificate
+   was revoked.
+
+   Conversely, a gap in serial numbers does not imply that an RSC
+   exists.  Nor does an arbitrary (to the RP unknown) serial in a CRL
+   imply an RSC object exists: the implicitly referenced object might
+   not be a RSC, it might never have been published, or was revoked
+   before it was visible to RPs.  In general, it is not possible to
+   confidentiality infer the existence or non-existence of RSCs from the
+   Repository state without access to a given RSC.
+
+   While an one-time-use EE Certificate must only be used to generate
+   and sign a single RSC object, CAs technically are not restricted from
+   generating and signing multiple different RSC objects with a single
+   keypair.  Any RSC objects sharing the same EE Certificate can not be
+   revoked individually.
 
 8.  Implementation status
 
@@ -379,20 +438,24 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    features.  Readers are advised to note that other implementations may
    exist.
 
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 8]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
    According to RFC 7942, "this will allow reviewers and working groups
    to assign due consideration to documents that have the benefit of
    running code, which may serve as evidence of valuable experimentation
    and feedback that have made the implemented protocols more mature.
    It is up to the individual working groups to use this information as
    they see fit".
-
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 7]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
 
    *  A signer and validator implementation [rpki-rsc-demo] written in
       Perl based on OpenSSL was provided by Tom Harrison from APNIC.
@@ -435,20 +498,19 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
 
 
+
+
+
+Snijders, et al.        Expires 12 February 2022                [Page 9]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
 9.3.  File Extension
 
    The IANA is requested to add an item for the Signed Checklist file
    extension to the "RPKI Repository Name Scheme" registry created by
    [RFC6481] as follows:
-
-
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 8]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
 
    Filename Extension  RPKI Object           Reference
    -----------------------------------------------------------------------
@@ -470,6 +532,35 @@ Internet-Draft            RPKI Signed Checklist                June 2021
 
    The IANA is requested to register the media type application/rpki-
    checklist in the Provisional Standard Media Type registry as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 12 February 2022               [Page 10]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
 
       Type name: application
       Subtype name: rpki-checklist
@@ -498,14 +589,6 @@ Internet-Draft            RPKI Signed Checklist                June 2021
 
 10.  References
 
-
-
-
-Snijders, et al.        Expires 12 December 2021                [Page 9]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
-
 10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -527,10 +610,23 @@ Internet-Draft            RPKI Signed Checklist                June 2021
               DOI 10.17487/RFC6481, February 2012,
               <https://www.rfc-editor.org/info/rfc6481>.
 
+
+
+
+Snijders, et al.        Expires 12 February 2022               [Page 11]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
    [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
               "Manifests for the Resource Public Key Infrastructure
               (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
               <https://www.rfc-editor.org/info/rfc6486>.
+
+   [RFC6487]  Huston, G., Michaelson, G., and R. Loomans, "A Profile for
+              X.509 PKIX Resource Certificates", RFC 6487,
+              DOI 10.17487/RFC6487, February 2012,
+              <https://www.rfc-editor.org/info/rfc6487>.
 
    [RFC6488]  Lepinski, M., Chi, A., and S. Kent, "Signed Object
               Template for the Resource Public Key Infrastructure
@@ -554,14 +650,6 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
               and M. Hoffmann, "A profile for Resource Tagged
-
-
-
-Snijders, et al.        Expires 12 December 2021               [Page 10]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
-
               Attestations (RTAs)", Work in Progress, Internet-Draft,
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
               <https://tools.ietf.org/html/draft-ietf-sidrops-rpki-rta-
@@ -577,6 +665,14 @@ Internet-Draft            RPKI Signed Checklist                June 2021
    [POSIX]    IEEE and The Open Group, "The Open Group's Base
               Specifications, Issue 7", 2016,
               <https://publications.opengroup.org/standards/unix/c165>.
+
+
+
+
+Snijders, et al.        Expires 12 February 2022               [Page 12]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
 
    [RFC1952]  Deutsch, P., "GZIP file format specification version 4.3",
               RFC 1952, DOI 10.17487/RFC1952, May 1996,
@@ -605,47 +701,48 @@ Appendix A.  Acknowledgements
    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
    Unangst, and Marc Espie for prior art.  The authors thank Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
-   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and
-   Alberto Leiva for document review and suggestions.
-
-
-
-
-
-
-Snijders, et al.        Expires 12 December 2021               [Page 11]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
-
+   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto
+   Leiva, and Ties de Kock for document review and suggestions.
 
 Appendix B.  Document changelog
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  changes from -03 -> -04
+B.1.  changes from -04 -> -05
+
+   *  Ties contributed clarifications.
+
+B.2.  changes from -03 -> -04
 
    *  Alberto pointed out the asID validation also needs to be
       documented.
 
-B.2.  changes from -02 -> -03
+B.3.  changes from -02 -> -03
 
    *  Reference the IANA assigned OID
 
    *  Clarify validation rules
 
-B.3.  changes from -01 -> -02
+
+
+Snijders, et al.        Expires 12 February 2022               [Page 13]
+
+Internet-Draft            RPKI Signed Checklist              August 2021
+
+
+B.4.  changes from -01 -> -02
 
    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &
       Russ.
 
-B.4.  changes from -00 -> -01
+B.5.  changes from -00 -> -01
 
    *  Readability improvements
 
    *  Update document category to match the registry allocation policy
       requirement.
 
-B.5.  individual submission phase
+B.6.  individual submission phase
 
    *  On-the-wire change: the 'Filename' switched from 'required' to
       'optional'.  Some SIDROPS Working Group participants proposed a
@@ -660,18 +757,6 @@ Authors' Addresses
    Netherlands
 
    Email: job@fastly.com
-
-
-
-
-
-
-
-
-
-Snijders, et al.        Expires 12 December 2021               [Page 12]
-
-Internet-Draft            RPKI Signed Checklist                June 2021
 
 
    Tom Harrison
@@ -696,33 +781,4 @@ Internet-Draft            RPKI Signed Checklist                June 2021
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Snijders, et al.        Expires 12 December 2021               [Page 13]
+Snijders, et al.        Expires 12 February 2022               [Page 14]

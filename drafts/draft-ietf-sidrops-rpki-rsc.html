@@ -19,10 +19,10 @@
 <meta content="draft-ietf-sidrops-rpki-rsc-05" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.8.0
-    Python 3.9.5
+    Python 3.9.6
     appdirs 1.4.4
-    ConfigArgParse 1.4.1
-    google-i18n-address 2.4.0
+    ConfigArgParse 1.5.2
+    google-i18n-address 2.5.0
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 2.11.3
@@ -31,8 +31,8 @@
     pycountry 20.7.3
     pyflakes 2.3.1
     PyYAML 5.4.1
-    requests 2.25.1
-    setuptools 57.0.0
+    requests 2.26.0
+    setuptools 57.4.0
     six 1.16.0
 -->
 <link href="draft-ietf-sidrops-rpki-rsc.xml" rel="alternate" type="application/rfc+xml">
@@ -1181,11 +1181,11 @@ li > p:last-of-type {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RPKI Signed Checklist</td>
-<td class="right">June 2021</td>
+<td class="right">August 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Snijders, et al.</td>
-<td class="center">Expires 12 December 2021</td>
+<td class="center">Expires 12 February 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1198,12 +1198,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-05</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-06-10" class="published">10 June 2021</time>
+<time datetime="2021-08-11" class="published">11 August 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-12-12">12 December 2021</time></dd>
+<dd class="expires"><time datetime="2022-02-12">12 February 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1259,7 +1259,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 December 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 February 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1287,100 +1287,108 @@ li > p:last-of-type {
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents-2">
 <a href="#name-table-of-contents-2" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.1">
+<nav class="toc"><ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction-2" class="xref">Introduction</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.2">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-rsc-profile-and-distribution" class="xref">RSC Profile and Distribution</a></p>
+<ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-rsc-end-entity-certificates-2" class="xref">RSC End-Entity Certificates</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-the-rsc-contenttype-2" class="xref">The RSC ContentType</a></p>
+            </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.4">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-the-rsc-contenttype-2" class="xref">The RSC ContentType</a></p>
+</li>
+          <li class="toc ulEmpty compact" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-the-rsc-econtent-2" class="xref">The RSC eContent</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.4.2.1">
+<ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-version-2" class="xref">version</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.4.2.2">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-resources-2" class="xref">resources</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.4.2.3">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-digestalgorithm-2" class="xref">digestAlgorithm</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.4.2.4">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.4.2.4">
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-checklist-2" class="xref">checkList</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.5">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-rsc-validation-2" class="xref">RSC Validation</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.6">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-operational-considerations-2" class="xref">Operational Considerations</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.7">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-security-considerations-2" class="xref">Security Considerations</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.8">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-implementation-status-2" class="xref">Implementation status</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.9">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-iana-considerations-2" class="xref">IANA Considerations</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.9.2.1">
+<ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.9.2.1">
                 <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-smi-security-for-s-mime-cms-" class="xref">SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.2">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-rpki-signed-objects-sub-regi" class="xref">RPKI Signed Objects sub-registry</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.3">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.9.2.3">
                 <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-file-extension-2" class="xref">File Extension</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.4">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.9.2.4">
                 <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="xref">9.4</a>.  <a href="#name-smi-security-for-s-mime-modu" class="xref">SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.9.2.5">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.9.2.5">
                 <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="xref">9.5</a>.  <a href="#name-media-type-2" class="xref">Media Type</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.10">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-references-2" class="xref">References</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.10.2.1">
+<ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.10.2.1">
                 <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-normative-references-2" class="xref">Normative References</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.10.2.2">
+              <li class="toc ulEmpty compact" id="section-toc.1-1.10.2.2">
                 <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-informative-references-2" class="xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.11">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-acknowledgements-2" class="xref">Acknowledgements</a></p>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.12">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-document-changelog-2" class="xref">Document changelog</a></p>
-<ul class="toc compact ulEmpty">
-<li class="toc compact ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-changes-from-03-04-2" class="xref">changes from -03 -&gt; -04</a></p>
+<ul class="toc ulEmpty compact">
+<li class="toc ulEmpty compact" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-changes-from-04-05-2" class="xref">changes from -04 -&gt; -05</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-changes-from-02-03-2" class="xref">changes from -02 -&gt; -03</a></p>
+              <li class="toc ulEmpty compact" id="section-toc.1-1.12.2.2">
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-changes-from-03-04-2" class="xref">changes from -03 -&gt; -04</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#section-b.3" class="xref">B.3</a>.  <a href="#name-changes-from-01-02-2" class="xref">changes from -01 -&gt; -02</a></p>
+              <li class="toc ulEmpty compact" id="section-toc.1-1.12.2.3">
+                <p id="section-toc.1-1.12.2.3.1"><a href="#section-b.3" class="xref">B.3</a>.  <a href="#name-changes-from-02-03-2" class="xref">changes from -02 -&gt; -03</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-b.4" class="xref">B.4</a>.  <a href="#name-changes-from-00-01-2" class="xref">changes from -00 -&gt; -01</a></p>
+              <li class="toc ulEmpty compact" id="section-toc.1-1.12.2.4">
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-b.4" class="xref">B.4</a>.  <a href="#name-changes-from-01-02-2" class="xref">changes from -01 -&gt; -02</a></p>
 </li>
-              <li class="toc compact ulEmpty" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#section-b.5" class="xref">B.5</a>.  <a href="#name-individual-submission-phase-2" class="xref">individual submission phase</a></p>
+              <li class="toc ulEmpty compact" id="section-toc.1-1.12.2.5">
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-b.5" class="xref">B.5</a>.  <a href="#name-changes-from-00-01-2" class="xref">changes from -00 -&gt; -01</a></p>
+</li>
+              <li class="toc ulEmpty compact" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#section-b.6" class="xref">B.6</a>.  <a href="#name-individual-submission-phase-2" class="xref">individual submission phase</a></p>
 </li>
             </ul>
 </li>
-          <li class="toc compact ulEmpty" id="section-toc.1-1.13">
+          <li class="toc ulEmpty compact" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-appendix.c" class="xref"></a><a href="#name-authors-addresses-2" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
@@ -1412,10 +1420,18 @@ li > p:last-of-type {
       </h2>
 <p id="section-2-1">
         RSC follows the Signed Object Template for the RPKI <span>[<a href="#RFC6488" class="xref">RFC6488</a>]</span> with one exception.
-        Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 EE certificate.<a href="#section-2-1" class="pilcrow">¶</a></p>
+        Because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">
         What constitutes suitable transport for RSC files is deliberately unspecified.
         It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<section id="section-2.1">
+        <h3 id="name-rsc-end-entity-certificates-2">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-rsc-end-entity-certificates-2" class="section-name selfRef">RSC End-Entity Certificates</a>
+        </h3>
+<p id="section-2.1-1">
+          The CA MUST only sign one RSC with each EE Certificate, and MUST generate a new key pair for each new RSC.
+          This form of use of the associated EE Certificate is termed a "one-time-use" EE certificate <span><a href="https://rfc-editor.org/rfc/rfc6487#section-3" class="relref">Section 3</a> of [<a href="#RFC6487" class="xref">RFC6487</a>]</span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+</section>
 </section>
 </div>
 <div id="content">
@@ -1505,7 +1521,7 @@ END
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-resources-2" class="section-name selfRef">resources</a>
         </h3>
 <p id="section-4.2-1">
-          The resources contained here are the resources used to mark the attestation, and MUST match the set of resources listed by the EE certificate carried in the CMS certificates field.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+          The resources contained here are the resources used to mark the attestation, and MUST match the set of resources listed by the EE Certificate carried in the CMS certificates field.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.3">
         <h3 id="name-digestalgorithm-2">
@@ -1520,9 +1536,9 @@ END
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-checklist-2" class="section-name selfRef">checkList</a>
         </h3>
 <p id="section-4.4-1">
-          This field is a sequence of FilenameAndHash objects.
-          There is one FilenameAndHash entry for each arbitrary object referenced on the Signed Checklist.
-          Each FilenameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
+          This field is a sequence of FileNameAndHash objects.
+          There is one FileNameAndHash entry for each arbitrary object referenced on the Signed Checklist.
+          Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
           The filename field is OPTIONAL.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </section>
@@ -1532,21 +1548,24 @@ END
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-rsc-validation-2" class="section-name selfRef">RSC Validation</a>
       </h2>
 <p id="section-5-1">
-        Before a relying party can use an RSC to validate a set of digital objects, the relying party MUST first validate the RSC.
-        To validate an RSC, the relying party MUST perform all the validation checks specified in <span>[<a href="#RFC6488" class="xref">RFC6488</a>]</span> as well as the following additional RSC-specific validation steps.<a href="#section-5-1" class="pilcrow">¶</a></p>
+        Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <span>[<a href="#RFC6488" class="xref">RFC6488</a>]</span> (except checking for the presence of a SIA extension), and perform the following additional RSC-specific validation steps:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5-2">
         <li id="section-5-2.1">
-          The IP Addresses and AS Identifiers extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP Addresses and AS Identifiers delegation extension.<a href="#section-5-2.1" class="pilcrow">¶</a>
+          The RSC specification deviates from <span><a href="https://rfc-editor.org/rfc/rfc6487#section-4.8.8.2" class="relref">Section 4.8.8.2</a> of [<a href="#RFC6487" class="xref">RFC6487</a>]</span>, the Subject Information Access extension MUST NOT be present on the End-Entity (EE) certificate signing the RSC.<a href="#section-5-2.1" class="pilcrow">¶</a>
 </li>
         <li id="section-5-2.2">
-          For each FilenameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <span>[<a href="#POSIX" class="xref">POSIX</a>]</span>.<a href="#section-5-2.2" class="pilcrow">¶</a>
+          The IP Addresses and AS Identifiers extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE Certificate's IP Addresses and AS Identifiers delegation extension.<a href="#section-5-2.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-5-2.3">
+          For each FileNameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <span>[<a href="#POSIX" class="xref">POSIX</a>]</span>.<a href="#section-5-2.3" class="pilcrow">¶</a>
 </li>
       </ol>
 <p id="section-5-3">
         To validate a set of digital objects against an RSC:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-4.1">
-          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FilenameAndHash, for the digital object to be considered valid as against the RSC.<a href="#section-5-4.1" class="pilcrow">¶</a>
+          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileNameAndHash, for the digital object to be considered valid as against the RSC.<a href="#section-5-4.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1559,7 +1578,7 @@ END
         Distributing plain-text objects within a compression envelope (such as <span><a href="#RFC1952" class="xref">GZIP</a> [<a href="#RFC1952" class="xref">RFC1952</a>]</span>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
         Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">
-        If a filename field is present, but no referenced digital object has a filename that matches the content of that field, a validator implementation SHOULD compare the message digest of each digital object to the value from the messageDigest field of the associated FilenameAndHash, and report matches to the client for further consideration.<a href="#section-6-2" class="pilcrow">¶</a></p>
+        If a filename field is present, but no referenced digital object has a filename that matches the content of that field, a validator implementation SHOULD compare the message digest of each digital object to the value from the messageDigest field of the associated FileNameAndHash, and report matches to the client for further consideration.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 <div id="security">
 <section id="section-7">
@@ -1569,16 +1588,24 @@ END
 <p id="section-7-1">
         Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
         When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
-        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.<a href="#section-7-1" class="pilcrow">¶</a></p>
+        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE Certificate used to validate the Signed Checklist.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">
         RPKI Certificates are not bound to real world identities, see <span>[<a href="#I-D.ymbk-sidrops-rpki-has-no-identity" class="xref">I-D.ymbk-sidrops-rpki-has-no-identity</a>]</span> for an elaboration.
         Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
         Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">
-        RSC objects are not distributed through the global RPKI repository system, so whether a given CA is making use of them is not immediately apparent from the state of the repository.
-        However, because RSC objects depend on EE certificates, and because all existing applications for EE certificates involve their publication in the repository, an observer may be able to infer indirectly from the state of the repository that RSC objects are in use.
-        For example, if the CA sets the serial number on a new EE certificate to be one greater than the serial number used for the previous EE certificate, then an observer could infer that RSCs are in use if there is a gap between serial numbers used in published EE certificates.
-        Similarly, if the CA includes an unpublished serial number in a CRL, an observer could infer that an RSC object has been revoked.<a href="#section-7-3" class="pilcrow">¶</a></p>
+        RSC objects are not distributed through the RPKI Repository system.
+        From this, it follows that third parties who do not have a copy of a given RSC, may not be aware of the existence of that RSC.
+        Since RSC objects use EE Certificates, but all other currently defined types of RPKI object profiles are published in public CA repositories, an observer may infer from discrepancies in the Repository that RSC object(s) may exist.
+        For example, if a CA does not use random serial numbers for Certificates, an observer could detect gaps between the serial numbers of the published EE Certificates.
+        Similarly, if the CA includes a serial number on a CRL that does not match any published object, an observer could postulate an RSC EE Certificate was revoked.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">
+        Conversely, a gap in serial numbers does not imply that an RSC exists.
+        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be a RSC, it might never have been published, or was revoked before it was visible to RPs.
+        In general, it is not possible to confidentiality infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">
+        While an one-time-use EE Certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single keypair.
+        Any RSC objects sharing the same EE Certificate can not be revoked individually.<a href="#section-7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">
@@ -1752,6 +1779,10 @@ END
         <dd>
 <span class="refAuthor">Austein, R.</span>, <span class="refAuthor">Huston, G.</span>, <span class="refAuthor">Kent, S.</span>, and <span class="refAuthor">M. Lepinski</span>, <span class="refTitle">"Manifests for the Resource Public Key Infrastructure (RPKI)"</span>, <span class="seriesInfo">RFC 6486</span>, <span class="seriesInfo">DOI 10.17487/RFC6486</span>, <time datetime="2012-02" class="refDate">February 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6486">https://www.rfc-editor.org/info/rfc6486</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6487">[RFC6487]</dt>
+        <dd>
+<span class="refAuthor">Huston, G.</span>, <span class="refAuthor">Michaelson, G.</span>, and <span class="refAuthor">R. Loomans</span>, <span class="refTitle">"A Profile for X.509 PKIX Resource Certificates"</span>, <span class="seriesInfo">RFC 6487</span>, <span class="seriesInfo">DOI 10.17487/RFC6487</span>, <time datetime="2012-02" class="refDate">February 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6487">https://www.rfc-editor.org/info/rfc6487</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC6488">[RFC6488]</dt>
         <dd>
 <span class="refAuthor">Lepinski, M.</span>, <span class="refAuthor">Chi, A.</span>, and <span class="refAuthor">S. Kent</span>, <span class="refTitle">"Signed Object Template for the Resource Public Key Infrastructure (RPKI)"</span>, <span class="seriesInfo">RFC 6488</span>, <span class="seriesInfo">DOI 10.17487/RFC6488</span>, <time datetime="2012-02" class="refDate">February 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6488">https://www.rfc-editor.org/info/rfc6488</a>&gt;</span>. </dd>
@@ -1831,7 +1862,8 @@ END
         The authors would like to thank
           Nimrod Levy,
           Tim Bruijnzeels,
-          and Alberto Leiva
+          Alberto Leiva,
+          and Ties de Kock
         for document review and suggestions.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1841,53 +1873,62 @@ END
       </h2>
 <p id="section-appendix.b-1">This section is to be removed before publishing as an RFC.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
 <section id="section-b.1">
-        <h2 id="name-changes-from-03-04-2">
-<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-changes-from-03-04-2" class="section-name selfRef">changes from -03 -&gt; -04</a>
+        <h2 id="name-changes-from-04-05-2">
+<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-changes-from-04-05-2" class="section-name selfRef">changes from -04 -&gt; -05</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.1-1.1">Alberto pointed out the asID validation also needs to be documented.<a href="#section-b.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-b.1-1.1">Ties contributed clarifications.<a href="#section-b.1-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.2">
-        <h2 id="name-changes-from-02-03-2">
-<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-changes-from-02-03-2" class="section-name selfRef">changes from -02 -&gt; -03</a>
+        <h2 id="name-changes-from-03-04-2">
+<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-changes-from-03-04-2" class="section-name selfRef">changes from -03 -&gt; -04</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.2-1.1">Reference the IANA assigned OID<a href="#section-b.2-1.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-b.2-1.2">Clarify validation rules<a href="#section-b.2-1.2" class="pilcrow">¶</a>
+<li class="normal" id="section-b.2-1.1">Alberto pointed out the asID validation also needs to be documented.<a href="#section-b.2-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.3">
-        <h2 id="name-changes-from-01-02-2">
-<a href="#section-b.3" class="section-number selfRef">B.3. </a><a href="#name-changes-from-01-02-2" class="section-name selfRef">changes from -01 -&gt; -02</a>
+        <h2 id="name-changes-from-02-03-2">
+<a href="#section-b.3" class="section-number selfRef">B.3. </a><a href="#name-changes-from-02-03-2" class="section-name selfRef">changes from -02 -&gt; -03</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.3-1.1">Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ.<a href="#section-b.3-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-b.3-1.1">Reference the IANA assigned OID<a href="#section-b.3-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-b.3-1.2">Clarify validation rules<a href="#section-b.3-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.4">
-        <h2 id="name-changes-from-00-01-2">
-<a href="#section-b.4" class="section-number selfRef">B.4. </a><a href="#name-changes-from-00-01-2" class="section-name selfRef">changes from -00 -&gt; -01</a>
+        <h2 id="name-changes-from-01-02-2">
+<a href="#section-b.4" class="section-number selfRef">B.4. </a><a href="#name-changes-from-01-02-2" class="section-name selfRef">changes from -01 -&gt; -02</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.4-1.1">Readability improvements<a href="#section-b.4-1.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-b.4-1.2">Update document category to match the registry allocation policy requirement.<a href="#section-b.4-1.2" class="pilcrow">¶</a>
+<li class="normal" id="section-b.4-1.1">Clarify RSC is part of a puzzle, not panacea. Thanks Randy &amp; Russ.<a href="#section-b.4-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 <section id="section-b.5">
-        <h2 id="name-individual-submission-phase-2">
-<a href="#section-b.5" class="section-number selfRef">B.5. </a><a href="#name-individual-submission-phase-2" class="section-name selfRef">individual submission phase</a>
+        <h2 id="name-changes-from-00-01-2">
+<a href="#section-b.5" class="section-number selfRef">B.5. </a><a href="#name-changes-from-00-01-2" class="section-name selfRef">changes from -00 -&gt; -01</a>
         </h2>
 <ul class="normal">
-<li class="normal" id="section-b.5-1.1">
+<li class="normal" id="section-b.5-1.1">Readability improvements<a href="#section-b.5-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-b.5-1.2">Update document category to match the registry allocation policy requirement.<a href="#section-b.5-1.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+<section id="section-b.6">
+        <h2 id="name-individual-submission-phase-2">
+<a href="#section-b.6" class="section-number selfRef">B.6. </a><a href="#name-individual-submission-phase-2" class="section-name selfRef">individual submission phase</a>
+        </h2>
+<ul class="normal">
+<li class="normal" id="section-b.6-1.1">
             On-the-wire change: the 'Filename' switched from 'required' to 'optional'.
-            Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.<a href="#section-b.5-1.1" class="pilcrow">¶</a>
+            Some SIDROPS Working Group participants proposed a checksum itself is the most minimal information required to address digital objects.<a href="#section-b.6-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
