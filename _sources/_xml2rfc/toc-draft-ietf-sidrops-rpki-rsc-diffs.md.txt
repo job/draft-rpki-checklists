@@ -2,5 +2,7 @@
 
 :::{toctree}
 
+refs/heads/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
+refs/heads/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 refs/tags/04/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 :::
