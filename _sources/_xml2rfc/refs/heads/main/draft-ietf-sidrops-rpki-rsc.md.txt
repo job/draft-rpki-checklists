@@ -1,7 +1,0 @@
-# branches: main
-
-:::{xml2rfc:version} draft-ietf-sidrops-rpki-rsc
-:ref_type: branches
-:ref_name: main
-:ref_path: refs/heads/main
-:::
