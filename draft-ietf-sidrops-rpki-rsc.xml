@@ -117,13 +117,20 @@
 
       <t>
         RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception.
-        Because RSCs MUST NOT be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 EE certificate.
+        Because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
       </t>
 
       <t>
         What constitutes suitable transport for RSC files is deliberately unspecified.
         It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.
       </t>
+
+      <section title="RSC End-Entity Certificates">
+        <t>
+          The CA MUST only sign one RSC with each EE Certificate, and MUST generate a new key pair for each new RSC.
+          This form of use of the associated EE Certificate is termed a "one-time-use" EE certificate <xref target="RFC6487" section="3"/>.
+        </t>
+      </section>
 
     </section>
 
@@ -160,7 +167,7 @@
       <section>
         <name>resources</name>
         <t>
-          The resources contained here are the resources used to mark the attestation, and MUST match the set of resources listed by the EE certificate carried in the CMS certificates field.
+          The resources contained here are the resources used to mark the attestation, and MUST match the set of resources listed by the EE Certificate carried in the CMS certificates field.
         </t>
       </section>
 
@@ -175,9 +182,9 @@
       <section>
         <name>checkList</name>
         <t>
-          This field is a sequence of FilenameAndHash objects.
-          There is one FilenameAndHash entry for each arbitrary object referenced on the Signed Checklist.
-          Each FilenameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
+          This field is a sequence of FileNameAndHash objects.
+          There is one FileNameAndHash entry for each arbitrary object referenced on the Signed Checklist.
+          Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
           The filename field is OPTIONAL.
         </t>
       </section>
@@ -188,16 +195,19 @@
       <name>RSC Validation</name>
 
       <t>
-        Before a relying party can use an RSC to validate a set of digital objects, the relying party MUST first validate the RSC.
-        To validate an RSC, the relying party MUST perform all the validation checks specified in <xref target="RFC6488"/> as well as the following additional RSC-specific validation steps.
+        Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488" /> (except checking for the presence of a SIA extension), and perform the following additional RSC-specific validation steps:
       </t>
 
       <ol>
         <li>
-          The IP Addresses and AS Identifiers extension <xref target="RFC3779"/> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE certificate's IP Addresses and AS Identifiers delegation extension.
+          The RSC specification deviates from <xref target="RFC6487" section="4.8.8.2"/>, the Subject Information Access extension MUST NOT be present on the End-Entity (EE) certificate signing the RSC.
         </li>
         <li>
-          For each FilenameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
+          The IP Addresses and AS Identifiers extension <xref target="RFC3779"/> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE Certificate's IP Addresses and AS Identifiers delegation extension.
+        </li>
+        <li>
+          For each FileNameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
         </li>
       </ol>
 
@@ -207,7 +217,7 @@
 
       <ul>
         <li>
-          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FilenameAndHash, for the digital object to be considered valid as against the RSC.
+          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileNameAndHash, for the digital object to be considered valid as against the RSC.
         </li>
       </ul>
 
@@ -223,7 +233,7 @@
       </t>
 
       <t>
-        If a filename field is present, but no referenced digital object has a filename that matches the content of that field, a validator implementation SHOULD compare the message digest of each digital object to the value from the messageDigest field of the associated FilenameAndHash, and report matches to the client for further consideration.
+        If a filename field is present, but no referenced digital object has a filename that matches the content of that field, a validator implementation SHOULD compare the message digest of each digital object to the value from the messageDigest field of the associated FileNameAndHash, and report matches to the client for further consideration.
       </t>
 
     </section>
@@ -234,7 +244,7 @@
       <t>
         Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
         When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
-        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
+        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE Certificate used to validate the Signed Checklist.
       </t>
 
       <t>
@@ -244,10 +254,20 @@
       </t>
 
       <t>
-        RSC objects are not distributed through the global RPKI repository system, so whether a given CA is making use of them is not immediately apparent from the state of the repository.
-        However, because RSC objects depend on EE certificates, and because all existing applications for EE certificates involve their publication in the repository, an observer may be able to infer indirectly from the state of the repository that RSC objects are in use.
-        For example, if the CA sets the serial number on a new EE certificate to be one greater than the serial number used for the previous EE certificate, then an observer could infer that RSCs are in use if there is a gap between serial numbers used in published EE certificates.
-        Similarly, if the CA includes an unpublished serial number in a CRL, an observer could infer that an RSC object has been revoked.
+        RSC objects are not distributed through the RPKI Repository system.
+        From this, it follows that third parties who do not have a copy of a given RSC, may not be aware of the existence of that RSC.
+        Since RSC objects use EE Certificates, but all other currently defined types of RPKI object profiles are published in public CA repositories, an observer may infer from discrepancies in the Repository that RSC object(s) may exist.
+        For example, if a CA does not use random serial numbers for Certificates, an observer could detect gaps between the serial numbers of the published EE Certificates.
+        Similarly, if the CA includes a serial number on a CRL that does not match any published object, an observer could postulate an RSC EE Certificate was revoked.
+      <t>
+      </t>
+        Conversely, a gap in serial numbers does not imply that an RSC exists.
+        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be a RSC, it might never have been published, or was revoked before it was visible to RPs.
+        In general, it is not possible to confidentiality infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
+      </t>
+      <t>
+        While an one-time-use EE Certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single keypair.
+        Any RSC objects sharing the same EE Certificate can not be revoked individually.
       </t>
 
     </section>
@@ -401,6 +421,7 @@
         <?rfc include="reference.RFC.5652.xml"?>
         <?rfc include="reference.RFC.6481.xml"?>
         <?rfc include="reference.RFC.6486.xml"?>
+        <?rfc include="reference.RFC.6487.xml"?>
         <?rfc include="reference.RFC.6488.xml"?>
         <?rfc include="reference.RFC.7935.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
@@ -482,12 +503,20 @@
         The authors would like to thank
           Nimrod Levy,
           Tim Bruijnzeels,
-          and Alberto Leiva
+          Alberto Leiva,
+          and Ties de Kock
         for document review and suggestions.
       </t>
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+
+      <section>
+        <name>changes from -04 -&gt; -05</name>
+        <ul>
+          <li>Ties contributed clarifications.</li>
+        </ul>
+      </section>
 
       <section>
         <name>changes from -03 -&gt; -04</name>
