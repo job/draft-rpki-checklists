@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 12 February 2022                                          APNIC
+Expires: 24 February 2022                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                          11 August 2021
+                                                          23 August 2021
 
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 1]
+Snijders, et al.        Expires 24 February 2022                [Page 1]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
 
-   This Internet-Draft will expire on 12 February 2022.
+   This Internet-Draft will expire on 24 February 2022.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 2]
+Snijders, et al.        Expires 24 February 2022                [Page 2]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -165,7 +165,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 3]
+Snijders, et al.        Expires 24 February 2022                [Page 3]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -221,7 +221,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 4]
+Snijders, et al.        Expires 24 February 2022                [Page 4]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -277,7 +277,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 5]
+Snijders, et al.        Expires 24 February 2022                [Page 5]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -333,7 +333,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 6]
+Snijders, et al.        Expires 24 February 2022                [Page 6]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -361,7 +361,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
    Relying parties are hereby warned that the data in a RPKI Signed
    Checklist is self-asserted.  When determining the meaning of any data
    contained in an RPKI Signed Checklist, Relying Parties MUST NOT make
-   any assuptions about the signer beyond the fact that it had
+   any assumptions about the signer beyond the fact that it had
    sufficient control of the issuing CA to create the object.  These
    data have not been verified by the Certificate Authority (CA) that
    issued the CA certificate to the entity that issued the EE
@@ -389,7 +389,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 7]
+Snijders, et al.        Expires 24 February 2022                [Page 7]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -412,7 +412,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
    imply an RSC object exists: the implicitly referenced object might
    not be a RSC, it might never have been published, or was revoked
    before it was visible to RPs.  In general, it is not possible to
-   confidentiality infer the existence or non-existence of RSCs from the
+   confidently infer the existence or non-existence of RSCs from the
    Repository state without access to a given RSC.
 
    While an one-time-use EE Certificate must only be used to generate
@@ -445,7 +445,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 8]
+Snijders, et al.        Expires 24 February 2022                [Page 8]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -501,7 +501,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022                [Page 9]
+Snijders, et al.        Expires 24 February 2022                [Page 9]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -557,7 +557,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022               [Page 10]
+Snijders, et al.        Expires 24 February 2022               [Page 10]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -613,7 +613,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022               [Page 11]
+Snijders, et al.        Expires 24 February 2022               [Page 11]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -669,7 +669,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 12 February 2022               [Page 12]
+Snijders, et al.        Expires 24 February 2022               [Page 12]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -702,7 +702,8 @@ Appendix A.  Acknowledgements
    Unangst, and Marc Espie for prior art.  The authors thank Russ
    Housley for reviewing the ASN.1 notation and providing suggestions.
    The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto
-   Leiva, and Ties de Kock for document review and suggestions.
+   Leiva, Ties de Kock, and Peter Peele for document review and
+   suggestions.
 
 Appendix B.  Document changelog
 
@@ -721,14 +722,15 @@ B.3.  changes from -02 -> -03
 
    *  Reference the IANA assigned OID
 
-   *  Clarify validation rules
 
 
 
-Snijders, et al.        Expires 12 February 2022               [Page 13]
+Snijders, et al.        Expires 24 February 2022               [Page 13]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
+
+   *  Clarify validation rules
 
 B.4.  changes from -01 -> -02
 
@@ -779,6 +781,4 @@ Authors' Addresses
 
 
 
-
-
-Snijders, et al.        Expires 12 February 2022               [Page 14]
+Snijders, et al.        Expires 24 February 2022               [Page 14]
