@@ -243,7 +243,7 @@
 
       <t>
         Relying parties are hereby warned that the data in a RPKI Signed Checklist is self-asserted.
-        When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assuptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
+        When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assumptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
         These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE Certificate used to validate the Signed Checklist.
       </t>
 
@@ -263,7 +263,7 @@
       <t>
         Conversely, a gap in serial numbers does not imply that an RSC exists.
         Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be a RSC, it might never have been published, or was revoked before it was visible to RPs.
-        In general, it is not possible to confidentiality infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
+        In general, it is not possible to confidently infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
       </t>
       <t>
         While an one-time-use EE Certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single keypair.
@@ -504,7 +504,8 @@
           Nimrod Levy,
           Tim Bruijnzeels,
           Alberto Leiva,
-          and Ties de Kock
+          Ties de Kock,
+        and Peter Peele
         for document review and suggestions.
       </t>
     </section>
