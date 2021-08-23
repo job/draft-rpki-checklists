@@ -2,8 +2,9 @@
 
 :::{toctree}
 
-refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
-refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
+refs/heads/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.05
+refs/heads/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
+refs/heads/main/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 refs/tags/05/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
 refs/tags/05/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 refs/tags/04/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
