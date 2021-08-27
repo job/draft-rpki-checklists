@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 24 February 2022                                          APNIC
+Expires: 28 February 2022                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                          23 August 2021
+                                                          27 August 2021
 
 
   Resource Public Key Infrastructure (RPKI) object profile for Signed
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 1]
+Snijders, et al.        Expires 28 February 2022                [Page 1]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
 
-   This Internet-Draft will expire on 24 February 2022.
+   This Internet-Draft will expire on 28 February 2022.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 2]
+Snijders, et al.        Expires 28 February 2022                [Page 2]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -165,7 +165,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 3]
+Snijders, et al.        Expires 28 February 2022                [Page 3]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -221,7 +221,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 4]
+Snijders, et al.        Expires 28 February 2022                [Page 4]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -277,7 +277,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 5]
+Snijders, et al.        Expires 28 February 2022                [Page 5]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -316,13 +316,13 @@ Internet-Draft            RPKI Signed Checklist              August 2021
        specified in the Portable Filename Character Set as defined in
        [POSIX].
 
-   To validate a set of digital objects against an RSC:
+   To verify a set of digital objects with an RSC:
 
    *  The message digest of each referenced digital object, using the
       digest algorithm specified in the the digestAlgorithm field, MUST
       be calculated and MUST match the value given in the messageDigest
       field of the associated FileNameAndHash, for the digital object to
-      be considered valid as against the RSC.
+      be considered as verified with the RSC.
 
 
 
@@ -333,7 +333,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 6]
+Snijders, et al.        Expires 28 February 2022                [Page 6]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -389,7 +389,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 7]
+Snijders, et al.        Expires 28 February 2022                [Page 7]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -445,7 +445,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 8]
+Snijders, et al.        Expires 28 February 2022                [Page 8]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -501,7 +501,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022                [Page 9]
+Snijders, et al.        Expires 28 February 2022                [Page 9]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -557,7 +557,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022               [Page 10]
+Snijders, et al.        Expires 28 February 2022               [Page 10]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -613,7 +613,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022               [Page 11]
+Snijders, et al.        Expires 28 February 2022               [Page 11]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -669,7 +669,7 @@ Internet-Draft            RPKI Signed Checklist              August 2021
 
 
 
-Snijders, et al.        Expires 24 February 2022               [Page 12]
+Snijders, et al.        Expires 28 February 2022               [Page 12]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -725,7 +725,7 @@ B.3.  changes from -02 -> -03
 
 
 
-Snijders, et al.        Expires 24 February 2022               [Page 13]
+Snijders, et al.        Expires 28 February 2022               [Page 13]
 
 Internet-Draft            RPKI Signed Checklist              August 2021
 
@@ -781,4 +781,4 @@ Authors' Addresses
 
 
 
-Snijders, et al.        Expires 24 February 2022               [Page 14]
+Snijders, et al.        Expires 28 February 2022               [Page 14]
