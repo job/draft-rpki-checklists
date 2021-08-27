@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.5.1.dev1 documentation</title>
+    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.5.1.dev2 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/readable.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="draft-ietf-sidrops-rpki-rsc-diff-from-tags.05.html" title="refs/tags/05 ⟼ refs/heads/main"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.5.1.dev1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.5.1.dev2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -164,7 +164,7 @@
  
  4.3.  digestAlgorithm
  
-<span class="gu">@@ -227,38 +236,44 @@</span>
+<span class="gu">@@ -227,39 +236,45 @@</span>
 
  
  4.4.  checkList
@@ -197,6 +197,8 @@
 <span class="gd">-      present, the field&#39;s content MUST contain only characters</span>
 <span class="gd">-      specified in the Portable Filename Character Set as defined in</span>
 <span class="gd">-      [POSIX].</span>
+<span class="gd">-</span>
+<span class="gd">-   To validate a set of digital objects against an RSC:</span>
 <span class="gi">+   Before a Relying Party can use an RSC to validate a set of digital</span>
 <span class="gi">+   objects, the Relying Party MUST first validate the RSC.  To validate</span>
 <span class="gi">+   an RSC, the Relying Party MUST perform all the validation checks</span>
@@ -219,17 +221,19 @@
 <span class="gi">+       present, the field&#39;s content MUST contain only characters</span>
 <span class="gi">+       specified in the Portable Filename Character Set as defined in</span>
 <span class="gi">+       [POSIX].</span>
- 
-    To validate a set of digital objects against an RSC:
+<span class="gi">+</span>
+<span class="gi">+   To verify a set of digital objects with an RSC:</span>
  
     *  The message digest of each referenced digital object, using the
        digest algorithm specified in the the digestAlgorithm field, MUST
        be calculated and MUST match the value given in the messageDigest
 <span class="gd">-      field of the associated FilenameAndHash, for the digital object to</span>
+<span class="gd">-      be considered valid as against the RSC.</span>
 <span class="gi">+      field of the associated FileNameAndHash, for the digital object to</span>
-       be considered valid as against the RSC.
+<span class="gi">+      be considered as verified with the RSC.</span>
  
  6.  Operational Considerations
+ 
 <span class="gu">@@ -276,7 +291,7 @@</span>
 
     a filename that matches the content of that field, a validator
