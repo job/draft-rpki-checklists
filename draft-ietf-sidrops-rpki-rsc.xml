@@ -212,12 +212,12 @@
       </ol>
 
       <t>
-        To validate a set of digital objects against an RSC:
+        To verify a set of digital objects with an RSC:
       </t>
 
       <ul>
         <li>
-          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileNameAndHash, for the digital object to be considered valid as against the RSC.
+          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileNameAndHash, for the digital object to be considered as verified with the RSC.
         </li>
       </ul>
 
