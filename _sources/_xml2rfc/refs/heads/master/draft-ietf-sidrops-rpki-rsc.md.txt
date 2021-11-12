@@ -1,0 +1,7 @@
+# branches: master
+
+:::{xml2rfc:version} draft-ietf-sidrops-rpki-rsc
+:ref_type: branches
+:ref_name: master
+:ref_path: refs/heads/master
+:::
