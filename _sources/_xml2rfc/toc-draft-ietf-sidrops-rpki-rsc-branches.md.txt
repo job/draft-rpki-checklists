@@ -3,5 +3,4 @@
 :::{toctree}
 
 refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc
-refs/heads/master/draft-ietf-sidrops-rpki-rsc
 :::
