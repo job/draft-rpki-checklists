@@ -1,0 +1,6 @@
+# refs/tags/03 ⟼ refs/remotes/origin/master
+
+:::{xml2rfc:diff} draft-ietf-sidrops-rpki-rsc
+:from: refs/tags/03
+:to: refs/remotes/origin/master
+:::

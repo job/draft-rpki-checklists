@@ -2,6 +2,6 @@
 
 :::{toctree}
 
-refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc
-refs/heads/master/draft-ietf-sidrops-rpki-rsc
+refs/heads/main/draft-ietf-sidrops-rpki-rsc
+refs/remotes/origin/master/draft-ietf-sidrops-rpki-rsc
 :::
