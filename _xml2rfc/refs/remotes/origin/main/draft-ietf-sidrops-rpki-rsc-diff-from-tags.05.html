@@ -60,82 +60,82 @@
 <code class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code><a class="headerlink" href="#xml2rfc-diff-draft-ietf-sidrops-rpki-rsc-refs/tags/05-refs/remotes/origin/main" title="Permalink to this definition">¶</a></dt>
 <dd><div class="docutils container">
 <p>Changes refs/tags/05 ⟼ refs/remotes/origin/main</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">--- refs/tags/05</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">--- refs/tags/05</span><span class="w"></span>
 
-<span class="gi">+++ refs/remotes/origin/main</span>
+<span class="gi">+++ refs/remotes/origin/main</span><span class="w"></span>
 
-<span class="gu">@@ -5,10 +5,10 @@</span>
+<span class="gu">@@ -5,10 +5,10 @@</span><span class="w"></span>
 
- Network Working Group                                        J. Snijders
- Internet-Draft                                                    Fastly
- Intended status: Standards Track                             T. Harrison
-<span class="gd">-Expires: 12 February 2022                                          APNIC</span>
-<span class="gi">+Expires: 16 May 2022                                               APNIC</span>
-                                                              B. Maddison
-                                                               Workonline
-<span class="gd">-                                                          11 August 2021</span>
-<span class="gi">+                                                        12 November 2021</span>
- 
- 
-   Resource Public Key Infrastructure (RPKI) object profile for Signed
-<span class="gu">@@ -50,7 +50,7 @@</span>
+<span class="w"> </span>Network Working Group                                        J. Snijders<span class="w"></span>
+<span class="w"> </span>Internet-Draft                                                    Fastly<span class="w"></span>
+<span class="w"> </span>Intended status: Standards Track                             T. Harrison<span class="w"></span>
+<span class="gd">-Expires: 12 February 2022                                          APNIC</span><span class="w"></span>
+<span class="gi">+Expires: 16 May 2022                                               APNIC</span><span class="w"></span>
+<span class="w"> </span>                                                             B. Maddison<span class="w"></span>
+<span class="w"> </span>                                                              Workonline<span class="w"></span>
+<span class="gd">-                                                          11 August 2021</span><span class="w"></span>
+<span class="gi">+                                                        12 November 2021</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span>  Resource Public Key Infrastructure (RPKI) object profile for Signed<span class="w"></span>
+<span class="gu">@@ -50,7 +50,7 @@</span><span class="w"></span>
 
-    time.  It is inappropriate to use Internet-Drafts as reference
-    material or to cite them other than as &quot;work in progress.&quot;
- 
-<span class="gd">-   This Internet-Draft will expire on 12 February 2022.</span>
-<span class="gi">+   This Internet-Draft will expire on 16 May 2022.</span>
- 
- Copyright Notice
- 
-<span class="gu">@@ -268,13 +268,13 @@</span>
+<span class="w"> </span>   time.  It is inappropriate to use Internet-Drafts as reference<span class="w"></span>
+<span class="w"> </span>   material or to cite them other than as &quot;work in progress.&quot;<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-   This Internet-Draft will expire on 12 February 2022.</span><span class="w"></span>
+<span class="gi">+   This Internet-Draft will expire on 16 May 2022.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>Copyright Notice<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -268,13 +268,13 @@</span><span class="w"></span>
 
-        specified in the Portable Filename Character Set as defined in
-        [POSIX].
- 
-<span class="gd">-   To validate a set of digital objects against an RSC:</span>
-<span class="gi">+   To verify a set of digital objects with an RSC:</span>
- 
-    *  The message digest of each referenced digital object, using the
-       digest algorithm specified in the the digestAlgorithm field, MUST
-       be calculated and MUST match the value given in the messageDigest
-       field of the associated FileNameAndHash, for the digital object to
-<span class="gd">-      be considered valid as against the RSC.</span>
-<span class="gi">+      be considered as verified with the RSC.</span>
- 
- 6.  Operational Considerations
- 
-<span class="gu">@@ -299,7 +299,7 @@</span>
+<span class="w"> </span>       specified in the Portable Filename Character Set as defined in<span class="w"></span>
+<span class="w"> </span>       [POSIX].<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-   To validate a set of digital objects against an RSC:</span><span class="w"></span>
+<span class="gi">+   To verify a set of digital objects with an RSC:</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  The message digest of each referenced digital object, using the<span class="w"></span>
+<span class="w"> </span>      digest algorithm specified in the the digestAlgorithm field, MUST<span class="w"></span>
+<span class="w"> </span>      be calculated and MUST match the value given in the messageDigest<span class="w"></span>
+<span class="w"> </span>      field of the associated FileNameAndHash, for the digital object to<span class="w"></span>
+<span class="gd">-      be considered valid as against the RSC.</span><span class="w"></span>
+<span class="gi">+      be considered as verified with the RSC.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>6.  Operational Considerations<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -299,7 +299,7 @@</span><span class="w"></span>
 
-    Relying parties are hereby warned that the data in a RPKI Signed
-    Checklist is self-asserted.  When determining the meaning of any data
-    contained in an RPKI Signed Checklist, Relying Parties MUST NOT make
-<span class="gd">-   any assuptions about the signer beyond the fact that it had</span>
-<span class="gi">+   any assumptions about the signer beyond the fact that it had</span>
-    sufficient control of the issuing CA to create the object.  These
-    data have not been verified by the Certificate Authority (CA) that
-    issued the CA certificate to the entity that issued the EE
-<span class="gu">@@ -332,7 +332,7 @@</span>
+<span class="w"> </span>   Relying parties are hereby warned that the data in a RPKI Signed<span class="w"></span>
+<span class="w"> </span>   Checklist is self-asserted.  When determining the meaning of any data<span class="w"></span>
+<span class="w"> </span>   contained in an RPKI Signed Checklist, Relying Parties MUST NOT make<span class="w"></span>
+<span class="gd">-   any assuptions about the signer beyond the fact that it had</span><span class="w"></span>
+<span class="gi">+   any assumptions about the signer beyond the fact that it had</span><span class="w"></span>
+<span class="w"> </span>   sufficient control of the issuing CA to create the object.  These<span class="w"></span>
+<span class="w"> </span>   data have not been verified by the Certificate Authority (CA) that<span class="w"></span>
+<span class="w"> </span>   issued the CA certificate to the entity that issued the EE<span class="w"></span>
+<span class="gu">@@ -332,7 +332,7 @@</span><span class="w"></span>
 
-    imply an RSC object exists: the implicitly referenced object might
-    not be a RSC, it might never have been published, or was revoked
-    before it was visible to RPs.  In general, it is not possible to
-<span class="gd">-   confidentiality infer the existence or non-existence of RSCs from the</span>
-<span class="gi">+   confidently infer the existence or non-existence of RSCs from the</span>
-    Repository state without access to a given RSC.
- 
-    While an one-time-use EE Certificate must only be used to generate
-<span class="gu">@@ -557,7 +557,8 @@</span>
+<span class="w"> </span>   imply an RSC object exists: the implicitly referenced object might<span class="w"></span>
+<span class="w"> </span>   not be a RSC, it might never have been published, or was revoked<span class="w"></span>
+<span class="w"> </span>   before it was visible to RPs.  In general, it is not possible to<span class="w"></span>
+<span class="gd">-   confidentiality infer the existence or non-existence of RSCs from the</span><span class="w"></span>
+<span class="gi">+   confidently infer the existence or non-existence of RSCs from the</span><span class="w"></span>
+<span class="w"> </span>   Repository state without access to a given RSC.<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   While an one-time-use EE Certificate must only be used to generate<span class="w"></span>
+<span class="gu">@@ -557,7 +557,8 @@</span><span class="w"></span>
 
-    Unangst, and Marc Espie for prior art.  The authors thank Russ
-    Housley for reviewing the ASN.1 notation and providing suggestions.
-    The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto
-<span class="gd">-   Leiva, and Ties de Kock for document review and suggestions.</span>
-<span class="gi">+   Leiva, Ties de Kock, and Peter Peele for document review and</span>
-<span class="gi">+   suggestions.</span>
- 
- Appendix B.  Document changelog
- 
+<span class="w"> </span>   Unangst, and Marc Espie for prior art.  The authors thank Russ<span class="w"></span>
+<span class="w"> </span>   Housley for reviewing the ASN.1 notation and providing suggestions.<span class="w"></span>
+<span class="w"> </span>   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto<span class="w"></span>
+<span class="gd">-   Leiva, and Ties de Kock for document review and suggestions.</span><span class="w"></span>
+<span class="gi">+   Leiva, Ties de Kock, and Peter Peele for document review and</span><span class="w"></span>
+<span class="gi">+   suggestions.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>Appendix B.  Document changelog<span class="w"></span>
+<span class="w"> </span>
 </pre></div>
 </div>
 </div>
@@ -150,7 +150,7 @@
       <div class="clearer"></div>
     </div>
   <div class="footer">
-    &copy; Copyright 2021, Ben Maddison.
+    &copy; Copyright 2021-2022, Ben Maddison.
     Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.
   </div>
   

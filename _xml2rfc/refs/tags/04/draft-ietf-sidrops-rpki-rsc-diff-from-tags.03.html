@@ -60,119 +60,119 @@
 <code class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code><a class="headerlink" href="#xml2rfc-diff-draft-ietf-sidrops-rpki-rsc-refs/tags/03-refs/tags/04" title="Permalink to this definition">¶</a></dt>
 <dd><div class="docutils container">
 <p>Changes refs/tags/03 ⟼ refs/tags/04</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">--- refs/tags/03</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">--- refs/tags/03</span><span class="w"></span>
 
-<span class="gi">+++ refs/tags/04</span>
+<span class="gi">+++ refs/tags/04</span><span class="w"></span>
 
-<span class="gu">@@ -13,7 +13,7 @@</span>
+<span class="gu">@@ -13,7 +13,7 @@</span><span class="w"></span>
 
- 
-   Resource Public Key Infrastructure (RPKI) object profile for Signed
-                             Checklist (RSC)
-<span class="gd">-                     draft-ietf-sidrops-rpki-rsc-03</span>
-<span class="gi">+                     draft-ietf-sidrops-rpki-rsc-04</span>
- 
- Abstract
- 
-<span class="gu">@@ -94,10 +94,11 @@</span>
+<span class="w"> </span>
+<span class="w"> </span>  Resource Public Key Infrastructure (RPKI) object profile for Signed<span class="w"></span>
+<span class="w"> </span>                            Checklist (RSC)<span class="w"></span>
+<span class="gd">-                     draft-ietf-sidrops-rpki-rsc-03</span><span class="w"></span>
+<span class="gi">+                     draft-ietf-sidrops-rpki-rsc-04</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>Abstract<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -94,10 +94,11 @@</span><span class="w"></span>
 
-    Appendix A.  Acknowledgements
-    Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE
-            PUBLICATION
-<span class="gd">-     B.1.  changes from -02 -&gt; -03</span>
-<span class="gd">-     B.2.  changes from -01 -&gt; -02</span>
-<span class="gd">-     B.3.  changes from -00 -&gt; -01</span>
-<span class="gd">-     B.4.  individual submission phase</span>
-<span class="gi">+     B.1.  changes from -03 -&gt; -04</span>
-<span class="gi">+     B.2.  changes from -02 -&gt; -03</span>
-<span class="gi">+     B.3.  changes from -01 -&gt; -02</span>
-<span class="gi">+     B.4.  changes from -00 -&gt; -01</span>
-<span class="gi">+     B.5.  individual submission phase</span>
-    Authors&#39; Addresses
- 
- 1.  Introduction
-<span class="gu">@@ -241,11 +242,11 @@</span>
+<span class="w"> </span>   Appendix A.  Acknowledgements<span class="w"></span>
+<span class="w"> </span>   Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE<span class="w"></span>
+<span class="w"> </span>           PUBLICATION<span class="w"></span>
+<span class="gd">-     B.1.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="gd">-     B.2.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="gd">-     B.3.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="gd">-     B.4.  individual submission phase</span><span class="w"></span>
+<span class="gi">+     B.1.  changes from -03 -&gt; -04</span><span class="w"></span>
+<span class="gi">+     B.2.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="gi">+     B.3.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="gi">+     B.4.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="gi">+     B.5.  individual submission phase</span><span class="w"></span>
+<span class="w"> </span>   Authors&#39; Addresses<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>1.  Introduction<span class="w"></span>
+<span class="gu">@@ -241,11 +242,11 @@</span><span class="w"></span>
 
-    specified in [RFC6488] as well as the following additional RSC-
-    specific validation steps.
- 
-<span class="gd">-   *  The IP address delegation extension [RFC3779] is present in the</span>
-<span class="gd">-      end-entity (EE) certificate (contained within the RSC), and each</span>
-<span class="gd">-      IP address prefix(es) in the RSC is contained within the set of IP</span>
-<span class="gd">-      addresses specified by the EE certificate&#39;s IP address delegation</span>
-<span class="gd">-      extension.</span>
-<span class="gi">+   *  The IP Addresses and AS Identifiers extension [RFC3779] is present</span>
-<span class="gi">+      in the end-entity (EE) certificate (contained within the RSC), and</span>
-<span class="gi">+      each IP address prefix(es) and/or AS Identifier(s) in the RSC is</span>
-<span class="gi">+      contained within the set of IP addresses specified by the EE</span>
-<span class="gi">+      certificate&#39;s IP address delegation extension.</span>
- 
-    *  For each FilenameAndHash entry in the RSC, if a filename field is
-       present, the field&#39;s content MUST contain only characters
-<span class="gu">@@ -346,6 +347,9 @@</span>
+<span class="w"> </span>   specified in [RFC6488] as well as the following additional RSC-<span class="w"></span>
+<span class="w"> </span>   specific validation steps.<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-   *  The IP address delegation extension [RFC3779] is present in the</span><span class="w"></span>
+<span class="gd">-      end-entity (EE) certificate (contained within the RSC), and each</span><span class="w"></span>
+<span class="gd">-      IP address prefix(es) in the RSC is contained within the set of IP</span><span class="w"></span>
+<span class="gd">-      addresses specified by the EE certificate&#39;s IP address delegation</span><span class="w"></span>
+<span class="gd">-      extension.</span><span class="w"></span>
+<span class="gi">+   *  The IP Addresses and AS Identifiers extension [RFC3779] is present</span><span class="w"></span>
+<span class="gi">+      in the end-entity (EE) certificate (contained within the RSC), and</span><span class="w"></span>
+<span class="gi">+      each IP address prefix(es) and/or AS Identifier(s) in the RSC is</span><span class="w"></span>
+<span class="gi">+      contained within the set of IP addresses specified by the EE</span><span class="w"></span>
+<span class="gi">+      certificate&#39;s IP address delegation extension.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  For each FilenameAndHash entry in the RSC, if a filename field is<span class="w"></span>
+<span class="w"> </span>      present, the field&#39;s content MUST contain only characters<span class="w"></span>
+<span class="gu">@@ -346,6 +347,9 @@</span><span class="w"></span>
 
- 
-    *  A validator implementation based on OpenBSD rpki-client and
-       LibreSSL was developed by Job Snijders.
-<span class="gi">+</span>
-<span class="gi">+   *  A validator implementation [FORT] based on the FORT validator was</span>
-<span class="gi">+      developed by Alberto Leiva.</span>
- 
- 9.  IANA Considerations
- 
-<span class="gu">@@ -464,6 +468,9 @@</span>
+<span class="w"> </span>
+<span class="w"> </span>   *  A validator implementation based on OpenBSD rpki-client and<span class="w"></span>
+<span class="w"> </span>      LibreSSL was developed by Job Snijders.<span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="gi">+   *  A validator implementation [FORT] based on the FORT validator was</span><span class="w"></span>
+<span class="gi">+      developed by Alberto Leiva.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>9.  IANA Considerations<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -464,6 +468,9 @@</span><span class="w"></span>
 
- 
- 10.2.  Informative References
- 
-<span class="gi">+   [FORT]     LACNIC and NIC.MX, &quot;FORT&quot;, May 2021,</span>
-<span class="gi">+              &lt;https://github.com/NICMx/FORT-validator&gt;.</span>
-<span class="gi">+</span>
-    [I-D.ietf-sidrops-rpki-rta]
-               Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,
-               and M. Hoffmann, &quot;A profile for Resource Tagged
-<span class="gu">@@ -510,29 +517,34 @@</span>
+<span class="w"> </span>
+<span class="w"> </span>10.2.  Informative References<span class="w"></span>
+<span class="w"> </span>
+<span class="gi">+   [FORT]     LACNIC and NIC.MX, &quot;FORT&quot;, May 2021,</span><span class="w"></span>
+<span class="gi">+              &lt;https://github.com/NICMx/FORT-validator&gt;.</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="w"> </span>   [I-D.ietf-sidrops-rpki-rta]<span class="w"></span>
+<span class="w"> </span>              Michaelson, G., Huston, G., Harrison, T., Bruijnzeels, T.,<span class="w"></span>
+<span class="w"> </span>              and M. Hoffmann, &quot;A profile for Resource Tagged<span class="w"></span>
+<span class="gu">@@ -510,29 +517,34 @@</span><span class="w"></span>
 
-    Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
-    Unangst, and Marc Espie for prior art.  The authors thank Russ
-    Housley for reviewing the ASN.1 notation and providing suggestions.
-<span class="gd">-   The authors would like to thank Nimrod Levy, and Tim Bruijnzeels for</span>
-<span class="gd">-   document review and suggestions.</span>
-<span class="gi">+   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and</span>
-<span class="gi">+   Alberto Leiva for document review and suggestions.</span>
- 
- Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION
- 
-<span class="gd">-B.1.  changes from -02 -&gt; -03</span>
-<span class="gi">+B.1.  changes from -03 -&gt; -04</span>
-<span class="gi">+</span>
-<span class="gi">+   *  Alberto pointed out the asID validation also needs to be</span>
-<span class="gi">+      documented.</span>
-<span class="gi">+</span>
-<span class="gi">+B.2.  changes from -02 -&gt; -03</span>
- 
-    *  Reference the IANA assigned OID
- 
-    *  Clarify validation rules
- 
-<span class="gd">-B.2.  changes from -01 -&gt; -02</span>
-<span class="gi">+B.3.  changes from -01 -&gt; -02</span>
- 
-    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ
- 
-<span class="gd">-B.3.  changes from -00 -&gt; -01</span>
-<span class="gi">+B.4.  changes from -00 -&gt; -01</span>
- 
-    *  Readability improvements
- 
-    *  Update document category to match the registry allocation policy
-       requirement.
- 
-<span class="gd">-B.4.  individual submission phase</span>
-<span class="gi">+B.5.  individual submission phase</span>
- 
-    *  On-the-wire change: the &#39;Filename&#39; switched from &#39;required&#39; to
-       &#39;optional&#39;.  Some SIDROPS Working Group participants proposed a
+<span class="w"> </span>   Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted<span class="w"></span>
+<span class="w"> </span>   Unangst, and Marc Espie for prior art.  The authors thank Russ<span class="w"></span>
+<span class="w"> </span>   Housley for reviewing the ASN.1 notation and providing suggestions.<span class="w"></span>
+<span class="gd">-   The authors would like to thank Nimrod Levy, and Tim Bruijnzeels for</span><span class="w"></span>
+<span class="gd">-   document review and suggestions.</span><span class="w"></span>
+<span class="gi">+   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, and</span><span class="w"></span>
+<span class="gi">+   Alberto Leiva for document review and suggestions.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>Appendix B.  Document changelog - RFC EDITOR: REMOVE BEFORE PUBLICATION<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-B.1.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="gi">+B.1.  changes from -03 -&gt; -04</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="gi">+   *  Alberto pointed out the asID validation also needs to be</span><span class="w"></span>
+<span class="gi">+      documented.</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
+<span class="gi">+B.2.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  Reference the IANA assigned OID<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  Clarify validation rules<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-B.2.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="gi">+B.3.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-B.3.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="gi">+B.4.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  Readability improvements<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  Update document category to match the registry allocation policy<span class="w"></span>
+<span class="w"> </span>      requirement.<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-B.4.  individual submission phase</span><span class="w"></span>
+<span class="gi">+B.5.  individual submission phase</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>   *  On-the-wire change: the &#39;Filename&#39; switched from &#39;required&#39; to<span class="w"></span>
+<span class="w"> </span>      &#39;optional&#39;.  Some SIDROPS Working Group participants proposed a<span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -187,7 +187,7 @@
       <div class="clearer"></div>
     </div>
   <div class="footer">
-    &copy; Copyright 2021, Ben Maddison.
+    &copy; Copyright 2021-2022, Ben Maddison.
     Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.
   </div>
   
