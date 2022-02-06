@@ -12,10 +12,12 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
-     docName="draft-ietf-sidrops-rpki-rsc-05"
+     docName="draft-ietf-sidrops-rpki-rsc-06"
      ipr="trust200902"
      xml:lang="en"
      sortRefs="true"
+     submissionType="IETF"
+     consensus="true"
      version="3">
 
   <front>
@@ -319,9 +321,9 @@
         </t>
         <artwork>
 <![CDATA[
-   Decimal   Description             References
-   ---------------------------------------------------------------
-      48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
+Decimal   Description             References
+---------------------------------------------------------------
+  48      id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
         <t>
@@ -336,9 +338,9 @@
         </t>
         <artwork>
 <![CDATA[
-   Name               OID                          Specification
-   -------------------------------------------------------------
-   Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
+Name              OID                         Specification
+-------------------------------------------------------------
+Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
@@ -350,9 +352,9 @@
         </t>
         <artwork>
 <![CDATA[
-   Filename Extension  RPKI Object           Reference
-   -----------------------------------------------------------------------
-      .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
+Filename Extension  RPKI Object       Reference
+-------------------------------------------------------------------
+       .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
@@ -364,9 +366,9 @@
         </t>
         <artwork>
 <![CDATA[
-   Decimal   Description                       References
-   -------------------------------------------------------------------------
-     TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+Decimal  Description                      References
+-----------------------------------------------------------------------
+    TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
