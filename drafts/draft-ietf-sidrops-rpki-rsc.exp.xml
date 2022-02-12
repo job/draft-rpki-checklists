@@ -7,12 +7,12 @@
 <?rfc tocdepth="3"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-05" ipr="trust200902" xml:lang="en" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-06" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
   <front>
     <title abbrev="RPKI Signed Checklist">
       Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-05"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-06"/>
     <author fullname="Job Snijders" initials="J." surname="Snijders">
       <organization>Fastly</organization>
       <address>
@@ -309,9 +309,9 @@ END
         </t>
         <artwork>
 <![CDATA[
-   Decimal   Description             References
-   ---------------------------------------------------------------
-      48     id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
+Decimal   Description             References
+---------------------------------------------------------------
+  48      id-ct-signedChecklist   [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
         <t>
@@ -325,9 +325,9 @@ END
         </t>
         <artwork>
 <![CDATA[
-   Name               OID                          Specification
-   -------------------------------------------------------------
-   Signed Checklist   1.2.840.113549.1.9.16.1.48   [draft-ietf-sidrops-rpki-rsc]
+Name              OID                         Specification
+-------------------------------------------------------------
+Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
@@ -338,9 +338,9 @@ END
         </t>
         <artwork>
 <![CDATA[
-   Filename Extension  RPKI Object           Reference
-   -----------------------------------------------------------------------
-      .sig             Signed Checklist      [draft-ietf-sidrops-rpki-rsc]
+Filename Extension  RPKI Object       Reference
+-------------------------------------------------------------------
+       .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
@@ -351,9 +351,9 @@ END
         </t>
         <artwork>
 <![CDATA[
-   Decimal   Description                       References
-   -------------------------------------------------------------------------
-     TBD     id-mod-rpkiSignedChecklist-2021   [draft-ietf-sidrops-rpki-rsc]
+Decimal  Description                      References
+-----------------------------------------------------------------------
+    TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
@@ -565,7 +565,7 @@ END
       </references>
       <references>
         <name>Informative References</name>
-        <reference anchor="I-D.ietf-sidrops-rpki-rta" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-sidrops-rpki-rta-00.xml">
+        <reference anchor="I-D.ietf-sidrops-rpki-rta" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.draft-ietf-sidrops-rpki-rta-00.xml">
           <front>
             <title>A profile for Resource Tagged Attestations (RTAs)</title>
             <author initials="G" surname="Michaelson" fullname="George Michaelson">
@@ -591,7 +591,7 @@ END
           <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rta-00"/>
           <format type="TXT" target="https://www.ietf.org/internet-drafts/draft-ietf-sidrops-rpki-rta-00.txt"/>
         </reference>
-        <reference anchor="I-D.ymbk-sidrops-rpki-has-no-identity" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ymbk-sidrops-rpki-has-no-identity-00.xml">
+        <reference anchor="I-D.ymbk-sidrops-rpki-has-no-identity" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ymbk-sidrops-rpki-has-no-identity-00.xml">
           <front>
             <title>The I in RPKI does not stand for Identity</title>
             <author initials="R." surname="Bush" fullname="Randy Bush">
@@ -719,6 +719,12 @@ END
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+      <section>
+        <name>changes from -05 -&gt; -06</name>
+        <ul>
+          <li>Non-content-related updates.</li>
+        </ul>
+      </section>
       <section>
         <name>changes from -04 -&gt; -05</name>
         <ul>
