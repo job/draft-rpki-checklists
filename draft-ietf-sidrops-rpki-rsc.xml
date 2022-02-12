@@ -24,7 +24,7 @@
       Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
     </title>
 
-    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-05"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-06"/>
 
     <author fullname="Job Snijders" initials="J." surname="Snijders">
       <organization>Fastly</organization>
@@ -511,6 +511,13 @@ Decimal  Description                      References
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+
+      <section>
+        <name>changes from -05 -&gt; -06</name>
+        <ul>
+          <li>Non-content-related updates.</li>
+        </ul>
+      </section>
 
       <section>
         <name>changes from -04 -&gt; -05</name>
