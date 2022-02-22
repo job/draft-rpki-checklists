@@ -20,8 +20,8 @@
 
   <front>
 
-    <title abbrev="RPKI Signed Checklist">
-      Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
+    <title abbrev="RPKI Signed Checklists">
+      A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
     </title>
 
     <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-06"/>
