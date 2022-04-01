@@ -46,7 +46,7 @@ AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
 IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
 
-IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI --
+IPAddressFamilyItem ::= SEQUENCE {    -- AFI & optional SAFI octet --
    addressFamily        OCTET STRING (SIZE (2..3)),
    iPAddressOrRange     IPAddressOrRange }
 
