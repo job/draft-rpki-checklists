@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>refs/tags/04 ⟼ refs/remotes/origin/main &#8212; RPKI Signed Checklists 0.6.1.dev2 documentation</title>
+    <title>refs/tags/04 ⟼ refs/remotes/origin/main &#8212; RPKI Signed Checklists 0.6.1.dev16 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/readable.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="draft-ietf-sidrops-rpki-rsc-diff-from-tags.05.html" title="refs/tags/05 ⟼ refs/remotes/origin/main"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../../index.html">RPKI Signed Checklists 0.6.1.dev2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">RPKI Signed Checklists 0.6.1.dev16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -70,17 +70,17 @@
 <span class="w"> </span>Network Working Group                                        J. Snijders<span class="w"></span>
 <span class="w"> </span>Internet-Draft                                                    Fastly<span class="w"></span>
 <span class="w"> </span>Intended status: Standards Track                             T. Harrison<span class="w"></span>
-<span class="gd">-Expires: 12 September 2022                                         APNIC</span><span class="w"></span>
-<span class="gi">+Expires: 26 August 2022                                            APNIC</span><span class="w"></span>
+<span class="gd">-Expires: 4 October 2022                                            APNIC</span><span class="w"></span>
+<span class="gi">+Expires: 30 September 2022                                         APNIC</span><span class="w"></span>
 <span class="w"> </span>                                                             B. Maddison<span class="w"></span>
 <span class="w"> </span>                                                              Workonline<span class="w"></span>
-<span class="gd">-                                                           11 March 2022</span><span class="w"></span>
+<span class="gd">-                                                            2 April 2022</span><span class="w"></span>
 <span class="gd">-</span><span class="w"></span>
 <span class="gd">-</span><span class="w"></span>
 <span class="gd">-  Resource Public Key Infrastructure (RPKI) object profile for Signed</span><span class="w"></span>
 <span class="gd">-                            Checklist (RSC)</span><span class="w"></span>
 <span class="gd">-                     draft-ietf-sidrops-rpki-rsc-04</span><span class="w"></span>
-<span class="gi">+                                                        22 February 2022</span><span class="w"></span>
+<span class="gi">+                                                           29 March 2022</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+     A profile for Resource Public Key Infrastructure (RPKI) Signed</span><span class="w"></span>
@@ -94,8 +94,8 @@
 <span class="w"> </span>   time.  It is inappropriate to use Internet-Drafts as reference<span class="w"></span>
 <span class="w"> </span>   material or to cite them other than as &quot;work in progress.&quot;<span class="w"></span>
 <span class="w"> </span>
-<span class="gd">-   This Internet-Draft will expire on 12 September 2022.</span><span class="w"></span>
-<span class="gi">+   This Internet-Draft will expire on 26 August 2022.</span><span class="w"></span>
+<span class="gd">-   This Internet-Draft will expire on 4 October 2022.</span><span class="w"></span>
+<span class="gi">+   This Internet-Draft will expire on 30 September 2022.</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>Copyright Notice<span class="w"></span>
 <span class="w"> </span>
@@ -180,6 +180,16 @@
 <span class="w"> </span>
 <span class="w"> </span>     ASIdOrRange, IPAddressOrRange<span class="w"></span>
 <span class="w"> </span>     FROM IPAddrAndASCertExtn -- in [RFC3779]<span class="w"></span>
+<span class="gu">@@ -203,7 +213,7 @@</span><span class="w"></span>
+
+<span class="w"> </span>
+<span class="w"> </span>   IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-   IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp;amp; optional SAFI --</span><span class="w"></span>
+<span class="gi">+   IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI octet --</span><span class="w"></span>
+<span class="w"> </span>      addressFamily        OCTET STRING (SIZE (2..3)),<span class="w"></span>
+<span class="w"> </span>      iPAddressOrRange     IPAddressOrRange }<span class="w"></span>
+<span class="w"> </span>
 <span class="gu">@@ -217,7 +227,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>
@@ -519,7 +529,7 @@
     </div>
   <div class="footer">
     &copy; Copyright 2021-2022, Ben Maddison.
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.
   </div>
   
   </body>
