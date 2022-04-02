@@ -5,14 +5,14 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 16 August 2022                                            APNIC
+Expires: 4 October 2022                                            APNIC
                                                              B. Maddison
                                                               Workonline
-                                                        12 February 2022
+                                                            2 April 2022
 
 
-  Resource Public Key Infrastructure (RPKI) object profile for Signed
-                            Checklist (RSC)
+     A profile for Resource Public Key Infrastructure (RPKI) Signed
+                            Checklists (RSC)
                      draft-ietf-sidrops-rpki-rsc-06
 
 Abstract
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 1]
+Snijders, et al.         Expires 4 October 2022                 [Page 1]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
-   This Internet-Draft will expire on 16 August 2022.
+   This Internet-Draft will expire on 4 October 2022.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 2]
+Snijders, et al.         Expires 4 October 2022                 [Page 2]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
      B.5.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  14
@@ -165,9 +165,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 3]
+Snijders, et al.         Expires 4 October 2022                 [Page 3]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 2.1.  RSC End-Entity Certificates
@@ -221,9 +221,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 4]
+Snijders, et al.         Expires 4 October 2022                 [Page 4]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
    RpkiSignedChecklist ::= SEQUENCE {
@@ -247,7 +247,7 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
    IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
 
-   IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI --
+   IPAddressFamilyItem ::= SEQUENCE {    -- AFI & optional SAFI octet --
       addressFamily        OCTET STRING (SIZE (2..3)),
       iPAddressOrRange     IPAddressOrRange }
 
@@ -277,9 +277,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 5]
+Snijders, et al.         Expires 4 October 2022                 [Page 5]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 4.4.  checkList
@@ -333,9 +333,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 6]
+Snijders, et al.         Expires 4 October 2022                 [Page 6]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 6.  Operational Considerations
@@ -389,9 +389,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 7]
+Snijders, et al.         Expires 4 October 2022                 [Page 7]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
    RSC objects are not distributed through the RPKI Repository system.
@@ -445,9 +445,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 8]
+Snijders, et al.         Expires 4 October 2022                 [Page 8]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
    According to RFC 7942, "this will allow reviewers and working groups
@@ -501,9 +501,9 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
 
 
 
-Snijders, et al.         Expires 16 August 2022                 [Page 9]
+Snijders, et al.         Expires 4 October 2022                 [Page 9]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 9.3.  File Extension
@@ -557,9 +557,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                [Page 10]
+Snijders, et al.         Expires 4 October 2022                [Page 10]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
       Type name: application
@@ -613,9 +613,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                [Page 11]
+Snijders, et al.         Expires 4 October 2022                [Page 11]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
    [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
@@ -669,9 +669,9 @@ Internet-Draft            RPKI Signed Checklist            February 2022
 
 
 
-Snijders, et al.         Expires 16 August 2022                [Page 12]
+Snijders, et al.         Expires 4 October 2022                [Page 12]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
    [RFC1952]  Deutsch, P., "GZIP file format specification version 4.3",
@@ -725,9 +725,9 @@ B.3.  changes from -03 -> -04
 
 
 
-Snijders, et al.         Expires 16 August 2022                [Page 13]
+Snijders, et al.         Expires 4 October 2022                [Page 13]
 
-Internet-Draft            RPKI Signed Checklist            February 2022
+Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 B.4.  changes from -02 -> -03
@@ -761,7 +761,6 @@ Authors' Addresses
    Fastly
    Amsterdam
    Netherlands
-
    Email: job@fastly.com
 
 
@@ -770,71 +769,16 @@ Authors' Addresses
    6 Cordelia St
    South Brisbane QLD 4101
    Australia
-
    Email: tomh@apnic.net
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 16 August 2022                [Page 14]
-
-Internet-Draft            RPKI Signed Checklist            February 2022
 
 
    Ben Maddison
    Workonline Communications
    Cape Town
    South Africa
-
    Email: benm@workonline.africa
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 16 August 2022                [Page 15]
+Snijders, et al.         Expires 4 October 2022                [Page 14]

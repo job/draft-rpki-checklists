@@ -9,8 +9,8 @@
 <?rfc subcompact="no"?>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-06" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
   <front>
-    <title abbrev="RPKI Signed Checklist">
-      Resource Public Key Infrastructure (RPKI) object profile for Signed Checklist (RSC)
+    <title abbrev="RPKI Signed Checklists">
+      A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
     </title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-06"/>
     <author fullname="Job Snijders" initials="J." surname="Snijders">
@@ -167,7 +167,7 @@ AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
 
 IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
 
-IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp;amp; optional SAFI --
+IPAddressFamilyItem ::= SEQUENCE {    -- AFI &amp; optional SAFI octet --
    addressFamily        OCTET STRING (SIZE (2..3)),
    iPAddressOrRange     IPAddressOrRange }
 
