@@ -14,13 +14,19 @@
 from __future__ import annotations
 
 import logging
+import typing
 
 from rpkimancer.cert import EECertificate
 
+if typing.TYPE_CHECKING:
+    from rpkimancer.sigobj.base import EncapsulatedContentType
+
 log = logging.getLogger(__name__)
 
+ECT = typing.TypeVar("ECT", bound="EncapsulatedContentType")
 
-class UnpublishedEECertificate(EECertificate):
+
+class UnpublishedEECertificate(EECertificate[ECT]):
     """RPKI Unpublished EE Certificate."""
 
     sia = None

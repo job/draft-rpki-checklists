@@ -19,18 +19,18 @@ import os
 import typing
 
 from rpkimancer.algorithms import DIGEST_ALGORITHMS, SHA256
-from rpkimancer.asn1 import Content
+from rpkimancer.asn1 import Interface
 from rpkimancer.asn1.mod import RpkiSignedChecklist_2021
 from rpkimancer.resources import (AFI, ASIdOrRange, AsResourcesInfo,
                                   IpResourcesInfo, net_to_bitstring)
-from rpkimancer.sigobj.base import EncapsulatedContent, SignedObject
+from rpkimancer.sigobj.base import EncapsulatedContentType, SignedObject
 
 from .eecert import UnpublishedEECertificate
 
 log = logging.getLogger(__name__)
 
 
-class IPList(Content):
+class IPList(Interface):
     """ASN.1 IPList type."""
 
     content_syntax = RpkiSignedChecklist_2021.IPList
@@ -46,11 +46,10 @@ class IPList(Content):
         super().__init__(data)
 
 
-class SignedChecklistEContent(EncapsulatedContent):
+class SignedChecklistContentType(EncapsulatedContentType):
     """encapContentInfo for RPKI Signed Checklists."""
 
-    content_type = RpkiSignedChecklist_2021.id_ct_signedChecklist
-    content_syntax = RpkiSignedChecklist_2021.RpkiSignedChecklist
+    asn1_definition = RpkiSignedChecklist_2021.ct_rpkiSignedChecklist
     file_ext = "sig"
 
     def __init__(self, *,
@@ -93,11 +92,9 @@ class SignedChecklistEContent(EncapsulatedContent):
         return self._ip_resources
 
 
-class SignedChecklist(SignedObject,
-                      econtent_type=RpkiSignedChecklist_2021.ct_rpkiSignedChecklist):  # noqa: E501
+class SignedChecklist(SignedObject[SignedChecklistContentType]):
     """CMS ASN.1 ContentInfo for RPKI Signed Checklists."""
 
-    econtent_cls = SignedChecklistEContent
     ee_cert_cls = UnpublishedEECertificate
 
     def publish(self, *,
