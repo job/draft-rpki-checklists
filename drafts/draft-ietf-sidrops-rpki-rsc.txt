@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 4 October 2022                                            APNIC
+Expires: 11 November 2022                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                            2 April 2022
+                                                             10 May 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.         Expires 4 October 2022                 [Page 1]
+Snijders, et al.        Expires 11 November 2022                [Page 1]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
-   This Internet-Draft will expire on 4 October 2022.
+   This Internet-Draft will expire on 11 November 2022.
 
 Copyright Notice
 
@@ -81,9 +81,9 @@ Table of Contents
      2.1.  RSC End-Entity Certificates . . . . . . . . . . . . . . .   4
    3.  The RSC ContentType . . . . . . . . . . . . . . . . . . . . .   4
    4.  The RSC eContent  . . . . . . . . . . . . . . . . . . . . . .   4
-     4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   5
-     4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   5
+     4.1.  version . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     4.2.  resources . . . . . . . . . . . . . . . . . . . . . . . .   6
+     4.3.  digestAlgorithm . . . . . . . . . . . . . . . . . . . . .   6
      4.4.  checkList . . . . . . . . . . . . . . . . . . . . . . . .   6
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  Operational Considerations  . . . . . . . . . . . . . . . . .   7
@@ -102,21 +102,22 @@ Table of Contents
      10.2.  Informative References . . . . . . . . . . . . . . . . .  12
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  13
    Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  13
-     B.1.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  13
-     B.2.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  13
-     B.3.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  13
-     B.4.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  14
+     B.1.  changes from -06 -> -07 . . . . . . . . . . . . . . . . .  13
+     B.2.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  13
+     B.3.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  13
+     B.4.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  14
 
 
 
-Snijders, et al.         Expires 4 October 2022                 [Page 2]
+Snijders, et al.        Expires 11 November 2022                [Page 2]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
-     B.5.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  14
-     B.6.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  14
-     B.7.  individual submission phase . . . . . . . . . . . . . . .  14
+     B.5.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  14
+     B.6.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  14
+     B.7.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  14
+     B.8.  individual submission phase . . . . . . . . . . . . . . .  14
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Introduction
@@ -164,10 +165,9 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 
-
-Snijders, et al.         Expires 4 October 2022                 [Page 3]
+Snijders, et al.        Expires 11 November 2022                [Page 3]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 2.1.  RSC End-Entity Certificates
@@ -192,7 +192,41 @@ Internet-Draft           RPKI Signed Checklists               April 2022
    digital objects has been signed "with resources".  An RSC is formally
    defined as:
 
-   RpkiSignedChecklist-2021
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 4]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
+   RpkiSignedChecklist-2022
      { iso(1) member-body(2) us(840) rsadsi(113549)
        pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
 
@@ -205,7 +239,7 @@ Internet-Draft           RPKI Signed Checklists               April 2022
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
          pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
-     ASIdOrRange, IPAddressOrRange
+     ASIdentifiers, IPAddrBlocks
      FROM IPAddrAndASCertExtn -- in [RFC3779]
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) mod(0)
@@ -219,13 +253,6 @@ Internet-Draft           RPKI Signed Checklists               April 2022
        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
          pkcs-9(9) id-smime(16) id-ct(1) 48 }
 
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 4]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
-
    RpkiSignedChecklist ::= SEQUENCE {
      version  [0]          INTEGER DEFAULT 0,
      resources             ResourceBlock,
@@ -237,21 +264,23 @@ Internet-Draft           RPKI Signed Checklists               April 2022
      hash            Digest }
 
    ResourceBlock ::= SEQUENCE {
-       asID         [0]       AsList OPTIONAL,
-       ipAddrBlocks [1]       IPList OPTIONAL }
+       asID         [0]       ASIdentifiers OPTIONAL,
+       ipAddrBlocks [1]       IPAddrBlocks OPTIONAL }
        -- at least one of asID or ipAddrBlocks MUST be present
        ( WITH COMPONENTS { ..., asID PRESENT} |
          WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-   AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
-
-   IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
-
-   IPAddressFamilyItem ::= SEQUENCE {    -- AFI & optional SAFI octet --
-      addressFamily        OCTET STRING (SIZE (2..3)),
-      iPAddressOrRange     IPAddressOrRange }
-
    END
+
+
+
+
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 5]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
 
 4.1.  version
 
@@ -260,27 +289,20 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 4.2.  resources
 
    The resources contained here are the resources used to mark the
-   attestation, and MUST match the set of resources listed by the EE
-   Certificate carried in the CMS certificates field.
+   attestation, and MUST be a subset of the set of resources listed by
+   the EE Certificate carried in the CMS certificates field.
+
+   If the asID component is present, it MUST include one or more ASNs,
+   and the "inherit" element MUST NOT be specified.
+
+   If the ipAddrBlocks component is present, it MUST include one or more
+   ASNs, and the "inherit" element MUST NOT be specified.
 
 4.3.  digestAlgorithm
 
    The digest algorithm used to create the message digest of the
    attested digital object.  This algorithm MUST be a hashing algorithm
    defined in [RFC7935].
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 5]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
 
 4.4.  checkList
 
@@ -304,6 +326,18 @@ Internet-Draft           RPKI Signed Checklists               April 2022
        the Subject Information Access extension MUST NOT be present on
        the End-Entity (EE) certificate signing the RSC.
 
+
+
+
+
+
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 6]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
    2.  The IP Addresses and AS Identifiers extension [RFC3779] is
        present in the end-entity (EE) certificate (contained within the
        RSC), and each IP address prefix(es) and/or AS Identifier(s) in
@@ -323,20 +357,6 @@ Internet-Draft           RPKI Signed Checklists               April 2022
       be calculated and MUST match the value given in the messageDigest
       field of the associated FileNameAndHash, for the digital object to
       be considered as verified with the RSC.
-
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 6]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
 
 6.  Operational Considerations
 
@@ -367,6 +387,13 @@ Internet-Draft           RPKI Signed Checklists               April 2022
    issued the CA certificate to the entity that issued the EE
    Certificate used to validate the Signed Checklist.
 
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 7]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
    RPKI Certificates are not bound to real world identities, see
    [I-D.ymbk-sidrops-rpki-has-no-identity] for an elaboration.  Relying
    Parties can only associate real world entities to Internet Number
@@ -375,24 +402,6 @@ Internet-Draft           RPKI Signed Checklists               April 2022
    Number Resources', not about any other aspect of the resource
    holder's business operations such as the identity of the resource
    holder itself.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 7]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
 
    RSC objects are not distributed through the RPKI Repository system.
    From this, it follows that third parties who do not have a copy of a
@@ -433,22 +442,18 @@ Internet-Draft           RPKI Signed Checklists               April 2022
    RFCs.  Please note that the listing of any individual implementation
    here does not imply endorsement by the IETF.  Furthermore, no effort
    has been spent to verify the information presented here that was
+
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 8]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
    supplied by IETF contributors.  This is not intended as, and must not
    be construed to be, a catalog of available implementations or their
    features.  Readers are advised to note that other implementations may
    exist.
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 8]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
 
    According to RFC 7942, "this will allow reviewers and working groups
    to assign due consideration to documents that have the benefit of
@@ -493,17 +498,17 @@ Internet-Draft           RPKI Signed Checklists               April 2022
    The IANA is requested to register the OID for the RPKI Signed
    Checklist in the registry created by [RFC6488] as following:
 
+
+
+
+Snijders, et al.        Expires 11 November 2022                [Page 9]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
 Name              OID                         Specification
 -------------------------------------------------------------
 Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                 [Page 9]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 9.3.  File Extension
@@ -552,14 +557,9 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 
-
-
-
-
-
-Snijders, et al.         Expires 4 October 2022                [Page 10]
+Snijders, et al.        Expires 11 November 2022               [Page 10]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
       Type name: application
@@ -613,9 +613,9 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 
-Snijders, et al.         Expires 4 October 2022                [Page 11]
+Snijders, et al.        Expires 11 November 2022               [Page 11]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
    [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
@@ -669,9 +669,9 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 
 
 
-Snijders, et al.         Expires 4 October 2022                [Page 12]
+Snijders, et al.        Expires 11 November 2022               [Page 12]
 
-Internet-Draft           RPKI Signed Checklists               April 2022
+Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
    [RFC1952]  Deutsch, P., "GZIP file format specification version 4.3",
@@ -697,58 +697,63 @@ Internet-Draft           RPKI Signed Checklists               April 2022
 
 Appendix A.  Acknowledgements
 
-   The authors wish to thank George Michaelson, Tom Harrison, Geoff
-   Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted
-   Unangst, and Marc Espie for prior art.  The authors thank Russ
-   Housley for reviewing the ASN.1 notation and providing suggestions.
-   The authors would like to thank Nimrod Levy, Tim Bruijnzeels, Alberto
-   Leiva, Ties de Kock, and Peter Peele for document review and
+   The authors wish to thank George Michaelson, Geoff Huston, Randy
+   Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted Unangst, and Marc
+   Espie for prior art.  The authors thank Russ Housley for reviewing
+   the ASN.1 notation and providing suggestions.  The authors would like
+   to thank Nimrod Levy, Tim Bruijnzeels, Alberto Leiva, Ties de Kock,
+   Peter Peele, Claudio Jeker, and Theo Beuhler for document review and
    suggestions.
 
 Appendix B.  Document changelog
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  changes from -05 -> -06
+B.1.  changes from -06 -> -07
+
+   *  Change wire format to allow use of commonly deployed libcrypto
+      APIs.
+
+B.2.  changes from -05 -> -06
 
    *  Non-content-related updates.
 
-B.2.  changes from -04 -> -05
+B.3.  changes from -04 -> -05
 
    *  Ties contributed clarifications.
 
-B.3.  changes from -03 -> -04
+
+
+
+Snijders, et al.        Expires 11 November 2022               [Page 13]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
+B.4.  changes from -03 -> -04
 
    *  Alberto pointed out the asID validation also needs to be
       documented.
 
-
-
-
-Snijders, et al.         Expires 4 October 2022                [Page 13]
-
-Internet-Draft           RPKI Signed Checklists               April 2022
-
-
-B.4.  changes from -02 -> -03
+B.5.  changes from -02 -> -03
 
    *  Reference the IANA assigned OID
 
    *  Clarify validation rules
 
-B.5.  changes from -01 -> -02
+B.6.  changes from -01 -> -02
 
    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &
       Russ.
 
-B.6.  changes from -00 -> -01
+B.7.  changes from -00 -> -01
 
    *  Readability improvements
 
    *  Update document category to match the registry allocation policy
       requirement.
 
-B.7.  individual submission phase
+B.8.  individual submission phase
 
    *  On-the-wire change: the 'Filename' switched from 'required' to
       'optional'.  Some SIDROPS Working Group participants proposed a
@@ -772,6 +777,15 @@ Authors' Addresses
    Email: tomh@apnic.net
 
 
+
+
+
+
+Snijders, et al.        Expires 11 November 2022               [Page 14]
+
+Internet-Draft           RPKI Signed Checklists                 May 2022
+
+
    Ben Maddison
    Workonline Communications
    Cape Town
@@ -781,4 +795,46 @@ Authors' Addresses
 
 
 
-Snijders, et al.         Expires 4 October 2022                [Page 14]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 11 November 2022               [Page 15]
