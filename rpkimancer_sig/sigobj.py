@@ -29,6 +29,7 @@ from .eecert import UnpublishedEECertificate
 
 log = logging.getLogger(__name__)
 
+
 class ConstrainedASIdentifiers(Interface):
     """ASN.1 ConstrainedASIdentifiers type."""
 
@@ -43,6 +44,7 @@ class ConstrainedASIdentifiers(Interface):
         data = {"asnum": asnum}
         super().__init__(data)
 
+
 class ConstrainedIPAddrBlocks(Interface):
     """ASN.1 ConstrainedIPAddrBlocks type."""
 
@@ -51,7 +53,8 @@ class ConstrainedIPAddrBlocks(Interface):
     def __init__(self, ip_resources: IpResourcesInfo):
         """Initialise instance from python data."""
         data = [{"addressFamily": AFI[network.version],
-                 "ipAddressChoice": [("addressPrefix", net_to_bitstring(network))]}
+                 "ipAddressChoice": [("addressPrefix",
+                                      net_to_bitstring(network))]}
                 for network in ip_resources
                 if isinstance(network, (ipaddress.IPv4Network,
                                         ipaddress.IPv6Network))]
