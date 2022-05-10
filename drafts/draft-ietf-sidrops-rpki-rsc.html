@@ -1531,9 +1531,11 @@ END
 <p id="section-4.2-1">
           The resources contained here are the resources used to mark the attestation, and MUST be a subset of the set of resources listed by the EE Certificate carried in the CMS certificates field.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">
-          If the asID component is present, it MUST include one or more ASNs, and the "inherit" element MUST NOT be specified.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+          If the asID component is present, it MUST include one or more "asnum" elements.
+          The "inherit" element or any "rdi" elements MUST NOT be specified.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">
-          If the ipAddrBlocks component is present, it MUST include one or more ASNs, and the "inherit" element MUST NOT be specified.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+          If the ipAddrBlocks component is present, it MUST include one or more IPAddressFamily types.
+          The "inherit" element MUST NOT be specified.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.3">
         <h3 id="name-digestalgorithm-2">
@@ -1877,7 +1879,7 @@ Decimal  Description                      References
           Ties de Kock,
           Peter Peele,
           Claudio Jeker,
-          and Theo Beuhler
+          and Theo Buehler 
         for document review and suggestions.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>

@@ -292,11 +292,12 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
    attestation, and MUST be a subset of the set of resources listed by
    the EE Certificate carried in the CMS certificates field.
 
-   If the asID component is present, it MUST include one or more ASNs,
-   and the "inherit" element MUST NOT be specified.
+   If the asID component is present, it MUST include one or more "asnum"
+   elements.  The "inherit" element or any "rdi" elements MUST NOT be
+   specified.
 
    If the ipAddrBlocks component is present, it MUST include one or more
-   ASNs, and the "inherit" element MUST NOT be specified.
+   IPAddressFamily types.  The "inherit" element MUST NOT be specified.
 
 4.3.  digestAlgorithm
 
@@ -326,10 +327,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
        the Subject Information Access extension MUST NOT be present on
        the End-Entity (EE) certificate signing the RSC.
 
-
-
-
-
+   2.  The IP Addresses and AS Identifiers extension [RFC3779] is
+       present in the end-entity (EE) certificate (contained within the
+       RSC), and each IP address prefix(es) and/or AS Identifier(s) in
 
 
 
@@ -338,9 +338,6 @@ Snijders, et al.        Expires 11 November 2022                [Page 6]
 Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
-   2.  The IP Addresses and AS Identifiers extension [RFC3779] is
-       present in the end-entity (EE) certificate (contained within the
-       RSC), and each IP address prefix(es) and/or AS Identifier(s) in
        the RSC is contained within the set of IP addresses specified by
        the EE Certificate's IP Addresses and AS Identifiers delegation
        extension.
@@ -386,6 +383,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
    data have not been verified by the Certificate Authority (CA) that
    issued the CA certificate to the entity that issued the EE
    Certificate used to validate the Signed Checklist.
+
+
+
 
 
 
@@ -702,7 +702,7 @@ Appendix A.  Acknowledgements
    Espie for prior art.  The authors thank Russ Housley for reviewing
    the ASN.1 notation and providing suggestions.  The authors would like
    to thank Nimrod Levy, Tim Bruijnzeels, Alberto Leiva, Ties de Kock,
-   Peter Peele, Claudio Jeker, and Theo Beuhler for document review and
+   Peter Peele, Claudio Jeker, and Theo Buehler for document review and
    suggestions.
 
 Appendix B.  Document changelog
