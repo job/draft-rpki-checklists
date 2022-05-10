@@ -1,4 +1,4 @@
-RpkiSignedChecklist-2021
+RpkiSignedChecklist-2022
   { iso(1) member-body(2) us(840) rsadsi(113549)
     pkcs(1) pkcs9(9) smime(16) mod(0) 72 } -- using next available id-mod(0)
 
@@ -11,7 +11,7 @@ IMPORTS
     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
       pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
-  ASIdOrRange, IPAddressOrRange
+  IPAddressOrRange, ASIdOrRange
   FROM IPAddrAndASCertExtn -- in [RFC3779]
     { iso(1) identified-organization(3) dod(6) internet(1)
       security(5) mechanisms(5) pkix(7) mod(0)
@@ -36,18 +36,19 @@ FileNameAndHash ::= SEQUENCE {
   hash            Digest }
 
 ResourceBlock ::= SEQUENCE {
-    asID         [0]       AsList OPTIONAL,
-    ipAddrBlocks [1]       IPList OPTIONAL }
+    asID         [0]       NotASIdentifiers OPTIONAL,
+    ipAddrBlocks [1]       NotIPAddrBlocks OPTIONAL }
     -- at least one of asID or ipAddrBlocks MUST be present
     ( WITH COMPONENTS { ..., asID PRESENT} |
       WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-AsList ::= SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange
+ NotIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF NotIPAddressFamily
 
-IPList ::= SEQUENCE (SIZE(1..MAX)) OF IPAddressFamilyItem
+ NotIPAddressFamily  ::= SEQUENCE { -- AFI & opt SAFI --
+    addressFamily        OCTET STRING (SIZE (2..3)),
+    ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
-IPAddressFamilyItem ::= SEQUENCE {    -- AFI & optional SAFI octet --
-   addressFamily        OCTET STRING (SIZE (2..3)),
-   iPAddressOrRange     IPAddressOrRange }
+ NotASIdentifiers       ::= SEQUENCE {
+     asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
 END

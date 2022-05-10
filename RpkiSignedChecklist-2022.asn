@@ -11,7 +11,7 @@ IMPORTS
     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
       pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
-  ASIdentifiers, IPAddrBlocks
+  IPAddressOrRange, ASIdOrRange
   FROM IPAddrAndASCertExtn -- in [RFC3779]
     { iso(1) identified-organization(3) dod(6) internet(1)
       security(5) mechanisms(5) pkix(7) mod(0)
@@ -36,10 +36,19 @@ FileNameAndHash ::= SEQUENCE {
   hash            Digest }
 
 ResourceBlock ::= SEQUENCE {
-    asID         [0]       ASIdentifiers OPTIONAL,
-    ipAddrBlocks [1]       IPAddrBlocks OPTIONAL }
-    -- at least one of asID or ipAddrBlocks MUST be present
-    ( WITH COMPONENTS { ..., asID PRESENT} |
-      WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+  asID         [0]       ConstrainedASIdentifiers OPTIONAL,
+  ipAddrBlocks [1]       ConstrainedIPAddrBlocks OPTIONAL }
+  -- at least one of asID or ipAddrBlocks MUST be present
+  ( WITH COMPONENTS { ..., asID PRESENT} |
+    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF NotIPAddressFamily
+
+ContrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
+  addressFamily        OCTET STRING (SIZE (2..3)),
+  ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+
+ConstrainedASIdentifiers    ::= SEQUENCE {
+  asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
 END

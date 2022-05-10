@@ -20,7 +20,7 @@ import typing
 
 from rpkimancer.algorithms import DIGEST_ALGORITHMS, SHA256
 from rpkimancer.asn1 import Interface
-from rpkimancer.asn1.mod import RpkiSignedChecklist_2021
+from rpkimancer.asn1.mod import RpkiSignedChecklist_2022
 from rpkimancer.resources import (AFI, ASIdOrRange, AsResourcesInfo,
                                   IpResourcesInfo, net_to_bitstring)
 from rpkimancer.sigobj.base import EncapsulatedContentType, SignedObject
@@ -29,17 +29,29 @@ from .eecert import UnpublishedEECertificate
 
 log = logging.getLogger(__name__)
 
+class ConstrainedASIdentifiers(Interface):
+    """ASN.1 ConstrainedASIdentifiers type."""
 
-class IPList(Interface):
-    """ASN.1 IPList type."""
+    content_syntax = RpkiSignedChecklist_2022.NotASIdentifiers
 
-    content_syntax = RpkiSignedChecklist_2021.IPList
+    def __init__(self, as_resources: AsResourcesInfo) -> None:
+        """Initialise instance from python data."""
+        if isinstance(as_resources, list):
+            asnum = [ASIdOrRange(a).content_data for a in as_resources]
+        else:  # pragma: no cover
+            raise ValueError
+        data = {"asnum": asnum}
+        super().__init__(data)
+
+class ConstrainedIPAddrBlocks(Interface):
+    """ASN.1 ConstrainedIPAddrBlocks type."""
+
+    content_syntax = RpkiSignedChecklist_2022.NotIPAddrBlocks
 
     def __init__(self, ip_resources: IpResourcesInfo):
-        """Initialise IPList instance."""
+        """Initialise instance from python data."""
         data = [{"addressFamily": AFI[network.version],
-                 "iPAddressOrRange": ("addressPrefix",
-                                      net_to_bitstring(network))}
+                 "ipAddressChoice": [("addressPrefix", net_to_bitstring(network))]}
                 for network in ip_resources
                 if isinstance(network, (ipaddress.IPv4Network,
                                         ipaddress.IPv6Network))]
@@ -49,7 +61,7 @@ class IPList(Interface):
 class SignedChecklistContentType(EncapsulatedContentType):
     """encapContentInfo for RPKI Signed Checklists."""
 
-    asn1_definition = RpkiSignedChecklist_2021.ct_rpkiSignedChecklist
+    asn1_definition = RpkiSignedChecklist_2022.ct_rpkiSignedChecklist
     file_ext = "sig"
 
     def __init__(self, *,
@@ -72,11 +84,9 @@ class SignedChecklistContentType(EncapsulatedContentType):
                                               "checkList": checklist,
                                               "resources": {}}
         if ip_resources is not None:
-            data["resources"]["ipAddrBlocks"] = IPList(ip_resources).content_data  # noqa: E501
+            data["resources"]["ipAddrBlocks"] = ConstrainedIPAddrBlocks(ip_resources).content_data  # noqa: E501
         if as_resources is not None:
-            data["resources"]["asID"] = [ASIdOrRange(a).content_data
-                                         for a in as_resources
-                                         if isinstance(a, (int, tuple))]
+            data["resources"]["asID"] = ConstrainedASIdentifiers(as_resources).content_data  # noqa: E501
         super().__init__(data)
         self._as_resources = as_resources
         self._ip_resources = ip_resources

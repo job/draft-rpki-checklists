@@ -2,10 +2,8 @@
 # Makefile for I-D's and RFCs
 # $Id: Makefile,v 1.1.1.1 2002-11-11 05:11:48 randy Exp $
 #
-
-# Your nroff document is called foo.txt. Change below as appropiate.
 NAME=draft-ietf-sidrops-rpki-rsc
-MOD=RpkiSignedChecklist-2021
+MOD=RpkiSignedChecklist-2022
 
 .PHONY: all
 all: drafts asn1
