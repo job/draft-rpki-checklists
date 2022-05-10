@@ -32,7 +32,7 @@ log = logging.getLogger(__name__)
 class ConstrainedASIdentifiers(Interface):
     """ASN.1 ConstrainedASIdentifiers type."""
 
-    content_syntax = RpkiSignedChecklist_2022.NotASIdentifiers
+    content_syntax = RpkiSignedChecklist_2022.ConstrainedASIdentifiers
 
     def __init__(self, as_resources: AsResourcesInfo) -> None:
         """Initialise instance from python data."""
@@ -46,7 +46,7 @@ class ConstrainedASIdentifiers(Interface):
 class ConstrainedIPAddrBlocks(Interface):
     """ASN.1 ConstrainedIPAddrBlocks type."""
 
-    content_syntax = RpkiSignedChecklist_2022.NotIPAddrBlocks
+    content_syntax = RpkiSignedChecklist_2022.ConstrainedIPAddrBlocks
 
     def __init__(self, ip_resources: IpResourcesInfo):
         """Initialise instance from python data."""

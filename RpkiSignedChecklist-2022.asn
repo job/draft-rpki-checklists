@@ -42,10 +42,10 @@ ResourceBlock ::= SEQUENCE {
   ( WITH COMPONENTS { ..., asID PRESENT} |
     WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF NotIPAddressFamily
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
 
-ContrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
-  addressFamily        OCTET STRING (SIZE (2..3)),
+ConstrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
+  addressFamily        OCTET STRING (SIZE (2)),
   ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
 ConstrainedASIdentifiers    ::= SEQUENCE {

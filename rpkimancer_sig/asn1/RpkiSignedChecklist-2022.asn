@@ -36,19 +36,19 @@ FileNameAndHash ::= SEQUENCE {
   hash            Digest }
 
 ResourceBlock ::= SEQUENCE {
-    asID         [0]       NotASIdentifiers OPTIONAL,
-    ipAddrBlocks [1]       NotIPAddrBlocks OPTIONAL }
-    -- at least one of asID or ipAddrBlocks MUST be present
-    ( WITH COMPONENTS { ..., asID PRESENT} |
-      WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+  asID         [0]       ConstrainedASIdentifiers OPTIONAL,
+  ipAddrBlocks [1]       ConstrainedIPAddrBlocks OPTIONAL }
+  -- at least one of asID or ipAddrBlocks MUST be present
+  ( WITH COMPONENTS { ..., asID PRESENT} |
+    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
- NotIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF NotIPAddressFamily
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
 
- NotIPAddressFamily  ::= SEQUENCE { -- AFI & opt SAFI --
-    addressFamily        OCTET STRING (SIZE (2..3)),
-    ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+ConstrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
+  addressFamily        OCTET STRING (SIZE (2)),
+  ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
- NotASIdentifiers       ::= SEQUENCE {
-     asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
+ConstrainedASIdentifiers    ::= SEQUENCE {
+  asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
 END
