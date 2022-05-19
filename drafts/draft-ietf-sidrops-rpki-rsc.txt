@@ -13,7 +13,7 @@ Expires: 20 November 2022                                          APNIC
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
                             Checklists (RSC)
-                     draft-ietf-sidrops-rpki-rsc-06
+                     draft-ietf-sidrops-rpki-rsc-07
 
 Abstract
 

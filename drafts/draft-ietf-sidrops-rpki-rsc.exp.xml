@@ -7,7 +7,7 @@
 <?rfc tocdepth="3"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-06" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-07" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
   <front>
     <title abbrev="RPKI Signed Checklists">
       A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
