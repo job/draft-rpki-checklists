@@ -1195,7 +1195,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Snijders, et al.</td>
-<td class="center">Expires 11 November 2022</td>
+<td class="center">Expires 20 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1208,12 +1208,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-06</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-05-10" class="published">10 May 2022</time>
+<time datetime="2022-05-19" class="published">19 May 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-11-11">11 November 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-20">20 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1269,7 +1269,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1320,6 +1320,14 @@ li > p:last-of-type {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-resources-2" class="xref">resources</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="xref">4.2.1</a>.  <a href="#name-constrainedasidentifiers-typ" class="xref">ConstrainedASIdentifiers type</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="xref">4.2.2</a>.  <a href="#name-constrainedipaddrblocks-type" class="xref">ConstrainedIPAddrBlocks type</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-digestalgorithm-2" class="xref">digestAlgorithm</a></p>
@@ -1483,7 +1491,7 @@ IMPORTS
     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
       pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
 
-  ASIdentifiers, IPAddrBlocks
+  IPAddressOrRange, ASIdOrRange
   FROM IPAddrAndASCertExtn -- in [RFC3779]
     { iso(1) identified-organization(3) dod(6) internet(1)
       security(5) mechanisms(5) pkix(7) mod(0)
@@ -1508,11 +1516,20 @@ FileNameAndHash ::= SEQUENCE {
   hash            Digest }
 
 ResourceBlock ::= SEQUENCE {
-    asID         [0]       ASIdentifiers OPTIONAL,
-    ipAddrBlocks [1]       IPAddrBlocks OPTIONAL }
-    -- at least one of asID or ipAddrBlocks MUST be present
-    ( WITH COMPONENTS { ..., asID PRESENT} |
-      WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+  asID         [0]       ConstrainedASIdentifiers OPTIONAL,
+  ipAddrBlocks [1]       ConstrainedIPAddrBlocks OPTIONAL }
+  -- at least one of asID or ipAddrBlocks MUST be present
+  ( WITH COMPONENTS { ..., asID PRESENT} |
+    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
+
+ConstrainedIPAddressFamily   ::= SEQUENCE { -- AFI &amp; opt SAFI --
+  addressFamily        OCTET STRING (SIZE (2)),
+  addressesOrRanges    SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+
+ConstrainedASIdentifiers    ::= SEQUENCE {
+  asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
 END
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
@@ -1531,11 +1548,56 @@ END
 <p id="section-4.2-1">
           The resources contained here are the resources used to mark the attestation, and MUST be a subset of the set of resources listed by the EE Certificate carried in the CMS certificates field.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">
-          If the asID component is present, it MUST include one or more "asnum" elements.
-          The "inherit" element or any "rdi" elements MUST NOT be specified.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+          If the asID field is present, it MUST contain an instance of ConstrainedASIdentifiers.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">
-          If the ipAddrBlocks component is present, it MUST include one or more IPAddressFamily types.
-          The "inherit" element MUST NOT be specified.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+          If the ipAddrBlocks field is present, it MUST contain an instance of ConstrainedIPAddrBlocks.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">
+          Each of ConstrainedASIdentifiers and ConstrainedIPAddrBlocks are specified such that the resulting DER encoded data instances are binary compatible with, respectively, ASIdentifiers and IPAddrBlocks defined in <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span>.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<section id="section-4.2.1">
+          <h4 id="name-constrainedasidentifiers-typ">
+<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-constrainedasidentifiers-typ" class="section-name selfRef">ConstrainedASIdentifiers type</a>
+          </h4>
+<p id="section-4.2.1-1">
+            ConstrainedASIdentifiers is a SEQUENCE, constisting of a single field "asnum", itself containing a SEQUENCE OF one or more ASIdOrRange instances as defined in <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span>.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">
+            ConstrainedASIdentifiers is defined such that the resulting DER encoded data are binary compatible with ASIdentifiers defined in <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span>.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-4.2.2">
+          <h4 id="name-constrainedipaddrblocks-type">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-constrainedipaddrblocks-type" class="section-name selfRef">ConstrainedIPAddrBlocks type</a>
+          </h4>
+<p id="section-4.2.2-1">
+            ConstrainedIPAddrBlocks is a SEQUENCE OF one or more instances of ConstrainedIPAddressFamily.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-2">
+            There MUST be only one instance of ConstrainedIPAddressFamily per unique AFI.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-3">
+            The elements of ConstrainedIPAddressFamily MUST be ordered by ascending addressFamily values (treating the octets as unsigned numbers).
+            Thus, when both IPv4 and IPv6 addresses are specified, the IPv4 addresses MUST precede the IPv6 addresses (since the IPv4 AFI of 0001 is less than the IPv6 AFI of 0002).<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-4">
+            ConstrainedIPAddrBlocks is defined such that the resulting DER encoded data are binary compatible with IPAddrBlocks defined in <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span>.<a href="#section-4.2.2-4" class="pilcrow">¶</a></p>
+<section id="section-4.2.2.1">
+            <h5 id="name-constrainedipaddressfamily-t">
+<a href="#section-4.2.2.1" class="section-number selfRef">4.2.2.1. </a><a href="#name-constrainedipaddressfamily-t" class="section-name selfRef">ConstrainedIPAddressFamily type</a>
+            </h5>
+<section id="section-4.2.2.1.1">
+              <h6 id="name-addressfamily-field-2">
+<a href="#section-4.2.2.1.1" class="section-number selfRef">4.2.2.1.1. </a><a href="#name-addressfamily-field-2" class="section-name selfRef">addressFamily field</a>
+              </h6>
+<p id="section-4.2.2.1.1-1">
+                The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
+                Unlike <span><a href="#RFC3779" class="xref">IPAddrBlocks</a> [<a href="#RFC3779" class="xref">RFC3779</a>]</span>, a third octet containing a SAFI MUST NOT be present.
+                AFIs and SAFIs are specified in [IANA-AFI] and [IANA-SAFI], respectively.<a href="#section-4.2.2.1.1-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-4.2.2.1.2">
+              <h6 id="name-addressesorranges-field-2">
+<a href="#section-4.2.2.1.2" class="section-number selfRef">4.2.2.1.2. </a><a href="#name-addressesorranges-field-2" class="section-name selfRef">addressesOrRanges field</a>
+              </h6>
+<p id="section-4.2.2.1.2-1">
+                The addressesOrRanges element is a SEQUENCE OF (one or more) IPAddressOrRange values, as defined in <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span>.
+                The rules for canonicalization and encoding defined in <span><a href="#RFC3779" class="xref">section 2.2.3.6</a> [<a href="#RFC3779" class="xref">RFC3779</a>]</span> apply of the value of addressesOrRanges.<a href="#section-4.2.2.1.2-1" class="pilcrow">¶</a></p>
+</section>
+</section>
+</section>
 </section>
 <section id="section-4.3">
         <h3 id="name-digestalgorithm-2">
