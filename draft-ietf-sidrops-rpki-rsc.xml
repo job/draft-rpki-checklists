@@ -170,13 +170,70 @@
           The resources contained here are the resources used to mark the attestation, and MUST be a subset of the set of resources listed by the EE Certificate carried in the CMS certificates field.
         </t>
         <t>
-          If the asID component is present, it MUST include one or more "asnum" elements.
-          The "inherit" element or any "rdi" elements MUST NOT be specified.
+          If the asID field is present, it MUST contain an instance of ConstrainedASIdentifiers.
         </t>
         <t>
-          If the ipAddrBlocks component is present, it MUST include one or more IPAddressFamily types.
-          The "inherit" element MUST NOT be specified.
+          If the ipAddrBlocks field is present, it MUST contain an instance of ConstrainedIPAddrBlocks.
         </t>
+        <t>
+          Each of ConstrainedASIdentifiers and ConstrainedIPAddrBlocks are specified such that the resulting DER encoded data instances are binary compatible with, respectively, ASIdentifiers and IPAddrBlocks defined in <xref target="RFC3779"/>.
+        </t>
+
+        <section>
+          <name>ConstrainedASIdentifiers type</name>
+
+          <t>
+            ConstrainedASIdentifiers is a SEQUENCE, constisting of a single field "asnum", itself containing a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
+          </t>
+
+          <t>
+            ConstrainedASIdentifiers is defined such that the resulting DER encoded data are binary compatible with ASIdentifiers defined in <xref target="RFC3779"/>.
+          </t>
+
+        </section>
+
+        <section>
+          <name>ConstrainedIPAddrBlocks type</name>
+
+          <t>
+            ConstrainedIPAddrBlocks is a SEQUENCE OF one or more instances of ConstrainedIPAddressFamily.
+          </t>
+
+          <t>
+            There MUST be only one instance of ConstrainedIPAddressFamily per unique AFI.
+          </t>
+
+          <t>
+            The elements of ConstrainedIPAddressFamily MUST be ordered by ascending addressFamily values (treating the octets as unsigned numbers).
+            Thus, when both IPv4 and IPv6 addresses are specified, the IPv4 addresses MUST precede the IPv6 addresses (since the IPv4 AFI of 0001 is less than the IPv6 AFI of 0002).
+          </t>
+
+          <t>
+            ConstrainedIPAddrBlocks is defined such that the resulting DER encoded data are binary compatible with IPAddrBlocks defined in <xref target="RFC3779"/>.
+          </t>
+
+          <section>
+            <name>ConstrainedIPAddressFamily type</name>
+
+            <section>
+              <name>addressFamily field</name>
+              <t>
+                The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
+                Unlike <xref target="RFC3779">IPAddrBlocks</xref>, a third octet containing a SAFI MUST NOT be present.
+                AFIs and SAFIs are specified in [IANA-AFI] and [IANA-SAFI], respectively.
+              </t>
+            </section>
+
+            <section>
+              <name>addressesOrRanges field</name>
+              <t>
+                The addressesOrRanges element is a SEQUENCE OF (one or more) IPAddressOrRange values, as defined in <xref target="RFC3779"/>.
+                The rules for canonicalization and encoding defined in <xref target="RFC3779">section 2.2.3.6</xref> apply of the value of addressesOrRanges.
+              </t>
+            </section>
+          </section>
+
+        </section>
       </section>
 
       <section>

@@ -46,7 +46,7 @@ ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressF
 
 ConstrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
   addressFamily        OCTET STRING (SIZE (2)),
-  ipAddressChoice      SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+  addressesOrRanges    SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
 ConstrainedASIdentifiers    ::= SEQUENCE {
   asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
