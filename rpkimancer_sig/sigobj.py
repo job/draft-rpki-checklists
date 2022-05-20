@@ -53,8 +53,8 @@ class ConstrainedIPAddrBlocks(Interface):
     def __init__(self, ip_resources: IpResourcesInfo):
         """Initialise instance from python data."""
         data = [{"addressFamily": AFI[network.version],
-                 "ipAddressChoice": [("addressPrefix",
-                                      net_to_bitstring(network))]}
+                 "addressesOrRanges": [("addressPrefix",
+                                        net_to_bitstring(network))]}
                 for network in ip_resources
                 if isinstance(network, (ipaddress.IPv4Network,
                                         ipaddress.IPv6Network))]
