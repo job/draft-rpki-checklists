@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>refs/tags/03 ⟼ refs/tags/06 &#8212; RPKI Signed Checklists 0.6.1.dev17 documentation</title>
+    <title>refs/tags/03 ⟼ refs/tags/06 &#8212; RPKI Signed Checklists 0.7.1.dev13 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="draft-ietf-sidrops-rpki-rsc-diff-from-tags.04.html" title="refs/tags/04 ⟼ refs/tags/06"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.6.1.dev17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.7.1.dev13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -70,12 +70,12 @@
 <span class="w"> </span>Network Working Group                                        J. Snijders<span class="w"></span>
 <span class="w"> </span>Internet-Draft                                                    Fastly<span class="w"></span>
 <span class="w"> </span>Intended status: Standards Track                             T. Harrison<span class="w"></span>
-<span class="gd">-Expires: 19 October 2022                                           APNIC</span><span class="w"></span>
-<span class="gi">+Expires: 16 August 2022                                            APNIC</span><span class="w"></span>
+<span class="gd">-Expires: 21 November 2022                                          APNIC</span><span class="w"></span>
+<span class="gi">+Expires: 10 August 2022                                            APNIC</span><span class="w"></span>
 <span class="w"> </span>                                                             B. Maddison<span class="w"></span>
 <span class="w"> </span>                                                              Workonline<span class="w"></span>
-<span class="gd">-                                                           17 April 2022</span><span class="w"></span>
-<span class="gi">+                                                        12 February 2022</span><span class="w"></span>
+<span class="gd">-                                                             20 May 2022</span><span class="w"></span>
+<span class="gi">+                                                         6 February 2022</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>
 <span class="w"> </span>  Resource Public Key Infrastructure (RPKI) object profile for Signed<span class="w"></span>
@@ -90,8 +90,8 @@
 <span class="w"> </span>   time.  It is inappropriate to use Internet-Drafts as reference<span class="w"></span>
 <span class="w"> </span>   material or to cite them other than as &quot;work in progress.&quot;<span class="w"></span>
 <span class="w"> </span>
-<span class="gd">-   This Internet-Draft will expire on 19 October 2022.</span><span class="w"></span>
-<span class="gi">+   This Internet-Draft will expire on 16 August 2022.</span><span class="w"></span>
+<span class="gd">-   This Internet-Draft will expire on 21 November 2022.</span><span class="w"></span>
+<span class="gi">+   This Internet-Draft will expire on 10 August 2022.</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>Copyright Notice<span class="w"></span>
 <span class="w"> </span>
@@ -114,7 +114,7 @@
 <span class="w"> </span>   9.  IANA Considerations<span class="w"></span>
 <span class="w"> </span>     9.1.  SMI Security for S/MIME CMS Content Type<span class="w"></span>
 <span class="w"> </span>           (1.2.840.113549.1.9.16.1)<span class="w"></span>
-<span class="gu">@@ -92,12 +93,14 @@</span><span class="w"></span>
+<span class="gu">@@ -92,12 +93,13 @@</span><span class="w"></span>
 
 <span class="w"> </span>     10.1.  Normative References<span class="w"></span>
 <span class="w"> </span>     10.2.  Informative References<span class="w"></span>
@@ -126,17 +126,16 @@
 <span class="gd">-     B.3.  changes from -00 -&gt; -01</span><span class="w"></span>
 <span class="gd">-     B.4.  individual submission phase</span><span class="w"></span>
 <span class="gi">+   Appendix B.  Document changelog</span><span class="w"></span>
-<span class="gi">+     B.1.  changes from -05 -&gt; -06</span><span class="w"></span>
-<span class="gi">+     B.2.  changes from -04 -&gt; -05</span><span class="w"></span>
-<span class="gi">+     B.3.  changes from -03 -&gt; -04</span><span class="w"></span>
-<span class="gi">+     B.4.  changes from -02 -&gt; -03</span><span class="w"></span>
-<span class="gi">+     B.5.  changes from -01 -&gt; -02</span><span class="w"></span>
-<span class="gi">+     B.6.  changes from -00 -&gt; -01</span><span class="w"></span>
-<span class="gi">+     B.7.  individual submission phase</span><span class="w"></span>
+<span class="gi">+     B.1.  changes from -04 -&gt; -05</span><span class="w"></span>
+<span class="gi">+     B.2.  changes from -03 -&gt; -04</span><span class="w"></span>
+<span class="gi">+     B.3.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="gi">+     B.4.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="gi">+     B.5.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="gi">+     B.6.  individual submission phase</span><span class="w"></span>
 <span class="w"> </span>   Authors&#39; Addresses<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>1.  Introduction<span class="w"></span>
-<span class="gu">@@ -131,14 +134,22 @@</span><span class="w"></span>
+<span class="gu">@@ -131,14 +133,22 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>   RSC follows the Signed Object Template for the RPKI [RFC6488] with<span class="w"></span>
@@ -162,7 +161,7 @@
 <span class="w"> </span>3.  The RSC ContentType<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>   The ContentType for an RSC is defined as rpkiSignedChecklist, and has<span class="w"></span>
-<span class="gu">@@ -163,9 +174,9 @@</span><span class="w"></span>
+<span class="gu">@@ -163,9 +173,9 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>   IMPORTS<span class="w"></span>
@@ -175,7 +174,7 @@
 <span class="w"> </span>
 <span class="w"> </span>     ASIdOrRange, IPAddressOrRange<span class="w"></span>
 <span class="w"> </span>     FROM IPAddrAndASCertExtn -- in [RFC3779]<span class="w"></span>
-<span class="gu">@@ -216,7 +227,7 @@</span><span class="w"></span>
+<span class="gu">@@ -216,7 +226,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>   The resources contained here are the resources used to mark the<span class="w"></span>
@@ -185,7 +184,7 @@
 <span class="w"> </span>
 <span class="w"> </span>4.3.  digestAlgorithm<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -226,39 +237,45 @@</span><span class="w"></span>
+<span class="gu">@@ -226,39 +236,45 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>4.4.  checkList<span class="w"></span>
@@ -255,7 +254,7 @@
 <span class="w"> </span>
 <span class="w"> </span>6.  Operational Considerations<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -275,7 +292,7 @@</span><span class="w"></span>
+<span class="gu">@@ -275,7 +291,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>   a filename that matches the content of that field, a validator<span class="w"></span>
 <span class="w"> </span>   implementation SHOULD compare the message digest of each digital<span class="w"></span>
@@ -265,7 +264,7 @@
 <span class="w"> </span>   consideration.<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>7.  Security Considerations<span class="w"></span>
-<span class="gu">@@ -283,11 +300,11 @@</span><span class="w"></span>
+<span class="gu">@@ -283,11 +299,11 @@</span><span class="w"></span>
 
 <span class="w"> </span>   Relying parties are hereby warned that the data in a RPKI Signed<span class="w"></span>
 <span class="w"> </span>   Checklist is self-asserted.  When determining the meaning of any data<span class="w"></span>
@@ -280,7 +279,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   RPKI Certificates are not bound to real world identities, see<span class="w"></span>
 <span class="w"> </span>   [I-D.ymbk-sidrops-rpki-has-no-identity] for an elaboration.  Relying<span class="w"></span>
-<span class="gu">@@ -298,22 +315,36 @@</span><span class="w"></span>
+<span class="gu">@@ -298,22 +314,36 @@</span><span class="w"></span>
 
 <span class="w"> </span>   holder&#39;s business operations such as the identity of the resource<span class="w"></span>
 <span class="w"> </span>   holder itself.<span class="w"></span>
@@ -334,7 +333,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   This section records the status of known implementations of the<span class="w"></span>
 <span class="w"> </span>   protocol defined by this specification at the time of posting of this<span class="w"></span>
-<span class="gu">@@ -347,6 +378,9 @@</span><span class="w"></span>
+<span class="gu">@@ -347,6 +377,9 @@</span><span class="w"></span>
 
 <span class="w"> </span>   *  A validator implementation based on OpenBSD rpki-client and<span class="w"></span>
 <span class="w"> </span>      LibreSSL was developed by Job Snijders.<span class="w"></span>
@@ -345,7 +344,7 @@
 <span class="w"> </span>9.  IANA Considerations<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>9.1.  SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)<span class="w"></span>
-<span class="gu">@@ -355,9 +389,10 @@</span><span class="w"></span>
+<span class="gu">@@ -355,9 +388,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>   Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)<span class="w"></span>
 <span class="w"> </span>   registry:<span class="w"></span>
@@ -360,7 +359,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   Upon publication of this document, IANA is requested to reference the<span class="w"></span>
 <span class="w"> </span>   RFC publication instead of this draft.<span class="w"></span>
-<span class="gu">@@ -367,9 +402,10 @@</span><span class="w"></span>
+<span class="gu">@@ -367,9 +401,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>   The IANA is requested to register the OID for the RPKI Signed<span class="w"></span>
 <span class="w"> </span>   Checklist in the registry created by [RFC6488] as following:<span class="w"></span>
@@ -375,7 +374,7 @@
 <span class="w"> </span>
 <span class="w"> </span>9.3.  File Extension<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -377,9 +413,10 @@</span><span class="w"></span>
+<span class="gu">@@ -377,9 +412,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>   extension to the &quot;RPKI Repository Name Scheme&quot; registry created by<span class="w"></span>
 <span class="w"> </span>   [RFC6481] as follows:<span class="w"></span>
@@ -390,7 +389,7 @@
 <span class="w"> </span>
 <span class="w"> </span>9.4.  SMI Security for S/MIME Module Identifier<span class="w"></span>
 <span class="w"> </span>      (1.2.840.113549.1.9.16.0)<span class="w"></span>
-<span class="gu">@@ -387,9 +424,10 @@</span><span class="w"></span>
+<span class="gu">@@ -387,9 +423,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>   The IANA is requested to add an item to the &quot;SMI Security for S/MIME<span class="w"></span>
 <span class="w"> </span>   Module Identifier&quot; registry as follows:<span class="w"></span>
@@ -405,7 +404,7 @@
 <span class="w"> </span>
 <span class="w"> </span>9.5.  Media Type<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -420,6 +458,7 @@</span><span class="w"></span>
+<span class="gu">@@ -420,6 +457,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>      Author: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
 <span class="w"> </span>      Change controller: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
@@ -414,7 +413,7 @@
 <span class="w"> </span>10.  References<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>10.1.  Normative References<span class="w"></span>
-<span class="gu">@@ -448,6 +487,11 @@</span><span class="w"></span>
+<span class="gu">@@ -448,6 +486,11 @@</span><span class="w"></span>
 
 <span class="w"> </span>              (RPKI)&quot;, RFC 6486, DOI 10.17487/RFC6486, February 2012,<span class="w"></span>
 <span class="w"> </span>              &lt;https://www.rfc-editor.org/info/rfc6486&gt;.<span class="w"></span>
@@ -427,7 +426,7 @@
 <span class="w"> </span>   [RFC6488]  Lepinski, M., Chi, A., and S. Kent, &quot;Signed Object<span class="w"></span>
 <span class="w"> </span>              Template for the Resource Public Key Infrastructure<span class="w"></span>
 <span class="w"> </span>              (RPKI)&quot;, RFC 6488, DOI 10.17487/RFC6488, February 2012,<span class="w"></span>
-<span class="gu">@@ -463,21 +507,24 @@</span><span class="w"></span>
+<span class="gu">@@ -463,21 +506,24 @@</span><span class="w"></span>
 
 <span class="w"> </span>              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.<span class="w"></span>
 <span class="w"> </span>
@@ -458,7 +457,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base<span class="w"></span>
 <span class="w"> </span>              Specifications, Issue 7&quot;, 2016,<span class="w"></span>
-<span class="gu">@@ -510,29 +557,46 @@</span><span class="w"></span>
+<span class="gu">@@ -510,29 +556,42 @@</span><span class="w"></span>
 
 <span class="w"> </span>   Huston, Randy Bush, Stephen Kent, Matt Lepinski, Rob Austein, Ted<span class="w"></span>
 <span class="w"> </span>   Unangst, and Marc Espie for prior art.  The authors thank Russ<span class="w"></span>
@@ -477,20 +476,16 @@
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   This section is to be removed before publishing as an RFC.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
-<span class="gi">+B.1.  changes from -05 -&gt; -06</span><span class="w"></span>
-<span class="gi">+</span><span class="w"></span>
-<span class="gi">+   *  Non-content-related updates.</span><span class="w"></span>
-<span class="gi">+</span><span class="w"></span>
-<span class="gi">+B.2.  changes from -04 -&gt; -05</span><span class="w"></span>
+<span class="gi">+B.1.  changes from -04 -&gt; -05</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   *  Ties contributed clarifications.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
-<span class="gi">+B.3.  changes from -03 -&gt; -04</span><span class="w"></span>
+<span class="gi">+B.2.  changes from -03 -&gt; -04</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   *  Alberto pointed out the asID validation also needs to be</span><span class="w"></span>
 <span class="gi">+      documented.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
-<span class="gi">+B.4.  changes from -02 -&gt; -03</span><span class="w"></span>
+<span class="gi">+B.3.  changes from -02 -&gt; -03</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>   *  Reference the IANA assigned OID<span class="w"></span>
 <span class="w"> </span>
@@ -501,12 +496,12 @@
 <span class="gd">-   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp; Russ</span><span class="w"></span>
 <span class="gd">-</span><span class="w"></span>
 <span class="gd">-B.3.  changes from -00 -&gt; -01</span><span class="w"></span>
-<span class="gi">+B.5.  changes from -01 -&gt; -02</span><span class="w"></span>
+<span class="gi">+B.4.  changes from -01 -&gt; -02</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &amp;</span><span class="w"></span>
 <span class="gi">+      Russ.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
-<span class="gi">+B.6.  changes from -00 -&gt; -01</span><span class="w"></span>
+<span class="gi">+B.5.  changes from -00 -&gt; -01</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>   *  Readability improvements<span class="w"></span>
 <span class="w"> </span>
@@ -514,7 +509,7 @@
 <span class="w"> </span>      requirement.<span class="w"></span>
 <span class="w"> </span>
 <span class="gd">-B.4.  individual submission phase</span><span class="w"></span>
-<span class="gi">+B.7.  individual submission phase</span><span class="w"></span>
+<span class="gi">+B.6.  individual submission phase</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>   *  On-the-wire change: the &#39;Filename&#39; switched from &#39;required&#39; to<span class="w"></span>
 <span class="w"> </span>      &#39;optional&#39;.  Some SIDROPS Working Group participants proposed a<span class="w"></span>
