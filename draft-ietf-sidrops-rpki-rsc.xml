@@ -248,33 +248,59 @@
         <name>checkList</name>
         <t>
           This field is a sequence of FileNameAndHash objects.
-          There is one FileNameAndHash entry for each arbitrary object referenced on the Signed Checklist.
-          Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
-          The filename field is OPTIONAL.
+          There is one FileNameAndHash entry for each digital object referenced on the Signed Checklist.
         </t>
+
+        <section anchor="FileNameAndHash">
+          <name>FileNameAndHash</name>
+          <t>
+            Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
+          </t>
+          <t>
+            The fileName field is OPTIONAL. This is to allow Signed Checklists to be used in a "stand-alone" fashion, for example in a challenge-response authentication scheme similar to those defined in <xref target="RFC8555" section="8"/>.
+          </t>
+          <t>
+            If the fileName field is present then its value:
+          </t>
+          <ul>
+            <li>
+              MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
+            </li>
+            <li>
+              MUST be unique with respect to the other FileNameAndHash elements of checkList for which the fileName field is also present.
+            </li>
+          </ul>
+          <t>
+            Conversely, if the fileName field is omitted, then the value of the hash field MUST be unique with respect to the other FileNameAndHash elements of checkList for which the fileName field is also omitted.
+          </t>
+        </section>
       </section>
 
     </section>
 
-    <section>
+    <section anchor="validation">
       <name>RSC Validation</name>
 
       <t>
         Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
-        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488" /> (except checking for the presence of a SIA extension), and perform the following additional RSC-specific validation steps:
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488" /> (except checking for the presence of a SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
       </t>
 
       <ol>
         <li>
-          The RSC specification deviates from <xref target="RFC6487" section="4.8.8.2"/>, the Subject Information Access extension MUST NOT be present on the End-Entity (EE) certificate signing the RSC.
+          The contents of the CMS eContent field MUST conform to the constraints described in <xref target="econtent"/>. In particular, for each FileNameAndHash element in the checkList field, its contents MUST conform to the constraints described in <xref target="FileNameAndHash"/>.
         </li>
         <li>
-          The IP Addresses and AS Identifiers extension <xref target="RFC3779"/> is present in the end-entity (EE) certificate (contained within the RSC), and each IP address prefix(es) and/or AS Identifier(s) in the RSC is contained within the set of IP addresses specified by the EE Certificate's IP Addresses and AS Identifiers delegation extension.
+          If the asID field is present within the contents of the resources field, then the AS Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the resources field MUST be a subset of those present in the certificate extension.
         </li>
         <li>
-          For each FileNameAndHash entry in the RSC, if a filename field is present, the field's content MUST contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
+          If the ipAddrBlocks field is present within the contents of the resources field, then the IP Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The IP address resources present in the resources field MUST be a subset of those present in the certificate extension.
         </li>
       </ol>
+    </section>
+
+    <section>
+      <name>Verifying files or data using RSC</name>
 
       <t>
         To verify a set of digital objects with an RSC:
@@ -282,9 +308,50 @@
 
       <ul>
         <li>
-          The message digest of each referenced digital object, using the digest algorithm specified in the the digestAlgorithm field, MUST be calculated and MUST match the value given in the messageDigest field of the associated FileNameAndHash, for the digital object to be considered as verified with the RSC.
+          The RSC MUST be validated acording to the procedure described in <xref target="validation"/>. If the RSC cannot be validated, verification MUST fail and the error SHOULD be reported to the user.
+        </li>
+        <li>
+          <t>For every digital object to be verified:</t>
+          <ol>
+            <li anchor="mode">
+              <t>
+                If the verification procedure is provided with a file name for the object being verified (e.g. because the user has provided a file system path from which to read the object) then verification SHOULD proceed in "filename-aware" mode. Otherwise, verification SHOULD proceed in "filename-unaware" mode.
+              </t>
+              <t>
+                Implementations MAY provide an option to override the verification mode, for example to ignore the fact that the object is to be read from a file.
+              </t>
+            </li>
+            <li anchor="hash">
+              <t>
+                The message digest MUST be computed from the file contents or data using the digest algorithm specified in the digestAlgorithm field of the RSC.
+              </t>
+            </li>
+            <li anchor="match_hash">
+              <t>
+                The digest computed in step <xref target="hash" format="counter"/> MUST be compared to the value appearing in the hash field of all FileNameAndHash elements of the checkList field of the RSC.
+              </t>
+              <t>
+                One or more FileNameAndHash elements MUST be found with a matching hash value, otherwise verification MUST fail and the error SHOULD be reported to the user.
+              </t>
+            </li>
+            <li>
+              <t>
+                If the mode selected in step <xref target="mode" format="counter"/> is "filename-aware" then exactly one of the FileNameAndHash elements matched in step <xref target="match_hash" format="counter"/> MUST contain a fileName field value exactly matching the file name of the object being verified.
+              </t>
+              <t>
+                Alternatively, if the mode selected in step <xref target="mode" format="counter"/> is "filename-unaware" then exactly one of the FileNameAndHash elements matched in step <xref target="match_hash" format="counter"/> MUST have the fileName field omitted.
+              </t>
+              <t>
+                Otherwise, verification MUST fail, and the error SHOULD be reported to the user.
+              </t>
+            </li>
+          </ol>
         </li>
       </ul>
+
+      <t>
+        Note that in the above procedure, not all elements of checkList necessarily need be used. That is, it is not an error if the length of checkList is greater than the size of the set of digital objects to be verified. However, in this situation, implementations SHOULD issue a warning to the user, allowing for corrective action to be taken if necessary.
+      </t>
 
     </section>
 
@@ -498,6 +565,7 @@ Decimal  Description                      References
         <?rfc include="reference.I-D.ymbk-sidrops-rpki-has-no-identity-00.xml"?>
         <?rfc include="reference.RFC.1952.xml"?>
         <?rfc include="reference.RFC.6480.xml"?>
+        <?rfc include="reference.RFC.8555.xml"?>
         <reference anchor="signify" target="https://man.openbsd.org/signify">
           <front>
             <title>signify - cryptographically sign and verify files</title>
