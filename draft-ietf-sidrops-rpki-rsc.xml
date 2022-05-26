@@ -10,7 +10,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
-     docName="draft-ietf-sidrops-rpki-rsc-07"
+     docName="draft-ietf-sidrops-rpki-rsc-08"
      ipr="trust200902"
      xml:lang="en"
      sortRefs="true"
@@ -24,7 +24,7 @@
       A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
     </title>
 
-    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-06"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-08"/>
 
     <author fullname="Job Snijders" initials="J." surname="Snijders">
       <organization>Fastly</organization>
