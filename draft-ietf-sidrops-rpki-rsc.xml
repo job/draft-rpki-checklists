@@ -178,6 +178,15 @@
         <t>
           Each of ConstrainedASIdentifiers and ConstrainedIPAddrBlocks are specified such that the resulting DER encoded data instances are binary compatible with, respectively, ASIdentifiers and IPAddrBlocks defined in <xref target="RFC3779"/>.
         </t>
+        <t>
+          Implementations encountering decoding errors whilst attempting to read DER encoded data using this specification SHOULD be aware of the possibility that the data may have been encoded using an implementation intended for use with <xref target="RFC3779"/>. Such data may contain elements prohibited by the current specification.
+        </t>
+        <t>
+          Attempting to decode the errored data using the more permissive specification conatained in <xref target="RFC3779"/> may enable implementors to gather additional context for use when reporting errors to the user.
+        </t>
+        <t>
+          However, implementations MUST NOT ignore errors resulting from the more restrictive definitions contained herein: in particular, such errors MUST cause the validation procedure described in <xref target="validation"/> to fail.
+        </t>
 
         <section>
           <name>ConstrainedASIdentifiers type</name>
