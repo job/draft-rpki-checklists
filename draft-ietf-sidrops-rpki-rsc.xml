@@ -266,7 +266,8 @@
             Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
           </t>
           <t>
-            The fileName field is OPTIONAL. This is to allow Signed Checklists to be used in a "stand-alone" fashion, for example in a challenge-response authentication scheme similar to those defined in <xref target="RFC8555" section="8"/>.
+            The fileName field is OPTIONAL.
+            This is to allow Signed Checklists to be used in a "stand-alone" fashion in which nameless digital objects are addressed directly through their respective message digest rather than through a file system abstraction.
           </t>
           <t>
             If the fileName field is present then its value:
@@ -574,7 +575,6 @@ Decimal  Description                      References
         <?rfc include="reference.I-D.ymbk-sidrops-rpki-has-no-identity-00.xml"?>
         <?rfc include="reference.RFC.1952.xml"?>
         <?rfc include="reference.RFC.6480.xml"?>
-        <?rfc include="reference.RFC.8555.xml"?>
         <reference anchor="signify" target="https://man.openbsd.org/signify">
           <front>
             <title>signify - cryptographically sign and verify files</title>
@@ -659,7 +659,7 @@ Decimal  Description                      References
         <name>changes from -07 -&gt; -08</name>
         <ul>
           <li>Theo requested explanation as to why fileName is OPTIONAL</li>
-          <li>Russ & Randy requested implementor guidance when RFC3779-generated data fails to decode</li>
+          <li>Russ &amp; Randy requested implementor guidance when RFC3779-generated data fails to decode</li>
           <li>Added uniqueness constraints for fileName and hash contents</li>
           <li>Improved validation and verification procedure description</li>
           <li>Incorporated character-set constraints for fileName in ASN.1 module</li>
