@@ -44,7 +44,7 @@ ResourceBlock ::= SEQUENCE {
 
 ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
 
-ConstrainedIPAddressFamily   ::= SEQUENCE { -- AFI & opt SAFI --
+ConstrainedIPAddressFamily   ::= SEQUENCE {
   addressFamily        OCTET STRING (SIZE (2)),
   addressesOrRanges    SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
