@@ -32,8 +32,10 @@ RpkiSignedChecklist ::= SEQUENCE {
   checkList             SEQUENCE SIZE (1..MAX) OF FileNameAndHash }
 
 FileNameAndHash ::= SEQUENCE {
-  fileName        IA5String OPTIONAL,
+  fileName        PortableFilename OPTIONAL,
   hash            Digest }
+
+PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
 
 ResourceBlock ::= SEQUENCE {
   asID         [0]       ConstrainedASIdentifiers OPTIONAL,
