@@ -21,7 +21,9 @@ import typing
 from rpkimancer.algorithms import DIGEST_ALGORITHMS, SHA256
 from rpkimancer.asn1 import Interface
 from rpkimancer.asn1.mod import RpkiSignedChecklist_2022
-from rpkimancer.resources import (AFI, ASIdOrRange, AsResourcesInfo,
+from rpkimancer.resources import (AFI, ASIdOrRange, ASIdOrRangeInfo,
+                                  AsResourcesInfo, IPAddressRange,
+                                  IPNetwork, IPNetworkBits, IPRange,
                                   IpResourcesInfo, net_to_bitstring)
 from rpkimancer.sigobj.base import EncapsulatedContentType, SignedObject
 
@@ -29,19 +31,20 @@ from .eecert import UnpublishedEECertificate
 
 log = logging.getLogger(__name__)
 
+ConstrainedAsResourcesInfo = typing.Iterable[ASIdOrRangeInfo]
+
+ConstrainedIPAddressFamilyInfo = typing.Union[IPNetwork, IPRange]
+ConstrainedIpResourcesInfo = typing.Iterable[ConstrainedIPAddressFamilyInfo]
+
 
 class ConstrainedASIdentifiers(Interface):
     """ASN.1 ConstrainedASIdentifiers type."""
 
     content_syntax = RpkiSignedChecklist_2022.ConstrainedASIdentifiers
 
-    def __init__(self, as_resources: AsResourcesInfo) -> None:
+    def __init__(self, as_resources: ConstrainedAsResourcesInfo) -> None:
         """Initialise instance from python data."""
-        if isinstance(as_resources, list):
-            asnum = [ASIdOrRange(a).content_data for a in as_resources]
-        else:  # pragma: no cover
-            raise ValueError
-        data = {"asnum": asnum}
+        data = {"asnum": [ASIdOrRange(a).content_data for a in as_resources]}
         super().__init__(data)
 
 
@@ -50,14 +53,30 @@ class ConstrainedIPAddrBlocks(Interface):
 
     content_syntax = RpkiSignedChecklist_2022.ConstrainedIPAddrBlocks
 
-    def __init__(self, ip_resources: IpResourcesInfo):
+    def __init__(self, ip_resources: ConstrainedIpResourcesInfo) -> None:
         """Initialise instance from python data."""
-        data = [{"addressFamily": AFI[network.version],
-                 "addressesOrRanges": [("addressPrefix",
-                                        net_to_bitstring(network))]}
-                for network in ip_resources
-                if isinstance(network, (ipaddress.IPv4Network,
-                                        ipaddress.IPv6Network))]
+        log.info(f"preparing data for {self}")
+        net_data_type = typing.Tuple[str, IPNetworkBits]
+        entry_type = typing.Tuple[int, net_data_type]
+
+        def _net_entry(data: ConstrainedIPAddressFamilyInfo) -> entry_type:
+            if isinstance(data, (ipaddress.IPv4Network,
+                                 ipaddress.IPv6Network)):
+                return data.version, ("addressPrefix", net_to_bitstring(data))
+            elif isinstance(data[0], (ipaddress.IPv4Address,
+                                      ipaddress.IPv6Address)):
+                return data[0].version, ("addressRange",
+                                         IPAddressRange(data).content_data)
+            else:
+                raise ValueError
+
+        by_afi = {afi_data: [net_data
+                             for net_version, net_data
+                             in map(_net_entry, ip_resources)
+                             if net_version == afi_version]
+                  for (afi_version, afi_data) in AFI.items()}
+        data = [{"addressFamily": afi, "addressesOrRanges": entries}
+                for afi, entries in by_afi.items() if entries]
         super().__init__(data)
 
 
@@ -70,8 +89,8 @@ class SignedChecklistContentType(EncapsulatedContentType):
     def __init__(self, *,
                  paths: typing.List[str],
                  version: int = 0,
-                 as_resources: typing.Optional[AsResourcesInfo] = None,
-                 ip_resources: typing.Optional[IpResourcesInfo] = None,
+                 as_resources: typing.Optional[ConstrainedAsResourcesInfo] = None,  # noqa: E501
+                 ip_resources: typing.Optional[ConstrainedIpResourcesInfo] = None,  # noqa: E501
                  digest_algorithm: typing.Tuple[int, ...] = SHA256) -> None:
         """Initialise the encapContentInfo."""
         checklist = list()

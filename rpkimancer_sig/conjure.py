@@ -14,7 +14,6 @@
 from __future__ import annotations
 
 import glob
-import ipaddress
 import logging
 import os
 import typing
@@ -25,6 +24,7 @@ from rpkimancer.cli.conjure import (ConjurePlugin,
                                     DEFAULT_CA_IP_RESOURCES,
                                     META_AS, META_IP, META_PATH,
                                     PluginReturn)
+from rpkimancer.cli.helpers import ip_resource
 
 if typing.TYPE_CHECKING:
     from rpkimancer.cert import CertificateAuthority
@@ -55,7 +55,7 @@ class ConjureChecklist(ConjurePlugin):
                                  help="ASN(s) to include in the RSC object "
                                       "(default: %(default)s)")
         self.parser.add_argument("--rsc-ip-resources",
-                                 nargs="+", type=ipaddress.ip_network,
+                                 nargs="+", type=ip_resource,
                                  default=DEFAULT_CA_IP_RESOURCES,
                                  metavar=META_IP,
                                  help="IP resources to include in the RSC object "  # noqa: E501
