@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 27 November 2022                                          APNIC
+Expires: 3 December 2022                                           APNIC
                                                              B. Maddison
                                                               Workonline
-                                                             26 May 2022
+                                                             1 June 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 1]
+Snijders, et al.         Expires 3 December 2022                [Page 1]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
-   This Internet-Draft will expire on 27 November 2022.
+   This Internet-Draft will expire on 3 December 2022.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 2]
+Snijders, et al.         Expires 3 December 2022                [Page 2]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
      B.1.  changes from -07 -> -08 . . . . . . . . . . . . . . . . .  16
@@ -165,9 +165,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 3]
+Snijders, et al.         Expires 3 December 2022                [Page 3]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    What constitutes suitable transport for RSC files is deliberately
@@ -221,9 +221,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 4]
+Snijders, et al.         Expires 3 December 2022                [Page 4]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
          id-ct-signedChecklist }
@@ -277,9 +277,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 5]
+Snijders, et al.         Expires 3 December 2022                [Page 5]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    If the ipAddrBlocks field is present, it MUST contain an instance of
@@ -333,9 +333,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 6]
+Snijders, et al.         Expires 3 December 2022                [Page 6]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    ConstrainedIPAddrBlocks is defined such that the resulting DER-
@@ -389,9 +389,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 7]
+Snijders, et al.         Expires 3 December 2022                [Page 7]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    *  MUST be unique with respect to the other FileNameAndHash elements
@@ -445,9 +445,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 8]
+Snijders, et al.         Expires 3 December 2022                [Page 8]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
           verification SHOULD proceed in "filename-aware" mode.
@@ -501,9 +501,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022                [Page 9]
+Snijders, et al.         Expires 3 December 2022                [Page 9]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    string of arbitrary single octets.
@@ -557,9 +557,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 10]
+Snijders, et al.         Expires 3 December 2022               [Page 10]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    Conversely, a gap in serial numbers does not imply that an RSC
@@ -613,9 +613,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 11]
+Snijders, et al.         Expires 3 December 2022               [Page 11]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    *  A validator implementation based on OpenBSD rpki-client and
@@ -669,9 +669,9 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 12]
+Snijders, et al.         Expires 3 December 2022               [Page 12]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
 10.4.  SMI Security for S/MIME Module Identifier
@@ -725,9 +725,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 13]
+Snijders, et al.         Expires 3 December 2022               [Page 13]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -781,9 +781,9 @@ Internet-Draft           RPKI Signed Checklists                 May 2022
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 14]
+Snijders, et al.         Expires 3 December 2022               [Page 14]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    [I-D.ietf-sidrops-rpki-rta]
@@ -837,9 +837,9 @@ Appendix A.  Acknowledgements
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 15]
+Snijders, et al.         Expires 3 December 2022               [Page 15]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
    suggestions.
@@ -893,9 +893,9 @@ B.7.  changes from -01 -> -02
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 16]
+Snijders, et al.         Expires 3 December 2022               [Page 16]
 
-Internet-Draft           RPKI Signed Checklists                 May 2022
+Internet-Draft           RPKI Signed Checklists                June 2022
 
 
 B.8.  changes from -00 -> -01
@@ -949,4 +949,4 @@ Authors' Addresses
 
 
 
-Snijders, et al.        Expires 27 November 2022               [Page 17]
+Snijders, et al.         Expires 3 December 2022               [Page 17]
