@@ -87,7 +87,8 @@ class SignedChecklistContentType(EncapsulatedContentType):
     file_ext = "sig"
 
     def __init__(self, *,
-                 paths: typing.List[str],
+                 paths: typing.Iterable[str],
+                 anon_data: typing.Optional[typing.Iterable[bytes]] = None,
                  version: int = 0,
                  as_resources: typing.Optional[ConstrainedAsResourcesInfo] = None,  # noqa: E501
                  ip_resources: typing.Optional[ConstrainedIpResourcesInfo] = None,  # noqa: E501
@@ -101,6 +102,10 @@ class SignedChecklistContentType(EncapsulatedContentType):
             digest = alg(content).digest()
             checklist.append({"fileName": os.path.basename(path),
                               "hash": digest})
+        if anon_data is not None:
+            for item in anon_data:
+                digest = alg(item).digest()
+                checklist.append({"hash": digest})
         data: typing.Dict[str, typing.Any] = {"version": version,
                                               "digestAlgorithm": {"algorithm": digest_algorithm},  # noqa: E501
                                               "checkList": checklist,

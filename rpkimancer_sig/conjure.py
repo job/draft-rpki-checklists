@@ -43,6 +43,7 @@ class ConjureChecklist(ConjurePlugin):
                                                            "**", "*.asn"),
                                               recursive=True)
                          if os.path.isfile(p)]
+        default_data = [b"Hello, World!"]
         self.parser.add_argument("--rsc-paths",
                                  nargs="+", default=default_paths,
                                  metavar=META_PATH,
@@ -60,6 +61,18 @@ class ConjureChecklist(ConjurePlugin):
                                  metavar=META_IP,
                                  help="IP resources to include in the RSC object "  # noqa: E501
                                       "(default: %(default)s)")
+        anon_data_group = self.parser.add_mutually_exclusive_group()
+        anon_data_group.add_argument("--rsc-anon-data",
+                                     nargs="+", type=str.encode,
+                                     default=default_data,
+                                     metavar="<chars>",
+                                     help="String of characters to include "
+                                          "as anonymous checkList entries "
+                                          "(default: %(default)s)")
+        anon_data_group.add_argument("--rsc-no-anon-data",
+                                     dest="rsc_anon_data",
+                                     action="store_const", const=[],
+                                     help="Omit anonymous checkList entries")
 
     def run(self,
             parsed_args: Args,
@@ -73,6 +86,7 @@ class ConjureChecklist(ConjurePlugin):
         rsc_output_dir = os.path.join(parsed_args.output_dir, RSC_SUB_DIR)
         SignedChecklist(issuer=ca,
                         paths=parsed_args.rsc_paths,
+                        anon_data=parsed_args.rsc_anon_data,
                         as_resources=parsed_args.rsc_as_resources,
                         ip_resources=parsed_args.rsc_ip_resources)
         return {"rsc_output_dir": rsc_output_dir}
