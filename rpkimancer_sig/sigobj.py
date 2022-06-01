@@ -13,7 +13,9 @@
 
 from __future__ import annotations
 
+import copy
 import ipaddress
+import json
 import logging
 import os
 import typing
@@ -23,8 +25,9 @@ from rpkimancer.asn1 import Interface
 from rpkimancer.asn1.mod import RpkiSignedChecklist_2022
 from rpkimancer.resources import (AFI, ASIdOrRange, ASIdOrRangeInfo,
                                   AsResourcesInfo, IPAddressRange,
-                                  IPNetwork, IPNetworkBits, IPRange,
-                                  IpResourcesInfo, net_to_bitstring)
+                                  IPNetwork, IPNetworkBits,
+                                  IPRange, IPRangeBits, IpResourcesInfo,
+                                  bitstring_to_net, net_to_bitstring)
 from rpkimancer.sigobj.base import EncapsulatedContentType, SignedObject
 
 from .eecert import UnpublishedEECertificate
@@ -128,6 +131,37 @@ class SignedChecklistContentType(EncapsulatedContentType):
         """Get the IP Address Resources covered by this Checklist."""
         return self._ip_resources
 
+    def to_json(self) -> str:
+        """Serialize as JSON."""
+        data = copy.deepcopy(self.content_data)
+        afi_bytes_version_map = {v: k for k, v in AFI.items()}
+        data["digestAlgorithm"]["algorithm"] = ".".join(str(i)
+                                                        for i in self.content_data["digestAlgorithm"]["algorithm"])  # noqa: E501
+        for i, entry in enumerate(self.content_data["checkList"]):
+            data_entry = data["checkList"][i]
+            data_entry["hash"] = entry["hash"].hex()
+        for i, asnum in enumerate(self.content_data["resources"]["asID"]["asnum"]):  # noqa: E501
+            data["resources"]["asID"]["asnum"][i] = {asnum[0]: asnum[1]}
+        for i, addr_block in enumerate(self.content_data["resources"]["ipAddrBlocks"]):  # noqa: E501
+            data_addr_block = data["resources"]["ipAddrBlocks"][i]
+            version = afi_bytes_version_map[addr_block["addressFamily"]]
+            data_addr_block["addressFamily"] = f"ipv{version}"
+            for j, addr in enumerate(addr_block["addressesOrRanges"]):
+                addr_info: typing.Union[str, typing.Dict[str, str]]
+                if addr[0] == "addressPrefix":
+                    network = bitstring_to_net(addr[1], version)
+                    addr_info = str(network)
+                elif addr[0] == "addressRange":
+                    min_addr, max_addr = bitstring_to_addr_range((addr[1]["min"],  # noqa: E501
+                                                                  addr[1]["max"]),  # noqa: E501
+                                                                 version)
+                    addr_info = {"min": str(min_addr), "max": str(max_addr)}
+                else:
+                    raise ValueError
+                data_addr_block["addressesOrRanges"][j] = {addr[0]: addr_info}
+        log.info(data)
+        return json.dumps(data, indent=2)
+
 
 class SignedChecklist(SignedObject[SignedChecklistContentType]):
     """CMS ASN.1 ContentInfo for RPKI Signed Checklists."""
@@ -145,3 +179,16 @@ class SignedChecklist(SignedObject[SignedChecklistContentType]):
                 f.write(self.to_der())
         else:
             super().publish(**kwargs)
+
+
+# TODO: move into rpkimancer.resources
+def bitstring_to_addr_range(bits: IPRangeBits, version: int) -> IPRange:
+    """Convert a pair of ASN.1 BIT STRING representations to an IPRange."""
+    len_map = {4: ipaddress.IPV4LENGTH, 6: ipaddress.IPV6LENGTH}
+    cls_map = {4: ipaddress.IPv4Address, 6: ipaddress.IPv6Address}
+    addr_len = len_map[version]
+    addr_cls = cls_map[version]
+    (low_bits, low_len), (high_bits, high_len) = bits
+    low = addr_cls(low_bits << addr_len - low_len)
+    high = addr_cls((high_bits + 1 << addr_len - high_len) - 1)
+    return typing.cast(IPRange, (low, high))
