@@ -176,6 +176,9 @@
           If the ipAddrBlocks field is present, it MUST contain an instance of ConstrainedIPAddrBlocks.
         </t>
         <t>
+          At least one of asID or ipAddrBlocks MUST be present.
+        </t>
+        <t>
           Each of ConstrainedASIdentifiers and ConstrainedIPAddrBlocks are specified such that the resulting DER-encoded data instances are binary compatible with, respectively, ASIdentifiers and IPAddrBlocks defined in <xref target="RFC3779"/>.
         </t>
         <t>
