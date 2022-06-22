@@ -1,14 +1,14 @@
 <RpkiSignedChecklist>
   <resources>
-      <ipAddrBlocks>
-          <IPAddressFamilyItem>
-            <addressFamily>00 02</addressFamily>
-            <iPAddressOrRange>
-              <addressPrefix>
-                001000000000000100000110011111000010000010001100
-              </addressPrefix>
-            </iPAddressOrRange>
-          </IPAddressFamilyItem>
+     <ipAddrBlocks>
+          <ConstrainedIPAddressFamily>
+	      <addressFamily>00 02</addressFamily>
+              <addressesOrRanges>
+                  <addressPrefix>
+                      001000000000000100000110011111000010000010001100
+                  </addressPrefix>
+              </addressesOrRanges>
+          </ConstrainedIPAddressFamily>
       </ipAddrBlocks>
   </resources>
   <digestAlgorithm>
