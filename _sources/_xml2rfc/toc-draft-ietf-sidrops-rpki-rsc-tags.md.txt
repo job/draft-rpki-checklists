@@ -4,6 +4,4 @@
 
 refs/tags/03/draft-ietf-sidrops-rpki-rsc
 refs/tags/04/draft-ietf-sidrops-rpki-rsc
-refs/tags/05/draft-ietf-sidrops-rpki-rsc
-refs/tags/06/draft-ietf-sidrops-rpki-rsc
 :::

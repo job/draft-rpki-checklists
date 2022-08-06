@@ -2,10 +2,5 @@
 
 :::{toctree}
 
-refs/tags/06/draft-ietf-sidrops-rpki-rsc-diff-from-tags.05
-refs/tags/06/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
-refs/tags/06/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
-refs/tags/05/draft-ietf-sidrops-rpki-rsc-diff-from-tags.04
-refs/tags/05/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 refs/tags/04/draft-ietf-sidrops-rpki-rsc-diff-from-tags.03
 :::
