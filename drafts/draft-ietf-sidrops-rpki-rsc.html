@@ -15,25 +15,25 @@
         The profile is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
        
     " name="description">
-<meta content="xml2rfc 3.12.8" name="generator">
+<meta content="xml2rfc 3.13.0" name="generator">
 <meta content="draft-ietf-sidrops-rpki-rsc-08" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.8
+  xml2rfc 3.13.0
     Python 3.9.13
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.1
+    google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.3
+    Jinja2 3.1.2
     kitchen 1.2.6
-    lxml 4.9.0
-    MarkupSafe 2.0.1
+    lxml 4.9.1
+    MarkupSafe 2.1.1
     pycountry 22.3.5
-    pyflakes 2.4.0
+    pyflakes 2.5.0
     PyYAML 6.0
-    requests 2.28.0
-    setuptools 62.1.0
+    requests 2.28.1
+    setuptools 63.4.1
     six 1.16.0
 -->
 <link href="draft-ietf-sidrops-rpki-rsc.xml" rel="alternate" type="application/rfc+xml">
@@ -177,10 +177,6 @@ svg {
 }
 .alignCenter > *:first-child {
   border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
   margin: 0 auto;
 }
 
@@ -1194,11 +1190,11 @@ li > p:last-of-type {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RPKI Signed Checklists</td>
-<td class="right">June 2022</td>
+<td class="right">August 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Snijders, et al.</td>
-<td class="center">Expires 24 December 2022</td>
+<td class="center">Expires 7 February 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1211,12 +1207,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-08</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-06-22" class="published">22 June 2022</time>
+<time datetime="2022-08-06" class="published">6 August 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-12-24">24 December 2022</time></dd>
+<dd class="expires"><time datetime="2023-02-07">7 February 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1272,7 +1268,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 February 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1610,7 +1606,7 @@ END
 <p id="section-4.2.2.1.1-1">
                 The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
                 Unlike <span><a href="#RFC3779" class="xref">IPAddrBlocks</a> [<a href="#RFC3779" class="xref">RFC3779</a>]</span>, a third octet containing a SAFI MUST NOT be present.
-                AFIs are specified in <span>[<a href="#ADDRESS-FAMILY-NUMBERS" class="xref">ADDRESS-FAMILY-NUMBERS</a>]</span>.<a href="#section-4.2.2.1.1-1" class="pilcrow">¶</a></p>
+                AFIs are specified in <span>[<a href="#IANA.ADDRESS-FAMILY-NUMBERS" class="xref">IANA.ADDRESS-FAMILY-NUMBERS</a>]</span>.<a href="#section-4.2.2.1.1-1" class="pilcrow">¶</a></p>
 </section>
 <section id="section-4.2.2.1.2">
               <h6 id="name-addressesorranges-field-2">
@@ -1756,7 +1752,7 @@ END
         When determining the meaning of any data contained in an RPKI Signed Checklist, Relying Parties MUST NOT make any assumptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
         These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE Certificate used to validate the Signed Checklist.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">
-        RPKI Certificates are not bound to real world identities, see <span>[<a href="#I-D.ymbk-sidrops-rpki-has-no-identity" class="xref">I-D.ymbk-sidrops-rpki-has-no-identity</a>]</span> for an elaboration.
+        RPKI Certificates are not bound to real world identities, see <span>[<a href="#I-D.ietf-sidrops-rpki-has-no-identity" class="xref">I-D.ietf-sidrops-rpki-has-no-identity</a>]</span> for an elaboration.
         Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
         Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">
@@ -1925,7 +1921,7 @@ Decimal  Description                      References
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references-2" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="ADDRESS-FAMILY-NUMBERS">[ADDRESS-FAMILY-NUMBERS]</dt>
+<dt id="IANA.ADDRESS-FAMILY-NUMBERS">[IANA.ADDRESS-FAMILY-NUMBERS]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Address Family Numbers"</span>, <time datetime="2021-10-19" class="refDate">19 October 2021</time>, <span>&lt;<a href="http://www.iana.org/assignments/address-family-numbers">http://www.iana.org/assignments/address-family-numbers</a>&gt;</span>. </dd>
 <dd class="break"></dd>
@@ -1976,13 +1972,13 @@ Decimal  Description                      References
         <dd>
 <span class="refAuthor">LACNIC and NIC.MX</span>, <span class="refTitle">"FORT"</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://github.com/NICMx/FORT-validator">https://github.com/NICMx/FORT-validator</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-sidrops-rpki-has-no-identity">[I-D.ietf-sidrops-rpki-has-no-identity]</dt>
+        <dd>
+<span class="refAuthor">Bush, R.</span> and <span class="refAuthor">R. Housley</span>, <span class="refTitle">"The I in RPKI does not stand for Identity"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sidrops-rpki-has-no-identity-07</span>, <time datetime="2022-04-20" class="refDate">20 April 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-has-no-identity-07.txt">https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-has-no-identity-07.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-sidrops-rpki-rta">[I-D.ietf-sidrops-rpki-rta]</dt>
         <dd>
-<span class="refAuthor">Michaelson, G.</span>, <span class="refAuthor">Huston, G.</span>, <span class="refAuthor">Harrison, T.</span>, <span class="refAuthor">Bruijnzeels, T.</span>, and <span class="refAuthor">M. Hoffmann</span>, <span class="refTitle">"A profile for Resource Tagged Attestations (RTAs)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sidrops-rpki-rta-00</span>, <time datetime="2021-01-21" class="refDate">21 January 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-sidrops-rpki-rta-00">https://datatracker.ietf.org/doc/html/draft-ietf-sidrops-rpki-rta-00</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ymbk-sidrops-rpki-has-no-identity">[I-D.ymbk-sidrops-rpki-has-no-identity]</dt>
-        <dd>
-<span class="refAuthor">Bush, R.</span> and <span class="refAuthor">R. Housley</span>, <span class="refTitle">"The I in RPKI does not stand for Identity"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ymbk-sidrops-rpki-has-no-identity-00</span>, <time datetime="2021-03-16" class="refDate">16 March 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ymbk-sidrops-rpki-has-no-identity-00">https://datatracker.ietf.org/doc/html/draft-ymbk-sidrops-rpki-has-no-identity-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Michaelson, G. G.</span>, <span class="refAuthor">Huston, G.</span>, <span class="refAuthor">Harrison, T.</span>, <span class="refAuthor">Bruijnzeels, T.</span>, and <span class="refAuthor">M. Hoffmann</span>, <span class="refTitle">"A profile for Resource Tagged Attestations (RTAs)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sidrops-rpki-rta-00</span>, <time datetime="2021-01-21" class="refDate">21 January 2021</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-rta-00.txt">https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-rta-00.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="POSIX">[POSIX]</dt>
         <dd>
