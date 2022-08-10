@@ -460,7 +460,7 @@
       <section>
         <name>SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</name>
         <t>
-          The IANA has permanently allocated for this document in the SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1) registry:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
         </t>
         <artwork>
 <![CDATA[
@@ -477,13 +477,13 @@ Decimal   Description             References
       <section>
         <name>RPKI Signed Objects sub-registry</name>
         <t>
-          The IANA is requested to register the OID for the RPKI Signed Checklist in the registry created by <xref target="RFC6488"/> as following:
+          The IANA is requested to register the OID for the RPKI Signed Checklist in the "RPKI Signed Objects" registry created by <xref target="RFC6488"/> as follows:
         </t>
         <artwork>
 <![CDATA[
 Name              OID                         Specification
 -------------------------------------------------------------
-Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
+Signed Checklist  1.2.840.113549.1.9.16.1.48  [RFC-TBD]
 ]]>
         </artwork>
       </section>
@@ -491,7 +491,7 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
       <section>
         <name>File Extension</name>
         <t>
-          The IANA is requested to add an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" registry created by <xref target="RFC6481"/> as follows:
+          The IANA has temporarily added an item for the Signed Checklist file extension to the "RPKI Repository Name Schemes" registry created by <xref target="RFC6481"/> as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -500,12 +500,15 @@ Filename Extension  RPKI Object       Reference
        .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to make this addition permanent and to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
-          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier" (1.2.840.113549.1.9.16.0) registry:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
         </t>
         <artwork>
 <![CDATA[
@@ -514,12 +517,15 @@ Decimal  Description                      References
     73   id-mod-rpkiSignedChecklist-2022  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
       <section>
         <name>Media Type</name>
         <t>
-          The IANA is requested to register the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
+          The IANA has registered the media type application/rpki-checklist in the "Provisional Standard Media Type" registry as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -529,7 +535,7 @@ Decimal  Description                      References
    Optional parameters: None
    Encoding considerations: binary
    Security considerations: Carries an RPKI Signed Checklist
-                            [RFC-TBD].
+                            [draft-ietf-sidrops-rpki-rsc].
    Interoperability considerations: None
    Published specification: This document.
    Applications that use this media type: RPKI operators.
@@ -548,6 +554,9 @@ Decimal  Description                      References
    Change controller: Job Snijders <job@fastly.com>
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to move this registation to the "Media Types" registry and to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
     </section>
