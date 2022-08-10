@@ -505,13 +505,13 @@ Filename Extension  RPKI Object       Reference
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
-          The IANA is requested to add an item to the "SMI Security for S/MIME Module Identifier" registry as follows:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier" (1.2.840.113549.1.9.16.0) registry:
         </t>
         <artwork>
 <![CDATA[
 Decimal  Description                      References
 -----------------------------------------------------------------------
-    TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
+    73   id-mod-rpkiSignedChecklist-2022  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
       </section>
