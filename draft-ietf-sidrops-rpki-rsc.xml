@@ -94,7 +94,7 @@
       <name>Introduction</name>
 
       <t>
-        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
+        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
         The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
         The protected CMS content type is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
       </t>
