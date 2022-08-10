@@ -564,6 +564,7 @@ Decimal  Description                      References
         <?rfc include="reference.RFC.2119.xml"?>
         <?rfc include="reference.RFC.3779.xml"?>
         <?rfc include="reference.RFC.5652.xml"?>
+        <?rfc include="reference.RFC.6268.xml"?>
         <?rfc include="reference.RFC.6481.xml"?>
         <?rfc include="reference.RFC.6487.xml"?>
         <?rfc include="reference.RFC.6488.xml"?>
