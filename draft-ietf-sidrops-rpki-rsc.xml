@@ -670,6 +670,18 @@ Decimal  Description                      References
       <name>Document changelog</name>
 
       <section>
+        <name>changes from -08 -&gt; -09</name>
+        <ul>
+          <li>Updated manifests refs to RFC9286</li>
+          <li>Added normative ref to RFC6268 (CMS)</li>
+          <li>Cleaned up ASN.1 formatting</li>
+          <li>Updated ASN.1 module OID following early allocation</li>
+          <li>Updated draft-ietf-sidrops-rpki-has-no-identity to RFC9255</li>
+          <li>Clean up IANA considerations</li>
+        </ul>
+      </section>
+
+      <section>
         <name>changes from -07 -&gt; -08</name>
         <ul>
           <li>Theo requested explanation as to why fileName is OPTIONAL</li>
