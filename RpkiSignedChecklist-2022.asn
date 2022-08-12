@@ -35,7 +35,8 @@ FileNameAndHash ::= SEQUENCE {
   fileName        PortableFilename OPTIONAL,
   hash            Digest }
 
-PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
+PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" |
+                                     "." | "_" | "-"))
 
 ResourceBlock ::= SEQUENCE {
   asID         [0]       ConstrainedASIdentifiers OPTIONAL,
@@ -44,7 +45,8 @@ ResourceBlock ::= SEQUENCE {
   ( WITH COMPONENTS { ..., asID PRESENT} |
     WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF
+                                ConstrainedIPAddressFamily
 
 ConstrainedIPAddressFamily   ::= SEQUENCE {
   addressFamily        OCTET STRING (SIZE(2)),
