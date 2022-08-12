@@ -53,9 +53,9 @@
     </author>
     <abstract>
       <t>
-        This document defines a Cryptographic Message Syntax (CMS) profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI).
-        The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary digital objects (files), to be signed "with resources", and for validation to provide a means to confirm a specific Internet Resource Holder produced the Signed Checklist.
-        The profile is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
+         This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general purpose listing of checksums (a 'checklist').
+         The objective is to allow an attestation of a RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and the allow for validation to confirm that a specific Internet Resource Holder produced the RSC.
+         The protected CMS content type is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
       </t>
     </abstract>
     <note>
@@ -73,9 +73,9 @@
     <section anchor="intro">
       <name>Introduction</name>
       <t>
-        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> profile for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
+        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
         The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-        The profile is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
+        The protected CMS content type is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
       </t>
       <t>
         Signed Checklists are expected to facilitate inter-domain business use-cases which depend on an ability to verify resource holdership.
@@ -99,7 +99,7 @@
       </t>
       <section title="RSC End-Entity Certificates">
         <t>
-          The CA MUST only sign one RSC with each EE Certificate, and MUST generate a new key pair for each new RSC.
+          The Certification Authority (CA) MUST only sign one RSC with each End-Entity (EE) Certificate, and MUST generate a new key pair for each new RSC.
           This form of use of the associated EE Certificate is termed a "one-time-use" EE certificate <xref target="RFC6487" section="3"/>.
         </t>
       </section>
@@ -107,7 +107,7 @@
     <section anchor="content">
       <name>The RSC ContentType</name>
       <t>
-        The ContentType for an RSC is defined as rpkiSignedChecklist, and has the numerical value of 1.2.840.113549.1.9.16.1.48.
+        The ContentType for an RSC is defined as rpkiSignedChecklist, with Object Identifier (OID) 1.2.840.113549.1.9.16.1.48.
       </t>
       <t>
         This OID MUST appear both within the eContentType in the encapContentInfo object as well as the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
@@ -156,7 +156,8 @@ FileNameAndHash ::= SEQUENCE {
   fileName        PortableFilename OPTIONAL,
   hash            Digest }
 
-PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
+PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" |
+                                     "." | "_" | "-"))
 
 ResourceBlock ::= SEQUENCE {
   asID         [0]       ConstrainedASIdentifiers OPTIONAL,
@@ -165,7 +166,8 @@ ResourceBlock ::= SEQUENCE {
   ( WITH COMPONENTS { ..., asID PRESENT} |
     WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
+ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF
+                                ConstrainedIPAddressFamily
 
 ConstrainedIPAddressFamily   ::= SEQUENCE {
   addressFamily        OCTET STRING (SIZE(2)),

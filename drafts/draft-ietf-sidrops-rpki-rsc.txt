@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 7 February 2023                                           APNIC
+Expires: 13 February 2023                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                           6 August 2022
+                                                          12 August 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
@@ -17,15 +17,16 @@ Expires: 7 February 2023                                           APNIC
 
 Abstract
 
-   This document defines a Cryptographic Message Syntax (CMS) profile
-   for a general purpose listing of checksums (a 'checklist'), for use
-   with the Resource Public Key Infrastructure (RPKI).  The objective is
-   to allow an attestation, in the form of a listing of one or more
-   checksums of arbitrary digital objects (files), to be signed "with
-   resources", and for validation to provide a means to confirm a
-   specific Internet Resource Holder produced the Signed Checklist.  The
-   profile is intended to provide for the signing of an arbitrary
-   checksum listing with a specific set of Internet Number Resources.
+   This document defines a Cryptographic Message Syntax (CMS) protected
+   content type for use with the Resource Public Key Infrastructure
+   (RPKI) to carry a general purpose listing of checksums (a
+   'checklist').  The objective is to allow an attestation of a RPKI
+   Signed Checklist (RSC), which contains one or more checksums of
+   arbitrary digital objects (files) that are signed "with resources",
+   and the allow for validation to confirm that a specific Internet
+   Resource Holder produced the RSC.  The protected CMS content type is
+   intended to provide for the signing of an arbitrary checksum listing
+   with a specific set of Internet Number Resources.
 
 Requirements Language
 
@@ -52,13 +53,12 @@ Status of This Memo
 
 
 
-
-Snijders, et al.         Expires 7 February 2023                [Page 1]
+Snijders, et al.        Expires 13 February 2023                [Page 1]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
-   This Internet-Draft will expire on 7 February 2023.
+   This Internet-Draft will expire on 13 February 2023.
 
 Copyright Notice
 
@@ -90,52 +90,53 @@ Table of Contents
        4.4.1.  FileNameAndHash . . . . . . . . . . . . . . . . . . .   7
    5.  RSC Validation  . . . . . . . . . . . . . . . . . . . . . . .   8
    6.  Verifying files or data using RSC . . . . . . . . . . . . . .   8
-   7.  Operational Considerations  . . . . . . . . . . . . . . . . .   9
+   7.  Operational Considerations  . . . . . . . . . . . . . . . . .  10
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
    9.  Implementation status . . . . . . . . . . . . . . . . . . . .  11
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
      10.1.  SMI Security for S/MIME CMS Content Type
             (1.2.840.113549.1.9.16.1)  . . . . . . . . . . . . . . .  12
      10.2.  RPKI Signed Objects sub-registry . . . . . . . . . . . .  12
-     10.3.  File Extension . . . . . . . . . . . . . . . . . . . . .  12
+     10.3.  File Extension . . . . . . . . . . . . . . . . . . . . .  13
      10.4.  SMI Security for S/MIME Module Identifier
             (1.2.840.113549.1.9.16.0)  . . . . . . . . . . . . . . .  13
      10.5.  Media Type . . . . . . . . . . . . . . . . . . . . . . .  13
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  13
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  14
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  15
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  14
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  15
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  16
    Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  16
 
 
 
-Snijders, et al.         Expires 7 February 2023                [Page 2]
+Snijders, et al.        Expires 13 February 2023                [Page 2]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
      B.1.  changes from -07 -> -08 . . . . . . . . . . . . . . . . .  16
-     B.2.  changes from -06 -> -07 . . . . . . . . . . . . . . . . .  16
-     B.3.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  16
-     B.4.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  16
-     B.5.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  16
-     B.6.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  16
-     B.7.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  16
+     B.2.  changes from -06 -> -07 . . . . . . . . . . . . . . . . .  17
+     B.3.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  17
+     B.4.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  17
+     B.5.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  17
+     B.6.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  17
+     B.7.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  17
      B.8.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  17
      B.9.  individual submission phase . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
 
    This document defines a Cryptographic Message Syntax (CMS) [RFC5652]
-   profile for a general purpose listing of checksums (a 'checklist'),
-   for use with the Resource Public Key Infrastructure (RPKI) [RFC6480].
-   The objective is to allow an attestation, in the form of a listing of
-   one or more checksums of arbitrary files, to be signed "with
-   resources", and for validation to provide a means to confirm a given
-   Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-   The profile is intended to provide for the signing of a checksum
-   listing with a specific set of Internet Number Resources.
+   protected content type for a general purpose listing of checksums (a
+   'checklist'), for use with the Resource Public Key Infrastructure
+   (RPKI) [RFC6480].  The objective is to allow an attestation, in the
+   form of a listing of one or more checksums of arbitrary files, to be
+   signed "with resources", and for validation to provide a means to
+   confirm a given Internet Resource Holder produced the RPKI Signed
+   Checklist (RSC).  The protected CMS content type is intended to
+   provide for the signing of a checksum listing with a specific set of
+   Internet Number Resources.
 
    Signed Checklists are expected to facilitate inter-domain business
    use-cases which depend on an ability to verify resource holdership.
@@ -164,8 +165,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-
-Snijders, et al.         Expires 7 February 2023                [Page 3]
+Snijders, et al.        Expires 13 February 2023                [Page 3]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -177,15 +177,15 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 2.1.  RSC End-Entity Certificates
 
-   The CA MUST only sign one RSC with each EE Certificate, and MUST
-   generate a new key pair for each new RSC.  This form of use of the
-   associated EE Certificate is termed a "one-time-use" EE certificate
-   Section 3 of [RFC6487].
+   The Certification Authority (CA) MUST only sign one RSC with each
+   End-Entity (EE) Certificate, and MUST generate a new key pair for
+   each new RSC.  This form of use of the associated EE Certificate is
+   termed a "one-time-use" EE certificate Section 3 of [RFC6487].
 
 3.  The RSC ContentType
 
-   The ContentType for an RSC is defined as rpkiSignedChecklist, and has
-   the numerical value of 1.2.840.113549.1.9.16.1.48.
+   The ContentType for an RSC is defined as rpkiSignedChecklist, with
+   Object Identifier (OID) 1.2.840.113549.1.9.16.1.48.
 
    This OID MUST appear both within the eContentType in the
    encapContentInfo object as well as the ContentType signed attribute
@@ -221,7 +221,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.         Expires 7 February 2023                [Page 4]
+Snijders, et al.        Expires 13 February 2023                [Page 4]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -242,7 +242,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
      fileName        PortableFilename OPTIONAL,
      hash            Digest }
 
-   PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
+   PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" |
+                                        "." | "_" | "-"))
 
    ResourceBlock ::= SEQUENCE {
      asID         [0]       ConstrainedASIdentifiers OPTIONAL,
@@ -251,7 +252,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
      ( WITH COMPONENTS { ..., asID PRESENT} |
        WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-   ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
+   ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF
+                                   ConstrainedIPAddressFamily
 
    ConstrainedIPAddressFamily   ::= SEQUENCE {
      addressFamily        OCTET STRING (SIZE(2)),
@@ -272,15 +274,16 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    attestation, and MUST be a subset of the set of resources listed by
    the EE Certificate carried in the CMS certificates field.
 
-   If the asID field is present, it MUST contain an instance of
-   ConstrainedASIdentifiers.
 
 
 
-Snijders, et al.         Expires 7 February 2023                [Page 5]
+Snijders, et al.        Expires 13 February 2023                [Page 5]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
+
+   If the asID field is present, it MUST contain an instance of
+   ConstrainedASIdentifiers.
 
    If the ipAddrBlocks field is present, it MUST contain an instance of
    ConstrainedIPAddrBlocks.
@@ -325,18 +328,21 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    There MUST be only one instance of ConstrainedIPAddressFamily per
    unique AFI.
 
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023                [Page 6]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
    The elements of ConstrainedIPAddressFamily MUST be ordered by
    ascending addressFamily values (treating the octets as unsigned
    numbers).  Thus, when both IPv4 and IPv6 addresses are specified, the
    IPv4 addresses MUST precede the IPv6 addresses (since the IPv4 AFI of
    0001 is less than the IPv6 AFI of 0002).
-
-
-
-Snijders, et al.         Expires 7 February 2023                [Page 6]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
 
    ConstrainedIPAddrBlocks is defined such that the resulting DER-
    encoded data are binary compatible with IPAddrBlocks defined in
@@ -381,18 +387,17 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    objects are addressed directly through their respective message
    digest rather than through a file system abstraction.
 
+
+
+Snijders, et al.        Expires 13 February 2023                [Page 7]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
    If the fileName field is present then its value:
 
    *  MUST contain only characters specified in the Portable Filename
       Character Set as defined in [POSIX].
-
-
-
-
-Snijders, et al.         Expires 7 February 2023                [Page 7]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
 
    *  MUST be unique with respect to the other FileNameAndHash elements
       of checkList for which the fileName field is also present.
@@ -437,19 +442,19 @@ Internet-Draft           RPKI Signed Checklists              August 2022
       Section 5.  If the RSC cannot be validated, verification MUST fail
       and the error SHOULD be reported to the user.
 
+
+
+
+Snijders, et al.        Expires 13 February 2023                [Page 8]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
    *  For every digital object to be verified:
 
       1.  If the verification procedure is provided with a file name for
           the object being verified (e.g. because the user has provided
           a file system path from which to read the object) then
-
-
-
-Snijders, et al.         Expires 7 February 2023                [Page 8]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
           verification SHOULD proceed in "filename-aware" mode.
           Otherwise, verification SHOULD proceed in "filename-unaware"
           mode.
@@ -489,6 +494,18 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    issue a warning to the user, allowing for corrective action to be
    taken if necessary.
 
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023                [Page 9]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
 7.  Operational Considerations
 
    When creating digital objects of a plain-text nature (such as ASCII,
@@ -498,14 +515,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    help avoid unexpected canonicalization at intermediate systems (which
    in turn would lead to checksum verification errors).  Validator
    implementations are expected to treat a checksummed digital object as
-
-
-
-Snijders, et al.         Expires 7 February 2023                [Page 9]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
    string of arbitrary single octets.
 
    If a fileName field is present, but no referenced digital object has
@@ -535,6 +544,24 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    holder's business operations such as the identity of the resource
    holder itself.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 10]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
    RSC objects are not distributed through the RPKI Repository system.
    From this, it follows that third parties who do not have a copy of a
    given RSC, may not be aware of the existence of that RSC.  Since RSC
@@ -547,20 +574,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    CA includes a serial number on a CRL that does not match any
    published object, an observer could postulate an RSC EE Certificate
    was revoked.
-
-
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 10]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
 
    Conversely, a gap in serial numbers does not imply that an RSC
    exists.  Nor does an arbitrary (to the RP unknown) serial in a CRL
@@ -593,6 +606,18 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    features.  Readers are advised to note that other implementations may
    exist.
 
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 11]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
    According to RFC 7942, "this will allow reviewers and working groups
    to assign due consideration to documents that have the benefit of
    running code, which may serve as evidence of valuable experimentation
@@ -608,15 +633,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
    *  Example .sig files were created by Job Snijders with the use of
       OpenSSL.
-
-
-
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 11]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
 
    *  A validator implementation based on OpenBSD rpki-client and
       LibreSSL was developed by Job Snijders.
@@ -647,6 +663,17 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    The IANA is requested to register the OID for the RPKI Signed
    Checklist in the registry created by [RFC6488] as following:
 
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 12]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
+
 Name              OID                         Specification
 -------------------------------------------------------------
 Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
@@ -661,17 +688,6 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
    Filename Extension  RPKI Object       Reference
    -------------------------------------------------------------------
           .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
-
-
-
-
-
-
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 12]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 10.4.  SMI Security for S/MIME Module Identifier
@@ -689,6 +705,30 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
    The IANA is requested to register the media type application/rpki-
    checklist in the Provisional Standard Media Type registry as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 13]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
 
       Type name: application
       Subtype name: rpki-checklist
@@ -723,13 +763,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               IANA, "Address Family Numbers", 19 October 2021,
               <http://www.iana.org/assignments/address-family-numbers>.
 
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 13]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -743,6 +776,15 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/info/rfc5652>.
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 14]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
 
    [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", RFC 6481,
@@ -778,14 +820,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    [FORT]     LACNIC and NIC.MX, "FORT", May 2021,
               <https://github.com/NICMx/FORT-validator>.
 
-
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 14]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
    [I-D.ietf-sidrops-rpki-has-no-identity]
               Bush, R. and R. Housley, "The I in RPKI does not stand for
               Identity", Work in Progress, Internet-Draft, draft-ietf-
@@ -800,6 +834,13 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
               <https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-
               rta-00.txt>.
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 15]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
 
    [POSIX]    IEEE and The Open Group, "The Open Group's Base
               Specifications, Issue 7", 2016,
@@ -834,14 +875,6 @@ Appendix A.  Acknowledgements
    the ASN.1 notation and providing suggestions.  The authors would like
    to thank Nimrod Levy, Tim Bruijnzeels, Alberto Leiva, Ties de Kock,
    Peter Peele, Claudio Jeker, and Theo Buehler for document review and
-
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 15]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
    suggestions.
 
 Appendix B.  Document changelog
@@ -856,6 +889,14 @@ B.1.  changes from -07 -> -08
       data fails to decode
 
    *  Added uniqueness constraints for fileName and hash contents
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 16]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
 
    *  Improved validation and verification procedure description
 
@@ -891,13 +932,6 @@ B.7.  changes from -01 -> -02
    *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &
       Russ.
 
-
-
-Snijders, et al.         Expires 7 February 2023               [Page 16]
-
-Internet-Draft           RPKI Signed Checklists              August 2022
-
-
 B.8.  changes from -00 -> -01
 
    *  Readability improvements
@@ -911,6 +945,14 @@ B.9.  individual submission phase
       'optional'.  Some SIDROPS Working Group participants proposed a
       checksum itself is the most minimal information required to
       address digital objects.
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 17]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
+
 
 Authors' Addresses
 
@@ -949,4 +991,18 @@ Authors' Addresses
 
 
 
-Snijders, et al.         Expires 7 February 2023               [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 18]
