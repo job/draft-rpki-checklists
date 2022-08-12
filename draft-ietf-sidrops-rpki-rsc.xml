@@ -10,7 +10,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
-     docName="draft-ietf-sidrops-rpki-rsc-08"
+     docName="draft-ietf-sidrops-rpki-rsc-09"
      ipr="trust200902"
      xml:lang="en"
      sortRefs="true"
@@ -24,7 +24,7 @@
       A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
     </title>
 
-    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-08"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-09"/>
 
     <author fullname="Job Snijders" initials="J." surname="Snijders">
       <organization>Fastly</organization>
@@ -70,8 +70,7 @@
     <abstract>
       <t>
          This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general purpose listing of checksums (a 'checklist').
-         The objective is to allow an attestation of a RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and the allow for validation to confirm that a specific Internet Resource Holder produced the RSC.
-         The protected CMS content type is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
+         The objective is to allow an attestation, termed an RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and which, when validated, confirms that the respective Internet Resource Holder produced the RSC.
       </t>
     </abstract>
 
@@ -94,9 +93,9 @@
       <name>Introduction</name>
 
       <t>
-        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
-        The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-        The protected CMS content type is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
+        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
+        The protected CMS content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC): a checksum listing signed with a specific set of Internet Number Resources.
+        The objective is to allow an attestation that, when validated, provides a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
       </t>
 
       <t>
@@ -105,8 +104,8 @@
       </t>
 
       <t>
-        The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486"/>, and OpenBSD's <xref target="signify"/> utility.
-        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the existence of multiple digital objects.
+        The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC9286"/>, and OpenBSD's <xref target="signify"/> utility.
+        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the content of multiple digital objects.
         A single signer profile is considered a simplification for both implementers and operators.
       </t>
 
@@ -116,8 +115,7 @@
       <name>RSC Profile and Distribution</name>
 
       <t>
-        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception.
-        Because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
+        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception: because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
       </t>
 
       <t>
@@ -251,7 +249,7 @@
       <section>
         <name>digestAlgorithm</name>
         <t>
-          The digest algorithm used to create the message digest of the attested digital object.
+          The digest algorithm used to create the message digest of the attested digital object(s).
           This algorithm MUST be a hashing algorithm defined in <xref target="RFC7935"/>.
         </t>
       </section>
@@ -296,7 +294,7 @@
 
       <t>
         Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
-        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of a SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of an SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
       </t>
 
       <ol>
@@ -393,7 +391,7 @@
       </t>
 
       <t>
-        RPKI Certificates are not bound to real world identities, see <xref target="I-D.ietf-sidrops-rpki-has-no-identity"/> for an elaboration.
+        RPKI Certificates are not bound to real world identities, see <xref target="RFC9255"/> for an elaboration.
         Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
         Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.
       </t>
@@ -460,7 +458,7 @@
       <section>
         <name>SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</name>
         <t>
-          The IANA has permanently allocated for this document in the SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1) registry:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
         </t>
         <artwork>
 <![CDATA[
@@ -477,13 +475,13 @@ Decimal   Description             References
       <section>
         <name>RPKI Signed Objects sub-registry</name>
         <t>
-          The IANA is requested to register the OID for the RPKI Signed Checklist in the registry created by <xref target="RFC6488"/> as following:
+          The IANA is requested to register the OID for the RPKI Signed Checklist in the "RPKI Signed Objects" registry created by <xref target="RFC6488"/> as follows:
         </t>
         <artwork>
 <![CDATA[
 Name              OID                         Specification
 -------------------------------------------------------------
-Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
+Signed Checklist  1.2.840.113549.1.9.16.1.48  [RFC-TBD]
 ]]>
         </artwork>
       </section>
@@ -491,7 +489,7 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
       <section>
         <name>File Extension</name>
         <t>
-          The IANA is requested to add an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" registry created by <xref target="RFC6481"/> as follows:
+          The IANA has temporarily added an item for the Signed Checklist file extension to the "RPKI Repository Name Schemes" registry created by <xref target="RFC6481"/> as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -500,26 +498,32 @@ Filename Extension  RPKI Object       Reference
        .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to make this addition permanent and to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
-          The IANA is requested to add an item to the "SMI Security for S/MIME Module Identifier" registry as follows:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
         </t>
         <artwork>
 <![CDATA[
 Decimal  Description                      References
 -----------------------------------------------------------------------
-    TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
+    73   id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to update the "Description" column to read "id-mod-rpkiSignedChecklist-2022", and to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
       <section>
         <name>Media Type</name>
         <t>
-          The IANA is requested to register the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
+          The IANA has registered the media type application/rpki-checklist in the "Provisional Standard Media Type" registry as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -529,7 +533,7 @@ Decimal  Description                      References
    Optional parameters: None
    Encoding considerations: binary
    Security considerations: Carries an RPKI Signed Checklist
-                            [RFC-TBD].
+                            [draft-ietf-sidrops-rpki-rsc].
    Interoperability considerations: None
    Published specification: This document.
    Applications that use this media type: RPKI operators.
@@ -548,6 +552,9 @@ Decimal  Description                      References
    Change controller: Job Snijders <job@fastly.com>
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to move this registation to the "Media Types" registry and to reference the RFC publication instead of this draft.
+        </t>
       </section>
 
     </section>
@@ -565,20 +572,21 @@ Decimal  Description                      References
         <?rfc include="reference.RFC.3779.xml"?>
         <?rfc include="reference.RFC.5652.xml"?>
         <?rfc include="reference.RFC.6481.xml"?>
-        <?rfc include="reference.RFC.6486.xml"?>
         <?rfc include="reference.RFC.6487.xml"?>
         <?rfc include="reference.RFC.6488.xml"?>
         <?rfc include="reference.RFC.7935.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
+        <?rfc include="reference.RFC.9286.xml"?>
         <?rfc include="reference.IANA.ADDRESS-FAMILY-NUMBERS.xml"?>
       </references>
 
       <references>
         <name>Informative References</name>
         <?rfc include="reference.I-D.ietf-sidrops-rpki-rta.xml"?>
-        <?rfc include="reference.I-D.ietf-sidrops-rpki-has-no-identity.xml"?>
         <?rfc include="reference.RFC.1952.xml"?>
+        <?rfc include="reference.RFC.6268.xml"?>
         <?rfc include="reference.RFC.6480.xml"?>
+        <?rfc include="reference.RFC.9255.xml"?>
         <reference anchor="signify" target="https://man.openbsd.org/signify">
           <front>
             <title>signify - cryptographically sign and verify files</title>
@@ -658,6 +666,18 @@ Decimal  Description                      References
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+
+      <section>
+        <name>changes from -08 -&gt; -09</name>
+        <ul>
+          <li>Updated manifests refs to RFC9286</li>
+          <li>Added normative ref to RFC6268 (CMS)</li>
+          <li>Cleaned up ASN.1 formatting</li>
+          <li>Updated ASN.1 module OID following early allocation</li>
+          <li>Updated draft-ietf-sidrops-rpki-has-no-identity to RFC9255</li>
+          <li>Clean up IANA considerations</li>
+        </ul>
+      </section>
 
       <section>
         <name>changes from -07 -&gt; -08</name>

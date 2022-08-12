@@ -1,4 +1,0 @@
-3c3
-<     pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
----
->     pkcs(1) pkcs9(9) smime(16) mod(0) 72 } -- using next available id-mod(0)
