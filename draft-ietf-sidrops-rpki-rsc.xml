@@ -70,8 +70,7 @@
     <abstract>
       <t>
          This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general purpose listing of checksums (a 'checklist').
-         The objective is to allow an attestation of a RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and the allow for validation to confirm that a specific Internet Resource Holder produced the RSC.
-         The protected CMS content type is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
+         The objective is to allow an attestation, termed an RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and which, when validated, confirms that the respective Internet Resource Holder produced the RSC.
       </t>
     </abstract>
 
@@ -95,8 +94,8 @@
 
       <t>
         This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
-        The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-        The protected CMS content type is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
+        The protected CMS content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC): a checksum listing signed with a specific set of Internet Number Resources.
+        The objective is to allow an attestation that, when validated, provides a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
       </t>
 
       <t>
@@ -106,7 +105,7 @@
 
       <t>
         The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC9286"/>, and OpenBSD's <xref target="signify"/> utility.
-        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the existence of multiple digital objects.
+        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the content of multiple digital objects.
         A single signer profile is considered a simplification for both implementers and operators.
       </t>
 
@@ -116,8 +115,7 @@
       <name>RSC Profile and Distribution</name>
 
       <t>
-        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception.
-        Because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
+        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception: because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
       </t>
 
       <t>
@@ -251,7 +249,7 @@
       <section>
         <name>digestAlgorithm</name>
         <t>
-          The digest algorithm used to create the message digest of the attested digital object.
+          The digest algorithm used to create the message digest of the attested digital object(s).
           This algorithm MUST be a hashing algorithm defined in <xref target="RFC7935"/>.
         </t>
       </section>
@@ -296,7 +294,7 @@
 
       <t>
         Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
-        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of a SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of an SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
       </t>
 
       <ol>
