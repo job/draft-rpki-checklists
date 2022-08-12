@@ -85,6 +85,6 @@ myst_enable_extensions = [
 xml2rfc_drafts = ["draft-ietf-sidrops-rpki-rsc"]
 xml2rfc_sources = [
     "RpkiSignedChecklist-2021.asn",
-    "RpkiSignedChecklist-2022.asn"
+    "RpkiSignedChecklist-2022.asn",
 ]
 xml2rfc_autogen_tag_re = r"^\d\d$"
