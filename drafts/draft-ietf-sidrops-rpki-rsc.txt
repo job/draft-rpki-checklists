@@ -13,20 +13,18 @@ Expires: 13 February 2023                                          APNIC
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
                             Checklists (RSC)
-                     draft-ietf-sidrops-rpki-rsc-08
+                     draft-ietf-sidrops-rpki-rsc-09
 
 Abstract
 
    This document defines a Cryptographic Message Syntax (CMS) protected
    content type for use with the Resource Public Key Infrastructure
    (RPKI) to carry a general purpose listing of checksums (a
-   'checklist').  The objective is to allow an attestation of a RPKI
-   Signed Checklist (RSC), which contains one or more checksums of
+   'checklist').  The objective is to allow an attestation, termed an
+   RPKI Signed Checklist (RSC), which contains one or more checksums of
    arbitrary digital objects (files) that are signed "with resources",
-   and the allow for validation to confirm that a specific Internet
-   Resource Holder produced the RSC.  The protected CMS content type is
-   intended to provide for the signing of an arbitrary checksum listing
-   with a specific set of Internet Number Resources.
+   and which, when validated, confirms that the respective Internet
+   Resource Holder produced the RSC.
 
 Requirements Language
 
@@ -51,14 +49,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
+   This Internet-Draft will expire on 13 February 2023.
+
 
 
 Snijders, et al.        Expires 13 February 2023                [Page 1]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
-
-   This Internet-Draft will expire on 13 February 2023.
 
 Copyright Notice
 
@@ -105,7 +103,9 @@ Table of Contents
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  14
      11.2.  Informative References . . . . . . . . . . . . . . . . .  15
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  16
-   Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  16
+   Appendix B.  Document changelog . . . . . . . . . . . . . . . . .  17
+     B.1.  changes from -08 -> -09 . . . . . . . . . . . . . . . . .  17
+     B.2.  changes from -07 -> -08 . . . . . . . . . . . . . . . . .  17
 
 
 
@@ -114,29 +114,27 @@ Snijders, et al.        Expires 13 February 2023                [Page 2]
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
-     B.1.  changes from -07 -> -08 . . . . . . . . . . . . . . . . .  16
-     B.2.  changes from -06 -> -07 . . . . . . . . . . . . . . . . .  17
-     B.3.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  17
-     B.4.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  17
-     B.5.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  17
-     B.6.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  17
-     B.7.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  17
-     B.8.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  17
-     B.9.  individual submission phase . . . . . . . . . . . . . . .  17
+     B.3.  changes from -06 -> -07 . . . . . . . . . . . . . . . . .  17
+     B.4.  changes from -05 -> -06 . . . . . . . . . . . . . . . . .  17
+     B.5.  changes from -04 -> -05 . . . . . . . . . . . . . . . . .  17
+     B.6.  changes from -03 -> -04 . . . . . . . . . . . . . . . . .  17
+     B.7.  changes from -02 -> -03 . . . . . . . . . . . . . . . . .  18
+     B.8.  changes from -01 -> -02 . . . . . . . . . . . . . . . . .  18
+     B.9.  changes from -00 -> -01 . . . . . . . . . . . . . . . . .  18
+     B.10. individual submission phase . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
 
    This document defines a Cryptographic Message Syntax (CMS) [RFC5652]
-   protected content type for a general purpose listing of checksums (a
-   'checklist'), for use with the Resource Public Key Infrastructure
-   (RPKI) [RFC6480].  The objective is to allow an attestation, in the
-   form of a listing of one or more checksums of arbitrary files, to be
-   signed "with resources", and for validation to provide a means to
-   confirm a given Internet Resource Holder produced the RPKI Signed
-   Checklist (RSC).  The protected CMS content type is intended to
-   provide for the signing of a checksum listing with a specific set of
-   Internet Number Resources.
+   [RFC6268] protected content type for a general purpose listing of
+   checksums (a 'checklist'), for use with the Resource Public Key
+   Infrastructure (RPKI) [RFC6480].  The protected CMS content type is
+   intended to provide for the creation and validation of an RPKI Signed
+   Checklist (RSC): a checksum listing signed with a specific set of
+   Internet Number Resources.  The objective is to allow an attestation
+   that, when validated, provides a means to confirm a given Internet
+   Resource Holder produced the RPKI Signed Checklist (RSC).
 
    Signed Checklists are expected to facilitate inter-domain business
    use-cases which depend on an ability to verify resource holdership.
@@ -145,21 +143,23 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    establishment of physical interconnection between Autonomous Systems.
 
    The RSC concept borrows heavily from RTA [I-D.ietf-sidrops-rpki-rta],
-   Manifests [RFC6486], and OpenBSD's [signify] utility.  The main
+   Manifests [RFC9286], and OpenBSD's [signify] utility.  The main
    difference between RSC and RTA is that the RTA profile allows
    multiple signers to attest a single digital object through a checksum
    of its content, while the RSC profile allows a single signer to
-   attest the existence of multiple digital objects.  A single signer
+   attest the content of multiple digital objects.  A single signer
    profile is considered a simplification for both implementers and
    operators.
 
 2.  RSC Profile and Distribution
 
    RSC follows the Signed Object Template for the RPKI [RFC6488] with
-   one exception.  Because RSCs MUST NOT be distributed through the
+   one exception: because RSCs MUST NOT be distributed through the
    global RPKI Repository system, the Subject Information Access (SIA)
    extension MUST be omitted from the RSC's X.509 End-Entity (EE)
    certificate.
+
+
 
 
 
@@ -199,7 +199,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
    RpkiSignedChecklist-2022
      { iso(1) member-body(2) us(840) rsadsi(113549)
-       pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
+       pkcs(1) pkcs9(9) smime(16) mod(0)
+       id-mod-rpkiSignedChecklist-2022(73) }
 
    DEFINITIONS EXPLICIT TAGS ::=
    BEGIN
@@ -217,7 +218,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
          id-mod-ip-addr-and-as-ident(30) } ;
 
    ct-rpkiSignedChecklist CONTENT-TYPE ::=
-       { TYPE RpkiSignedChecklist IDENTIFIED BY
 
 
 
@@ -226,41 +226,42 @@ Snijders, et al.        Expires 13 February 2023                [Page 4]
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
-         id-ct-signedChecklist }
+     { TYPE RpkiSignedChecklist
+       IDENTIFIED BY id-ct-signedChecklist }
 
    id-ct-signedChecklist OBJECT IDENTIFIER ::=
-       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-         pkcs-9(9) id-smime(16) id-ct(1) 48 }
+     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+       pkcs-9(9) id-smime(16) id-ct(1) 48 }
 
    RpkiSignedChecklist ::= SEQUENCE {
-     version  [0]          INTEGER DEFAULT 0,
+     version [0]           INTEGER DEFAULT 0,
      resources             ResourceBlock,
      digestAlgorithm       DigestAlgorithmIdentifier,
      checkList             SEQUENCE (SIZE(1..MAX)) OF FileNameAndHash }
 
    FileNameAndHash ::= SEQUENCE {
-     fileName        PortableFilename OPTIONAL,
-     hash            Digest }
+     fileName              PortableFilename OPTIONAL,
+     hash                  Digest }
 
-   PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" |
-                                        "." | "_" | "-"))
+   PortableFilename ::=
+     IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
 
    ResourceBlock ::= SEQUENCE {
-     asID         [0]       ConstrainedASIdentifiers OPTIONAL,
-     ipAddrBlocks [1]       ConstrainedIPAddrBlocks OPTIONAL }
+     asID         [0]      ConstrainedASIdentifiers OPTIONAL,
+     ipAddrBlocks [1]      ConstrainedIPAddrBlocks OPTIONAL }
      -- at least one of asID or ipAddrBlocks MUST be present
      ( WITH COMPONENTS { ..., asID PRESENT} |
        WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-   ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF
-                                   ConstrainedIPAddressFamily
+   ConstrainedIPAddrBlocks ::=
+     SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
 
-   ConstrainedIPAddressFamily   ::= SEQUENCE {
-     addressFamily        OCTET STRING (SIZE(2)),
-     addressesOrRanges    SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+   ConstrainedIPAddressFamily ::= SEQUENCE {
+     addressFamily         OCTET STRING (SIZE(2)),
+     addressesOrRanges     SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
-   ConstrainedASIdentifiers    ::= SEQUENCE {
-     asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
+   ConstrainedASIdentifiers ::= SEQUENCE {
+     asnum [0]             SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
    END
 
@@ -273,7 +274,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    The resources contained here are the resources used to mark the
    attestation, and MUST be a subset of the set of resources listed by
    the EE Certificate carried in the CMS certificates field.
-
 
 
 
@@ -367,8 +367,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 4.3.  digestAlgorithm
 
    The digest algorithm used to create the message digest of the
-   attested digital object.  This algorithm MUST be a hashing algorithm
-   defined in [RFC7935].
+   attested digital object(s).  This algorithm MUST be a hashing
+   algorithm defined in [RFC7935].
 
 4.4.  checkList
 
@@ -411,7 +411,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    Before a Relying Party can use an RSC to validate a set of digital
    objects, the Relying Party MUST first validate the RSC.  To validate
    an RSC, the Relying Party MUST perform all the validation checks
-   specified in [RFC6488] (except checking for the presence of a SIA
+   specified in [RFC6488] (except checking for the presence of an SIA
    extension, which MUST NOT be present in the EE X.509 certificate
    Section 4.8.8.2 of [RFC6487]), and perform the following additional
    RSC-specific validation steps:
@@ -536,13 +536,13 @@ Internet-Draft           RPKI Signed Checklists              August 2022
    Certificate used to validate the Signed Checklist.
 
    RPKI Certificates are not bound to real world identities, see
-   [I-D.ietf-sidrops-rpki-has-no-identity] for an elaboration.  Relying
-   Parties can only associate real world entities to Internet Number
-   Resources by additionally consulting an exogenous authority.  Signed
-   Checklists are a tool to communicate assertions 'signed with Internet
-   Number Resources', not about any other aspect of the resource
-   holder's business operations such as the identity of the resource
-   holder itself.
+   [RFC9255] for an elaboration.  Relying Parties can only associate
+   real world entities to Internet Number Resources by additionally
+   consulting an exogenous authority.  Signed Checklists are a tool to
+   communicate assertions 'signed with Internet Number Resources', not
+   about any other aspect of the resource holder's business operations
+   such as the identity of the resource holder itself.
+
 
 
 
@@ -646,8 +646,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 10.1.  SMI Security for S/MIME CMS Content Type
        (1.2.840.113549.1.9.16.1)
 
-   The IANA has permanently allocated for this document in the SMI
-   Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)
+   The IANA has permanently allocated for this document in the "SMI
+   Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)"
    registry:
 
    Decimal   Description             References
@@ -661,8 +661,8 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 10.2.  RPKI Signed Objects sub-registry
 
    The IANA is requested to register the OID for the RPKI Signed
-   Checklist in the registry created by [RFC6488] as following:
-
+   Checklist in the "RPKI Signed Objects" registry created by [RFC6488]
+   as follows:
 
 
 
@@ -674,15 +674,15 @@ Snijders, et al.        Expires 13 February 2023               [Page 12]
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
-Name              OID                         Specification
--------------------------------------------------------------
-Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
+   Name              OID                         Specification
+   -------------------------------------------------------------
+   Signed Checklist  1.2.840.113549.1.9.16.1.48  [RFC-TBD]
 
 
 10.3.  File Extension
 
-   The IANA is requested to add an item for the Signed Checklist file
-   extension to the "RPKI Repository Name Scheme" registry created by
+   The IANA has temporarily added an item for the Signed Checklist file
+   extension to the "RPKI Repository Name Schemes" registry created by
    [RFC6481] as follows:
 
    Filename Extension  RPKI Object       Reference
@@ -690,30 +690,30 @@ Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
           .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 
 
+   Upon publication of this document, IANA is requested to make this
+   addition permanent and to reference the RFC publication instead of
+   this draft.
+
 10.4.  SMI Security for S/MIME Module Identifier
        (1.2.840.113549.1.9.16.0)
 
-   The IANA is requested to add an item to the "SMI Security for S/MIME
-   Module Identifier" registry as follows:
+   The IANA has permanently allocated for this document in the "SMI
+   Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)"
+   registry:
 
  Decimal  Description                      References
  -----------------------------------------------------------------------
-     TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
+     73   id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 
+
+   Upon publication of this document, IANA is requested to update the
+   "Description" column to read "id-mod-rpkiSignedChecklist-2022", and
+   to reference the RFC publication instead of this draft.
 
 10.5.  Media Type
 
-   The IANA is requested to register the media type application/rpki-
-   checklist in the Provisional Standard Media Type registry as follows:
-
-
-
-
-
-
-
-
-
+   The IANA has registered the media type application/rpki-checklist in
+   the "Provisional Standard Media Type" registry as follows:
 
 
 
@@ -736,7 +736,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
       Optional parameters: None
       Encoding considerations: binary
       Security considerations: Carries an RPKI Signed Checklist
-                               [RFC-TBD].
+                               [draft-ietf-sidrops-rpki-rsc].
       Interoperability considerations: None
       Published specification: This document.
       Applications that use this media type: RPKI operators.
@@ -754,6 +754,10 @@ Internet-Draft           RPKI Signed Checklists              August 2022
       Author: Job Snijders <job@fastly.com>
       Change controller: Job Snijders <job@fastly.com>
 
+
+   Upon publication of this document, IANA is requested to move this
+   registation to the "Media Types" registry and to reference the RFC
+   publication instead of this draft.
 
 11.  References
 
@@ -773,10 +777,6 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               DOI 10.17487/RFC3779, June 2004,
               <https://www.rfc-editor.org/info/rfc3779>.
 
-   [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
-              RFC 5652, DOI 10.17487/RFC5652, September 2009,
-              <https://www.rfc-editor.org/info/rfc5652>.
-
 
 
 
@@ -786,15 +786,14 @@ Snijders, et al.        Expires 13 February 2023               [Page 14]
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
+   [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
+              RFC 5652, DOI 10.17487/RFC5652, September 2009,
+              <https://www.rfc-editor.org/info/rfc5652>.
+
    [RFC6481]  Huston, G., Loomans, R., and G. Michaelson, "A Profile for
               Resource Certificate Repository Structure", RFC 6481,
               DOI 10.17487/RFC6481, February 2012,
               <https://www.rfc-editor.org/info/rfc6481>.
-
-   [RFC6486]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
-              "Manifests for the Resource Public Key Infrastructure
-              (RPKI)", RFC 6486, DOI 10.17487/RFC6486, February 2012,
-              <https://www.rfc-editor.org/info/rfc6486>.
 
    [RFC6487]  Huston, G., Michaelson, G., and R. Loomans, "A Profile for
               X.509 PKIX Resource Certificates", RFC 6487,
@@ -815,17 +814,15 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+   [RFC9286]  Austein, R., Huston, G., Kent, S., and M. Lepinski,
+              "Manifests for the Resource Public Key Infrastructure
+              (RPKI)", RFC 9286, DOI 10.17487/RFC9286, June 2022,
+              <https://www.rfc-editor.org/info/rfc9286>.
+
 11.2.  Informative References
 
    [FORT]     LACNIC and NIC.MX, "FORT", May 2021,
               <https://github.com/NICMx/FORT-validator>.
-
-   [I-D.ietf-sidrops-rpki-has-no-identity]
-              Bush, R. and R. Housley, "The I in RPKI does not stand for
-              Identity", Work in Progress, Internet-Draft, draft-ietf-
-              sidrops-rpki-has-no-identity-07, 20 April 2022,
-              <https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-
-              has-no-identity-07.txt>.
 
    [I-D.ietf-sidrops-rpki-rta]
               Michaelson, G. G., Huston, G., Harrison, T., Bruijnzeels,
@@ -834,6 +831,9 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               draft-ietf-sidrops-rpki-rta-00, 21 January 2021,
               <https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-
               rta-00.txt>.
+
+
+
 
 
 
@@ -850,9 +850,19 @@ Internet-Draft           RPKI Signed Checklists              August 2022
               RFC 1952, DOI 10.17487/RFC1952, May 1996,
               <https://www.rfc-editor.org/info/rfc1952>.
 
+   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
+              for the Cryptographic Message Syntax (CMS) and the Public
+              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
+              DOI 10.17487/RFC6268, July 2011,
+              <https://www.rfc-editor.org/info/rfc6268>.
+
    [RFC6480]  Lepinski, M. and S. Kent, "An Infrastructure to Support
               Secure Internet Routing", RFC 6480, DOI 10.17487/RFC6480,
               February 2012, <https://www.rfc-editor.org/info/rfc6480>.
+
+   [RFC9255]  Bush, R. and R. Housley, "The 'I' in RPKI Does Not Stand
+              for Identity", RFC 9255, DOI 10.17487/RFC9255, June 2022,
+              <https://www.rfc-editor.org/info/rfc9255>.
 
    [rpki-rsc-demo]
               Harrison, T., "A proof-of-concept for constructing and
@@ -877,18 +887,8 @@ Appendix A.  Acknowledgements
    Peter Peele, Claudio Jeker, and Theo Buehler for document review and
    suggestions.
 
-Appendix B.  Document changelog
 
-   This section is to be removed before publishing as an RFC.
 
-B.1.  changes from -07 -> -08
-
-   *  Theo requested explanation as to why fileName is OPTIONAL
-
-   *  Russ & Randy requested implementor guidance when RFC3779-generated
-      data fails to decode
-
-   *  Added uniqueness constraints for fileName and hash contents
 
 
 
@@ -898,53 +898,53 @@ Snijders, et al.        Expires 13 February 2023               [Page 16]
 Internet-Draft           RPKI Signed Checklists              August 2022
 
 
+Appendix B.  Document changelog
+
+   This section is to be removed before publishing as an RFC.
+
+B.1.  changes from -08 -> -09
+
+   *  Updated manifests refs to RFC9286
+
+   *  Added normative ref to RFC6268 (CMS)
+
+   *  Cleaned up ASN.1 formatting
+
+   *  Updated ASN.1 module OID following early allocation
+
+   *  Updated draft-ietf-sidrops-rpki-has-no-identity to RFC9255
+
+   *  Clean up IANA considerations
+
+B.2.  changes from -07 -> -08
+
+   *  Theo requested explanation as to why fileName is OPTIONAL
+
+   *  Russ & Randy requested implementor guidance when RFC3779-generated
+      data fails to decode
+
+   *  Added uniqueness constraints for fileName and hash contents
+
    *  Improved validation and verification procedure description
 
    *  Incorporated character-set constraints for fileName in ASN.1
       module
 
-B.2.  changes from -06 -> -07
+B.3.  changes from -06 -> -07
 
    *  Change wire format to allow use of commonly deployed libcrypto
       APIs.
 
-B.3.  changes from -05 -> -06
+B.4.  changes from -05 -> -06
 
    *  Non-content-related updates.
 
-B.4.  changes from -04 -> -05
+B.5.  changes from -04 -> -05
 
    *  Ties contributed clarifications.
 
-B.5.  changes from -03 -> -04
+B.6.  changes from -03 -> -04
 
-   *  Alberto pointed out the asID validation also needs to be
-      documented.
-
-B.6.  changes from -02 -> -03
-
-   *  Reference the IANA assigned OID
-
-   *  Clarify validation rules
-
-B.7.  changes from -01 -> -02
-
-   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &
-      Russ.
-
-B.8.  changes from -00 -> -01
-
-   *  Readability improvements
-
-   *  Update document category to match the registry allocation policy
-      requirement.
-
-B.9.  individual submission phase
-
-   *  On-the-wire change: the 'Filename' switched from 'required' to
-      'optional'.  Some SIDROPS Working Group participants proposed a
-      checksum itself is the most minimal information required to
-      address digital objects.
 
 
 
@@ -953,6 +953,34 @@ Snijders, et al.        Expires 13 February 2023               [Page 17]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
+
+   *  Alberto pointed out the asID validation also needs to be
+      documented.
+
+B.7.  changes from -02 -> -03
+
+   *  Reference the IANA assigned OID
+
+   *  Clarify validation rules
+
+B.8.  changes from -01 -> -02
+
+   *  Clarify RSC is part of a puzzle, not panacea.  Thanks Randy &
+      Russ.
+
+B.9.  changes from -00 -> -01
+
+   *  Readability improvements
+
+   *  Update document category to match the registry allocation policy
+      requirement.
+
+B.10.  individual submission phase
+
+   *  On-the-wire change: the 'Filename' switched from 'required' to
+      'optional'.  Some SIDROPS Working Group participants proposed a
+      checksum itself is the most minimal information required to
+      address digital objects.
 
 Authors' Addresses
 
@@ -969,6 +997,17 @@ Authors' Addresses
    South Brisbane QLD 4101
    Australia
    Email: tomh@apnic.net
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 18]
+
+Internet-Draft           RPKI Signed Checklists              August 2022
 
 
    Ben Maddison
@@ -1005,4 +1044,21 @@ Authors' Addresses
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Snijders, et al.        Expires 13 February 2023               [Page 19]

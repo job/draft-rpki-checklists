@@ -7,12 +7,12 @@
 <?rfc tocdepth="3"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-08" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-sidrops-rpki-rsc-09" ipr="trust200902" xml:lang="en" sortRefs="true" submissionType="IETF" consensus="true" version="3">
   <front>
     <title abbrev="RPKI Signed Checklists">
       A profile for Resource Public Key Infrastructure (RPKI) Signed Checklists (RSC)
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-08"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rsc-09"/>
     <author fullname="Job Snijders" initials="J." surname="Snijders">
       <organization>Fastly</organization>
       <address>
@@ -54,8 +54,7 @@
     <abstract>
       <t>
          This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general purpose listing of checksums (a 'checklist').
-         The objective is to allow an attestation of a RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and the allow for validation to confirm that a specific Internet Resource Holder produced the RSC.
-         The protected CMS content type is intended to provide for the signing of an arbitrary checksum listing with a specific set of Internet Number Resources.
+         The objective is to allow an attestation, termed an RPKI Signed Checklist (RSC), which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources", and which, when validated, confirms that the respective Internet Resource Holder produced the RSC.
       </t>
     </abstract>
     <note>
@@ -73,25 +72,24 @@
     <section anchor="intro">
       <name>Introduction</name>
       <t>
-        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
-        The objective is to allow an attestation, in the form of a listing of one or more checksums of arbitrary files, to be signed "with resources", and for validation to provide a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
-        The protected CMS content type is intended to provide for the signing of a checksum listing with a specific set of Internet Number Resources.
+        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
+        The protected CMS content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC): a checksum listing signed with a specific set of Internet Number Resources.
+        The objective is to allow an attestation that, when validated, provides a means to confirm a given Internet Resource Holder produced the RPKI Signed Checklist (RSC).
       </t>
       <t>
         Signed Checklists are expected to facilitate inter-domain business use-cases which depend on an ability to verify resource holdership.
         RPKI-based validation processes are expected to become the industry norm for automated Bring Your Own IP (BYOIP) on-boarding or establishment of physical interconnection between Autonomous Systems.
       </t>
       <t>
-        The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC6486"/>, and OpenBSD's <xref target="signify"/> utility.
-        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the existence of multiple digital objects.
+        The RSC concept borrows heavily from <xref target="I-D.ietf-sidrops-rpki-rta">RTA</xref>, Manifests <xref target="RFC9286"/>, and OpenBSD's <xref target="signify"/> utility.
+        The main difference between RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the content of multiple digital objects.
         A single signer profile is considered a simplification for both implementers and operators.
       </t>
     </section>
     <section anchor="profile">
       <name>RSC Profile and Distribution</name>
       <t>
-        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception.
-        Because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
+        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception: because RSCs MUST NOT be distributed through the global RPKI Repository system, the Subject Information Access (SIA) extension MUST be omitted from the RSC's X.509 End-Entity (EE) certificate.
       </t>
       <t>
         What constitutes suitable transport for RSC files is deliberately unspecified.
@@ -121,7 +119,8 @@
       </t>
       <sourcecode type="asn.1" originalSrc="RpkiSignedChecklist-2022.asn">RpkiSignedChecklist-2022
   { iso(1) member-body(2) us(840) rsadsi(113549)
-    pkcs(1) pkcs9(9) smime(16) mod(0) TBD }
+    pkcs(1) pkcs9(9) smime(16) mod(0)
+    id-mod-rpkiSignedChecklist-2022(73) }
 
 DEFINITIONS EXPLICIT TAGS ::=
 BEGIN
@@ -139,42 +138,42 @@ IMPORTS
       id-mod-ip-addr-and-as-ident(30) } ;
 
 ct-rpkiSignedChecklist CONTENT-TYPE ::=
-    { TYPE RpkiSignedChecklist IDENTIFIED BY
-      id-ct-signedChecklist }
+  { TYPE RpkiSignedChecklist
+    IDENTIFIED BY id-ct-signedChecklist }
 
 id-ct-signedChecklist OBJECT IDENTIFIER ::=
-    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
-      pkcs-9(9) id-smime(16) id-ct(1) 48 }
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+    pkcs-9(9) id-smime(16) id-ct(1) 48 }
 
 RpkiSignedChecklist ::= SEQUENCE {
-  version  [0]          INTEGER DEFAULT 0,
+  version [0]           INTEGER DEFAULT 0,
   resources             ResourceBlock,
   digestAlgorithm       DigestAlgorithmIdentifier,
   checkList             SEQUENCE (SIZE(1..MAX)) OF FileNameAndHash }
 
 FileNameAndHash ::= SEQUENCE {
-  fileName        PortableFilename OPTIONAL,
-  hash            Digest }
+  fileName              PortableFilename OPTIONAL,
+  hash                  Digest }
 
-PortableFilename ::= IA5String (FROM("a".."z" | "A".."Z" | "0".."9" |
-                                     "." | "_" | "-"))
+PortableFilename ::=
+  IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
 
 ResourceBlock ::= SEQUENCE {
-  asID         [0]       ConstrainedASIdentifiers OPTIONAL,
-  ipAddrBlocks [1]       ConstrainedIPAddrBlocks OPTIONAL }
+  asID         [0]      ConstrainedASIdentifiers OPTIONAL,
+  ipAddrBlocks [1]      ConstrainedIPAddrBlocks OPTIONAL }
   -- at least one of asID or ipAddrBlocks MUST be present
   ( WITH COMPONENTS { ..., asID PRESENT} |
     WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
 
-ConstrainedIPAddrBlocks     ::= SEQUENCE (SIZE(1..MAX)) OF
-                                ConstrainedIPAddressFamily
+ConstrainedIPAddrBlocks ::=
+  SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
 
-ConstrainedIPAddressFamily   ::= SEQUENCE {
-  addressFamily        OCTET STRING (SIZE(2)),
-  addressesOrRanges    SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+ConstrainedIPAddressFamily ::= SEQUENCE {
+  addressFamily         OCTET STRING (SIZE(2)),
+  addressesOrRanges     SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
 
-ConstrainedASIdentifiers    ::= SEQUENCE {
-  asnum               [0] SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
+ConstrainedASIdentifiers ::= SEQUENCE {
+  asnum [0]             SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
 
 END
 </sourcecode>
@@ -257,7 +256,7 @@ END
       <section>
         <name>digestAlgorithm</name>
         <t>
-          The digest algorithm used to create the message digest of the attested digital object.
+          The digest algorithm used to create the message digest of the attested digital object(s).
           This algorithm MUST be a hashing algorithm defined in <xref target="RFC7935"/>.
         </t>
       </section>
@@ -297,7 +296,7 @@ END
       <name>RSC Validation</name>
       <t>
         Before a Relying Party can use an RSC to validate a set of digital objects, the Relying Party MUST first validate the RSC.
-        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of a SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
+        To validate an RSC, the Relying Party MUST perform all the validation checks specified in <xref target="RFC6488"/> (except checking for the presence of an SIA extension, which MUST NOT be present in the EE X.509 certificate <xref target="RFC6487" section="4.8.8.2"/>), and perform the following additional RSC-specific validation steps:
       </t>
       <ol>
         <li>
@@ -381,7 +380,7 @@ END
         These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE Certificate used to validate the Signed Checklist.
       </t>
       <t>
-        RPKI Certificates are not bound to real world identities, see <xref target="I-D.ietf-sidrops-rpki-has-no-identity"/> for an elaboration.
+        RPKI Certificates are not bound to real world identities, see <xref target="RFC9255"/> for an elaboration.
         Relying Parties can only associate real world entities to Internet Number Resources by additionally consulting an exogenous authority.
         Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources', not about any other aspect of the resource holder's business operations such as the identity of the resource holder itself.
       </t>
@@ -439,7 +438,7 @@ END
       <section>
         <name>SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</name>
         <t>
-          The IANA has permanently allocated for this document in the SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1) registry:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
         </t>
         <artwork>
 <![CDATA[
@@ -455,20 +454,20 @@ Decimal   Description             References
       <section>
         <name>RPKI Signed Objects sub-registry</name>
         <t>
-          The IANA is requested to register the OID for the RPKI Signed Checklist in the registry created by <xref target="RFC6488"/> as following:
+          The IANA is requested to register the OID for the RPKI Signed Checklist in the "RPKI Signed Objects" registry created by <xref target="RFC6488"/> as follows:
         </t>
         <artwork>
 <![CDATA[
 Name              OID                         Specification
 -------------------------------------------------------------
-Signed Checklist  1.2.840.113549.1.9.16.1.48  [draft-ietf-sidrops-rpki-rsc]
+Signed Checklist  1.2.840.113549.1.9.16.1.48  [RFC-TBD]
 ]]>
         </artwork>
       </section>
       <section>
         <name>File Extension</name>
         <t>
-          The IANA is requested to add an item for the Signed Checklist file extension to the "RPKI Repository Name Scheme" registry created by <xref target="RFC6481"/> as follows:
+          The IANA has temporarily added an item for the Signed Checklist file extension to the "RPKI Repository Name Schemes" registry created by <xref target="RFC6481"/> as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -477,24 +476,30 @@ Filename Extension  RPKI Object       Reference
        .sig         Signed Checklist  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to make this addition permanent and to reference the RFC publication instead of this draft.
+        </t>
       </section>
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
-          The IANA is requested to add an item to the "SMI Security for S/MIME Module Identifier" registry as follows:
+          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
         </t>
         <artwork>
 <![CDATA[
 Decimal  Description                      References
 -----------------------------------------------------------------------
-    TBD  id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
+    73   id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to update the "Description" column to read "id-mod-rpkiSignedChecklist-2022", and to reference the RFC publication instead of this draft.
+        </t>
       </section>
       <section>
         <name>Media Type</name>
         <t>
-          The IANA is requested to register the media type application/rpki-checklist in the Provisional Standard Media Type registry as follows:
+          The IANA has registered the media type application/rpki-checklist in the "Provisional Standard Media Type" registry as follows:
         </t>
         <artwork>
 <![CDATA[
@@ -504,7 +509,7 @@ Decimal  Description                      References
    Optional parameters: None
    Encoding considerations: binary
    Security considerations: Carries an RPKI Signed Checklist
-                            [RFC-TBD].
+                            [draft-ietf-sidrops-rpki-rsc].
    Interoperability considerations: None
    Published specification: This document.
    Applications that use this media type: RPKI operators.
@@ -523,6 +528,9 @@ Decimal  Description                      References
    Change controller: Job Snijders <job@fastly.com>
 ]]>
         </artwork>
+        <t>
+          Upon publication of this document, IANA is requested to move this registation to the "Media Types" registry and to reference the RFC publication instead of this draft.
+        </t>
       </section>
     </section>
   </middle>
@@ -585,21 +593,6 @@ Decimal  Description                      References
           <seriesInfo name="RFC" value="6481"/>
           <seriesInfo name="DOI" value="10.17487/RFC6481"/>
         </reference>
-        <reference anchor="RFC6486" target="https://www.rfc-editor.org/info/rfc6486" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6486.xml">
-          <front>
-            <title>Manifests for the Resource Public Key Infrastructure (RPKI)</title>
-            <author fullname="R. Austein" initials="R" surname="Austein"/>
-            <author fullname="G. Huston" initials="G" surname="Huston"/>
-            <author fullname="S. Kent" initials="S" surname="Kent"/>
-            <author fullname="M. Lepinski" initials="M" surname="Lepinski"/>
-            <date month="February" year="2012"/>
-            <abstract>
-              <t>This document defines a "manifest" for use in the Resource Public Key Infrastructure (RPKI).  A manifest is a signed object (file) that contains a listing of all the signed objects (files) in the repository publication point (directory) associated with an authority responsible for publishing in the repository.  For each certificate, Certificate Revocation List (CRL), or other type of signed objects issued by the authority that are published at this repository publication point, the manifest contains both the name of the file containing the object and a hash of the file content.  Manifests are intended to enable a relying party (RP) to detect certain forms of attacks against a repository.  Specifically, if an RP checks a manifest's contents against the signed objects retrieved from a repository publication point, then the RP can detect "stale" (valid) data and deletion of signed objects. [STANDARDS-TRACK]</t>
-            </abstract>
-          </front>
-          <seriesInfo name="RFC" value="6486"/>
-          <seriesInfo name="DOI" value="10.17487/RFC6486"/>
-        </reference>
         <reference anchor="RFC6487" target="https://www.rfc-editor.org/info/rfc6487" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6487.xml">
           <front>
             <title>A Profile for X.509 PKIX Resource Certificates</title>
@@ -654,6 +647,21 @@ Decimal  Description                      References
           <seriesInfo name="RFC" value="8174"/>
           <seriesInfo name="DOI" value="10.17487/RFC8174"/>
         </reference>
+        <reference anchor="RFC9286" target="https://www.rfc-editor.org/info/rfc9286" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9286.xml">
+          <front>
+            <title>Manifests for the Resource Public Key Infrastructure (RPKI)</title>
+            <author fullname="R. Austein" initials="R" surname="Austein"/>
+            <author fullname="G. Huston" initials="G" surname="Huston"/>
+            <author fullname="S. Kent" initials="S" surname="Kent"/>
+            <author fullname="M. Lepinski" initials="M" surname="Lepinski"/>
+            <date month="June" year="2022"/>
+            <abstract>
+              <t>This document defines a "manifest" for use in the Resource Public Key Infrastructure (RPKI).  A manifest is a signed object (file) that contains a listing of all the signed objects (files) in the repository publication point (directory) associated with an authority responsible for publishing in the repository.  For each certificate, Certificate Revocation List (CRL), or other type of signed objects issued by the authority that are published at this repository publication point, the manifest contains both the name of the file containing the object and a hash of the file content.  Manifests are intended to enable a relying party (RP) to detect certain forms of attacks against a repository.  Specifically, if an RP checks a manifest's contents against the signed objects retrieved from a repository publication point, then the RP can detect replay attacks, and unauthorized in-flight modification or deletion of signed objects.  This document obsoletes RFC 6486.</t>
+            </abstract>
+          </front>
+          <seriesInfo name="RFC" value="9286"/>
+          <seriesInfo name="DOI" value="10.17487/RFC9286"/>
+        </reference>
         <reference anchor="IANA.ADDRESS-FAMILY-NUMBERS" target="http://www.iana.org/assignments/address-family-numbers" xml:base="https://bib.ietf.org/public/rfc/bibxml-misc/reference.IANA.ADDRESS-FAMILY-NUMBERS.xml">
           <front>
             <title>Address Family Numbers</title>
@@ -691,22 +699,6 @@ Decimal  Description                      References
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rta-00"/>
         </reference>
-        <reference anchor="I-D.ietf-sidrops-rpki-has-no-identity" target="https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-has-no-identity-07.txt" xml:base="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-sidrops-rpki-has-no-identity.xml">
-          <front>
-            <title>The I in RPKI does not stand for Identity</title>
-            <author fullname="Randy Bush">
-              <organization>Arrcus &amp; Internet Initiative Japan</organization>
-            </author>
-            <author fullname="Russ Housley">
-              <organization>Vigil Security, LLC</organization>
-            </author>
-            <date day="20" month="April" year="2022"/>
-            <abstract>
-              <t>There is a false notion that Internet Number Resources (INRs) in the RPKI can be associated with the real-world identity of the 'holder' of an INR. This document specifies that RPKI does not associate to the INR holder.</t>
-            </abstract>
-          </front>
-          <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-has-no-identity-07"/>
-        </reference>
         <reference anchor="RFC1952" target="https://www.rfc-editor.org/info/rfc1952" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.1952.xml">
           <front>
             <title>GZIP file format specification version 4.3</title>
@@ -718,6 +710,19 @@ Decimal  Description                      References
           </front>
           <seriesInfo name="RFC" value="1952"/>
           <seriesInfo name="DOI" value="10.17487/RFC1952"/>
+        </reference>
+        <reference anchor="RFC6268" target="https://www.rfc-editor.org/info/rfc6268" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6268.xml">
+          <front>
+            <title>Additional New ASN.1 Modules for the Cryptographic Message Syntax (CMS) and the Public Key Infrastructure Using X.509 (PKIX)</title>
+            <author fullname="J. Schaad" initials="J" surname="Schaad"/>
+            <author fullname="S. Turner" initials="S" surname="Turner"/>
+            <date month="July" year="2011"/>
+            <abstract>
+              <t>The Cryptographic Message Syntax (CMS) format, and many associated formats, are expressed using ASN.1.  The current ASN.1 modules conform to the 1988 version of ASN.1.  This document updates some auxiliary ASN.1 modules to conform to the 2008 version of ASN.1; the 1988 ASN.1 modules remain the normative version.  There are no bits- on-the-wire changes to any of the formats; this is simply a change to the syntax.  This document is not an Internet Standards Track specification; it is published for informational purposes.</t>
+            </abstract>
+          </front>
+          <seriesInfo name="RFC" value="6268"/>
+          <seriesInfo name="DOI" value="10.17487/RFC6268"/>
         </reference>
         <reference anchor="RFC6480" target="https://www.rfc-editor.org/info/rfc6480" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6480.xml">
           <front>
@@ -731,6 +736,19 @@ Decimal  Description                      References
           </front>
           <seriesInfo name="RFC" value="6480"/>
           <seriesInfo name="DOI" value="10.17487/RFC6480"/>
+        </reference>
+        <reference anchor="RFC9255" target="https://www.rfc-editor.org/info/rfc9255" xml:base="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9255.xml">
+          <front>
+            <title>The 'I' in RPKI Does Not Stand for Identity</title>
+            <author fullname="R. Bush" initials="R" surname="Bush"/>
+            <author fullname="R. Housley" initials="R" surname="Housley"/>
+            <date month="June" year="2022"/>
+            <abstract>
+              <t>There is a false notion that Internet Number Resources (INRs) in the RPKI can be associated with the real-world identity of the 'holder' of an INR.  This document specifies that RPKI does not associate to the INR holder.</t>
+            </abstract>
+          </front>
+          <seriesInfo name="RFC" value="9255"/>
+          <seriesInfo name="DOI" value="10.17487/RFC9255"/>
         </reference>
         <reference anchor="signify" target="https://man.openbsd.org/signify">
           <front>
@@ -809,6 +827,17 @@ Decimal  Description                      References
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+      <section>
+        <name>changes from -08 -&gt; -09</name>
+        <ul>
+          <li>Updated manifests refs to RFC9286</li>
+          <li>Added normative ref to RFC6268 (CMS)</li>
+          <li>Cleaned up ASN.1 formatting</li>
+          <li>Updated ASN.1 module OID following early allocation</li>
+          <li>Updated draft-ietf-sidrops-rpki-has-no-identity to RFC9255</li>
+          <li>Clean up IANA considerations</li>
+        </ul>
+      </section>
       <section>
         <name>changes from -07 -&gt; -08</name>
         <ul>
