@@ -514,11 +514,11 @@ Filename Extension  RPKI Object       Reference
 <![CDATA[
 Decimal  Description                      References
 -----------------------------------------------------------------------
-    73   id-mod-rpkiSignedChecklist-2022  [draft-ietf-sidrops-rpki-rsc]
+    73   id-mod-rpkiSignedChecklist-2021  [draft-ietf-sidrops-rpki-rsc]
 ]]>
         </artwork>
         <t>
-          Upon publication of this document, IANA is requested to reference the RFC publication instead of this draft.
+          Upon publication of this document, IANA is requested to update the "Description" column to read "id-mod-rpkiSignedChecklist-2022", and to reference the RFC publication instead of this draft.
         </t>
       </section>
 
