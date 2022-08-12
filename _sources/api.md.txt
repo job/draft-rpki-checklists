@@ -8,7 +8,7 @@
     :inherited-members:
     :show-inheritance:
 
-.. autoclass:: SignedChecklistEContent
+.. autoclass:: SignedChecklistContentType
     :members:
     :inherited-members:
     :show-inheritance:

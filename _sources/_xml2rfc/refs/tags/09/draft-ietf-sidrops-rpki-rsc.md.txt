@@ -1,0 +1,7 @@
+# tags: 09
+
+:::{xml2rfc:version} draft-ietf-sidrops-rpki-rsc
+:ref_type: tags
+:ref_name: 09
+:ref_path: refs/tags/09
+:::
