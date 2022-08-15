@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev2 documentation</title>
+    <title>refs/tags/04 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev3 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="draft-ietf-sidrops-rpki-rsc-diff-from-tags.09.html" title="refs/tags/09 ⟼ refs/heads/main"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -68,7 +68,7 @@
 
 <span class="gu">@@ -11,21 +11,20 @@</span><span class="w"></span>
 
-<span class="w"> </span>                                                          12 August 2022<span class="w"></span>
+<span class="w"> </span>                                                          15 August 2022<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>
 <span class="gd">-  Resource Public Key Infrastructure (RPKI) object profile for Signed</span><span class="w"></span>
@@ -327,7 +327,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   END<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -216,52 +238,197 @@</span><span class="w"></span>
+<span class="gu">@@ -216,52 +238,200 @@</span><span class="w"></span>
 
 <span class="w"> </span>4.2.  resources<span class="w"></span>
 <span class="w"> </span>
@@ -493,18 +493,21 @@
 <span class="gi">+       FileNameAndHash element in the checkList field, its contents MUST</span><span class="w"></span>
 <span class="gi">+       conform to the constraints described in Section 4.4.1.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
-<span class="gi">+   2.  If the asID field is present within the contents of the resources</span><span class="w"></span>
-<span class="gi">+       field, then the AS Resources extension [RFC3779] MUST be present</span><span class="w"></span>
-<span class="gi">+       in the EE certificate contained in the CMS certificates field.</span><span class="w"></span>
-<span class="gi">+       The AS identifiers present in the resources field MUST be a</span><span class="w"></span>
-<span class="gi">+       subset of those present in the certificate extension.</span><span class="w"></span>
+<span class="gi">+   2.  If the asID field is present within the contents of the</span><span class="w"></span>
+<span class="gi">+       &#39;resources&#39; field, then the AS Resources extension [RFC3779] MUST</span><span class="w"></span>
+<span class="gi">+       be present in the EE certificate contained in the CMS</span><span class="w"></span>
+<span class="gi">+       certificates field.  The AS identifiers present in the eContent</span><span class="w"></span>
+<span class="gi">+       &#39;resources&#39; field MUST be a subset of those present in the</span><span class="w"></span>
+<span class="gi">+       certificate extension.  The EE certificate&#39;s AS Resources</span><span class="w"></span>
+<span class="gi">+       extension MUST NOT contain &quot;inherit&quot; elements.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   3.  If the ipAddrBlocks field is present within the contents of the</span><span class="w"></span>
-<span class="gi">+       resources field, then the IP Resources extension [RFC3779] MUST</span><span class="w"></span>
+<span class="gi">+       &#39;resources&#39; field, then the IP Resources extension [RFC3779] MUST</span><span class="w"></span>
 <span class="gi">+       be present in the EE certificate contained in the CMS</span><span class="w"></span>
-<span class="gi">+       certificates field.  The IP address resources present in the</span><span class="w"></span>
-<span class="gi">+       resources field MUST be a subset of those present in the</span><span class="w"></span>
-<span class="gi">+       certificate extension.</span><span class="w"></span>
+<span class="gi">+       certificates field.  The IP addresses present in the eContent</span><span class="w"></span>
+<span class="gi">+       &#39;resources&#39; field MUST be a subset of those present in the</span><span class="w"></span>
+<span class="gi">+       certificate extension.  The EE certificate&#39;s IP Resources</span><span class="w"></span>
+<span class="gi">+       extension MUST NOT contain &quot;inherit&quot; elements.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+6.  Verifying files or data using RSC</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
@@ -562,7 +565,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   When creating digital objects of a plain-text nature (such as ASCII,<span class="w"></span>
 <span class="w"> </span>   UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to convert such<span class="w"></span>
-<span class="gu">@@ -272,49 +439,62 @@</span><span class="w"></span>
+<span class="gu">@@ -272,49 +442,62 @@</span><span class="w"></span>
 
 <span class="w"> </span>   implementations are expected to treat a checksummed digital object as<span class="w"></span>
 <span class="w"> </span>   string of arbitrary single octets.<span class="w"></span>
@@ -656,7 +659,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   This section records the status of known implementations of the<span class="w"></span>
 <span class="w"> </span>   protocol defined by this specification at the time of posting of this<span class="w"></span>
-<span class="gu">@@ -349,56 +529,72 @@</span><span class="w"></span>
+<span class="gu">@@ -349,56 +532,72 @@</span><span class="w"></span>
 
 <span class="w"> </span>      LibreSSL was developed by Job Snijders.<span class="w"></span>
 <span class="w"> </span>
@@ -769,7 +772,7 @@
 <span class="w"> </span>
 <span class="w"> </span>      Type name: application<span class="w"></span>
 <span class="w"> </span>      Subtype name: rpki-checklist<span class="w"></span>
-<span class="gu">@@ -406,7 +602,7 @@</span><span class="w"></span>
+<span class="gu">@@ -406,7 +605,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>      Optional parameters: None<span class="w"></span>
 <span class="w"> </span>      Encoding considerations: binary<span class="w"></span>
@@ -779,7 +782,7 @@
 <span class="w"> </span>      Interoperability considerations: None<span class="w"></span>
 <span class="w"> </span>      Published specification: This document.<span class="w"></span>
 <span class="w"> </span>      Applications that use this media type: RPKI operators.<span class="w"></span>
-<span class="gu">@@ -424,9 +620,18 @@</span><span class="w"></span>
+<span class="gu">@@ -424,9 +623,18 @@</span><span class="w"></span>
 
 <span class="w"> </span>      Author: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
 <span class="w"> </span>      Change controller: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
@@ -802,7 +805,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [RFC2119]  Bradner, S., &quot;Key words for use in RFCs to Indicate<span class="w"></span>
 <span class="w"> </span>              Requirement Levels&quot;, BCP 14, RFC 2119,<span class="w"></span>
-<span class="gu">@@ -447,10 +652,10 @@</span><span class="w"></span>
+<span class="gu">@@ -447,10 +655,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>              DOI 10.17487/RFC6481, February 2012,<span class="w"></span>
 <span class="w"> </span>              &lt;https://www.rfc-editor.org/info/rfc6481&gt;.<span class="w"></span>
@@ -818,7 +821,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [RFC6488]  Lepinski, M., Chi, A., and S. Kent, &quot;Signed Object<span class="w"></span>
 <span class="w"> </span>              Template for the Resource Public Key Infrastructure<span class="w"></span>
-<span class="gu">@@ -466,7 +671,12 @@</span><span class="w"></span>
+<span class="gu">@@ -466,7 +674,12 @@</span><span class="w"></span>
 
 <span class="w"> </span>              2119 Key Words&quot;, BCP 14, RFC 8174, DOI 10.17487/RFC8174,<span class="w"></span>
 <span class="w"> </span>              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.<span class="w"></span>
@@ -833,7 +836,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [FORT]     LACNIC and NIC.MX, &quot;FORT&quot;, May 2021,<span class="w"></span>
 <span class="w"> </span>              &lt;https://github.com/NICMx/FORT-validator&gt;.<span class="w"></span>
-<span class="gu">@@ -479,13 +689,6 @@</span><span class="w"></span>
+<span class="gu">@@ -479,13 +692,6 @@</span><span class="w"></span>
 
 <span class="w"> </span>              &lt;https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-<span class="w"></span>
 <span class="w"> </span>              rta-00.txt&gt;.<span class="w"></span>
@@ -848,7 +851,7 @@
 <span class="w"> </span>   [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base<span class="w"></span>
 <span class="w"> </span>              Specifications, Issue 7&quot;, 2016,<span class="w"></span>
 <span class="w"> </span>              &lt;https://publications.opengroup.org/standards/unix/c165&gt;.<span class="w"></span>
-<span class="gu">@@ -494,9 +697,19 @@</span><span class="w"></span>
+<span class="gu">@@ -494,9 +700,19 @@</span><span class="w"></span>
 
 <span class="w"> </span>              RFC 1952, DOI 10.17487/RFC1952, May 1996,<span class="w"></span>
 <span class="w"> </span>              &lt;https://www.rfc-editor.org/info/rfc1952&gt;.<span class="w"></span>
@@ -869,7 +872,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [rpki-rsc-demo]<span class="w"></span>
 <span class="w"> </span>              Harrison, T., &quot;A proof-of-concept for constructing and<span class="w"></span>
-<span class="gu">@@ -513,38 +726,83 @@</span><span class="w"></span>
+<span class="gu">@@ -513,38 +729,83 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>Appendix A.  Acknowledgements<span class="w"></span>
