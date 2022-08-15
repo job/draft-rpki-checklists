@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>tags: 09 &#8212; RPKI Signed Checklists 0.10.0 documentation</title>
+    <title>tags: 10 &#8212; RPKI Signed Checklists 0.10.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script src="../../../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="tags: 10" href="../10/draft-ietf-sidrops-rpki-rsc.html" />
-    <link rel="prev" title="tags: 04" href="../04/draft-ietf-sidrops-rpki-rsc.html" />
+    <link rel="next" title="changes" href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" />
+    <link rel="prev" title="tags: 09" href="../09/draft-ietf-sidrops-rpki-rsc.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -38,16 +38,16 @@
           <a href="../../../../xml2rfc-version-index.html" title="Internet Draft Versions"
              >drafts</a> |</li>
         <li class="right" >
-          <a href="../10/draft-ietf-sidrops-rpki-rsc.html" title="tags: 10"
+          <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" title="changes"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../04/draft-ietf-sidrops-rpki-rsc.html" title="tags: 04"
+          <a href="../09/draft-ietf-sidrops-rpki-rsc.html" title="tags: 09"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.10.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" accesskey="U">tags</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">tags: 09</a></li> 
+        <li class="nav-item nav-item-this"><a href="">tags: 10</a></li> 
       </ul>
     </div>  
 
@@ -55,23 +55,23 @@
       <div class="documentwrapper">
           <div class="body" role="main">
             
-  <section id="tags-09">
-<h1>tags: 09<a class="headerlink" href="#tags-09" title="Permalink to this heading">¶</a></h1>
+  <section id="tags-10">
+<h1>tags: 10<a class="headerlink" href="#tags-10" title="Permalink to this heading">¶</a></h1>
 <dl class="xml2rfc version">
-<dt class="sig sig-object xml2rfc" id="xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-09">
-<span class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></span><a class="headerlink" href="#xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-09" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object xml2rfc" id="xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-10">
+<span class="sig-name descname"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></span><a class="headerlink" href="#xml2rfc-version-draft-ietf-sidrops-rpki-rsc-tags-10" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 13 February 2023                                          APNIC
+Expires: 16 February 2023                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                          12 August 2022
+                                                          15 August 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
                             Checklists (RSC)
-                     draft-ietf-sidrops-rpki-rsc-09
+                     draft-ietf-sidrops-rpki-rsc-10
 
 Abstract
 
@@ -107,7 +107,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as &quot;work in progress.&quot;
 
-   This Internet-Draft will expire on 13 February 2023.
+   This Internet-Draft will expire on 16 February 2023.
 
 Copyright Notice
 
@@ -421,18 +421,21 @@ Table of Contents
        FileNameAndHash element in the checkList field, its contents MUST
        conform to the constraints described in Section 4.4.1.
 
-   2.  If the asID field is present within the contents of the resources
-       field, then the AS Resources extension [RFC3779] MUST be present
-       in the EE certificate contained in the CMS certificates field.
-       The AS identifiers present in the resources field MUST be a
-       subset of those present in the certificate extension.
+   2.  If the asID field is present within the contents of the
+       &#39;resources&#39; field, then the AS Resources extension [RFC3779] MUST
+       be present in the EE certificate contained in the CMS
+       certificates field.  The AS identifiers present in the eContent
+       &#39;resources&#39; field MUST be a subset of those present in the
+       certificate extension.  The EE certificate&#39;s AS Resources
+       extension MUST NOT contain &quot;inherit&quot; elements.
 
    3.  If the ipAddrBlocks field is present within the contents of the
-       resources field, then the IP Resources extension [RFC3779] MUST
+       &#39;resources&#39; field, then the IP Resources extension [RFC3779] MUST
        be present in the EE certificate contained in the CMS
-       certificates field.  The IP address resources present in the
-       resources field MUST be a subset of those present in the
-       certificate extension.
+       certificates field.  The IP addresses present in the eContent
+       &#39;resources&#39; field MUST be a subset of those present in the
+       certificate extension.  The EE certificate&#39;s IP Resources
+       extension MUST NOT contain &quot;inherit&quot; elements.
 
 6.  Verifying files or data using RSC
 
