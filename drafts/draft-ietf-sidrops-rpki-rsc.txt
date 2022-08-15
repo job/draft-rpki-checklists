@@ -5,10 +5,10 @@
 Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 13 February 2023                                          APNIC
+Expires: 16 February 2023                                          APNIC
                                                              B. Maddison
                                                               Workonline
-                                                          12 August 2022
+                                                          15 August 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2023.
+   This Internet-Draft will expire on 16 February 2023.
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 1]
+Snijders, et al.        Expires 16 February 2023                [Page 1]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 2]
+Snijders, et al.        Expires 16 February 2023                [Page 2]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -165,7 +165,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 3]
+Snijders, et al.        Expires 16 February 2023                [Page 3]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -221,7 +221,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 4]
+Snijders, et al.        Expires 16 February 2023                [Page 4]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -277,7 +277,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 5]
+Snijders, et al.        Expires 16 February 2023                [Page 5]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -333,7 +333,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 6]
+Snijders, et al.        Expires 16 February 2023                [Page 6]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -389,7 +389,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 7]
+Snijders, et al.        Expires 16 February 2023                [Page 7]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -421,34 +421,38 @@ Internet-Draft           RPKI Signed Checklists              August 2022
        FileNameAndHash element in the checkList field, its contents MUST
        conform to the constraints described in Section 4.4.1.
 
-   2.  If the asID field is present within the contents of the resources
-       field, then the AS Resources extension [RFC3779] MUST be present
-       in the EE certificate contained in the CMS certificates field.
-       The AS identifiers present in the resources field MUST be a
-       subset of those present in the certificate extension.
+   2.  If the asID field is present within the contents of the
+       'resources' field, then the AS Resources extension [RFC3779] MUST
+       be present in the EE certificate contained in the CMS
+       certificates field.  The AS identifiers present in the eContent
+       'resources' field MUST be a subset of those present in the
+       certificate extension.  The EE certificate's AS Resources
+       extension MUST NOT contain "inherit" elements.
 
    3.  If the ipAddrBlocks field is present within the contents of the
-       resources field, then the IP Resources extension [RFC3779] MUST
+       'resources' field, then the IP Resources extension [RFC3779] MUST
        be present in the EE certificate contained in the CMS
-       certificates field.  The IP address resources present in the
-       resources field MUST be a subset of those present in the
-       certificate extension.
+       certificates field.  The IP addresses present in the eContent
+       'resources' field MUST be a subset of those present in the
+       certificate extension.  The EE certificate's IP Resources
+       extension MUST NOT contain "inherit" elements.
 
 6.  Verifying files or data using RSC
 
    To verify a set of digital objects with an RSC:
 
-   *  The RSC MUST be validated acording to the procedure described in
-      Section 5.  If the RSC cannot be validated, verification MUST fail
-      and the error SHOULD be reported to the user.
 
 
 
 
-Snijders, et al.        Expires 13 February 2023                [Page 8]
+Snijders, et al.        Expires 16 February 2023                [Page 8]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
+
+   *  The RSC MUST be validated acording to the procedure described in
+      Section 5.  If the RSC cannot be validated, verification MUST fail
+      and the error SHOULD be reported to the user.
 
    *  For every digital object to be verified:
 
@@ -497,11 +501,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-
-
-
-
-Snijders, et al.        Expires 13 February 2023                [Page 9]
+Snijders, et al.        Expires 16 February 2023                [Page 9]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -557,7 +557,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 10]
+Snijders, et al.        Expires 16 February 2023               [Page 10]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -613,7 +613,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 11]
+Snijders, et al.        Expires 16 February 2023               [Page 11]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -669,7 +669,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 12]
+Snijders, et al.        Expires 16 February 2023               [Page 12]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -725,7 +725,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 13]
+Snijders, et al.        Expires 16 February 2023               [Page 13]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -781,7 +781,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 14]
+Snijders, et al.        Expires 16 February 2023               [Page 14]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -837,7 +837,7 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 15]
+Snijders, et al.        Expires 16 February 2023               [Page 15]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -893,7 +893,7 @@ Appendix A.  Acknowledgements
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 16]
+Snijders, et al.        Expires 16 February 2023               [Page 16]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -949,7 +949,7 @@ B.6.  changes from -03 -> -04
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 17]
+Snijders, et al.        Expires 16 February 2023               [Page 17]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -1005,7 +1005,7 @@ Authors' Addresses
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 18]
+Snijders, et al.        Expires 16 February 2023               [Page 18]
 
 Internet-Draft           RPKI Signed Checklists              August 2022
 
@@ -1061,4 +1061,4 @@ Internet-Draft           RPKI Signed Checklists              August 2022
 
 
 
-Snijders, et al.        Expires 13 February 2023               [Page 19]
+Snijders, et al.        Expires 16 February 2023               [Page 19]

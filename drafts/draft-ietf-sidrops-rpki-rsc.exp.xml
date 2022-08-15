@@ -303,10 +303,10 @@ END
           The contents of the CMS eContent field MUST conform to the constraints described in <xref target="econtent"/>. In particular, for each FileNameAndHash element in the checkList field, its contents MUST conform to the constraints described in <xref target="FileNameAndHash"/>.
         </li>
         <li>
-          If the asID field is present within the contents of the resources field, then the AS Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the resources field MUST be a subset of those present in the certificate extension.
+          If the asID field is present within the contents of the 'resources' field, then the AS Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent 'resources' field MUST be a subset of those present in the certificate extension. The EE certificate's AS Resources extension MUST NOT contain "inherit" elements.
         </li>
         <li>
-          If the ipAddrBlocks field is present within the contents of the resources field, then the IP Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The IP address resources present in the resources field MUST be a subset of those present in the certificate extension.
+          If the ipAddrBlocks field is present within the contents of the 'resources' field, then the IP Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The IP addresses present in the eContent 'resources' field MUST be a subset of those present in the certificate extension. The EE certificate's IP Resources extension MUST NOT contain "inherit" elements.
         </li>
       </ol>
     </section>

@@ -1193,7 +1193,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Snijders, et al.</td>
-<td class="center">Expires 13 February 2023</td>
+<td class="center">Expires 16 February 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1206,12 +1206,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-ietf-sidrops-rpki-rsc-09</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-08-12" class="published">12 August 2022</time>
+<time datetime="2022-08-15" class="published">15 August 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-02-13">13 February 2023</time></dd>
+<dd class="expires"><time datetime="2023-02-16">16 February 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1266,7 +1266,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 February 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 February 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1677,10 +1677,10 @@ END
           The contents of the CMS eContent field MUST conform to the constraints described in <a href="#econtent" class="xref">Section 4</a>. In particular, for each FileNameAndHash element in the checkList field, its contents MUST conform to the constraints described in <a href="#FileNameAndHash" class="xref">Section 4.4.1</a>.<a href="#section-5-2.1" class="pilcrow">¶</a>
 </li>
         <li id="section-5-2.2">
-          If the asID field is present within the contents of the resources field, then the AS Resources extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the resources field MUST be a subset of those present in the certificate extension.<a href="#section-5-2.2" class="pilcrow">¶</a>
+          If the asID field is present within the contents of the 'resources' field, then the AS Resources extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent 'resources' field MUST be a subset of those present in the certificate extension. The EE certificate's AS Resources extension MUST NOT contain "inherit" elements.<a href="#section-5-2.2" class="pilcrow">¶</a>
 </li>
         <li id="section-5-2.3">
-          If the ipAddrBlocks field is present within the contents of the resources field, then the IP Resources extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> MUST be present in the EE certificate contained in the CMS certificates field. The IP address resources present in the resources field MUST be a subset of those present in the certificate extension.<a href="#section-5-2.3" class="pilcrow">¶</a>
+          If the ipAddrBlocks field is present within the contents of the 'resources' field, then the IP Resources extension <span>[<a href="#RFC3779" class="xref">RFC3779</a>]</span> MUST be present in the EE certificate contained in the CMS certificates field. The IP addresses present in the eContent 'resources' field MUST be a subset of those present in the certificate extension. The EE certificate's IP Resources extension MUST NOT contain "inherit" elements.<a href="#section-5-2.3" class="pilcrow">¶</a>
 </li>
       </ol>
 </section>
