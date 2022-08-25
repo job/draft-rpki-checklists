@@ -2,7 +2,6 @@
 
 :::{toctree}
 
-toc-draft-ietf-sidrops-rpki-rsc-branches
 toc-draft-ietf-sidrops-rpki-rsc-tags
 toc-draft-ietf-sidrops-rpki-rsc-diffs
 :::

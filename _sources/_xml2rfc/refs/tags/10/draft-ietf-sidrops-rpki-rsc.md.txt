@@ -1,7 +1,0 @@
-# tags: 10
-
-:::{xml2rfc:version} draft-ietf-sidrops-rpki-rsc
-:ref_type: tags
-:ref_name: 10
-:ref_path: refs/tags/10
-:::
