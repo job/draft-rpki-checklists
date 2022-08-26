@@ -10,7 +10,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
-     docName="draft-ietf-sidrops-rpki-rsc-09"
+     docName="draft-ietf-sidrops-rpki-rsc-10"
      ipr="trust200902"
      xml:lang="en"
      sortRefs="true"
@@ -299,7 +299,7 @@
 
       <ol>
         <li>
-          The contents of the CMS eContent field MUST conform to the constraints described in <xref target="econtent"/>. In particular, for each FileNameAndHash element in the checkList field, its contents MUST conform to the constraints described in <xref target="FileNameAndHash"/>.
+          The contents of the CMS eContent field MUST conform to all of the constraints described in <xref target="econtent"/> including the constraints described in <xref target="FileNameAndHash"/>.
         </li>
         <li>
           If the asID field is present within the contents of the 'resources' field, then the AS Resources extension <xref target="RFC3779"/> MUST be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent 'resources' field MUST be a subset of those present in the certificate extension. The EE certificate's AS Resources extension MUST NOT contain "inherit" elements.
@@ -370,7 +370,7 @@
       <name>Operational Considerations</name>
 
       <t>
-        When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to convert such objects into a lossless compressed form.
+        When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, XML, etc) converting such objects into a lossless compressed form is RECOMMENDED.
         Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
         Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
       </t>
@@ -409,7 +409,7 @@
         In general, it is not possible to confidently infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
       </t>
       <t>
-        While an one-time-use EE Certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single keypair.
+        While a one-time-use EE Certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single keypair.
         Any RSC objects sharing the same EE Certificate can not be revoked individually.
       </t>
 
@@ -660,12 +660,20 @@ Decimal  Description                      References
           Ties de Kock,
           Peter Peele,
           Claudio Jeker,
-          and Theo Buehler 
+          Theo Buehler,
+          and Donald Eastlake
         for document review and suggestions.
       </t>
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+
+      <section>
+        <name>changes from -09 -&gt; -10</name>
+        <ul>
+          <li>Incorporate SECDIR feedback.</li>
+        </ul>
+      </section>
 
       <section>
         <name>changes from -08 -&gt; -09</name>
