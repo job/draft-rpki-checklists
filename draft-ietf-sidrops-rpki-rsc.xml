@@ -193,7 +193,7 @@
           <name>ConstrainedASIdentifiers type</name>
 
           <t>
-            ConstrainedASIdentifiers is a SEQUENCE, constisting of a single field "asnum", itself containing a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
+            ConstrainedASIdentifiers is a SEQUENCE, consisting of a single field "asnum", itself containing a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
           </t>
 
           <t>
@@ -661,7 +661,9 @@ Decimal  Description                      References
           Peter Peele,
           Claudio Jeker,
           Theo Buehler,
-          and Donald Eastlake
+          Donald Eastlake,
+          and
+          Erik Kline
         for document review and suggestions.
       </t>
     </section>
