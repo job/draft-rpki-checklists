@@ -10,7 +10,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
-     docName="draft-ietf-sidrops-rpki-rsc-10"
+     docName="draft-ietf-sidrops-rpki-rsc-11"
      ipr="trust200902"
      xml:lang="en"
      sortRefs="true"
@@ -448,6 +448,8 @@
         <li>
           A validator implementation <xref target="FORT"/> based on the FORT validator was developed by Alberto Leiva for a previous version of this specification.
         </li>
+        <li>
+          A validator implementation <xref target="prover"/> was developed by Mikhail Puzanov.
       </ul>
 
     </section>
@@ -626,6 +628,13 @@ Decimal  Description                      References
             <date year="2021" month="May"/>
           </front>
         </reference>
+        <reference anchor="prover" target="https://github.com/lolepezy/rpki-prover/pull/126/files">
+          <front>
+            <title>rpki-prover</title>
+            <author initials="M." surname="Puzanov"/>
+            <date year="2022" month="september"/>
+          </front>
+        </referece>
         <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
           <front>
             <title>The Open Group's Base Specifications, Issue 7</title>
