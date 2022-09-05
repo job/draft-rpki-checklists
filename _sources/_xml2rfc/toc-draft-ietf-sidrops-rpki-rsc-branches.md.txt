@@ -1,6 +1,0 @@
-# branches
-
-:::{toctree}
-
-refs/remotes/origin/main/draft-ietf-sidrops-rpki-rsc
-:::
