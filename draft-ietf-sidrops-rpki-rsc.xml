@@ -120,7 +120,7 @@
 
       <t>
         What constitutes suitable transport for RSC files is deliberately unspecified.
-        It might be a USB stick, a web interface secured with conventional HTTPS, PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.
+        For example, it might be a USB stick, a web interface secured with HTTPS, a PGP-signed email, a T-shirt printed with a QR code, or a carrier pigeon.
       </t>
 
       <section title="RSC End-Entity Certificates">
@@ -264,7 +264,12 @@
         <section anchor="FileNameAndHash">
           <name>FileNameAndHash</name>
           <t>
-            Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
+            Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object, and the message digest of the digital object.
+          </t>
+          <t>
+            The hash field is mandatory.
+            The value of the hash field is the calculated message digest of the digital object.
+            The hashing algorithm is specified in the digestAlgorithm field.
           </t>
           <t>
             The fileName field is OPTIONAL.
@@ -671,13 +676,22 @@ Decimal  Description                      References
           Claudio Jeker,
           Theo Buehler,
           Donald Eastlake,
+          Erik Kline,
           and
-          Erik Kline
+          Robert Wilton
         for document review and suggestions.
       </t>
     </section>
     <section removeInRFC="true">
       <name>Document changelog</name>
+
+      <section>
+        <name>changes from -10 -&gt; -11</name>
+        <ul>
+          <li>Incorporate feedback from Robert Wilton.</li>
+          <li>Add Mikhail Puzanov's implementation.</li>
+        </ul>
+      </section>
 
       <section>
         <name>changes from -09 -&gt; -10</name>
