@@ -183,7 +183,7 @@
           Implementations encountering decoding errors whilst attempting to read DER-encoded data using this specification SHOULD be aware of the possibility that the data may have been encoded using an implementation intended for use with <xref target="RFC3779"/>. Such data may contain elements prohibited by the current specification.
         </t>
         <t>
-          Attempting to decode the errored data using the more permissive specification conatained in <xref target="RFC3779"/> may enable implementors to gather additional context for use when reporting errors to the user.
+          Attempting to decode the errored data using the more permissive specification contained in <xref target="RFC3779"/> may enable implementors to gather additional context for use when reporting errors to the user.
         </t>
         <t>
           However, implementations MUST NOT ignore errors resulting from the more restrictive definitions contained herein: in particular, such errors MUST cause the validation procedure described in <xref target="validation"/> to fail.
@@ -324,7 +324,7 @@
 
       <ul>
         <li>
-          The RSC MUST be validated acording to the procedure described in <xref target="validation"/>. If the RSC cannot be validated, verification MUST fail and the error SHOULD be reported to the user.
+          The RSC MUST be validated according to the procedure described in <xref target="validation"/>. If the RSC cannot be validated, verification MUST fail and the error SHOULD be reported to the user.
         </li>
         <li>
           <t>For every digital object to be verified:</t>
@@ -677,8 +677,9 @@ Decimal  Description                      References
           Theo Buehler,
           Donald Eastlake,
           Erik Kline,
+          Robert Wilton,
           and
-          Robert Wilton
+          Roman Danyliw
         for document review and suggestions.
       </t>
     </section>
@@ -689,6 +690,7 @@ Decimal  Description                      References
         <name>changes from -10 -&gt; -11</name>
         <ul>
           <li>Incorporate feedback from Robert Wilton.</li>
+          <li>Incorporate feedback from Roman Danyliw.</li>
           <li>Add Mikhail Puzanov's implementation.</li>
         </ul>
       </section>
