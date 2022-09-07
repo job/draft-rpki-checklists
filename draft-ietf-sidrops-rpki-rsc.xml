@@ -455,6 +455,7 @@
         </li>
         <li>
           A validator implementation <xref target="prover"/> was developed by Mikhail Puzanov.
+        </li>
       </ul>
 
     </section>
@@ -585,6 +586,15 @@ Decimal  Description                      References
         <?rfc include="reference.RFC.8174.xml"?>
         <?rfc include="reference.RFC.9286.xml"?>
         <?rfc include="reference.IANA.ADDRESS-FAMILY-NUMBERS.xml"?>
+        <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
+          <front>
+            <title>The Open Group's Base Specifications, Issue 7</title>
+            <author>
+              <organization>IEEE and The Open Group</organization>
+            </author>
+            <date year="2016"/>
+          </front>
+        </reference>
       </references>
 
       <references>
@@ -639,15 +649,6 @@ Decimal  Description                      References
             <author initials="M." surname="Puzanov"/>
             <date year="2022" month="september"/>
           </front>
-        </referece>
-        <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
-          <front>
-            <title>The Open Group's Base Specifications, Issue 7</title>
-            <author>
-              <organization>IEEE and The Open Group</organization>
-            </author>
-            <date year="2016"/>
-          </front>
         </reference>
       </references>
 
@@ -678,8 +679,9 @@ Decimal  Description                      References
           Donald Eastlake,
           Erik Kline,
           Robert Wilton,
+          Roman Danyliw,
           and
-          Roman Danyliw
+          Éric Vyncke
         for document review and suggestions.
       </t>
     </section>
@@ -691,6 +693,7 @@ Decimal  Description                      References
         <ul>
           <li>Incorporate feedback from Robert Wilton.</li>
           <li>Incorporate feedback from Roman Danyliw.</li>
+          <li>Incorporate feedback from Éric Vyncke.</li>
           <li>Add Mikhail Puzanov's implementation.</li>
         </ul>
       </section>
