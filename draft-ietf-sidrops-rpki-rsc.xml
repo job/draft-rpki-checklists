@@ -685,7 +685,8 @@ Decimal  Description                      References
           Roman Danyliw,
           Éric Vyncke,
           Lars Eggert,
-          and Paul Wouters
+          Paul Wouters,
+          and Murray S. Kucherawy
         for document review and suggestions.
       </t>
     </section>
@@ -701,6 +702,7 @@ Decimal  Description                      References
           <li>Add Mikhail Puzanov's implementation.</li>
           <li>Incorporate feedback from Lars Eggert's review.</li>
           <li>Incorporate feedback from Paul Wouters.</li>
+          <li>Incorporate feedback from Murray S. Kucherawy.</li>
         </ul>
       </section>
 
