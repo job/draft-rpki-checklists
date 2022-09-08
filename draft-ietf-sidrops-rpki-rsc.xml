@@ -230,7 +230,7 @@
               <t>
                 The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
                 Unlike <xref target="RFC3779">IPAddrBlocks</xref>, a third octet containing a Subsequent Address Family Identifier (SAFI) MUST NOT be present.
-                AFIs are specified in the Address Family Numbers registry maintained by IANA.
+                AFIs are specified in the Address Family Numbers <xref target="IANA.ADDRESS-FAMILY-NUMBERS">registry</xref> maintained by IANA.
               </t>
             </section>
 
@@ -600,6 +600,7 @@ Decimal  Description                      References
 
       <references>
         <name>Informative References</name>
+        <?rfc include="reference.IANA.ADDRESS-FAMILY-NUMBERS.xml"?>
         <?rfc include="reference.I-D.ietf-sidrops-rpki-rta.xml"?>
         <?rfc include="reference.RFC.1952.xml"?>
         <?rfc include="reference.RFC.6268.xml"?>
