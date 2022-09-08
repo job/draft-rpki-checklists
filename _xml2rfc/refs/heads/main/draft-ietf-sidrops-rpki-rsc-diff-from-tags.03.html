@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>refs/tags/03 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev13 documentation</title>
+    <title>refs/tags/03 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev14 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="draft-ietf-sidrops-rpki-rsc-diff-from-tags.04.html" title="refs/tags/04 ⟼ refs/heads/main"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev13 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev14 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -330,7 +330,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   END<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -215,105 +240,270 @@</span><span class="w"></span>
+<span class="gu">@@ -215,105 +240,271 @@</span><span class="w"></span>
 
 <span class="w"> </span>4.2.  resources<span class="w"></span>
 <span class="w"> </span>
@@ -404,7 +404,8 @@
 <span class="gi">+   Address Family Identifier (AFI), in network byte order.  Unlike</span><span class="w"></span>
 <span class="gi">+   IPAddrBlocks [RFC3779], a third octet containing a Subsequent Address</span><span class="w"></span>
 <span class="gi">+   Family Identifier (SAFI) MUST NOT be present.  AFIs are specified in</span><span class="w"></span>
-<span class="gi">+   the Address Family Numbers registry maintained by IANA.</span><span class="w"></span>
+<span class="gi">+   the Address Family Numbers registry [IANA.ADDRESS-FAMILY-NUMBERS]</span><span class="w"></span>
+<span class="gi">+   maintained by IANA.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+4.2.2.1.2.  addressesOrRanges field</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
@@ -670,7 +671,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   This section records the status of known implementations of the<span class="w"></span>
 <span class="w"> </span>   protocol defined by this specification at the time of posting of this<span class="w"></span>
-<span class="gu">@@ -347,54 +537,75 @@</span><span class="w"></span>
+<span class="gu">@@ -347,54 +538,75 @@</span><span class="w"></span>
 
 <span class="w"> </span>   *  A validator implementation based on OpenBSD rpki-client and<span class="w"></span>
 <span class="w"> </span>      LibreSSL was developed by Job Snijders.<span class="w"></span>
@@ -786,7 +787,7 @@
 <span class="w"> </span>
 <span class="w"> </span>      Type name: application<span class="w"></span>
 <span class="w"> </span>      Subtype name: rpki-checklist<span class="w"></span>
-<span class="gu">@@ -402,7 +613,7 @@</span><span class="w"></span>
+<span class="gu">@@ -402,7 +614,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>      Optional parameters: None<span class="w"></span>
 <span class="w"> </span>      Encoding considerations: binary<span class="w"></span>
@@ -796,7 +797,7 @@
 <span class="w"> </span>      Interoperability considerations: None<span class="w"></span>
 <span class="w"> </span>      Published specification: This document.<span class="w"></span>
 <span class="w"> </span>      Applications that use this media type: RPKI operators.<span class="w"></span>
-<span class="gu">@@ -420,9 +631,18 @@</span><span class="w"></span>
+<span class="gu">@@ -420,9 +632,18 @@</span><span class="w"></span>
 
 <span class="w"> </span>      Author: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
 <span class="w"> </span>      Change controller: Job Snijders &lt;job@fastly.com&gt;<span class="w"></span>
@@ -819,7 +820,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [RFC2119]  Bradner, S., &quot;Key words for use in RFCs to Indicate<span class="w"></span>
 <span class="w"> </span>              Requirement Levels&quot;, BCP 14, RFC 2119,<span class="w"></span>
-<span class="gu">@@ -443,10 +663,10 @@</span><span class="w"></span>
+<span class="gu">@@ -443,10 +664,10 @@</span><span class="w"></span>
 
 <span class="w"> </span>              DOI 10.17487/RFC6481, February 2012,<span class="w"></span>
 <span class="w"> </span>              &lt;https://www.rfc-editor.org/info/rfc6481&gt;.<span class="w"></span>
@@ -835,7 +836,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [RFC6488]  Lepinski, M., Chi, A., and S. Kent, &quot;Signed Object<span class="w"></span>
 <span class="w"> </span>              Template for the Resource Public Key Infrastructure<span class="w"></span>
-<span class="gu">@@ -462,7 +682,15 @@</span><span class="w"></span>
+<span class="gu">@@ -462,7 +683,15 @@</span><span class="w"></span>
 
 <span class="w"> </span>              2119 Key Words&quot;, BCP 14, RFC 8174, DOI 10.17487/RFC8174,<span class="w"></span>
 <span class="w"> </span>              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.<span class="w"></span>
@@ -853,7 +854,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [I-D.ietf-sidrops-rpki-rta]<span class="w"></span>
 <span class="w"> </span>              Michaelson, G. G., Huston, G., Harrison, T., Bruijnzeels,<span class="w"></span>
-<span class="gu">@@ -472,24 +700,26 @@</span><span class="w"></span>
+<span class="gu">@@ -472,24 +701,30 @@</span><span class="w"></span>
 
 <span class="w"> </span>              &lt;https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-<span class="w"></span>
 <span class="w"> </span>              rta-00.txt&gt;.<span class="w"></span>
@@ -868,6 +869,10 @@
 <span class="gd">-   [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base</span><span class="w"></span>
 <span class="gd">-              Specifications, Issue 7&quot;, 2016,</span><span class="w"></span>
 <span class="gd">-              &lt;https://publications.opengroup.org/standards/unix/c165&gt;.</span><span class="w"></span>
+<span class="gi">+   [IANA.ADDRESS-FAMILY-NUMBERS]</span><span class="w"></span>
+<span class="gi">+              IANA, &quot;Address Family Numbers&quot;, 19 October 2021,</span><span class="w"></span>
+<span class="gi">+              &lt;http://www.iana.org/assignments/address-family-numbers&gt;.</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
 <span class="gi">+   [prover]   Puzanov, M., &quot;rpki-prover&quot;, September 2022,</span><span class="w"></span>
 <span class="gi">+              &lt;https://github.com/lolepezy/rpki-prover/pull/126/files&gt;.</span><span class="w"></span>
 <span class="w"> </span>
@@ -891,7 +896,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [rpki-rsc-demo]<span class="w"></span>
 <span class="w"> </span>              Harrison, T., &quot;A proof-of-concept for constructing and<span class="w"></span>
-<span class="gu">@@ -506,33 +736,102 @@</span><span class="w"></span>
+<span class="gu">@@ -506,33 +741,102 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>Appendix A.  Acknowledgements<span class="w"></span>
