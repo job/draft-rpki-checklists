@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>refs/tags/10 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev11 documentation</title>
+    <title>refs/tags/10 ⟼ refs/heads/main &#8212; RPKI Signed Checklists 0.9.1.dev12 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" title="changes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-diffs.html" accesskey="U">changes</a> &#187;</li>
@@ -72,11 +72,11 @@
 <span class="w"> </span>Internet-Draft                                                    Fastly<span class="w"></span>
 <span class="w"> </span>Intended status: Standards Track                             T. Harrison<span class="w"></span>
 <span class="gd">-Expires: 16 February 2023                                          APNIC</span><span class="w"></span>
-<span class="gi">+Expires: 11 March 2023                                             APNIC</span><span class="w"></span>
+<span class="gi">+Expires: 12 March 2023                                             APNIC</span><span class="w"></span>
 <span class="w"> </span>                                                             B. Maddison<span class="w"></span>
 <span class="w"> </span>                                                              Workonline<span class="w"></span>
 <span class="gd">-                                                          15 August 2022</span><span class="w"></span>
-<span class="gi">+                                                        7 September 2022</span><span class="w"></span>
+<span class="gi">+                                                        8 September 2022</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>
 <span class="w"> </span>     A profile for Resource Public Key Infrastructure (RPKI) Signed<span class="w"></span>
@@ -92,7 +92,7 @@
 <span class="w"> </span>   material or to cite them other than as &quot;work in progress.&quot;<span class="w"></span>
 <span class="w"> </span>
 <span class="gd">-   This Internet-Draft will expire on 16 February 2023.</span><span class="w"></span>
-<span class="gi">+   This Internet-Draft will expire on 11 March 2023.</span><span class="w"></span>
+<span class="gi">+   This Internet-Draft will expire on 12 March 2023.</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>Copyright Notice<span class="w"></span>
 <span class="w"> </span>
@@ -158,7 +158,18 @@
 <span class="w"> </span>   &quot;asnum&quot;, itself containing a SEQUENCE OF one or more ASIdOrRange<span class="w"></span>
 <span class="w"> </span>   instances as defined in [RFC3779].<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -328,8 +330,12 @@</span><span class="w"></span>
+<span class="gu">@@ -304,7 +306,8 @@</span><span class="w"></span>
+
+<span class="w"> </span>   The addressFamily field is an OCTET STRING containing a two-octet<span class="w"></span>
+<span class="w"> </span>   Address Family Identifier (AFI), in network byte order.  Unlike<span class="w"></span>
+<span class="w"> </span>   IPAddrBlocks [RFC3779], a third octet containing a SAFI MUST NOT be<span class="w"></span>
+<span class="gd">-   present.  AFIs are specified in [IANA.ADDRESS-FAMILY-NUMBERS].</span><span class="w"></span>
+<span class="gi">+   present.  AFIs are specified in the Address Family Numbers registry</span><span class="w"></span>
+<span class="gi">+   maintained by IANA.</span><span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>4.2.2.1.2.  addressesOrRanges field<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -328,8 +331,12 @@</span><span class="w"></span>
 
 <span class="w"> </span>4.4.1.  FileNameAndHash<span class="w"></span>
 <span class="w"> </span>
@@ -173,7 +184,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   The fileName field is OPTIONAL.  This is to allow Signed Checklists<span class="w"></span>
 <span class="w"> </span>   to be used in a &quot;stand-alone&quot; fashion in which nameless digital<span class="w"></span>
-<span class="gu">@@ -358,10 +364,9 @@</span><span class="w"></span>
+<span class="gu">@@ -358,10 +365,9 @@</span><span class="w"></span>
 
 <span class="w"> </span>   Section 4.8.8.2 of [RFC6487]), and perform the following additional<span class="w"></span>
 <span class="w"> </span>   RSC-specific validation steps:<span class="w"></span>
@@ -188,30 +199,40 @@
 <span class="w"> </span>
 <span class="w"> </span>   2.  If the asID field is present within the contents of the<span class="w"></span>
 <span class="w"> </span>       &#39;resources&#39; field, then the AS Resources extension [RFC3779] MUST<span class="w"></span>
-<span class="gu">@@ -383,7 +388,7 @@</span><span class="w"></span>
+<span class="gu">@@ -383,9 +389,9 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>   To verify a set of digital objects with an RSC:<span class="w"></span>
 <span class="w"> </span>
 <span class="gd">-   *  The RSC MUST be validated acording to the procedure described in</span><span class="w"></span>
+<span class="gd">-      Section 5.  If the RSC cannot be validated, verification MUST fail</span><span class="w"></span>
+<span class="gd">-      and the error SHOULD be reported to the user.</span><span class="w"></span>
 <span class="gi">+   *  The RSC MUST be validated according to the procedure described in</span><span class="w"></span>
-<span class="w"> </span>      Section 5.  If the RSC cannot be validated, verification MUST fail<span class="w"></span>
-<span class="w"> </span>      and the error SHOULD be reported to the user.<span class="w"></span>
+<span class="gi">+      Section 5.  If the RSC cannot be validated, verification MUST</span><span class="w"></span>
+<span class="gi">+      fail.  This error SHOULD be reported to the user.</span><span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -434,8 +439,8 @@</span><span class="w"></span>
+<span class="w"> </span>   *  For every digital object to be verified:<span class="w"></span>
+<span class="w"> </span>
+<span class="gu">@@ -434,8 +440,8 @@</span><span class="w"></span>
 
 <span class="w"> </span>7.  Operational Considerations<span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>   When creating digital objects of a plain-text nature (such as ASCII,<span class="w"></span>
 <span class="gd">-   UTF-8, HTML, Javascript, XML, etc) it is RECOMMENDED to convert such</span><span class="w"></span>
 <span class="gd">-   objects into a lossless compressed form.  Distributing plain-text</span><span class="w"></span>
-<span class="gi">+   UTF-8, HTML, Javascript, XML, etc) converting such objects into a</span><span class="w"></span>
+<span class="gi">+   UTF-8, HTML, Javascript, XML, etc.) converting such objects into a</span><span class="w"></span>
 <span class="gi">+   lossless compressed form is RECOMMENDED.  Distributing plain-text</span><span class="w"></span>
 <span class="w"> </span>   objects within a compression envelope (such as GZIP [RFC1952]) might<span class="w"></span>
 <span class="w"> </span>   help avoid unexpected canonicalization at intermediate systems (which<span class="w"></span>
 <span class="w"> </span>   in turn would lead to checksum verification errors).  Validator<span class="w"></span>
-<span class="gu">@@ -489,8 +494,8 @@</span><span class="w"></span>
+<span class="gu">@@ -484,13 +490,13 @@</span><span class="w"></span>
 
+<span class="w"> </span>   Conversely, a gap in serial numbers does not imply that an RSC<span class="w"></span>
+<span class="w"> </span>   exists.  Nor does an arbitrary (to the RP unknown) serial in a CRL<span class="w"></span>
+<span class="w"> </span>   imply an RSC object exists: the implicitly referenced object might<span class="w"></span>
+<span class="gd">-   not be a RSC, it might never have been published, or was revoked</span><span class="w"></span>
+<span class="gi">+   not be an RSC, it might have never been published, or was revoked</span><span class="w"></span>
+<span class="w"> </span>   before it was visible to RPs.  In general, it is not possible to<span class="w"></span>
 <span class="w"> </span>   confidently infer the existence or non-existence of RSCs from the<span class="w"></span>
 <span class="w"> </span>   Repository state without access to a given RSC.<span class="w"></span>
 <span class="w"> </span>
@@ -222,7 +243,7 @@
 <span class="w"> </span>   generating and signing multiple different RSC objects with a single<span class="w"></span>
 <span class="w"> </span>   keypair.  Any RSC objects sharing the same EE Certificate can not be<span class="w"></span>
 <span class="w"> </span>   revoked individually.<span class="w"></span>
-<span class="gu">@@ -534,6 +539,9 @@</span><span class="w"></span>
+<span class="gu">@@ -534,6 +540,9 @@</span><span class="w"></span>
 
 <span class="w"> </span>   *  A validator implementation [FORT] based on the FORT validator was<span class="w"></span>
 <span class="w"> </span>      developed by Alberto Leiva for a previous version of this<span class="w"></span>
@@ -233,19 +254,29 @@
 <span class="w"> </span>
 <span class="w"> </span>10.  IANA Considerations<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -636,6 +644,10 @@</span><span class="w"></span>
+<span class="gu">@@ -625,16 +634,16 @@</span><span class="w"></span>
 
-<span class="w"> </span>              IANA, &quot;Address Family Numbers&quot;, 19 October 2021,<span class="w"></span>
-<span class="w"> </span>              &lt;http://www.iana.org/assignments/address-family-numbers&gt;.<span class="w"></span>
 <span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span>   Upon publication of this document, IANA is requested to move this<span class="w"></span>
+<span class="gd">-   registation to the &quot;Media Types&quot; registry and to reference the RFC</span><span class="w"></span>
+<span class="gi">+   registration to the &quot;Media Types&quot; registry and to reference the RFC</span><span class="w"></span>
+<span class="w"> </span>   publication instead of this draft.<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>11.  References<span class="w"></span>
+<span class="w"> </span>
+<span class="w"> </span>11.1.  Normative References<span class="w"></span>
+<span class="w"> </span>
+<span class="gd">-   [IANA.ADDRESS-FAMILY-NUMBERS]</span><span class="w"></span>
+<span class="gd">-              IANA, &quot;Address Family Numbers&quot;, 19 October 2021,</span><span class="w"></span>
+<span class="gd">-              &lt;http://www.iana.org/assignments/address-family-numbers&gt;.</span><span class="w"></span>
 <span class="gi">+   [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base</span><span class="w"></span>
 <span class="gi">+              Specifications, Issue 7&quot;, 2016,</span><span class="w"></span>
 <span class="gi">+              &lt;https://publications.opengroup.org/standards/unix/c165&gt;.</span><span class="w"></span>
-<span class="gi">+</span><span class="w"></span>
+<span class="w"> </span>
 <span class="w"> </span>   [RFC2119]  Bradner, S., &quot;Key words for use in RFCs to Indicate<span class="w"></span>
 <span class="w"> </span>              Requirement Levels&quot;, BCP 14, RFC 2119,<span class="w"></span>
-<span class="w"> </span>              DOI 10.17487/RFC2119, March 1997,<span class="w"></span>
-<span class="gu">@@ -692,9 +704,8 @@</span><span class="w"></span>
+<span class="gu">@@ -692,9 +701,8 @@</span><span class="w"></span>
 
 <span class="w"> </span>              &lt;https://www.ietf.org/archive/id/draft-ietf-sidrops-rpki-<span class="w"></span>
 <span class="w"> </span>              rta-00.txt&gt;.<span class="w"></span>
@@ -258,7 +289,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   [RFC1952]  Deutsch, P., &quot;GZIP file format specification version 4.3&quot;,<span class="w"></span>
 <span class="w"> </span>              RFC 1952, DOI 10.17487/RFC1952, May 1996,<span class="w"></span>
-<span class="gu">@@ -734,14 +745,29 @@</span><span class="w"></span>
+<span class="gu">@@ -734,14 +742,31 @@</span><span class="w"></span>
 
 <span class="w"> </span>   Espie for prior art.  The authors thank Russ Housley for reviewing<span class="w"></span>
 <span class="w"> </span>   the ASN.1 notation and providing suggestions.  The authors would like<span class="w"></span>
@@ -266,8 +297,8 @@
 <span class="gd">-   Peter Peele, Claudio Jeker, and Theo Buehler for document review and</span><span class="w"></span>
 <span class="gd">-   suggestions.</span><span class="w"></span>
 <span class="gi">+   Peter Peele, Claudio Jeker, Theo Buehler, Donald Eastlake, Erik</span><span class="w"></span>
-<span class="gi">+   Kline, Robert Wilton, Roman Danyliw, and &amp;#201;ric Vyncke for</span><span class="w"></span>
-<span class="gi">+   document review and suggestions.</span><span class="w"></span>
+<span class="gi">+   Kline, Robert Wilton, Roman Danyliw, &amp;#201;ric Vyncke, and Lars</span><span class="w"></span>
+<span class="gi">+   Eggert for document review and suggestions.</span><span class="w"></span>
 <span class="w"> </span>
 <span class="w"> </span>Appendix B.  Document changelog<span class="w"></span>
 <span class="w"> </span>
@@ -284,6 +315,8 @@
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   *  Add Mikhail Puzanov&#39;s implementation.</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
+<span class="gi">+   *  Incorporate feedback frm Lars Eggert&#39;s review.</span><span class="w"></span>
+<span class="gi">+</span><span class="w"></span>
 <span class="gi">+B.2.  changes from -09 -&gt; -10</span><span class="w"></span>
 <span class="gi">+</span><span class="w"></span>
 <span class="gi">+   *  Incorporate SECDIR feedback.</span><span class="w"></span>
@@ -292,7 +325,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   *  Updated manifests refs to RFC9286<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -755,7 +781,7 @@</span><span class="w"></span>
+<span class="gu">@@ -755,7 +780,7 @@</span><span class="w"></span>
 
 <span class="w"> </span>
 <span class="w"> </span>   *  Clean up IANA considerations<span class="w"></span>
@@ -302,7 +335,7 @@
 <span class="w"> </span>
 <span class="w"> </span>   *  Theo requested explanation as to why fileName is OPTIONAL<span class="w"></span>
 <span class="w"> </span>
-<span class="gu">@@ -769,43 +795,43 @@</span><span class="w"></span>
+<span class="gu">@@ -769,43 +794,43 @@</span><span class="w"></span>
 
 <span class="w"> </span>   *  Incorporated character-set constraints for fileName in ASN.1<span class="w"></span>
 <span class="w"> </span>      module<span class="w"></span>

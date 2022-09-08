@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>branches: main &#8212; RPKI Signed Checklists 0.9.1.dev11 documentation</title>
+    <title>branches: main &#8212; RPKI Signed Checklists 0.9.1.dev12 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" title="branches"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" accesskey="U">branches</a> &#187;</li>
@@ -63,10 +63,10 @@
 <dd><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Network Working Group                                        J. Snijders
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                             T. Harrison
-Expires: 11 March 2023                                             APNIC
+Expires: 12 March 2023                                             APNIC
                                                              B. Maddison
                                                               Workonline
-                                                        7 September 2022
+                                                        8 September 2022
 
 
      A profile for Resource Public Key Infrastructure (RPKI) Signed
@@ -107,7 +107,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as &quot;work in progress.&quot;
 
-   This Internet-Draft will expire on 11 March 2023.
+   This Internet-Draft will expire on 12 March 2023.
 
 Copyright Notice
 
@@ -364,7 +364,8 @@ Table of Contents
    The addressFamily field is an OCTET STRING containing a two-octet
    Address Family Identifier (AFI), in network byte order.  Unlike
    IPAddrBlocks [RFC3779], a third octet containing a SAFI MUST NOT be
-   present.  AFIs are specified in [IANA.ADDRESS-FAMILY-NUMBERS].
+   present.  AFIs are specified in the Address Family Numbers registry
+   maintained by IANA.
 
 4.2.2.1.2.  addressesOrRanges field
 
@@ -447,8 +448,8 @@ Table of Contents
    To verify a set of digital objects with an RSC:
 
    *  The RSC MUST be validated according to the procedure described in
-      Section 5.  If the RSC cannot be validated, verification MUST fail
-      and the error SHOULD be reported to the user.
+      Section 5.  If the RSC cannot be validated, verification MUST
+      fail.  This error SHOULD be reported to the user.
 
    *  For every digital object to be verified:
 
@@ -497,7 +498,7 @@ Table of Contents
 7.  Operational Considerations
 
    When creating digital objects of a plain-text nature (such as ASCII,
-   UTF-8, HTML, Javascript, XML, etc) converting such objects into a
+   UTF-8, HTML, Javascript, XML, etc.) converting such objects into a
    lossless compressed form is RECOMMENDED.  Distributing plain-text
    objects within a compression envelope (such as GZIP [RFC1952]) might
    help avoid unexpected canonicalization at intermediate systems (which
@@ -547,7 +548,7 @@ Table of Contents
    Conversely, a gap in serial numbers does not imply that an RSC
    exists.  Nor does an arbitrary (to the RP unknown) serial in a CRL
    imply an RSC object exists: the implicitly referenced object might
-   not be a RSC, it might never have been published, or was revoked
+   not be an RSC, it might have never been published, or was revoked
    before it was visible to RPs.  In general, it is not possible to
    confidently infer the existence or non-existence of RSCs from the
    Repository state without access to a given RSC.
@@ -691,16 +692,12 @@ Table of Contents
 
 
    Upon publication of this document, IANA is requested to move this
-   registation to the &quot;Media Types&quot; registry and to reference the RFC
+   registration to the &quot;Media Types&quot; registry and to reference the RFC
    publication instead of this draft.
 
 11.  References
 
 11.1.  Normative References
-
-   [IANA.ADDRESS-FAMILY-NUMBERS]
-              IANA, &quot;Address Family Numbers&quot;, 19 October 2021,
-              &lt;http://www.iana.org/assignments/address-family-numbers&gt;.
 
    [POSIX]    IEEE and The Open Group, &quot;The Open Group&#39;s Base
               Specifications, Issue 7&quot;, 2016,
@@ -804,8 +801,8 @@ Appendix A.  Acknowledgements
    the ASN.1 notation and providing suggestions.  The authors would like
    to thank Nimrod Levy, Tim Bruijnzeels, Alberto Leiva, Ties de Kock,
    Peter Peele, Claudio Jeker, Theo Buehler, Donald Eastlake, Erik
-   Kline, Robert Wilton, Roman Danyliw, and &amp;#201;ric Vyncke for
-   document review and suggestions.
+   Kline, Robert Wilton, Roman Danyliw, &amp;#201;ric Vyncke, and Lars
+   Eggert for document review and suggestions.
 
 Appendix B.  Document changelog
 
@@ -820,6 +817,8 @@ B.1.  changes from -10 -&gt; -11
    *  Incorporate feedback from &amp;#201;ric Vyncke.
 
    *  Add Mikhail Puzanov&#39;s implementation.
+
+   *  Incorporate feedback frm Lars Eggert&#39;s review.
 
 B.2.  changes from -09 -&gt; -10
 
