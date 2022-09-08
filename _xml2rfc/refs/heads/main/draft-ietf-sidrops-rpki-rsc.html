@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>branches: main &#8212; RPKI Signed Checklists 0.9.1.dev15 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/readable.css" />
-    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
-    <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../../../_static/doctools.js"></script>
-    <link rel="index" title="Index" href="../../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="tags" href="../../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" />
-    <link rel="prev" title="branches" href="../../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="tags" href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" />
+    <link rel="prev" title="branches" href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -29,24 +29,24 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../../../genindex.html" title="General Index"
+          <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../../../../../xml2rfc-version-index.html" title="Internet Draft Versions"
+          <a href="../../../../xml2rfc-version-index.html" title="Internet Draft Versions"
              >drafts</a> |</li>
         <li class="right" >
-          <a href="../../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" title="tags"
+          <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-tags.html" title="tags"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" title="branches"
+          <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" title="branches"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../../index.html">RPKI Signed Checklists 0.9.1.dev15 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../../../toc.html" >Internet Drafts</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" accesskey="U">branches</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev15 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" accesskey="U">branches</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">branches: main</a></li> 
       </ul>
     </div>  
@@ -315,7 +315,7 @@ Table of Contents
    defined in [RFC3779].
 
    Implementations encountering decoding errors whilst attempting to
-   read DER-encoded data using this specification SHOULD be aware of the
+   read DER-encoded data using this specification should be aware of the
    possibility that the data may have been encoded using an
    implementation intended for use with [RFC3779].  Such data may
    contain elements prohibited by the current specification.
@@ -507,12 +507,13 @@ Table of Contents
    implementations are expected to treat a checksummed digital object as
    string of arbitrary single octets.
 
-   If a fileName field is present, but no referenced digital object has
-   a filename that matches the content of that field, a validator
-   implementation SHOULD compare the message digest of each digital
-   object to the value from the hash field of the associated
-   FileNameAndHash, and report matches to the client for further
-   consideration.
+   If a fileName field is present, but no digital object within the set
+   of to-be-verified digital objects has a filename that matches the
+   content of that field, a validator implementation SHOULD compare the
+   message digest of each digital object to the value from the hash
+   field of the associated FileNameAndHash and report matches to the
+   user for further consideration; or report an error indicating no file
+   by that name exists.
 
 8.  Security Considerations
 
@@ -666,29 +667,30 @@ Table of Contents
    The IANA has registered the media type application/rpki-checklist in
    the &quot;Provisional Standard Media Type&quot; registry as follows:
 
-      Type name: application
-      Subtype name: rpki-checklist
-      Required parameters: None
-      Optional parameters: None
-      Encoding considerations: binary
-      Security considerations: Carries an RPKI Signed Checklist
-                               [draft-ietf-sidrops-rpki-rsc].
-      Interoperability considerations: None
-      Published specification: This document.
-      Applications that use this media type: RPKI operators.
-      Additional information:
-        Content: This media type is a signed object, as defined
-            in [RFC6488], which contains a payload of a list of
-            checksums as defined above in this document.
-        Magic number(s): None
-        File extension(s): .sig
-        Macintosh file type code(s):
-      Person &amp; email address to contact for further information:
-        Job Snijders &lt;job@fastly.com&gt;
-      Intended usage: COMMON
-      Restrictions on usage: None
-      Author: Job Snijders &lt;job@fastly.com&gt;
-      Change controller: Job Snijders &lt;job@fastly.com&gt;
+   Type name: application
+   Subtype name: rpki-checklist
+   Required parameters: N/A
+   Optional parameters: N/A
+   Encoding considerations: binary
+   Security considerations: Carries an RPKI Signed Checklist [RFC-to-be].
+                            This media type contains no active content.
+                            See Section 5 of [RFC-to-be] for further information.
+   Interoperability considerations: None
+   Published specification: This document.
+   Applications that use this media type: RPKI operators.
+   Additional information:
+     Content: This media type is a signed object, as defined
+         in [RFC6488], which contains a payload of a list of
+         checksums as defined above in this document.
+     Magic number(s): None
+     File extension(s): .sig
+     Macintosh file type code(s):
+   Person &amp; email address to contact for further information:
+     Job Snijders &lt;job@fastly.com&gt;
+   Intended usage: COMMON
+   Restrictions on usage: None
+   Author: Job Snijders &lt;job@fastly.com&gt;
+   Change controller: IETF
 
 
    Upon publication of this document, IANA is requested to move this
