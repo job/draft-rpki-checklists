@@ -1,6 +1,6 @@
-# refs/tags/10 ⟼ refs/heads/main
+# refs/tags/10 ⟼ refs/tags/11
 
 :::{xml2rfc:diff} draft-ietf-sidrops-rpki-rsc
 :from: refs/tags/10
-:to: refs/heads/main
+:to: refs/tags/11
 :::
