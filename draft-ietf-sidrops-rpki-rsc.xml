@@ -230,7 +230,7 @@
               <t>
                 The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
                 Unlike <xref target="RFC3779">IPAddrBlocks</xref>, a third octet containing a SAFI MUST NOT be present.
-                AFIs are specified in <xref target="IANA.ADDRESS-FAMILY-NUMBERS"/>.
+                AFIs are specified in the Address Family Numbers registry maintained by IANA.
               </t>
             </section>
 
@@ -324,7 +324,9 @@
 
       <ul>
         <li>
-          The RSC MUST be validated according to the procedure described in <xref target="validation"/>. If the RSC cannot be validated, verification MUST fail and the error SHOULD be reported to the user.
+          The RSC MUST be validated according to the procedure described in <xref target="validation"/>.
+          If the RSC cannot be validated, verification MUST fail.
+          This error SHOULD be reported to the user.
         </li>
         <li>
           <t>For every digital object to be verified:</t>
@@ -375,7 +377,7 @@
       <name>Operational Considerations</name>
 
       <t>
-        When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, XML, etc) converting such objects into a lossless compressed form is RECOMMENDED.
+        When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, XML, etc.) converting such objects into a lossless compressed form is RECOMMENDED.
         Distributing plain-text objects within a compression envelope (such as <xref target="RFC1952">GZIP</xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
         Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
       </t>
@@ -410,7 +412,7 @@
       </t>
       <t>
         Conversely, a gap in serial numbers does not imply that an RSC exists.
-        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be a RSC, it might never have been published, or was revoked before it was visible to RPs.
+        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be an RSC, it might have never been published, or was revoked before it was visible to RPs.
         In general, it is not possible to confidently infer the existence or non-existence of RSCs from the Repository state without access to a given RSC.
       </t>
       <t>
@@ -561,7 +563,7 @@ Decimal  Description                      References
 ]]>
         </artwork>
         <t>
-          Upon publication of this document, IANA is requested to move this registation to the "Media Types" registry and to reference the RFC publication instead of this draft.
+          Upon publication of this document, IANA is requested to move this registration to the "Media Types" registry and to reference the RFC publication instead of this draft.
         </t>
       </section>
 
@@ -585,7 +587,6 @@ Decimal  Description                      References
         <?rfc include="reference.RFC.7935.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
         <?rfc include="reference.RFC.9286.xml"?>
-        <?rfc include="reference.IANA.ADDRESS-FAMILY-NUMBERS.xml"?>
         <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
           <front>
             <title>The Open Group's Base Specifications, Issue 7</title>
@@ -680,8 +681,9 @@ Decimal  Description                      References
           Erik Kline,
           Robert Wilton,
           Roman Danyliw,
+          Éric Vyncke,
           and
-          Éric Vyncke
+          Lars Eggert
         for document review and suggestions.
       </t>
     </section>
@@ -695,6 +697,7 @@ Decimal  Description                      References
           <li>Incorporate feedback from Roman Danyliw.</li>
           <li>Incorporate feedback from Éric Vyncke.</li>
           <li>Add Mikhail Puzanov's implementation.</li>
+          <li>Incorporate feedback frm Lars Eggert's review.</li>
         </ul>
       </section>
 
