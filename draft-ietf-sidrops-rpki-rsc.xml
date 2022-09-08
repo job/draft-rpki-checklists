@@ -229,7 +229,7 @@
               <name>addressFamily field</name>
               <t>
                 The addressFamily field is an OCTET STRING containing a two-octet Address Family Identifier (AFI), in network byte order.
-                Unlike <xref target="RFC3779">IPAddrBlocks</xref>, a third octet containing a SAFI MUST NOT be present.
+                Unlike <xref target="RFC3779">IPAddrBlocks</xref>, a third octet containing a Subsequent Address Family Identifier (SAFI) MUST NOT be present.
                 AFIs are specified in the Address Family Numbers registry maintained by IANA.
               </t>
             </section>
@@ -468,7 +468,7 @@
       <section>
         <name>SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</name>
         <t>
-          The IANA has permanently allocated for this document in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
+          The IANA has allocated for this document in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
         </t>
         <artwork>
 <![CDATA[
@@ -682,8 +682,8 @@ Decimal  Description                      References
           Robert Wilton,
           Roman Danyliw,
           Éric Vyncke,
-          and
-          Lars Eggert
+          Lars Eggert,
+          and Paul Wouters
         for document review and suggestions.
       </t>
     </section>
@@ -697,7 +697,8 @@ Decimal  Description                      References
           <li>Incorporate feedback from Roman Danyliw.</li>
           <li>Incorporate feedback from Éric Vyncke.</li>
           <li>Add Mikhail Puzanov's implementation.</li>
-          <li>Incorporate feedback frm Lars Eggert's review.</li>
+          <li>Incorporate feedback from Lars Eggert's review.</li>
+          <li>Incorporate feedback from Paul Wouters.</li>
         </ul>
       </section>
 
