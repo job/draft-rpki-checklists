@@ -542,9 +542,10 @@ Decimal  Description                      References
    Required parameters: N/A
    Optional parameters: N/A
    Encoding considerations: binary
-   Security considerations: Carries an RPKI Signed Checklist [RFC-to-be].
-                            This media type contains no active content.
-                            See Section 5 of [RFC-to-be] for further information.
+   Security considerations: Carries an RPKI Signed Checklist
+       [RFC-to-be]. This media type contains no active
+       content. See Section 5 of [RFC-to-be] for further
+       information.
    Interoperability considerations: None
    Published specification: This document.
    Applications that use this media type: RPKI operators.
