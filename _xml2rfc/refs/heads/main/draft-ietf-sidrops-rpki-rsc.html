@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>branches: main &#8212; RPKI Signed Checklists 0.9.1.dev12 documentation</title>
+    <title>branches: main &#8212; RPKI Signed Checklists 0.9.1.dev13 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/readable.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" title="branches"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">RPKI Signed Checklists 0.9.1.dev13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../toc.html" >Internet Drafts</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc.html" ><code class="docutils literal notranslate"><span class="pre">draft-ietf-sidrops-rpki-rsc</span></code></a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../toc-draft-ietf-sidrops-rpki-rsc-branches.html" accesskey="U">branches</a> &#187;</li>
@@ -363,9 +363,9 @@ Table of Contents
 
    The addressFamily field is an OCTET STRING containing a two-octet
    Address Family Identifier (AFI), in network byte order.  Unlike
-   IPAddrBlocks [RFC3779], a third octet containing a SAFI MUST NOT be
-   present.  AFIs are specified in the Address Family Numbers registry
-   maintained by IANA.
+   IPAddrBlocks [RFC3779], a third octet containing a Subsequent Address
+   Family Identifier (SAFI) MUST NOT be present.  AFIs are specified in
+   the Address Family Numbers registry maintained by IANA.
 
 4.2.2.1.2.  addressesOrRanges field
 
@@ -607,9 +607,8 @@ Table of Contents
 10.1.  SMI Security for S/MIME CMS Content Type
        (1.2.840.113549.1.9.16.1)
 
-   The IANA has permanently allocated for this document in the &quot;SMI
-   Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)&quot;
-   registry:
+   The IANA has allocated for this document in the &quot;SMI Security for S/
+   MIME CMS Content Type (1.2.840.113549.1.9.16.1)&quot; registry:
 
    Decimal   Description             References
    ---------------------------------------------------------------
@@ -801,8 +800,8 @@ Appendix A.  Acknowledgements
    the ASN.1 notation and providing suggestions.  The authors would like
    to thank Nimrod Levy, Tim Bruijnzeels, Alberto Leiva, Ties de Kock,
    Peter Peele, Claudio Jeker, Theo Buehler, Donald Eastlake, Erik
-   Kline, Robert Wilton, Roman Danyliw, &amp;#201;ric Vyncke, and Lars
-   Eggert for document review and suggestions.
+   Kline, Robert Wilton, Roman Danyliw, &amp;#201;ric Vyncke, Lars Eggert,
+   and Paul Wouters for document review and suggestions.
 
 Appendix B.  Document changelog
 
@@ -818,7 +817,9 @@ B.1.  changes from -10 -&gt; -11
 
    *  Add Mikhail Puzanov&#39;s implementation.
 
-   *  Incorporate feedback frm Lars Eggert&#39;s review.
+   *  Incorporate feedback from Lars Eggert&#39;s review.
+
+   *  Incorporate feedback from Paul Wouters.
 
 B.2.  changes from -09 -&gt; -10
 
