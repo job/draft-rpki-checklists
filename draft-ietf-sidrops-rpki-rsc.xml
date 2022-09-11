@@ -516,7 +516,7 @@ Filename Extension  RPKI Object       Reference
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
-          The IANA has permanently allocated for this document in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
+          The IANA has allocated for this document in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
         </t>
         <artwork>
 <![CDATA[
