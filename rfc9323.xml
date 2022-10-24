@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rfc [
+ <!ENTITY nbsp    "&#160;">
+ <!ENTITY zwsp   "&#8203;">
+ <!ENTITY nbhy   "&#8209;">
+ <!ENTITY wj     "&#8288;">
+]>
+
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" submissionType="IETF" consensus="true" category="std" docName="draft-ietf-sidrops-rpki-rsc-11" number="9323" ipr="trust200902" xml:lang="en" tocInclude="true" sortRefs="true" symRefs="true" tocDepth="3" updates="" obsoletes="" version="3">
+
+  <front>
+
+<!-- [rfced] FYI - We have updated the title as follows to improve clarity
+(the acronym within an acronym may be confusing for readers).
+
+Original: 
+  A profile for Resource Public Key Infrastructure (RPKI) Signed
+  Checklists (RSC)
+
+Perhaps:
+  A Profile for RPKI Signed Checklists (RSCs)
+-->
+
+<title abbrev="RPKI Signed Checklists (RSCs)">
+      A Profile for RPKI Signed Checklists (RSCs)
+    </title>
+    <seriesInfo name="RFC" value="9323"/>
+    <author fullname="Job Snijders" initials="J." surname="Snijders">
+      <organization>Fastly</organization>
+      <address>
+        <postal>
+          <street/>
+          <code/>
+          <city>Amsterdam</city>
+          <country>Netherlands</country>
+        </postal>
+        <email>job@fastly.com</email>
+      </address>
+    </author>
+    <author fullname="Tom Harrison" initials="T." surname="Harrison">
+      <organization abbrev="APNIC">Asia Pacific Network Information Centre</organization>
+      <address>
+        <postal>
+          <street>6 Cordelia St</street>
+          <city>South Brisbane</city>
+          <code>4101</code>
+          <country>Australia</country>
+          <region>QLD</region>
+        </postal>
+        <phone/>
+        <email>tomh@apnic.net</email>
+      </address>
+    </author>
+    <author fullname="Ben Maddison" initials="B." surname="Maddison">
+      <organization abbrev="Workonline">Workonline Communications</organization>
+      <address>
+        <postal>
+          <street/>
+          <city>Cape Town</city>
+          <code/>
+          <country>South Africa</country>
+        </postal>
+        <email>benm@workonline.africa</email>
+      </address>
+    </author>
+    <date year="2022" month="October" />
+    <area>ops</area>
+    <workgroup>sidrops</workgroup>
+
+<!-- [rfced] Please insert any keywords (beyond those that appear in the
+title) for use on https://www.rfc-editor.org/search. -->
+
+<keyword>example</keyword>
+    
+    <abstract>
+
+<!-- [rfced] We have split the following sentence into two sentences to
+improve readability. Please review and let us know any objections.
+
+Original:
+   The objective is to allow an attestation, termed an
+   RPKI Signed Checklist (RSC), which contains one or more checksums of
+   arbitrary digital objects (files) that are signed "with resources",
+   and which, when validated, confirms that the respective Internet
+   Resource Holder produced the RSC.
+
+Current:
+   The objective is to allow an attestation, termed an
+   "RPKI Signed Checklist (RSC)", which contains one or more checksums
+   of arbitrary digital objects (files) that are signed "with resources".
+   When validated, an RSC confirms that the respective Internet
+   resource holder produced the RSC.   
+-->
+      
+<!-- [rfced] The first two sentences below use "Cryptographic Message Syntax
+(CMS) protected content type", while the third sentence uses "protected CMS
+content type" (note the placement of "protected"). Should these be
+consistent?
+
+Original:
+   This document defines a Cryptographic Message Syntax (CMS) protected
+   content type for use with the Resource Public Key Infrastructure
+   (RPKI) to carry a general purpose listing of checksums (a
+   'checklist'). 
+   ...
+   This document defines a Cryptographic Message Syntax (CMS) [RFC5652]
+   [RFC6268] protected content type for a general purpose listing of
+   checksums (a 'checklist'), for use with the Resource Public Key
+   Infrastructure (RPKI) [RFC6480].   
+   ...
+   The protected CMS content type is
+   intended to provide for the creation and validation of an RPKI Signed
+   Checklist (RSC):    
+
+Perhaps:
+   This document defines a content type protected by Cryptographic Message Syntax (CMS) 
+   for use with the Resource Public Key Infrastructure
+   (RPKI) to carry a general-purpose listing of checksums (a
+   'checklist'). 
+   ...
+   This document defines a content type protected by Cryptographic Message Syntax (CMS) [RFC5652]
+   [RFC6268] for a general-purpose listing of
+   checksums (a 'checklist'), for use with the Resource Public Key
+   Infrastructure (RPKI) [RFC6480].   
+   ...
+   The CMS-protected content type is
+   intended to provide for the creation and validation of an RPKI Signed
+   Checklist (RSC):    
+
+Or:
+   This document defines a protected Cryptographic Message Syntax (CMS)
+   content type for use with the Resource Public Key Infrastructure
+   (RPKI) to carry a general-purpose listing of checksums (a
+   'checklist'). 
+   ...
+   This document defines a protected Cryptographic Message Syntax (CMS) [RFC5652]
+   [RFC6268] content type for a general-purpose listing of
+   checksums (a 'checklist'), for use with the Resource Public Key
+   Infrastructure (RPKI) [RFC6480].   
+   ...
+   The protected CMS content type is
+   intended to provide for the creation and validation of an RPKI Signed
+   Checklist (RSC):
+-->
+
+      <t>
+         This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general-purpose listing of checksums (a 'checklist').
+         The objective is to allow an attestation, termed an "RPKI Signed Checklist (RSC)", which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources". When validated, an RSC confirms that the respective Internet resource holder produced the RSC.
+      </t>
+    </abstract>
+  </front>
+  <middle>
+    <section anchor="intro">
+      <name>Introduction</name>
+      <t>
+        This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general-purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
+        The protected CMS content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC), a checksum listing signed with a specific set of Internet Number Resources.
+        The objective is to allow an attestation that, when validated, provides a means to confirm a given Internet resource holder produced the RSC.
+      </t>
+      <t>
+        Signed Checklists are expected to facilitate inter-domain business use cases that depend on an ability to verify resource holdership.
+        RPKI-based validation processes are expected to become the industry norm for automated Bring Your Own IP (BYOIP) on-boarding or establishment of physical interconnections between Autonomous Systems (ASes).
+      </t>
+      <t>
+        The RSC concept borrows heavily from Resource Tagged Attestation (RTA) <xref target="I-D.ietf-sidrops-rpki-rta"/>, Manifests <xref target="RFC9286"/>, and OpenBSD's signify utility <xref target="signify"/>.
+        The main difference between an RSC and RTA is that the RTA profile allows multiple signers to attest a single digital object through a checksum of its content, while the RSC profile allows a single signer to attest the content of multiple digital objects.
+        A single signer profile is considered a simplification for both implementers and operators.
+      </t>
+<section anchor="requirements">
+      <name>Requirements Language</name>
+        <t>
+    The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>",
+    "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL
+    NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>",
+    "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>",
+    "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are
+    to be interpreted as described in BCP&nbsp;14 <xref target="RFC2119"/>
+    <xref target="RFC8174"/> when, and only when, they appear in all capitals,
+    as shown here.
+        </t>
+    </section>
+    </section>
+    <section anchor="profile">
+      <name>RSC Profile and Distribution</name>
+      <t>
+        RSC follows the Signed Object Template for the RPKI <xref target="RFC6488"/> with one exception: because RSCs <bcp14>MUST NOT</bcp14> be distributed through the global RPKI repository system, the Subject Information Access (SIA) extension <bcp14>MUST</bcp14> be omitted from the RSC's X.509 End-Entity (EE) certificate.
+      </t>
+
+<!-- [rfced] FYI, we updated "PGP-signed email" to read "email signed with
+Pretty Good Privacy (PGP)" to avoid awkward hyphenation with the
+expansion.
+
+Original: 
+   For example, it might be a USB stick, a web interface
+   secured with HTTPS, a PGP-signed email, a T-shirt printed with a QR
+   code, or a carrier pigeon.
+
+Updated:
+   For example, it might be a USB stick, a web interface
+   secured with HTTPS, an email signed with Pretty Good Privacy (PGP), a
+   T-shirt printed with a QR code, or a carrier pigeon.
+-->
+
+      <t>
+        What constitutes suitable transport for RSC files is deliberately unspecified.
+        For example, it might be a USB stick, a web interface secured with HTTPS, an email signed with Pretty Good Privacy (PGP), a T-shirt printed with a QR code, or a carrier pigeon.
+      </t>
+      <section title="RSC EE Certificates">
+<!-- [rfced] Is "with each" correct here? Or should this read "for each"?
+
+Original:
+   The Certification Authority (CA) MUST only sign one RSC with each EE
+   certificate and MUST generate a new key pair for each new RSC. 
+-->
+
+<!-- [rfced] Will the phrasing "This form of use of the associated EE
+Certificate" be clear to readers?
+
+Original:
+   This form of use of the associated EE Certificate is
+   termed a "one-time-use" EE certificate Section 3 of [RFC6487].
+
+Perhaps:
+   This type of EE certificate is
+   termed a "one-time-use" EE certificate (see Section 3 of [RFC6487]).
+-->
+
+        <t>
+          The Certification Authority (CA) <bcp14>MUST</bcp14> only sign one RSC with each EE certificate and <bcp14>MUST</bcp14> generate a new key pair for each new RSC.
+          This form of use of the associated EE certificate is termed a "one-time-use" EE certificate (see <xref target="RFC6487" section="3"/>).
+        </t>
+      </section>
+    </section>
+    <section anchor="content">
+      <name>The RSC ContentType</name>
+      <t>
+        The ContentType for an RSC is defined as rpkiSignedChecklist, with Object Identifier (OID) 1.2.840.113549.1.9.16.1.48.
+      </t>
+      <t>
+        This OID <bcp14>MUST</bcp14> appear within both the eContentType in the encapContentInfo object and the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
+      </t>
+    </section>
+    <section anchor="econtent">
+      <name>The RSC eContent</name>
+      <t>
+        The content of an RSC indicates that a checklist for arbitrary digital objects has been signed "with resources".
+        An RSC is formally defined as follows:
+      </t>
+      <sourcecode type="asn.1">RpkiSignedChecklist-2022
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+    pkcs(1) pkcs9(9) smime(16) mod(0)
+    id-mod-rpkiSignedChecklist-2022(73) }
+
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  CONTENT-TYPE, Digest, DigestAlgorithmIdentifier
+  FROM CryptographicMessageSyntax-2010 -- in [RFC6268]
+    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+      pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
+
+  IPAddressOrRange, ASIdOrRange
+  FROM IPAddrAndASCertExtn -- in [RFC3779]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) mod(0)
+      id-mod-ip-addr-and-as-ident(30) } ;
+
+ct-rpkiSignedChecklist CONTENT-TYPE ::=
+  { TYPE RpkiSignedChecklist
+    IDENTIFIED BY id-ct-signedChecklist }
+
+id-ct-signedChecklist OBJECT IDENTIFIER ::=
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+    pkcs-9(9) id-smime(16) id-ct(1) 48 }
+
+RpkiSignedChecklist ::= SEQUENCE {
+  version [0]           INTEGER DEFAULT 0,
+  resources             ResourceBlock,
+  digestAlgorithm       DigestAlgorithmIdentifier,
+  checkList             SEQUENCE (SIZE(1..MAX)) OF FileNameAndHash }
+
+FileNameAndHash ::= SEQUENCE {
+  fileName              PortableFilename OPTIONAL,
+  hash                  Digest }
+
+PortableFilename ::=
+  IA5String (FROM("a".."z" | "A".."Z" | "0".."9" | "." | "_" | "-"))
+
+ResourceBlock ::= SEQUENCE {
+  asID         [0]      ConstrainedASIdentifiers OPTIONAL,
+  ipAddrBlocks [1]      ConstrainedIPAddrBlocks OPTIONAL }
+  -- at least one of asID or ipAddrBlocks MUST be present
+  ( WITH COMPONENTS { ..., asID PRESENT} |
+    WITH COMPONENTS { ..., ipAddrBlocks PRESENT } )
+
+ConstrainedIPAddrBlocks ::=
+  SEQUENCE (SIZE(1..MAX)) OF ConstrainedIPAddressFamily
+
+ConstrainedIPAddressFamily ::= SEQUENCE {
+  addressFamily         OCTET STRING (SIZE(2)),
+  addressesOrRanges     SEQUENCE (SIZE(1..MAX)) OF IPAddressOrRange }
+
+ConstrainedASIdentifiers ::= SEQUENCE {
+  asnum [0]             SEQUENCE (SIZE(1..MAX)) OF ASIdOrRange }
+
+END
+</sourcecode>
+      <section>
+        <name>Version</name>
+        <t>
+          The version number of the RpkiSignedChecklist <bcp14>MUST</bcp14> be 0.
+        </t>
+      </section>
+      <section>
+        <name>Resources</name>
+        <t>
+          The resources contained here are the resources used to mark the attestation and <bcp14>MUST</bcp14> be a subset of the set of resources listed by the EE certificate carried in the CMS certificates field.
+        </t>
+        <t>
+          If the asID field is present, it <bcp14>MUST</bcp14> contain an instance of ConstrainedASIdentifiers.
+        </t>
+        <t>
+          If the ipAddrBlocks field is present, it <bcp14>MUST</bcp14> contain an instance of ConstrainedIPAddrBlocks.
+        </t>
+        <t>
+          At least one of asID or ipAddrBlocks <bcp14>MUST</bcp14> be present.
+        </t>
+        <t>
+          ConstrainedASIdentifiers and ConstrainedIPAddrBlocks are specified such that the resulting DER-encoded data instances are binary compatible with ASIdentifiers and IPAddrBlocks (defined in <xref target="RFC3779"/>), respectively.
+        </t>
+        <t>
+          Implementations encountering decoding errors whilst attempting to read DER-encoded data using this specification should be aware of the possibility that the data may have been encoded using an implementation intended for use with <xref target="RFC3779"/>. Such data may contain elements prohibited by the current specification.
+        </t>
+        <t>
+          Attempting to decode the errored data using the more permissive specification contained in <xref target="RFC3779"/> may enable implementors to gather additional context for use when reporting errors to the user.
+        </t>
+        <t>
+          However, implementations <bcp14>MUST NOT</bcp14> ignore errors resulting from the more restrictive definitions contained herein; in particular, such errors <bcp14>MUST</bcp14> cause the validation procedure described in <xref target="validation"/> to fail.
+        </t>
+        <section>
+          <name>ConstrainedASIdentifiers Type</name>
+          <t>
+            ConstrainedASIdentifiers is a SEQUENCE consisting of a single field "asnum" that contains a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
+          </t>
+          <t>
+            ConstrainedASIdentifiers is defined such that the resulting DER-encoded data are binary compatible with ASIdentifiers defined in <xref target="RFC3779"/>.
+          </t>
+        </section>
+        <section>
+          <name>ConstrainedIPAddrBlocks Type</name>
+          <t>
+            ConstrainedIPAddrBlocks is a SEQUENCE OF one or more instances of ConstrainedIPAddressFamily.
+          </t>
+          <t>
+            There <bcp14>MUST</bcp14> be only one instance of ConstrainedIPAddressFamily per unique Address Family Identifier (AFI).
+          </t>
+          <t>
+            The elements of ConstrainedIPAddressFamily <bcp14>MUST</bcp14> be ordered by ascending addressFamily values (treating the octets as unsigned numbers).
+            Thus, when both IPv4 and IPv6 addresses are specified, the IPv4 addresses <bcp14>MUST</bcp14> precede the IPv6 addresses (since the IPv4 AFI of 0001 is less than the IPv6 AFI of 0002).
+          </t>
+          <t>
+            ConstrainedIPAddrBlocks is defined such that the resulting DER-encoded data are binary compatible with IPAddrBlocks defined in <xref target="RFC3779"/>.
+          </t>
+          <section>
+            <name>ConstrainedIPAddressFamily Type</name>
+            <section>
+              <name>addressFamily Field</name>
+              <t>
+                The addressFamily field is an OCTET STRING containing a 2-octet AFI, in network byte order.
+                Unlike IPAddrBlocks <xref target="RFC3779"/>, a third octet containing a Subsequent Address Family Identifier (SAFI) <bcp14>MUST NOT</bcp14> be present.
+                AFIs are specified in the "Address Family Numbers" registry <xref target="IANA.ADDRESS-FAMILY-NUMBERS"></xref> maintained by IANA.
+              </t>
+            </section>
+            <section>
+              <name>addressesOrRanges Field</name>
+              <t>
+                The addressesOrRanges element is a SEQUENCE OF one or more IPAddressOrRange values, as defined in <xref target="RFC3779"/>.
+                The rules for canonicalization and encoding defined in <xref target="RFC3779" section="2.2.3.6"/> apply to the value of addressesOrRanges.
+              </t>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section>
+        <name>digestAlgorithm</name>
+        <t>
+          The digest algorithm is used to create the message digest of the attested digital object(s).
+          This algorithm <bcp14>MUST</bcp14> be a hashing algorithm defined in <xref target="RFC7935"/>.
+        </t>
+      </section>
+      <section>
+        <name>checkList</name>
+        <t>
+          This field is a SEQUENCE OF one or more FileNameAndHash values.
+          There is one FileNameAndHash entry for each digital object referenced on the Signed Checklist.
+        </t>
+        <section anchor="FileNameAndHash">
+          <name>FileNameAndHash</name>
+          <t>
+            Each FileNameAndHash is an ordered pair of the name of the directory entry containing the digital object and the message digest of the digital object.
+          </t>
+          <t>
+            The hash field is mandatory.
+            The value of the hash field is the calculated message digest of the digital object.
+            The hashing algorithm is specified in the digestAlgorithm field.
+          </t>
+          <t>
+            The fileName field is <bcp14>OPTIONAL</bcp14>.
+            This is to allow Signed Checklists to be used in a "stand-alone" fashion in which nameless digital objects are addressed directly through their respective message digest rather than through a file system abstraction.
+          </t>
+          <t>
+            If the fileName field is present, then its value:
+          </t>
+          <ul>
+            <li>
+              <bcp14>MUST</bcp14> contain only characters specified in the Portable Filename Character Set as defined in <xref target="POSIX"/>.
+            </li>
+            <li>
+              <bcp14>MUST</bcp14> be unique with respect to the other FileNameAndHash elements of checkList for which the fileName field is also present.
+            </li>
+          </ul>
+          <t>
+            Conversely, if the fileName field is omitted, then the value of the hash field <bcp14>MUST</bcp14> be unique with respect to the other FileNameAndHash elements of checkList for which the fileName field is also omitted.
+          </t>
+        </section>
+      </section>
+    </section>
+    <section anchor="validation">
+      <name>RSC Validation</name>
+<!-- [rfced] We have a few questions about the following sentence.
+
+First, please confirm that "MUST NOT" is correct in the parenthetical. We ask
+because Section 4.8.8.2 of [RFC6487] states, "This extension MUST be present
+and MUST be marked non-critical." Or should this point to Section 2 of this
+document instead, which explains that SIA extension MUST be omitted?
+
+Next, we do not see "SIA" mentioned in the validation checks in RFC 6488. Are
+any updates needed? (This question also applies to first sentence in Section 2.)
+
+Last, would this sentence be easier to read if split into two separate
+sentences? See "Perhaps" text below.
+
+Original:
+   To validate
+   an RSC, the Relying Party MUST perform all the validation checks
+   specified in [RFC6488] (except checking for the presence of an SIA
+   extension, which MUST NOT be present in the EE X.509 certificate
+   Section 4.8.8.2 of [RFC6487]), and perform the following additional
+   RSC-specific validation steps:
+
+Current:
+   To validate an
+   RSC, the RP MUST perform all the validation checks specified in
+   [RFC6488] (except for checking for the presence of an SIA extension,
+   which MUST NOT be present in the EE X.509 certificate (see
+   Section 4.8.8.2 of [RFC6487])) and perform the following additional
+   RSC-specific validation steps:
+   
+Perhaps:
+   To validate an
+   RSC, the RP MUST perform all the validation checks specified in
+   [RFC6488], except for checking for the presence of an SIA extension,
+   which MUST NOT be present in the EE X.509 certificate (see
+   Section 2). In addition, the RP MUST perform
+   the following additional RSC-specific validation steps:
+-->
+
+      <t>
+        Before a Relying Party (RP) can use an RSC to validate a set of digital objects, the RP <bcp14>MUST</bcp14> first validate the RSC.
+        To validate an RSC, the RP <bcp14>MUST</bcp14> perform all the validation checks specified in <xref target="RFC6488"/> (except for checking for the presence of an SIA extension, which <bcp14>MUST NOT</bcp14> be present in the EE X.509 certificate (see <xref target="RFC6487" section="4.8.8.2"/>)) and perform the following additional RSC-specific validation steps:
+      </t>
+      <ol>
+        <li>
+          The contents of the CMS eContent field <bcp14>MUST</bcp14> conform to all of the constraints described in <xref target="econtent"/>, including the constraints described in <xref target="FileNameAndHash"/>.
+        </li>
+<!-- [rfced] Please confirm that "AS Resources extension [RFC3779]" and "IP
+Resources extension [RFC3779]" are correct in these sentences.  We ask
+because we do not see the exact phrases "AS Resources" or "IP Resources"
+in RFC 3779.
+
+Original:
+   If the asID field is present within the contents of the
+   'resources' field, then the AS Resources extension [RFC3779] MUST
+   be present in the EE certificate contained in the CMS
+   certificates field.
+   ...
+   If the ipAddrBlocks field is present within the contents of the
+   'resources' field, then the IP Resources extension [RFC3779] MUST
+   be present in the EE certificate contained in the CMS
+   certificates field.  
+-->
+
+        <li>
+          If the asID field is present within the contents of the 'resources' field, then the AS Resources extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent 'resources' field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's AS Resources extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
+        </li>
+        <li>
+          If the ipAddrBlocks field is present within the contents of the 'resources' field, then the IP Resources extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The IP addresses present in the eContent 'resources' field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's IP Resources extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
+        </li>
+      </ol>
+    </section>
+    <section>
+      <name>Verifying Files or Data Using RSC</name>
+      <t>
+        To verify a set of digital objects with an RSC:
+      </t>
+      <ul>
+        <li>
+          The RSC <bcp14>MUST</bcp14> be validated according to the procedure described in <xref target="validation"/>.
+          If the RSC cannot be validated, verification <bcp14>MUST</bcp14> fail.
+          This error <bcp14>SHOULD</bcp14> be reported to the user.
+        </li>
+        <li>
+          <t>For every digital object to be verified:</t>
+          <ol>
+            <li anchor="mode">
+              <t>
+                If the verification procedure is provided with a file name for the object being verified (e.g., because the user has provided a file system path from which to read the object), then verification <bcp14>SHOULD</bcp14> proceed in "filename-aware" mode. Otherwise, verification <bcp14>SHOULD</bcp14> proceed in "filename-unaware" mode.
+              </t>
+              <t>
+                Implementations <bcp14>MAY</bcp14> provide an option to override the verification mode, for example, to ignore the fact that the object is to be read from a file.
+              </t>
+            </li>
+            <li anchor="hash">
+              <t>
+                The message digest <bcp14>MUST</bcp14> be computed from the file contents or data using the digest algorithm specified in the digestAlgorithm field of the RSC.
+              </t>
+            </li>
+            <li anchor="match_hash">
+              <t>
+                The digest computed in Step <xref target="hash" format="counter"/> <bcp14>MUST</bcp14> be compared to the value appearing in the hash field of all FileNameAndHash elements of the checkList field of the RSC.
+              </t>
+              <t>
+                One or more FileNameAndHash elements <bcp14>MUST</bcp14> be found with a matching hash value; otherwise, verification <bcp14>MUST</bcp14> fail, and the error <bcp14>SHOULD</bcp14> be reported to the user.
+              </t>
+            </li>
+            <li>
+              <t>
+                If the mode selected in Step <xref target="mode" format="counter"/> is "filename-aware", then exactly one of the FileNameAndHash elements matched in Step <xref target="match_hash" format="counter"/> <bcp14>MUST</bcp14> contain a fileName field value exactly matching the file name of the object being verified.
+              </t>
+              <t>
+                Alternatively, if the mode selected in Step <xref target="mode" format="counter"/> is "filename-unaware", then exactly one of the FileNameAndHash elements matched in Step <xref target="match_hash" format="counter"/> <bcp14>MUST</bcp14> have the fileName field omitted.
+              </t>
+              <t>
+                Otherwise, verification <bcp14>MUST</bcp14> fail, and the error <bcp14>SHOULD</bcp14> be reported to the user.
+              </t>
+            </li>
+          </ol>
+        </li>
+      </ul>
+      <t>
+        Note that in the above procedure, not all elements of checkList necessarily need be used. That is, it is not an error if the length of checkList is greater than the size of the set of digital objects to be verified. However, in this situation, implementations <bcp14>SHOULD</bcp14> issue a warning to the user, allowing for corrective action to be taken if necessary.
+      </t>
+    </section>
+    <section>
+      <name>Operational Considerations</name>
+      <t>
+        When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, and XML), converting such objects into a lossless compressed form is <bcp14>RECOMMENDED</bcp14>.
+        Distributing plain-text objects within a compression envelope (such as GZIP <xref target="RFC1952"></xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
+        Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
+      </t>
+
+<!-- [rfced] We are having trouble understanding how the text after the
+semicolon relates to the rest of the sentence. May we update as follows?
+
+Current: 
+   If a fileName field is present, but no digital object within the set
+   of to-be-verified digital objects has a filename that matches the
+   content of that field, a validator implementation SHOULD compare the
+   message digest of each digital object to the value from the hash
+   field of the associated FileNameAndHash and report matches to the
+   user for further consideration; or report an error indicating no file
+   by that name exists.
+
+Perhaps:
+   If a fileName field is present but no digital object within the set
+   of to-be-verified digital objects has a filename that matches the
+   content of that field, a validator implementation SHOULD compare the
+   message digest of each digital object to the value from the hash
+   field of the associated FileNameAndHash and then either report matches to the
+   user for further consideration or report an error indicating no file
+   by that name exists.
+-->
+
+<t>
+        If a fileName field is present, but no digital object within the set of to-be-verified digital objects has a filename that matches the content of that field, a validator implementation <bcp14>SHOULD</bcp14> compare the message digest of each digital object to the value from the hash field of the associated FileNameAndHash and report matches to the user for further consideration; or report an error indicating no file by that name exists.
+      </t>
+    </section>
+    <section anchor="security">
+      <name>Security Considerations</name>
+      <t>
+        RPs are hereby warned that the data in an RSC is self-asserted.
+        When determining the meaning of any data contained in an RSC, RPs <bcp14>MUST NOT</bcp14> make any assumptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
+        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
+      </t>
+      <t>
+        RPKI certificates are not bound to real-world identities; see <xref target="RFC9255"/> for an elaboration.
+        RPs can only associate real-world entities to Internet Number Resources by additionally consulting an exogenous authority.
+        Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources' and do not communicate any other aspect of the resource holder's business operations, such as the identity of the resource holder itself.
+      </t>
+      <t>
+        RSC objects are not distributed through the RPKI repository system.
+        From this, it follows that third parties who do not have a copy of a given RSC may not be aware of the existence of that RSC.
+        Since RSC objects use EE certificates but all other currently defined types of RPKI object profiles are published in public CA repositories, an observer may infer from discrepancies in the repository that RSC object(s) may exist.
+        For example, if a CA does not use random serial numbers for certificates, an observer could detect gaps between the serial numbers of the published EE certificates.
+        Similarly, if the CA includes a serial number on a Certificate Revocation List (CRL) that does not match any published object, an observer could postulate an RSC EE certificate was revoked.
+      </t>
+
+<!-- [rfced] Should "serial" here read "serial number"? Also, will the text in
+parentheses be clear to readers?
+
+Original:
+   Nor does an arbitrary (to the RP unknown) serial in a CRL
+   imply an RSC object exists: 
+
+Perhaps:
+   Nor does an arbitrary serial number (or one that is unknown to the RP) in a CRL
+   imply an RSC object exists: 
+-->
+
+      <t>
+        Conversely, a gap in serial numbers does not imply that an RSC exists.
+        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be an RSC, it might have never been published, or it may have been revoked before it was visible to RPs.
+        In general, it is not possible to confidently infer the existence or non-existence of RSCs from the repository state without access to a given RSC.
+      </t>
+      <t>
+        While a one-time-use EE certificate must only be used to generate and sign a single RSC object, CAs technically are not restricted from generating and signing multiple different RSC objects with a single key pair.
+        Any RSC objects sharing the same EE certificate cannot be revoked individually.
+      </t>
+    </section>
+    <section anchor="iana">
+      <name>IANA Considerations</name>
+
+<!-- [rfced] We have included some specific questions about the IANA text in
+the document.  In addition to responding to those questions, please
+review all of the IANA-related updates carefully and let us know if any
+updates are needed.
+
+
+a) Section 9.4: FYI - We updated "id-mod-rpkiSignedChecklist-2021" to
+"id-mod-rpkiSignedChecklist-2022" to match the registry at
+https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#security-smime-0. 
+
+
+b) Section 9.5: FYI - We updated the registry name here from "Provisional
+Standard Media Type" to "Media Types" per https://www.iana.org/assignments/media-types/.
+
+Original:
+   The IANA has registered the media type application/rpki-checklist in
+   the "Provisional Standard Media Type" registry as follows:
+   
+Updated:
+   IANA has registered the media type application/rpki-checklist in
+   the "Media Types" registry as follows:
+
+
+c) Section 9.5: Please confirm that "Section 5" is correct here. Or was the
+intent to cite the "Security Considerations" section of this document (i.e.,
+Section 8)?
+
+Original:
+      Security considerations: Carries an RPKI Signed Checklist
+          [RFC-to-be]. This media type contains no active
+          content. See Section 5 of [RFC-to-be] for further
+          information.
+
+
+d) Section 9.5: We made several updates to the registration in this section.
+
+- Added the following item per the template in Section 5.6
+of RFC 6838:
+
+   Fragment identifier considerations: N/A
+
+- Updated "None" to "N/A" per Section 5.6 of RFC 6838, which states:
+
+   "N/A", written exactly that way, can be used in any field if desired
+   to emphasize the fact that it does not apply or that the question was
+   not omitted by accident.  Do not use 'none' or other words that could
+   be mistaken for a response.
+
+- Added "N/A" to the "Macintosh file type code(s)" field because it was not
+populated.
+
+- Made some punctuation edits.
+
+Please review and let us know any objections. We will request that IANA update
+the registration at
+https://www.iana.org/assignments/media-types/application/rpki-checklist to
+match the edited document prior to publication.
+
+
+e) We updated some section titles to be the name of the registry in that
+section as that seemed to be the overall pattern. Please let us know any
+objections.
+-->
+
+      <section>
+        <name>SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)</name>
+        <t>
+          IANA has allocated the following in the "SMI Security for S/MIME CMS Content Type (1.2.840.113549.1.9.16.1)" registry:
+        </t>
+
+<table anchor="cms-content-type" align="center">
+  <name></name>
+  <thead>
+    <tr>
+      <th rowspan="1" colspan="1">Decimal</th>
+      <th rowspan="1" colspan="1">Description</th>
+      <th rowspan="1" colspan="1">References</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+	<td>48</td>
+	<td>id-ct-signedChecklist</td>
+	<td>RFC 9323</td>
+      </tr>
+    </tbody>
+</table>
+
+      </section>
+      <section>
+        <name>RPKI Signed Objects</name>
+        <t>
+          IANA has registered the OID for the RSC in the "RPKI Signed Objects" registry <xref target="RFC6488"/> as follows:
+        </t>
+
+<table anchor="rpki-signed-checklist" align="center">
+  <name></name>
+  <thead>
+    <tr>
+      <th rowspan="1" colspan="1">Name</th>
+      <th rowspan="1" colspan="1">OID</th>
+      <th rowspan="1" colspan="1">Reference</th>
+    </tr>
+</thead>
+  <tbody>
+    <tr>
+      <td>Signed Checklist</td>
+      <td>1.2.840.113549.1.9.16.1.48</td>
+      <td>RFC 9323</td>
+    </tr>
+  </tbody>
+</table>
+
+      </section>
+      <section>
+        <name>RPKI Repository Name Schemes</name>
+        <t>
+          IANA has added the Signed Checklist file extension to the "RPKI Repository Name Schemes" registry <xref target="RFC6481"/> as follows:
+        </t>
+
+<table anchor="rpki-repository-name-schemes" align="center">
+  <name></name>
+  <thead>
+    <tr>
+      <th rowspan="1" colspan="1">Filename Extension</th>
+      <th rowspan="1" colspan="1">RPKI Object</th>
+      <th rowspan="1" colspan="1">Reference</th>
+    </tr>
+</thead>
+  <tbody>
+    <tr>
+      <td>.sig</td>
+      <td>Signed Checklist</td>
+      <td>RFC 9323</td>
+    </tr>
+  </tbody>
+</table>
+
+      </section>
+      <section>
+        <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
+        <t>
+          IANA has allocated the following in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry:
+        </t>
+
+<table anchor="smi-security-identifier" align="center">
+  <name></name>
+  <thead>
+    <tr>
+      <th rowspan="1" colspan="1">Decimal</th>
+      <th rowspan="1" colspan="1">Description</th>
+      <th rowspan="1" colspan="1">References</th>
+    </tr>
+</thead>
+  <tbody>
+    <tr>
+      <td>73</td>
+      <td>id-mod-rpkiSignedChecklist-2022</td>
+      <td>RFC 9323</td>
+    </tr>
+  </tbody>
+</table>
+
+      </section>
+      <section>
+        <name>Media Types</name>
+        <t>
+          IANA has registered the media type "application/rpki-checklist" in the "Media Types" registry as follows:
+        </t>
+<dl>
+   <dt>Type name:</dt><dd>application</dd>
+   <dt>Subtype name:</dt><dd>rpki-checklist</dd>
+   <dt>Required parameters:</dt><dd>N/A</dd>
+   <dt>Optional parameters:</dt><dd>N/A</dd>
+   <dt>Encoding considerations:</dt><dd>binary</dd>
+   <dt>Security considerations:</dt><dd>Carries an RPKI Signed Checklist. This media type contains no active content. See <xref target="validation"/> of RFC 9323 for further information.</dd>
+   <dt>Interoperability considerations:</dt><dd>N/A</dd>
+   <dt>Published specification:</dt><dd>RFC 9323</dd>
+   <dt>Applications that use this media type:</dt><dd>RPKI operators</dd>
+   <dt>Fragment identifier considerations:</dt><dd>N/A</dd>
+   <dt>Additional information:</dt><dd>
+   <t><br/></t>
+   <dl spacing="compact">
+     <dt>Content:</dt><dd>This media type is a signed object, as defined in [RFC6488], which contains a payload of a list of checksums as defined above in this document.</dd>
+     <dt>Magic number(s):</dt><dd>N/A</dd>
+     <dt>File extension(s):</dt><dd>.sig</dd>
+     <dt>Macintosh file type code(s):</dt><dd>N/A</dd>
+   </dl>
+ </dd>
+   <dt>Person &amp; email address to contact for further information:</dt><dd>Job Snijders (job@fastly.com)</dd>
+   <dt>Intended usage:</dt><dd>COMMON</dd>
+   <dt>Restrictions on usage:</dt><dd>N/A</dd>
+   <dt>Author:</dt><dd>Job Snijders (job@fastly.com)</dd>
+   <dt>Change controller:</dt><dd>IETF</dd>
+</dl>
+
+      </section>
+    </section>
+  </middle>
+  <back>
+
+<displayreference target="I-D.ietf-sidrops-rpki-rta" to="RPKI-RTA"/>
+
+    <references>
+      <name>References</name>
+      <references>
+        <name>Normative References</name>
+
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3779.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5652.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6481.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6487.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6488.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7935.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9286.xml"/>
+
+        <reference anchor="POSIX" target="https://publications.opengroup.org/standards/unix/c165">
+          <front>
+            <title>Base Specifications</title>
+            <author>
+              <organization>IEEE and The Open Group</organization>
+            </author>
+            <date year="2016"/>
+          </front>
+	  <refcontent>Issue 7</refcontent>
+	  <seriesInfo name="DOI" value="10.1109/IEEESTD.2016.7582338"/>
+        </reference>
+      </references>
+      <references>
+        <name>Informative References</name>
+
+        <reference anchor="IANA.ADDRESS-FAMILY-NUMBERS" target="https://www.iana.org/assignments/address-family-numbers">
+          <front>
+            <title>Address Family Numbers</title>
+            <author>
+              <organization abbrev="IANA">Internet Assigned Numbers Authority</organization>
+            </author>
+          </front>
+        </reference>
+
+<!-- [I-D.ietf-sidrops-rpki-rta] IESG state Expired -->
+
+<reference anchor="I-D.ietf-sidrops-rpki-rta" target="https://datatracker.ietf.org/doc/html/draft-ietf-sidrops-rpki-rta-00">
+  <front>
+    <title>A profile for Resource Tagged Attestations (RTAs)</title>
+    <author fullname="George G. Michaelson" initials="G" surname="Michaelson">
+      <organization>Asia Pacific Network Information Centre</organization>
+    </author>
+    <author fullname="Geoff Huston" initials="G" surname="Huston">
+      <organization>Asia Pacific Network Information Centre</organization>
+    </author>
+    <author fullname="Tom Harrison" initials="T" surname="Harrison">
+      <organization>Asia Pacific Network Information Centre</organization>
+    </author>
+    <author fullname="Tim Bruijnzeels" initials="T" surname="Bruijnzeels">
+      <organization>NLNet Labs B.V.</organization>
+    </author>
+    <author fullname="Martin Hoffmann" initials="M" surname="Hoffman">
+      <organization>NLNet Labs B.V.</organization>
+    </author>
+    <date month="January" day="21" year="2021"/>
+  </front>
+  <seriesInfo name="Internet-Draft" value="draft-ietf-sidrops-rpki-rta-00"/>
+</reference>
+
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1952.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6268.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6480.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9255.xml"/>
+
+        <reference anchor="signify" target="https://man.openbsd.org/signify">
+          <front>
+            <title>signify - cryptographically sign and verify files</title>
+            <author initials="T." surname="Unangst">
+              <organization/>
+            </author>
+            <author initials="M." surname="Espie">
+              <organization/>
+            </author>
+          </front>
+        </reference>
+
+      </references>
+    </references>
+    <section anchor="acknowledgements" numbered="false">
+      <name>Acknowledgements</name>
+      <t>
+        The authors wish to thank
+          <contact fullname="George Michaelson"/>,
+          <contact fullname="Geoff Huston"/>,
+          <contact fullname="Randy Bush"/>,
+          <contact fullname="Stephen Kent"/>,
+          <contact fullname="Matt Lepinski"/>,
+          <contact fullname="Rob Austein"/>,
+          <contact fullname="Ted Unangst"/>,
+          and <contact fullname="Marc Espie"/>
+        for prior art.
+        The authors thank <contact fullname="Russ Housley"/> for reviewing the ASN.1 notation and providing suggestions.
+        The authors would like to thank
+          <contact fullname="Nimrod Levy"/>,
+          <contact fullname="Tim Bruijnzeels"/>,
+          <contact fullname="Alberto Leiva"/>,
+          <contact fullname="Ties de Kock"/>,
+          <contact fullname="Peter Peele"/>,
+          <contact fullname="Claudio Jeker"/>,
+          <contact fullname="Theo Buehler"/>,
+          <contact fullname="Donald Eastlake 3rd"/>,
+          <contact fullname="Erik Kline"/>,
+          <contact fullname="Robert Wilton"/>,
+          <contact fullname="Roman Danyliw"/>,
+          <contact fullname="Éric Vyncke"/>,
+          <contact fullname="Lars Eggert"/>,
+          <contact fullname="Paul Wouters"/>,
+          and <contact fullname="Murray S. Kucherawy"/>
+        for document review and suggestions.
+      </t>
+    </section>
+  </back>
+
+<!-- [rfced] Terminology
+
+a) We see "Signed Checklist" and "RPKI Signed Checklist" (as well as the
+acronym "RSC") used in the document. Please review and let us know if any
+updates are needed for consistency. (Note that "Signed Checklist" is used in
+the IANA registries in Sections 9.2 and 9.3; if any changes are made that
+affect these registries, we will ask IANA to update accordingly prior to
+publication.)
+
+
+b) We note inconsistencies in the terms listed below. We chose the form on the
+right.  Please let us know any objections.
+
+EE Certificate vs. EE certificate
+  Note: "EE certificate" is more common in the RFC Series (e.g., RFCs 9286, 8360,
+  8211, and 6488).
+
+Resource Holder vs. resource holder
+  Note: The lowercase form is used in RFC 6488 and elsewhere in the RFC Series.
+
+RPKI Repository vs. RPKI repository
+  Note: The lowercase form is more common in the RFC Series (e.g., RFCs 9286, 6486,
+  6487, and 6841).
+
+Repository vs. repository
+
+
+c) Both of the following forms appear in the document. Which is the correct
+placement of "X.509"? Should "X.509" come before "EE certificate"?
+
+X.509 End-Entity (EE) certificate
+
+EE X.509 certificate
+
+
+d) We see the following forms used in the document. Please review and let us
+know if any updates are needed for consistency.
+
+rpkiSignedChecklist vs. RpkiSignedChecklist
+
+checklist vs. checkList
+  Note: We believe that "checklist" is for general use and "checkList" is the name
+        of the field, but please check for correct use.
+
+file name vs. filename vs. fileName
+   Note: We believe that "file name" and "filename" are for general use and "fileName"
+   is the name of the field, but please check for correct use.
+
+
+e) We see the following forms, which vary slightly. Please review and let us
+know if any updates are needed.
+
+signed "with resources"
+
+signed with a specific set of Internet Number Resources
+
+'signed with Internet Number Resources'
+
+
+f) It seems that quotation marks are not used for most field names (e.g., the
+asID field, the ipAddrBlocks field). However, quotation marks (single and
+double) are used for field names in the following sentences. Should the
+quotation marks here be removed?
+
+Original:
+   ConstrainedASIdentifiers is a SEQUENCE, consisting of a single field
+   "asnum", itself containing a SEQUENCE OF one or more ASIdOrRange
+   instances as defined in [RFC3779].
+   ...
+   The AS identifiers present in the eContent
+   'resources' field MUST be a subset of those present in the
+   certificate extension.
+   ...
+   If the ipAddrBlocks field is present within the contents of the
+   'resources' field, then the IP Resources extension [RFC3779] MUST
+   be present in the EE certificate contained in the CMS
+   certificates field.  The IP addresses present in the eContent
+   'resources' field MUST be a subset of those present in the
+   certificate extension.         
+-->
+
+<!-- [rfced] Please review the "Inclusive Language" portion of the online 
+Style Guide <https://www.rfc-editor.org/styleguide/part2/#inclusive_language>
+and let us know if any changes are needed.
+
+Note that our script did not flag any words in particular, but this should 
+still be reviewed as a best practice.
+-->
+
+
+
+</rfc>
