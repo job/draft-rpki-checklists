@@ -20,6 +20,8 @@ Original:
 
 Perhaps:
   A Profile for RPKI Signed Checklists (RSCs)
+
+[authors]: Thanks, looks good.
 -->
 
 <title abbrev="RPKI Signed Checklists (RSCs)">
@@ -69,10 +71,16 @@ Perhaps:
     <workgroup>sidrops</workgroup>
 
 <!-- [rfced] Please insert any keywords (beyond those that appear in the
-title) for use on https://www.rfc-editor.org/search. -->
+title) for use on https://www.rfc-editor.org/search.
 
-<keyword>example</keyword>
+[authors]: Added three keywords.
+-->
+
+    <keyword>security</keyword>
+    <keyword>cryptography</keyword>
+    <keyword>X.509</keyword>
     
+
     <abstract>
 
 <!-- [rfced] We have split the following sentence into two sentences to
@@ -91,6 +99,10 @@ Current:
    of arbitrary digital objects (files) that are signed "with resources".
    When validated, an RSC confirms that the respective Internet
    resource holder produced the RSC.   
+
+[authors]:
+  Agreed. We have also changed "allow an attestation" to "allow for the
+  creation of an attestation" here and in the introduction
 -->
       
 <!-- [rfced] The first two sentences below use "Cryptographic Message Syntax
@@ -142,11 +154,20 @@ Or:
    The protected CMS content type is
    intended to provide for the creation and validation of an RPKI Signed
    Checklist (RSC):
+
+[BM]:
+  I prefer the first of your two suggestions. I have made the necessary edits
+  below.
+
+[TH]:
+  From looking at other RFCs (e.g. 7107, 8769), 'CMS content type' looks like
+  the right expression to use, so the text under 'Or:' has been adopted
+  inline, but with 'protected' removed.
 -->
 
       <t>
          This document defines a Cryptographic Message Syntax (CMS) protected content type for use with the Resource Public Key Infrastructure (RPKI) to carry a general-purpose listing of checksums (a 'checklist').
-         The objective is to allow an attestation, termed an "RPKI Signed Checklist (RSC)", which contains one or more checksums of arbitrary digital objects (files) that are signed "with resources". When validated, an RSC confirms that the respective Internet resource holder produced the RSC.
+         The objective is to allow for the creation of an attestation, termed an "RPKI Signed Checklist (RSC)", which contains one or more checksums of arbitrary digital objects (files) that are signed with a specific set of Internet Number Resources. When validated, an RSC confirms that the respective Internet resource holder produced the RSC.
       </t>
     </abstract>
   </front>
@@ -155,11 +176,11 @@ Or:
       <name>Introduction</name>
       <t>
         This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general-purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
-        The protected CMS content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC), a checksum listing signed with a specific set of Internet Number Resources.
-        The objective is to allow an attestation that, when validated, provides a means to confirm a given Internet resource holder produced the RSC.
+        The CMS-protected content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC), a checksum listing signed with a specific set of Internet Number Resources.
+        The objective is to allow for the creation of an attestation that, when validated, provides a means to confirm a given Internet resource holder produced the RSC.
       </t>
       <t>
-        Signed Checklists are expected to facilitate inter-domain business use cases that depend on an ability to verify resource holdership.
+        RPKI Signed Checklists are expected to facilitate inter-domain business use cases that depend on an ability to verify resource holdership.
         RPKI-based validation processes are expected to become the industry norm for automated Bring Your Own IP (BYOIP) on-boarding or establishment of physical interconnections between Autonomous Systems (ASes).
       </t>
       <t>
@@ -200,6 +221,8 @@ Updated:
    For example, it might be a USB stick, a web interface
    secured with HTTPS, an email signed with Pretty Good Privacy (PGP), a
    T-shirt printed with a QR code, or a carrier pigeon.
+
+[authors]: Thanks, looks good.
 -->
 
       <t>
@@ -212,6 +235,8 @@ Updated:
 Original:
    The Certification Authority (CA) MUST only sign one RSC with each EE
    certificate and MUST generate a new key pair for each new RSC. 
+
+[authors]: "with each" is correct.
 -->
 
 <!-- [rfced] Will the phrasing "This form of use of the associated EE
@@ -224,18 +249,21 @@ Original:
 Perhaps:
    This type of EE certificate is
    termed a "one-time-use" EE certificate (see Section 3 of [RFC6487]).
+
+[authors]:
+    We prefer "This type ...". We have made the necessary edits.
 -->
 
         <t>
           The Certification Authority (CA) <bcp14>MUST</bcp14> only sign one RSC with each EE certificate and <bcp14>MUST</bcp14> generate a new key pair for each new RSC.
-          This form of use of the associated EE certificate is termed a "one-time-use" EE certificate (see <xref target="RFC6487" section="3"/>).
+          This type of EE certificate is termed a "one-time-use" EE certificate (see <xref target="RFC6487" section="3"/>).
         </t>
       </section>
     </section>
     <section anchor="content">
-      <name>The RSC ContentType</name>
+      <name>The RSC eContentType</name>
       <t>
-        The ContentType for an RSC is defined as rpkiSignedChecklist, with Object Identifier (OID) 1.2.840.113549.1.9.16.1.48.
+        The eContentType for an RSC is defined as id-ct-signedChecklist, with Object Identifier (OID) 1.2.840.113549.1.9.16.1.48.
       </t>
       <t>
         This OID <bcp14>MUST</bcp14> appear within both the eContentType in the encapContentInfo object and the ContentType signed attribute in the signerInfo object (see <xref target="RFC6488"/>).
@@ -244,7 +272,7 @@ Perhaps:
     <section anchor="econtent">
       <name>The RSC eContent</name>
       <t>
-        The content of an RSC indicates that a checklist for arbitrary digital objects has been signed "with resources".
+        The content of an RSC indicates that a checklist for arbitrary digital objects has been signed with a specific set of Internet Number Resources.
         An RSC is formally defined as follows:
       </t>
       <sourcecode type="asn.1">RpkiSignedChecklist-2022
@@ -342,7 +370,7 @@ END
         <section>
           <name>ConstrainedASIdentifiers Type</name>
           <t>
-            ConstrainedASIdentifiers is a SEQUENCE consisting of a single field "asnum" that contains a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
+            ConstrainedASIdentifiers is a SEQUENCE consisting of a single field, asnum, which in turn contains a SEQUENCE OF one or more ASIdOrRange instances as defined in <xref target="RFC3779"/>.
           </t>
           <t>
             ConstrainedASIdentifiers is defined such that the resulting DER-encoded data are binary compatible with ASIdentifiers defined in <xref target="RFC3779"/>.
@@ -394,7 +422,7 @@ END
         <name>checkList</name>
         <t>
           This field is a SEQUENCE OF one or more FileNameAndHash values.
-          There is one FileNameAndHash entry for each digital object referenced on the Signed Checklist.
+          There is one FileNameAndHash entry for each digital object referenced on the RSC.
         </t>
         <section anchor="FileNameAndHash">
           <name>FileNameAndHash</name>
@@ -408,7 +436,7 @@ END
           </t>
           <t>
             The fileName field is <bcp14>OPTIONAL</bcp14>.
-            This is to allow Signed Checklists to be used in a "stand-alone" fashion in which nameless digital objects are addressed directly through their respective message digest rather than through a file system abstraction.
+            This is to allow RSCs to be used in a "stand-alone" fashion in which nameless digital objects are addressed directly through their respective message digest rather than through a file system abstraction.
           </t>
           <t>
             If the fileName field is present, then its value:
@@ -465,11 +493,26 @@ Perhaps:
    which MUST NOT be present in the EE X.509 certificate (see
    Section 2). In addition, the RP MUST perform
    the following additional RSC-specific validation steps:
+
+[authors]:
+  The normative language is correct. RFC6488 mandates that the EE cert be valid
+  according to RFC6487, which in turn requires that the SIA be present.
+  The intention of the current language is to "override" that check.
+
+  However, as you noted, the reference to RFC6487 is likely to be confusing.
+  Updating it to point to section 2 makes more sense.
+
+  We also agree with your suggestion that the sentence is easier to parse when
+  split in two.
+
+  We have made the necessary edits below (in-line with your suggested text,
+  except for the superfluous "additional").
 -->
 
       <t>
         Before a Relying Party (RP) can use an RSC to validate a set of digital objects, the RP <bcp14>MUST</bcp14> first validate the RSC.
-        To validate an RSC, the RP <bcp14>MUST</bcp14> perform all the validation checks specified in <xref target="RFC6488"/> (except for checking for the presence of an SIA extension, which <bcp14>MUST NOT</bcp14> be present in the EE X.509 certificate (see <xref target="RFC6487" section="4.8.8.2"/>)) and perform the following additional RSC-specific validation steps:
+        To validate an RSC, the RP <bcp14>MUST</bcp14> perform all the validation checks specified in <xref target="RFC6488"/>, except for checking for the presence of an SIA extension, which <bcp14>MUST NOT</bcp14> be present in the EE certificate (see <xref target="profile"/>).
+        In addition, the RP MUST perform the following RSC-specific validation steps:
       </t>
       <ol>
         <li>
@@ -490,13 +533,16 @@ Original:
    'resources' field, then the IP Resources extension [RFC3779] MUST
    be present in the EE certificate contained in the CMS
    certificates field.  
+
+[authors]:
+    Good catch! We have updated to use the terminology of RFC3779.
 -->
 
         <li>
-          If the asID field is present within the contents of the 'resources' field, then the AS Resources extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent 'resources' field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's AS Resources extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
+          If the asID field is present within the contents of the resources field, then the AS identifier delegation extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The AS identifiers present in the eContent resources field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's AS identifier delegation extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
         </li>
         <li>
-          If the ipAddrBlocks field is present within the contents of the 'resources' field, then the IP Resources extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The IP addresses present in the eContent 'resources' field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's IP Resources extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
+          If the ipAddrBlocks field is present within the contents of the resources field, then the IP address delegation extension <xref target="RFC3779"/> <bcp14>MUST</bcp14> be present in the EE certificate contained in the CMS certificates field. The IP addresses present in the eContent resources field <bcp14>MUST</bcp14> be a subset of those present in the certificate extension. The EE certificate's IP address delegation extension <bcp14>MUST NOT</bcp14> contain "inherit" elements.
         </li>
       </ol>
     </section>
@@ -558,8 +604,11 @@ Original:
       <t>
         When creating digital objects of a plain-text nature (such as ASCII, UTF-8, HTML, Javascript, and XML), converting such objects into a lossless compressed form is <bcp14>RECOMMENDED</bcp14>.
         Distributing plain-text objects within a compression envelope (such as GZIP <xref target="RFC1952"></xref>) might help avoid unexpected canonicalization at intermediate systems (which in turn would lead to checksum verification errors).
-        Validator implementations are expected to treat a checksummed digital object as string of arbitrary single octets.
+        Validator implementations are expected to treat a checksummed digital object as a string of arbitrary single octets.
       </t>
+
+<!-- [authors] (An additional editorial change was made to the above
+text: "object as string" became "object as a string".) -->
 
 <!-- [rfced] We are having trouble understanding how the text after the
 semicolon relates to the rest of the sentence. May we update as follows?
@@ -581,10 +630,19 @@ Perhaps:
    field of the associated FileNameAndHash and then either report matches to the
    user for further consideration or report an error indicating no file
    by that name exists.
+
+[BM]:
+    I have removed the text after the semicolon, as it is superfluous.
+    The error reporting envisioned is already a SHOULD in the verification
+    proceedure above.
+
+[TH]:
+    Splitting the original paragraph into two sentences will probably work
+    better (updated inline). 
 -->
 
 <t>
-        If a fileName field is present, but no digital object within the set of to-be-verified digital objects has a filename that matches the content of that field, a validator implementation <bcp14>SHOULD</bcp14> compare the message digest of each digital object to the value from the hash field of the associated FileNameAndHash and report matches to the user for further consideration; or report an error indicating no file by that name exists.
+        If a fileName field is present, but no digital object within the set of to-be-verified digital objects has a file name that matches the content of that field, a validator implementation <bcp14>SHOULD</bcp14> compare the message digest of each digital object to the value from the hash field of the associated FileNameAndHash and report matches to the user for further consideration.
       </t>
     </section>
     <section anchor="security">
@@ -592,20 +650,23 @@ Perhaps:
       <t>
         RPs are hereby warned that the data in an RSC is self-asserted.
         When determining the meaning of any data contained in an RSC, RPs <bcp14>MUST NOT</bcp14> make any assumptions about the signer beyond the fact that it had sufficient control of the issuing CA to create the object.
-        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the Signed Checklist.
+        These data have not been verified by the Certificate Authority (CA) that issued the CA certificate to the entity that issued the EE certificate used to validate the RSC.
       </t>
       <t>
         RPKI certificates are not bound to real-world identities; see <xref target="RFC9255"/> for an elaboration.
         RPs can only associate real-world entities to Internet Number Resources by additionally consulting an exogenous authority.
-        Signed Checklists are a tool to communicate assertions 'signed with Internet Number Resources' and do not communicate any other aspect of the resource holder's business operations, such as the identity of the resource holder itself.
+        RSCs are a tool to communicate assertions 'signed with Internet Number Resources' and do not communicate any other aspect of the resource holder's business operations, such as the identity of the resource holder itself.
       </t>
       <t>
         RSC objects are not distributed through the RPKI repository system.
         From this, it follows that third parties who do not have a copy of a given RSC may not be aware of the existence of that RSC.
         Since RSC objects use EE certificates but all other currently defined types of RPKI object profiles are published in public CA repositories, an observer may infer from discrepancies in the repository that RSC object(s) may exist.
         For example, if a CA does not use random serial numbers for certificates, an observer could detect gaps between the serial numbers of the published EE certificates.
-        Similarly, if the CA includes a serial number on a Certificate Revocation List (CRL) that does not match any published object, an observer could postulate an RSC EE certificate was revoked.
+        Similarly, if the CA includes a serial number on a Certificate Revocation List (CRL) that does not match any published object, an observer could postulate that an RSC EE certificate was revoked.
       </t>
+
+<!-- [authors] (An additional editorial change was made to the above
+text: "postulate an" became "postulate that an".) -->
 
 <!-- [rfced] Should "serial" here read "serial number"? Also, will the text in
 parentheses be clear to readers?
@@ -617,11 +678,15 @@ Original:
 Perhaps:
    Nor does an arbitrary serial number (or one that is unknown to the RP) in a CRL
    imply an RSC object exists: 
+
+[authors]:
+  The idea here is that the serial number is unknown to the RP, so limiting it
+  to that case clarifies. We have edited accordingly.
 -->
 
       <t>
         Conversely, a gap in serial numbers does not imply that an RSC exists.
-        Nor does an arbitrary (to the RP unknown) serial in a CRL imply an RSC object exists: the implicitly referenced object might not be an RSC, it might have never been published, or it may have been revoked before it was visible to RPs.
+        Nor does the presence in a CRL of a serial number unknown to the RP imply an RSC object exists: the implicitly referenced object might not be an RSC, it might have never been published, or it may have been revoked before it was visible to RPs.
         In general, it is not possible to confidently infer the existence or non-existence of RSCs from the repository state without access to a given RSC.
       </t>
       <t>
@@ -642,6 +707,7 @@ a) Section 9.4: FYI - We updated "id-mod-rpkiSignedChecklist-2021" to
 "id-mod-rpkiSignedChecklist-2022" to match the registry at
 https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#security-smime-0. 
 
+[authors]: Ack
 
 b) Section 9.5: FYI - We updated the registry name here from "Provisional
 Standard Media Type" to "Media Types" per https://www.iana.org/assignments/media-types/.
@@ -654,6 +720,7 @@ Updated:
    IANA has registered the media type application/rpki-checklist in
    the "Media Types" registry as follows:
 
+[authors]: Ack
 
 c) Section 9.5: Please confirm that "Section 5" is correct here. Or was the
 intent to cite the "Security Considerations" section of this document (i.e.,
@@ -665,6 +732,13 @@ Original:
           content. See Section 5 of [RFC-to-be] for further
           information.
 
+[BM]:
+  You are correct, this should be the "Security Considerations" section.
+  I have updated.
+
+[TH]:
+  The intent was to cite section 5 (i.e. the RSC validation process), as the
+  key/core part of this document.
 
 d) Section 9.5: We made several updates to the registration in this section.
 
@@ -690,10 +764,13 @@ the registration at
 https://www.iana.org/assignments/media-types/application/rpki-checklist to
 match the edited document prior to publication.
 
+[authors]: All your changes look good.
 
 e) We updated some section titles to be the name of the registry in that
 section as that seemed to be the overall pattern. Please let us know any
 objections.
+
+[authors]: Ack
 -->
 
       <section>
@@ -962,6 +1039,9 @@ the IANA registries in Sections 9.2 and 9.3; if any changes are made that
 affect these registries, we will ask IANA to update accordingly prior to
 publication.)
 
+[authors]:
+    Updated to use either "RPKI Signed Checklist" or "RSC" throughout, with
+    the exception of the IANA sections (in which the additional "RPKI" is superfluous)
 
 b) We note inconsistencies in the terms listed below. We chose the form on the
 right.  Please let us know any objections.
@@ -979,6 +1059,7 @@ RPKI Repository vs. RPKI repository
 
 Repository vs. repository
 
+[authors]: Agreed on all counts.
 
 c) Both of the following forms appear in the document. Which is the correct
 placement of "X.509"? Should "X.509" come before "EE certificate"?
@@ -987,20 +1068,41 @@ X.509 End-Entity (EE) certificate
 
 EE X.509 certificate
 
+[BM]:
+  I have updated to use either "X.509 End-Entity (EE) certificate" or "EE
+  certificate".
+  I believe this maximises consistency with RFC6487.
+
+[TH]:
+  The former is correct, or at least has more prior art, so the instance of
+  the latter has been updated accordingly.
 
 d) We see the following forms used in the document. Please review and let us
 know if any updates are needed for consistency.
 
 rpkiSignedChecklist vs. RpkiSignedChecklist
 
+[authors]:
+  The one instance of the former (section 3) was incorrect, and has now been updated to
+  'id-ct-signedChecklist' instead, along with the title of that subsection.
+
 checklist vs. checkList
   Note: We believe that "checklist" is for general use and "checkList" is the name
         of the field, but please check for correct use.
+
+[authors]: Correct. This has been checked throughout.
 
 file name vs. filename vs. fileName
    Note: We believe that "file name" and "filename" are for general use and "fileName"
    is the name of the field, but please check for correct use.
 
+[BM]:
+  Correct. I have updated to use "file name" in the former case throughout for
+  consistency.
+
+[TH]:
+  Thanks, your understanding of the usage difference here is correct.
+  The instances of 'file name' have now been updated to be 'filename', too.
 
 e) We see the following forms, which vary slightly. Please review and let us
 know if any updates are needed.
@@ -1011,6 +1113,12 @@ signed with a specific set of Internet Number Resources
 
 'signed with Internet Number Resources'
 
+[BM]:
+  I have updated instances of "with resources" to "with a specific set of
+  Internet Number Resources" for clarity.
+
+[TH]:
+  Thanks, each has been updated to use the first form.
 
 f) It seems that quotation marks are not used for most field names (e.g., the
 asID field, the ipAddrBlocks field). However, quotation marks (single and
@@ -1032,6 +1140,10 @@ Original:
    certificates field.  The IP addresses present in the eContent
    'resources' field MUST be a subset of those present in the
    certificate extension.         
+
+[authors]:
+  We have removed the quotation marks in the locations that you have pointed out.
+  Additionally, we updated the first of those to make it a little clearer.
 -->
 
 <!-- [rfced] Please review the "Inclusive Language" portion of the online 
@@ -1040,6 +1152,9 @@ and let us know if any changes are needed.
 
 Note that our script did not flag any words in particular, but this should 
 still be reviewed as a best practice.
+
+[BM]:
+  We have reviewed, and do not see any necessary changes.
 -->
 
 
