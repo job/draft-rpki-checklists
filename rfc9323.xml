@@ -155,14 +155,8 @@ Or:
    intended to provide for the creation and validation of an RPKI Signed
    Checklist (RSC):
 
-[BM]:
-  I prefer the first of your two suggestions. I have made the necessary edits
-  below.
-
-[TH]:
-  From looking at other RFCs (e.g. 7107, 8769), 'CMS content type' looks like
-  the right expression to use, so the text under 'Or:' has been adopted
-  inline, but with 'protected' removed.
+[authors]:
+  The phrase "CMS protected ..." is the correct one. We have made the necessary edits.
 -->
 
       <t>
@@ -176,7 +170,7 @@ Or:
       <name>Introduction</name>
       <t>
         This document defines a Cryptographic Message Syntax (CMS) <xref target="RFC5652"/> <xref target="RFC6268"/> protected content type for a general-purpose listing of checksums (a 'checklist'), for use with the Resource Public Key Infrastructure (RPKI) <xref target="RFC6480"/>.
-        The CMS-protected content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC), a checksum listing signed with a specific set of Internet Number Resources.
+        The CMS protected content type is intended to provide for the creation and validation of an RPKI Signed Checklist (RSC), a checksum listing signed with a specific set of Internet Number Resources.
         The objective is to allow for the creation of an attestation that, when validated, provides a means to confirm a given Internet resource holder produced the RSC.
       </t>
       <t>
@@ -512,7 +506,7 @@ Perhaps:
       <t>
         Before a Relying Party (RP) can use an RSC to validate a set of digital objects, the RP <bcp14>MUST</bcp14> first validate the RSC.
         To validate an RSC, the RP <bcp14>MUST</bcp14> perform all the validation checks specified in <xref target="RFC6488"/>, except for checking for the presence of an SIA extension, which <bcp14>MUST NOT</bcp14> be present in the EE certificate (see <xref target="profile"/>).
-        In addition, the RP MUST perform the following RSC-specific validation steps:
+        In addition, the RP <bcp14>MUST</bcp14> perform the following RSC-specific validation steps:
       </t>
       <ol>
         <li>
@@ -562,7 +556,7 @@ Original:
           <ol>
             <li anchor="mode">
               <t>
-                If the verification procedure is provided with a file name for the object being verified (e.g., because the user has provided a file system path from which to read the object), then verification <bcp14>SHOULD</bcp14> proceed in "filename-aware" mode. Otherwise, verification <bcp14>SHOULD</bcp14> proceed in "filename-unaware" mode.
+                If the verification procedure is provided with a filename for the object being verified (e.g., because the user has provided a file system path from which to read the object), then verification <bcp14>SHOULD</bcp14> proceed in "filename-aware" mode. Otherwise, verification <bcp14>SHOULD</bcp14> proceed in "filename-unaware" mode.
               </t>
               <t>
                 Implementations <bcp14>MAY</bcp14> provide an option to override the verification mode, for example, to ignore the fact that the object is to be read from a file.
@@ -583,7 +577,7 @@ Original:
             </li>
             <li>
               <t>
-                If the mode selected in Step <xref target="mode" format="counter"/> is "filename-aware", then exactly one of the FileNameAndHash elements matched in Step <xref target="match_hash" format="counter"/> <bcp14>MUST</bcp14> contain a fileName field value exactly matching the file name of the object being verified.
+                If the mode selected in Step <xref target="mode" format="counter"/> is "filename-aware", then exactly one of the FileNameAndHash elements matched in Step <xref target="match_hash" format="counter"/> <bcp14>MUST</bcp14> contain a fileName field value exactly matching the filename of the object being verified.
               </t>
               <t>
                 Alternatively, if the mode selected in Step <xref target="mode" format="counter"/> is "filename-unaware", then exactly one of the FileNameAndHash elements matched in Step <xref target="match_hash" format="counter"/> <bcp14>MUST</bcp14> have the fileName field omitted.
@@ -631,18 +625,14 @@ Perhaps:
    user for further consideration or report an error indicating no file
    by that name exists.
 
-[BM]:
-    I have removed the text after the semicolon, as it is superfluous.
+[authors]:
+    We have removed the text after the semicolon, as it is superfluous.
     The error reporting envisioned is already a SHOULD in the verification
     proceedure above.
-
-[TH]:
-    Splitting the original paragraph into two sentences will probably work
-    better (updated inline). 
 -->
 
 <t>
-        If a fileName field is present, but no digital object within the set of to-be-verified digital objects has a file name that matches the content of that field, a validator implementation <bcp14>SHOULD</bcp14> compare the message digest of each digital object to the value from the hash field of the associated FileNameAndHash and report matches to the user for further consideration.
+        If a fileName field is present, but no digital object within the set of to-be-verified digital objects has a filename that matches the content of that field, a validator implementation <bcp14>SHOULD</bcp14> compare the message digest of each digital object to the value from the hash field of the associated FileNameAndHash and report matches to the user for further consideration.
       </t>
     </section>
     <section anchor="security">
@@ -732,11 +722,7 @@ Original:
           content. See Section 5 of [RFC-to-be] for further
           information.
 
-[BM]:
-  You are correct, this should be the "Security Considerations" section.
-  I have updated.
-
-[TH]:
+[authors]:
   The intent was to cite section 5 (i.e. the RSC validation process), as the
   key/core part of this document.
 
@@ -1068,14 +1054,10 @@ X.509 End-Entity (EE) certificate
 
 EE X.509 certificate
 
-[BM]:
-  I have updated to use either "X.509 End-Entity (EE) certificate" or "EE
+[authors]:
+  We have updated to use either "X.509 End-Entity (EE) certificate" or "EE
   certificate".
-  I believe this maximises consistency with RFC6487.
-
-[TH]:
-  The former is correct, or at least has more prior art, so the instance of
-  the latter has been updated accordingly.
+  We believe this maximises consistency with RFC6487.
 
 d) We see the following forms used in the document. Please review and let us
 know if any updates are needed for consistency.
@@ -1096,11 +1078,7 @@ file name vs. filename vs. fileName
    Note: We believe that "file name" and "filename" are for general use and "fileName"
    is the name of the field, but please check for correct use.
 
-[BM]:
-  Correct. I have updated to use "file name" in the former case throughout for
-  consistency.
-
-[TH]:
+[authors]:
   Thanks, your understanding of the usage difference here is correct.
   The instances of 'file name' have now been updated to be 'filename', too.
 
@@ -1113,12 +1091,9 @@ signed with a specific set of Internet Number Resources
 
 'signed with Internet Number Resources'
 
-[BM]:
-  I have updated instances of "with resources" to "with a specific set of
+[authors]:
+  We have updated instances of "with resources" to "with a specific set of
   Internet Number Resources" for clarity.
-
-[TH]:
-  Thanks, each has been updated to use the first form.
 
 f) It seems that quotation marks are not used for most field names (e.g., the
 asID field, the ipAddrBlocks field). However, quotation marks (single and
@@ -1153,7 +1128,7 @@ and let us know if any changes are needed.
 Note that our script did not flag any words in particular, but this should 
 still be reviewed as a best practice.
 
-[BM]:
+[authors]:
   We have reviewed, and do not see any necessary changes.
 -->
 
